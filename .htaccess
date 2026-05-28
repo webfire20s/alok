@@ -1,0 +1,25 @@
+RewriteEngine On
+
+RewriteBase /ajanta-project/
+
+# CATEGORY
+
+RewriteRule ^category/([^/]+)/?$ category.php?slug=$1 [L,QSA]
+
+# PRODUCT
+
+RewriteRule ^product/([^/]+)/?$ product.php?slug=$1 [L,QSA]
+
+# STATIC PAGES
+
+RewriteRule ^cart/?$ cart.php [L,QSA]
+
+RewriteRule ^checkout/?$ checkout.php [L,QSA]
+
+RewriteRule ^login/?$ login.php [L,QSA]
+
+RewriteRule ^register/?$ register.php [L,QSA]
+
+RewriteRule ^my-account/?$ my-account.php [L,QSA]
+
+RewriteRule ^contact/?$ contact.php [L,QSA]

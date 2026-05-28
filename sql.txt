@@ -1,0 +1,211 @@
+CREATE TABLE categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    image VARCHAR(255) DEFAULT NULL,
+    description TEXT DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    short_description TEXT,
+    description LONGTEXT,
+    price DECIMAL(10,2) NOT NULL DEFAULT 0,
+    sale_price DECIMAL(10,2) DEFAULT NULL,
+    image VARCHAR(255),
+    stock INT DEFAULT 0,
+    sku VARCHAR(100),
+    featured TINYINT(1) DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (category_id)
+    REFERENCES categories(id)
+    ON DELETE CASCADE
+);
+
+
+INSERT INTO categories (name, slug)
+VALUES ('Glass Bottles', 'glass-bottles');
+
+INSERT INTO products (
+    category_id,
+    name,
+    slug,
+    short_description,
+    description,
+    price,
+    image,
+    stock,
+    sku,
+    featured
+)
+VALUES (
+    1,
+    'Amber Glass Bottle',
+    'amber-glass-bottle',
+    'Premium amber glass bottle',
+    'This is a premium quality amber glass bottle.',
+    199.00,
+    'assets/images/test-bottle.jpg',
+    50,
+    'AMB001',
+    1
+);
+
+
+
+
+==================================================================================================================================================================================================================
+
+
+CREATE TABLE cart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    session_id VARCHAR(255) NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (product_id)
+    REFERENCES products(id)
+    ON DELETE CASCADE
+);
+
+
+ALTER TABLE products
+ADD pieces_per_box INT DEFAULT NULL,
+ADD min_order_qty INT DEFAULT 1,
+ADD gst_percent DECIMAL(5,2) DEFAULT 18.00,
+ADD selling_type ENUM(
+    'piece',
+    'box',
+    'both',
+    'inquiry'
+) DEFAULT 'piece';
+
+DROP TABLE cart;
+
+
+
+CREATE TABLE cart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    session_id VARCHAR(255) NOT NULL,
+
+    product_id INT NOT NULL,
+
+    quantity INT NOT NULL DEFAULT 1,
+
+    order_unit ENUM(
+        'piece',
+        'box'
+    ) DEFAULT 'piece',
+
+    gst_percent DECIMAL(5,2) DEFAULT 18.00,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (product_id)
+    REFERENCES products(id)
+    ON DELETE CASCADE
+);
+
+
+CREATE TABLE orders (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    order_number VARCHAR(100) UNIQUE,
+
+    customer_name VARCHAR(255),
+
+    customer_email VARCHAR(255),
+
+    customer_phone VARCHAR(50),
+
+    customer_company VARCHAR(255),
+
+    customer_address TEXT,
+
+    customer_city VARCHAR(100),
+
+    customer_state VARCHAR(100),
+
+    customer_pincode VARCHAR(20),
+
+    subtotal DECIMAL(10,2) DEFAULT 0,
+
+    gst_total DECIMAL(10,2) DEFAULT 0,
+
+    grand_total DECIMAL(10,2) DEFAULT 0,
+
+    payment_method VARCHAR(50) DEFAULT 'inquiry',
+
+    order_status VARCHAR(50) DEFAULT 'pending',
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+);
+
+
+CREATE TABLE order_items (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    order_id INT,
+
+    product_id INT,
+
+    product_name VARCHAR(255),
+
+    price DECIMAL(10,2),
+
+    quantity INT,
+
+    order_unit VARCHAR(50),
+
+    pieces_per_box INT,
+
+    gst_percent DECIMAL(5,2),
+
+    line_total DECIMAL(10,2),
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (order_id)
+    REFERENCES orders(id)
+    ON DELETE CASCADE
+
+);
+
+
+
+CREATE TABLE admins (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    username VARCHAR(100) UNIQUE,
+
+    password VARCHAR(255),
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+);
+
+
+
+INSERT INTO admins (
+    username,
+    password
+) VALUES (
+
+    'admin',
+
+    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
+
+);
+
+password

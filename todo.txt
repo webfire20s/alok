@@ -1,0 +1,89 @@
+STEP 1
+
+Create database:
+
+STEP 2
+
+Create:
+
+includes/db.php
+
+STEP 3
+
+Create categories + products tables
+
+STEP 4
+
+Make ONE dynamic product section work.
+
+Example:
+
+Featured Products
+
+on homepage.
+
+ONLY ONE section first.
+
+STEP 5
+
+Then:
+
+category pages
+product pages
+search
+cart
+
+incrementally.
+
+VERY IMPORTANT WARNING
+
+Do NOT:
+
+attempt full ecommerce immediately
+attempt admin immediately
+attempt checkout immediately
+
+That causes chaos.
+
+Correct Order
+
+First:
+stable frontend
+
+Then:
+dynamic products
+
+Then:
+categories
+
+Then:
+search
+
+Then:
+cart
+
+Then:
+checkout
+
+Then:
+admin panel
+
+
+
+
+
+
+Right now your priority order should be:
+
+Homepage dynamic
+Category pages
+Product pages
+Cart system
+Session cart
+Add to cart
+Checkout
+Orders
+Admin panel
+Search/filter
+User auth
+Payment integration
