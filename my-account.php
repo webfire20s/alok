@@ -198,6 +198,7 @@ $orders = $orderStmt->fetchAll();
                                         <th>Order No</th>
                                         <th>Date</th>
                                         <th>Status</th>
+                                        <th>Shipping</th>
                                         <th>Total</th>
                                         <th width="220">Actions</th>
 
@@ -239,15 +240,12 @@ $orders = $orderStmt->fetchAll();
                                                 </span>
 
                                             </td>
-
                                             <td>
 
-                                                ₹<?= number_format(
-                                                    $order['grand_total'],
-                                                    2
-                                                ) ?>
+                                                ₹<?= number_format($order['shipping_charge'], 2) ?>
 
                                             </td>
+
 
                                             <td>
 

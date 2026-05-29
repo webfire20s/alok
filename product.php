@@ -33,6 +33,83 @@ if(!$product){
         </div>
 
         <div class="col-md-6">
+            <?php
+
+            $ratingStmt = $pdo->prepare("
+                SELECT
+
+                    COUNT(*) AS total_reviews,
+                    AVG(rating) AS avg_rating
+
+                FROM product_reviews
+
+                WHERE product_id = ?
+                AND is_approved = 1
+            ");
+
+            $ratingStmt->execute([$product['id']]);
+
+            $ratingData = $ratingStmt->fetch();
+
+            $totalReviews =
+            (int)($ratingData['total_reviews'] ?? 0);
+
+            $avgRating =
+            round($ratingData['avg_rating'] ?? 0, 1);
+
+            ?>
+            <?php if($totalReviews > 0): ?>
+
+                <div class="mb-3">
+
+                    <div
+                        style="
+                            font-size:20px;
+                            color:#f5b301;
+                            line-height:1;
+                        "
+                    >
+
+                        <?php
+
+                        $fullStars = floor($avgRating);
+
+                        for($i=1; $i<=5; $i++):
+
+                            if($i <= $fullStars):
+
+                                echo '★';
+
+                            else:
+
+                                echo '☆';
+
+                            endif;
+
+                        endfor;
+
+                        ?>
+
+                        <span
+                            style="
+                                color:#222;
+                                font-size:15px;
+                                margin-left:8px;
+                                vertical-align:middle;
+                            "
+                        >
+
+                            <?= $avgRating ?>
+
+                            (<?= $totalReviews ?> Reviews)
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            <?php endif; ?>
 
             <h2 class="mb-3">
                 <?= htmlspecialchars($product['name']) ?>
@@ -233,8 +310,8 @@ if(!$product){
                             }else{
 
                                 quantityLabel.innerText =
-                                    "Number of Pieces";
-
+                                "Number of Pieces";
+                                
                             }
                         }
 
@@ -254,10 +331,160 @@ if(!$product){
                     </script>
 
             </form>
+            
+            
+
+        </div>
+        
+
+
+    </div>
+    <hr class="mt-5 mb-5">
+            
+    <h4 class="mb-4">
+        Customer Reviews
+    </h4>
+    
+    <form action="submit_review.php" method="POST" class="mb-5">
+    
+        <input
+            type="hidden"
+            name="product_id"
+            value="<?= $product['id'] ?>"
+        >
+    
+        <div class="form-group">
+    
+            <label>Your Name</label>
+    
+            <input
+                type="text"
+                name="customer_name"
+                class="form-control"
+                required
+            >
+    
+        </div>
+    
+        <div class="form-group">
+    
+            <label>Email</label>
+    
+            <input
+                type="email"
+                name="customer_email"
+                class="form-control"
+                required
+            >
+    
+        </div>
+    
+        <div class="form-group">
+    
+            <label>Rating</label>
+    
+            <select
+                name="rating"
+                class="form-control"
+                required
+            >
+    
+                <option value="5">5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="2">2 Stars</option>
+                <option value="1">1 Star</option>
+    
+            </select>
+    
+        </div>
+    
+        <div class="form-group">
+    
+            <label>Review</label>
+    
+            <textarea
+                name="review"
+                rows="5"
+                class="form-control"
+                required
+            ></textarea>
+    
+        </div>
+    
+        <button class="btn btn-org">
+    
+            Submit Review
+    
+        </button>
+    
+    </form>
+    <?php
+
+    $reviewStmt = $pdo->prepare("
+        SELECT *
+        FROM product_reviews
+        WHERE product_id = ?
+        AND is_approved = 1
+        ORDER BY id DESC
+    ");
+
+    $reviewStmt->execute([$product['id']]);
+
+    $reviews = $reviewStmt->fetchAll();
+
+    ?>
+
+    <?php if(empty($reviews)): ?>
+
+        <div class="alert alert-light">
+
+            No reviews yet.
 
         </div>
 
-    </div>
+    <?php else: ?>
+
+        <?php foreach($reviews as $review): ?>
+
+            <div class="border rounded p-3 mb-3">
+
+                <div class="d-flex justify-content-between mb-2">
+
+                    <strong>
+
+                        <?= htmlspecialchars($review['customer_name']) ?>
+
+                    </strong>
+
+                    <span>
+
+                        <?= str_repeat('⭐', $review['rating']) ?>
+
+                    </span>
+
+                </div>
+
+                <p class="mb-2">
+
+                    <?= nl2br(htmlspecialchars($review['review'])) ?>
+
+                </p>
+
+                <small class="text-muted">
+
+                    <?= date(
+                        'd M Y',
+                        strtotime($review['created_at'])
+                    ) ?>
+
+                </small>
+
+            </div>
+
+        <?php endforeach; ?>
+
+    <?php endif; ?>
 
 </div>
 

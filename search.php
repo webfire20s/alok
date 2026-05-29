@@ -76,7 +76,7 @@ $products = $stmt->fetchAll();
                     <div class="latest-image-box p-3 border h-100">
 
                         <a
-                            href="product.php?slug=<?= urlencode($product['slug']) ?>"
+                            href="product/<?= urlencode($product['slug']) ?>"
                         >
 
                             <img
@@ -94,7 +94,7 @@ $products = $stmt->fetchAll();
                         <h6>
 
                             <a
-                                href="product.php?slug=<?= urlencode($product['slug']) ?>"
+                                href="product/<?= urlencode($product['slug']) ?>"
                                 class="txt-org"
                             >
                                 <?= htmlspecialchars($product['name']) ?>

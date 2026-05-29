@@ -103,7 +103,8 @@ $revenue = $pdo->query("
             <h5>Total Revenue</h5>
 
             <h2>
-                ₹<?= number_format($revenue ?? 0, 2) ?>
+                
+            ₹<?= number_format($revenue ?? 0, 2) ?>
             </h2>
 
         </div>

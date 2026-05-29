@@ -20,6 +20,10 @@
         Orders
     </a>
 
+    <a href="reviews.php">
+        Reviews
+    </a>
+
     <a href="../index.php" target="_blank">
         View Website
     </a>

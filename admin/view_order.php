@@ -52,10 +52,14 @@ $items = $itemStmt->fetchAll();
 |--------------------------------------------------------------------------
 */
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+if(
+    $_SERVER['REQUEST_METHOD'] === 'POST'
+    &&
+    isset($_POST['update_status'])
+){
 
     $status =
-        $_POST['order_status'];
+        trim($_POST['order_status']);
 
     $updateStmt = $pdo->prepare("
         UPDATE orders
@@ -72,8 +76,73 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     exit;
 }
 
+/*
+|--------------------------------------------------------------------------
+| UPDATE SHIPPING
+|--------------------------------------------------------------------------
+*/
+
+if(
+    $_SERVER['REQUEST_METHOD'] === 'POST'
+    &&
+    isset($_POST['update_shipping'])
+){
+
+    $shippingCharge =
+        (float)$_POST['shipping_charge'];
+
+    $shippingNote =
+        trim($_POST['shipping_note']);
+
+    $newGrandTotal =
+        $order['subtotal']
+        +
+        $order['gst_total']
+        +
+        $shippingCharge;
+
+    $updateShipping = $pdo->prepare("
+        UPDATE orders
+        SET
+            shipping_charge = ?,
+            shipping_note = ?,
+            grand_total = ?
+        WHERE id = ?
+    ");
+
+    $updateShipping->execute([
+
+        $shippingCharge,
+        $shippingNote,
+        $newGrandTotal,
+        $orderId
+
+    ]);
+
+    header("Location:view_order.php?id=" . $orderId);
+    exit;
+}
 ?>
 
+<?php if($order['subtotal'] < 15000): ?>
+
+    <div class="alert alert-warning">
+
+        Order below ₹15,000.
+        Shipping recommended.
+
+    </div>
+
+<?php else: ?>
+
+    <div class="alert alert-success">
+
+        Order above ₹15,000.
+        Eligible for free shipping if approved.
+
+    </div>
+
+<?php endif; ?>
 <h2 class="mb-4">
     Order #<?= $order['id'] ?>
 </h2>
@@ -102,32 +171,32 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             <p>
                 <strong>Email:</strong>
-                <?= htmlspecialchars($order['email'] ?? '') ?>
+                <?= htmlspecialchars($order['customer_email'] ?? '') ?>
             </p>
 
             <p>
                 <strong>Phone:</strong>
-                <?= htmlspecialchars($order['phone'] ?? '') ?>
+                <?= htmlspecialchars($order['customer_phone'] ?? '') ?>
             </p>
 
             <p>
                 <strong>Address:</strong>
-                <?= nl2br(htmlspecialchars($order['address'] ?? '')) ?>
+                <?= nl2br(htmlspecialchars($order['customer_address'] ?? '')) ?>
             </p>
 
             <p>
                 <strong>City:</strong>
-                <?= htmlspecialchars($order['city'] ?? '') ?>
+                <?= htmlspecialchars($order['customer_city'] ?? '') ?>
             </p>
 
             <p>
                 <strong>State:</strong>
-                <?= htmlspecialchars($order['state'] ?? '') ?>
+                <?= htmlspecialchars($order['customer_state'] ?? '') ?>
             </p>
 
             <p>
                 <strong>Pincode:</strong>
-                <?= htmlspecialchars($order['pincode'] ?? '') ?>
+                <?= htmlspecialchars($order['customer_pincode'] ?? '') ?>
             </p>
 
         </div>
@@ -282,7 +351,74 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             <hr>
 
+            <?php
+
+            /*
+            |--------------------------------------------------------------------------
+            | UPDATE STATUS
+            |--------------------------------------------------------------------------
+            */
+
+            if(
+                $_SERVER['REQUEST_METHOD'] === 'POST'
+                &&
+                isset($_POST['update_status'])
+            ){
+
+                $newStatus =
+                trim($_POST['order_status'] ?? '');
+
+                $allowedStatuses = [
+
+                    'pending',
+                    'confirmed',
+                    'packed',
+                    'shipped',
+                    'delivered',
+                    'cancelled'
+
+                ];
+
+                if(in_array($newStatus, $allowedStatuses)){
+
+                    $updateStmt = $pdo->prepare("
+                        UPDATE orders
+                        SET order_status = ?
+                        WHERE id = ?
+                    ");
+
+                    $updateStmt->execute([
+                        $newStatus,
+                        $order['id']
+                    ]);
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | REFRESH ORDER DATA
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $stmt = $pdo->prepare("
+                        SELECT *
+                        FROM orders
+                        WHERE id = ?
+                    ");
+
+                    $stmt->execute([$order['id']]);
+
+                    $order = $stmt->fetch();
+                }
+            }
+
+            ?>
+
             <form method="POST">
+
+                <input
+                    type="hidden"
+                    name="update_status"
+                    value="1"
+                >
 
                 <div class="form-group">
 
@@ -328,6 +464,59 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <button class="btn btn-dark btn-block">
 
                     Update Status
+
+                </button>
+
+            </form>
+            <hr class="my-4">
+
+            <h5 class="mb-3">
+                Shipping Charges
+            </h5>
+
+            <form method="POST">
+
+                <input
+                    type="hidden"
+                    name="update_shipping"
+                    value="1"
+                >
+
+                <div class="form-group">
+
+                    <label>
+                        Shipping Charge
+                    </label>
+
+                    <input
+                        type="number"
+                        step="0.01"
+                        name="shipping_charge"
+                        class="form-control"
+                        value="<?= $order['shipping_charge'] ?>"
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Shipping Note
+                    </label>
+
+                    <input
+                        type="text"
+                        name="shipping_note"
+                        class="form-control"
+                        value="<?= htmlspecialchars($order['shipping_note']) ?>"
+                        placeholder="Optional transport note"
+                    >
+
+                </div>
+
+                <button class="btn btn-primary btn-block">
+
+                    Update Shipping
 
                 </button>
 

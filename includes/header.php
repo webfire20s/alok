@@ -234,8 +234,45 @@ $navCategories = $navStmt->fetchAll();
 
         <div class="col-md-4 txtm-center only-desktop">
 
-            <a href="index.php"><img src="assets/themes/storefront/public/images/logoe8da.png?v=2.0.3" alt="" /></a> 
-            <a href="index.php"><img src="assets/themes/storefront/public/images/40-years-trust2e8da.png?v=2.0.3" alt="" style="margin-left: 20px;" /></a> 
+            <div
+                style="
+                    display:flex;
+                    align-items:center;
+                    gap:18px;
+                "
+            >
+
+                <a href="index.php">
+
+                    <img
+                        src="assets/themes/storefront/public/images/logo2.jpg?v=2.0.3"
+                        alt="Alok Glass"
+                        style="
+                            height:90px;
+                            width:auto;
+                            object-fit:contain;
+                            display:block;
+                        "
+                    >
+
+                </a>
+
+                <a href="index.php">
+
+                    <img
+                        src="assets/themes/storefront/public/images/40-years-trust2e8da.png?v=2.0.3"
+                        alt="40 Years Trust"
+                        style="
+                            height:70px;
+                            width:auto;
+                            object-fit:contain;
+                            display:block;
+                        "
+                    >
+
+                </a>
+
+            </div>
 
         </div>
 
@@ -621,6 +658,11 @@ $navCategories = $navStmt->fetchAll();
                 <li class="nav-item">
                     <a class="nav-link" href="contact.php">
                         Contact Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="track-order.php">
+                        Track Order
                     </a>
                 </li>
 

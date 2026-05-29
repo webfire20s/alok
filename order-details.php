@@ -147,6 +147,7 @@ $items = $itemStmt->fetchAll();
                             <th>Qty</th>
                             <th>Type</th>
                             <th>GST</th>
+                            <th>Shipping</th>
                             <th>Total</th>
 
                         </tr>
@@ -196,6 +197,11 @@ $items = $itemStmt->fetchAll();
 
                                 </td>
 
+                                <td>
+
+                                    ₹<?= number_format($order['shipping_charge'], 2) ?>
+
+                                </td>
                                 <td>
 
                                     ₹<?= number_format(
