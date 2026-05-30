@@ -14,7 +14,7 @@
 
     <link
         rel="stylesheet"
-        href="../assets/themes/storefront/public/css/bootstrap.min.css"
+        href="../assets/themes/storefront/public/css/bootstrap.mine8da.css"
     >
 
     <style>
