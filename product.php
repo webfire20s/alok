@@ -288,6 +288,12 @@ if(!$product){
                 >
                     Add to Cart
                 </button>
+                <a
+                    href="bulk_inquiry.php?product_id=<?= $product['id'] ?>"
+                    class="btn btn-outline-dark btn-lg ml-2"
+                >
+                    Request Bulk Quote
+                </a>
                 <script>
 
                     document.addEventListener("DOMContentLoaded", function(){

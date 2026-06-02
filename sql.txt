@@ -209,3 +209,76 @@ INSERT INTO admins (
 );
 
 password
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+CREATE TABLE contact_inquiries (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    name VARCHAR(255),
+
+    email VARCHAR(255),
+
+    phone VARCHAR(50),
+
+    company VARCHAR(255),
+
+    message TEXT,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+);
+
+
+CREATE TABLE blogs (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    title VARCHAR(255),
+
+    slug VARCHAR(255),
+
+    image VARCHAR(255),
+
+    short_description TEXT,
+
+    content LONGTEXT,
+
+    video_url VARCHAR(255),
+
+    status TINYINT DEFAULT 1,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+);
+
+
+CREATE TABLE bulk_inquiries (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    product_id INT NULL,
+
+    product_name VARCHAR(255),
+
+    customer_name VARCHAR(255),
+
+    company_name VARCHAR(255),
+
+    email VARCHAR(255),
+
+    phone VARCHAR(50),
+
+    quantity VARCHAR(100),
+
+    message TEXT,
+
+    status VARCHAR(50) DEFAULT 'new',
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+);

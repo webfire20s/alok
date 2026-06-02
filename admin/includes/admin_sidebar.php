@@ -20,6 +20,18 @@
         Orders
     </a>
 
+    <a href="bulk_inquiries.php">
+        Bulk Inquiries
+    </a>
+
+    <a href="contact_inquiries.php">
+        Contact Inquiries
+    </a>
+    
+    <a href="blogs.php">
+        Blogs
+    </a>
+
     <a href="reviews.php">
         Reviews
     </a>
