@@ -430,7 +430,7 @@ include 'includes/header.php';
 
 <section
     class="py-5 text-center"
-    style="background:#1d1d1d;color:#fff;"
+    style="background:#2a5a4a ;color:#fff;"
 >
 
     <div class="container">
@@ -450,7 +450,7 @@ include 'includes/header.php';
 
         <a
             href="bulk_inquiry.php"
-            class="btn btn-warning btn-lg"
+            class="btn btn-info btn-lg"
         >
 
             Request Bulk Quote
