@@ -23,3 +23,13 @@ RewriteRule ^register/?$ register.php [L,QSA]
 RewriteRule ^my-account/?$ my-account.php [L,QSA]
 
 RewriteRule ^contact/?$ contact.php [L,QSA]
+
+RewriteRule ^blogs/?$ blogs.php [L,QSA]
+
+RewriteRule ^bulk-inquiry/?$ bulk_inquiry.php [L,QSA]
+
+RewriteRule ^decoration-services/?$ decoration-services.php [L,QSA]
+
+# CMS PAGES (KEEP LAST)
+
+RewriteRule ^([a-zA-Z0-9-]+)/?$ page.php?slug=$1 [L,QSA]
