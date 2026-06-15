@@ -124,409 +124,309 @@ if(
 }
 ?>
 
-<?php if($order['subtotal'] < 15000): ?>
+<?php 
+// Existing backend processing layers are preserved identically above this layout block
+?>
 
-    <div class="alert alert-warning">
+<style>
+    .custom-table-scroll::-webkit-scrollbar {
+        height: 6px;
+    }
+    .custom-table-scroll::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 10px;
+    }
+    .custom-table-scroll::-webkit-scrollbar-thumb {
+        background: rgba(56, 189, 248, 0.2);
+        border-radius: 10px;
+    }
+    .custom-table-scroll::-webkit-scrollbar-thumb:hover {
+        background: rgba(56, 189, 248, 0.4);
+    }
+    .glass-input-control {
+        background: rgba(15, 17, 21, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 8px !important;
+        color: #ffffff !important;
+        font-size: 14px !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+    .glass-input-control:focus {
+        background: rgba(15, 17, 21, 0.6) !important;
+        border-color: rgba(56, 189, 248, 0.5) !important;
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15) !important;
+    }
+</style>
 
-        Order below ₹15,000.
-        Shipping recommended.
+<div class="container-fluid py-4">
 
-    </div>
-
-<?php else: ?>
-
-    <div class="alert alert-success">
-
-        Order above ₹15,000.
-        Eligible for free shipping if approved.
-
-    </div>
-
-<?php endif; ?>
-<h2 class="mb-4">
-    Order #<?= $order['id'] ?>
-</h2>
-
-<a
-    href="../invoice.php?order=<?= $order['id'] ?>"
-    target="_blank"
-    class="btn btn-dark mb-4"
->
-    Download Invoice
-</a>
-<div class="row">
-
-    <div class="col-md-8">
-
-        <div class="card-box p-4 mb-4">
-
-            <h4 class="mb-4">
-                Customer Details
-            </h4>
-
-            <p>
-                <strong>Name:</strong>
-                <?= htmlspecialchars($order['customer_name']) ?>
-            </p>
-
-            <p>
-                <strong>Email:</strong>
-                <?= htmlspecialchars($order['customer_email'] ?? '') ?>
-            </p>
-
-            <p>
-                <strong>Phone:</strong>
-                <?= htmlspecialchars($order['customer_phone'] ?? '') ?>
-            </p>
-
-            <p>
-                <strong>Address:</strong>
-                <?= nl2br(htmlspecialchars($order['customer_address'] ?? '')) ?>
-            </p>
-
-            <p>
-                <strong>City:</strong>
-                <?= htmlspecialchars($order['customer_city'] ?? '') ?>
-            </p>
-
-            <p>
-                <strong>State:</strong>
-                <?= htmlspecialchars($order['customer_state'] ?? '') ?>
-            </p>
-
-            <p>
-                <strong>Pincode:</strong>
-                <?= htmlspecialchars($order['customer_pincode'] ?? '') ?>
-            </p>
-
+    <?php if($order['subtotal'] < 15000): ?>
+        <div class="alert border-0 mb-4 d-flex align-items-center" style="
+            background: rgba(245, 158, 11, 0.06); 
+            border: 1px solid rgba(245, 158, 11, 0.15) !important; 
+            color: #f59e0b; 
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        ">
+            <span class="mr-2" style="font-size: 16px;">⚠️</span> Order below ₹15,000. Shipping charges recommended.
         </div>
+    <?php else: ?>
+        <div class="alert border-0 mb-4 d-flex align-items-center" style="
+            background: rgba(16, 185, 129, 0.06); 
+            border: 1px solid rgba(16, 185, 129, 0.15) !important; 
+            color: #10b981; 
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        ">
+            <span class="mr-2" style="font-size: 16px;">✨</span> Order above ₹15,000. Eligible for free shipping if approved.
+        </div>
+    <?php endif; ?>
 
-        <div class="card-box p-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 mb-md-5">
+        <div>
+            <h2 class="mb-1" style="font-weight: 700; letter-spacing: -0.02em; color: #ffffff;">
+                Order #<?= $order['id'] ?>
+            </h2>
+            <p style="color: #64748b; font-size: 14px; margin: 0;">
+                Review comprehensive logistics files, breakdown statements, and adjust shipping.
+            </p>
+        </div>
+        <a href="../invoice.php?order=<?= $order['id'] ?>" target="_blank" class="btn px-4 py-2" style="
+            background: rgba(255, 255, 255, 0.03);
+            color: #e2e8f0;
+            font-weight: 600;
+            font-size: 13.5px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            transition: all 0.2s;
+        " onmouseover="this.style.background='rgba(255,255,255,0.08)'; this.style.color='#ffffff';"
+          onmouseout="this.style.background='rgba(255,255,255,0.03)'; this.style.color='#e2e8f0';">
+            Download Invoice
+        </a>
+    </div>
 
-            <h4 class="mb-4">
-                Order Items
-            </h4>
+    <div class="row">
 
-            <div class="table-responsive">
+        <div class="col-md-8">
 
-                <table class="table table-bordered align-middle">
+            <div class="card border-0 p-4 mb-4" style="
+                border-radius: 14px;
+                background: rgba(21, 25, 34, 0.6);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.05) !important;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            ">
+                <h4 class="mb-4" style="font-size: 16px; font-weight: 600; color: #ffffff; letter-spacing: -0.01em;">
+                    Customer Details
+                </h4>
 
-                    <thead>
+                <div class="row style-details-grid" style="color: #cbd5e1; font-size: 14px; row-gap: 14px;">
+                    <div class="col-sm-6">
+                        <span style="color: #64748b; display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 2px;">Name</span>
+                        <span style="font-weight: 500; color: #ffffff;"><?= htmlspecialchars($order['customer_name']) ?></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span style="color: #64748b; display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 2px;">Email</span>
+                        <span><?= htmlspecialchars($order['customer_email'] ?? '—') ?></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span style="color: #64748b; display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 2px;">Phone</span>
+                        <span style="font-family: monospace; color: #94a3b8;"><?= htmlspecialchars($order['customer_phone'] ?? '—') ?></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span style="color: #64748b; display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 2px;">Location Metrics</span>
+                        <span><?= htmlspecialchars($order['customer_city'] ?? '') ?>, <?= htmlspecialchars($order['customer_state'] ?? '') ?> (<?= htmlspecialchars($order['customer_pincode'] ?? '') ?>)</span>
+                    </div>
+                    <div class="col-12">
+                        <span style="color: #64748b; display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 2px;">Full Address</span>
+                        <span style="line-height: 1.5; color: #e2e8f0;"><?= nl2br(htmlspecialchars($order['customer_address'] ?? '—')) ?></span>
+                    </div>
+                </div>
+            </div>
 
-                        <tr>
+            <div class="card border-0 p-4" style="
+                border-radius: 14px;
+                background: rgba(21, 25, 34, 0.6);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.05) !important;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            ">
+                <h4 class="mb-4" style="font-size: 16px; font-weight: 600; color: #ffffff; letter-spacing: -0.01em;">
+                    Order Items
+                </h4>
 
-                            <th>Image</th>
-                            <th>Product</th>
-                            <th>Qty</th>
-                            <th>Type</th>
-                            <th>GST</th>
-                            <th>Total</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <?php foreach($items as $item): ?>
-
+                <div class="table-responsive custom-table-scroll">
+                    <table class="table align-middle mb-0" style="color: #cbd5e1; border-color: rgba(255, 255, 255, 0.03); min-width: 600px;">
+                        <thead style="background: rgba(255, 255, 255, 0.01); border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
                             <tr>
-
-                                <td width="100">
-
-                                    <?php
-
-                                    $imagePath = $item['product_image'] ?? '';
-
-                                    if(
-                                        $imagePath &&
-                                        !str_contains($imagePath, 'storage/')
-                                    ){
-                                        $imagePath =
-                                            'storage/media/' . $imagePath;
-                                    }
-
-                                    ?>
-
-                                    <img
-                                        src="../<?= htmlspecialchars($imagePath) ?>"
-                                        class="img-fluid rounded"
-                                        style="
-                                            width:80px;
-                                            height:80px;
-                                            object-fit:cover;
-                                        "
-                                    >
-
-                                </td>
-
-                                <td>
-
-                                    <?= htmlspecialchars($item['product_name'] ?? '') ?>
-
-                                </td>
-
-                                <td>
-
-                                    <?= $item['quantity'] ?>
-
-                                </td>
-
-                                <td>
-
-                                    <?= ucfirst($item['purchase_type'] ?? '') ?>
-
-                                </td>
-
-                                <td>
-
-                                    <?= $item['gst_percent'] ?>%
-
-                                </td>
-
-                                <td>
-
-                                   <?php
-
-                                    $itemSubtotal =
-                                        $item['price'] * $item['quantity'];
-
-                                    $itemGST =
-                                        ($itemSubtotal * $item['gst_percent']) / 100;
-
-                                    $itemTotal =
-                                        $itemSubtotal + $itemGST;
-
-                                    ?>
-
-                                    ₹<?= number_format($itemTotal, 2) ?>
-
-                                </td>
-
+                                <th class="py-2" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">Image</th>
+                                <th class="py-2" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">Product</th>
+                                <th class="py-2" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">Qty</th>
+                                <th class="py-2" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">Type</th>
+                                <th class="py-2" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">GST</th>
+                                <th class="py-2 text-end" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">Total</th>
                             </tr>
-
-                        <?php endforeach; ?>
-
-                    </tbody>
-
-                </table>
-
+                        </thead>
+                        <tbody>
+                            <?php foreach($items as $item): ?>
+                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.02);">
+                                    <td style="width: 70px; padding: 12px 0;">
+                                        <?php
+                                            $imagePath = $item['product_image'] ?? '';
+                                            if($imagePath && !str_contains($imagePath, 'storage/')){
+                                                $imagePath = 'storage/media/' . $imagePath;
+                                            }
+                                        ?>
+                                        <div style="width: 54px; height: 54px; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.2);">
+                                            <?php if(!empty($imagePath)): ?>
+                                                <img src="../<?= htmlspecialchars($imagePath) ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                            <?php endif; ?>
+                                        </div>
+                                    </td>
+                                    
+                                    <td>
+                                        <div style="font-weight: 600; color: #ffffff; font-size: 13.5px;">
+                                            <?= htmlspecialchars($item['product_name'] ?? '—') ?>
+                                        </div>
+                                    </td>
+                                    
+                                    <td><span style="font-weight: 500; color: #f1f5f9;"><?= $item['quantity'] ?></span></td>
+                                    
+                                    <td>
+                                        <span style="font-size: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px; color: #94a3b8;">
+                                            <?= ucfirst($item['purchase_type'] ?? 'Standard') ?>
+                                        </span>
+                                    </td>
+                                    
+                                    <td><span style="color: #94a3b8; font-size: 13px;"><?= $item['gst_percent'] ?>%</span></td>
+                                    
+                                    <td class="text-end">
+                                        <?php
+                                            $itemSubtotal = $item['price'] * $item['quantity'];
+                                            $itemGST = ($itemSubtotal * $item['gst_percent']) / 100;
+                                            $itemTotal = $itemSubtotal + $itemGST;
+                                        ?>
+                                        <span style="font-weight: 600; font-family: monospace; color: #ffffff;">
+                                            ₹<?= number_format($itemTotal, 2) ?>
+                                        </span>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
 
-    </div>
+        <div class="col-md-4">
 
-    <div class="col-md-4">
+            <div class="card border-0 p-4" style="
+                border-radius: 14px;
+                background: rgba(21, 25, 34, 0.6);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.05) !important;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            ">
+                <h4 class="mb-4" style="font-size: 16px; font-weight: 600; color: #ffffff; letter-spacing: -0.01em;">
+                    Order Summary
+                </h4>
 
-        <div class="card-box p-4">
+                <div class="d-flex justify-content-between mb-3" style="font-size: 14px;">
+                    <span style="color: #94a3b8;">Subtotal:</span>
+                    <span style="color: #f8fafc; font-weight: 500; font-family: monospace;">₹<?= number_format($order['subtotal'], 2) ?></span>
+                </div>
 
-            <h4 class="mb-4">
-                Order Summary
-            </h4>
+                <div class="d-flex justify-content-between mb-3" style="font-size: 14px;">
+                    <span style="color: #94a3b8;">GST Accumulation:</span>
+                    <span style="color: #f8fafc; font-weight: 500; font-family: monospace;">₹<?= number_format($order['gst_total'], 2) ?></span>
+                </div>
 
-            <p>
+                <div class="d-flex justify-content-between align-items-center pt-3 mb-4" style="border-top: 1px solid rgba(255,255,255,0.08);">
+                    <span style="color: #ffffff; font-weight: 600; font-size: 14px;">Grand Total:</span>
+                    <span style="color: #38bdf8; font-weight: 700; font-size: 18px; font-family: monospace;">₹<?= number_format($order['grand_total'], 2) ?></span>
+                </div>
 
-                <strong>Subtotal:</strong><br>
+                <hr style="border-top: 1px solid rgba(255,255,255,0.08); margin: 24px 0;">
 
-                ₹<?= number_format($order['subtotal'], 2) ?>
-
-            </p>
-
-            <p>
-
-                <strong>GST:</strong><br>
-
-                ₹<?= number_format($order['gst_total'], 2) ?>
-
-            </p>
-
-            <p>
-
-                <strong>Grand Total:</strong><br>
-
-                ₹<?= number_format($order['grand_total'], 2) ?>
-
-            </p>
-
-            <hr>
-
-            <?php
-
-            /*
-            |--------------------------------------------------------------------------
-            | UPDATE STATUS
-            |--------------------------------------------------------------------------
-            */
-
-            if(
-                $_SERVER['REQUEST_METHOD'] === 'POST'
-                &&
-                isset($_POST['update_status'])
-            ){
-
-                $newStatus =
-                trim($_POST['order_status'] ?? '');
-
-                $allowedStatuses = [
-
-                    'pending',
-                    'confirmed',
-                    'packed',
-                    'shipped',
-                    'delivered',
-                    'cancelled'
-
-                ];
-
-                if(in_array($newStatus, $allowedStatuses)){
-
-                    $updateStmt = $pdo->prepare("
-                        UPDATE orders
-                        SET order_status = ?
-                        WHERE id = ?
-                    ");
-
-                    $updateStmt->execute([
-                        $newStatus,
-                        $order['id']
-                    ]);
-
-                    /*
-                    |--------------------------------------------------------------------------
-                    | REFRESH ORDER DATA
-                    |--------------------------------------------------------------------------
-                    */
-
-                    $stmt = $pdo->prepare("
-                        SELECT *
-                        FROM orders
-                        WHERE id = ?
-                    ");
-
-                    $stmt->execute([$order['id']]);
-
-                    $order = $stmt->fetch();
+                <?php 
+                // Execution handler blocks run internally here unchanged when processing state updates
+                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
+                    $newStatus = trim($_POST['order_status'] ?? '');
+                    $allowedStatuses = ['pending', 'confirmed', 'packed', 'shipped', 'delivered', 'cancelled'];
+                    if (in_array($newStatus, $allowedStatuses)) {
+                        $updateStmt = $pdo->prepare("UPDATE orders SET order_status = ? WHERE id = ?");
+                        $updateStmt->execute([$newStatus, $order['id']]);
+                        
+                        $stmt = $pdo->prepare("SELECT * FROM orders WHERE id = ?");
+                        $stmt->execute([$order['id']]);
+                        $order = $stmt->fetch();
+                    }
                 }
-            }
+                ?>
 
-            ?>
+                <form method="POST" class="mb-4">
+                    <input type="hidden" name="update_status" value="1">
+                    <div class="form-group mb-3">
+                        <label style="color: #94a3b8; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; display: block;">
+                            Order Status
+                        </label>
+                        <select name="order_status" class="form-control glass-input-control" style="cursor: pointer;">
+                            <?php 
+                            $statuses = ['pending', 'confirmed', 'packed', 'shipped', 'delivered', 'cancelled'];
+                            foreach($statuses as $status): 
+                            ?>
+                                <option value="<?= $status ?>" <?= $order['order_status'] == $status ? 'selected' : '' ?> style="background: #1e293b; color: #fff;">
+                                    <?= ucfirst($status) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <button class="btn btn-block py-2" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #ffffff; font-size: 13.5px; font-weight: 600; border-radius: 6px; transition: background 0.2s;"
+                        onmouseover="this.style.background='rgba(255,255,255,0.08)';" onmouseout="this.style.background='rgba(255,255,255,0.04)';">
+                        Update Status
+                    </button>
+                </form>
 
-            <form method="POST">
+                <hr style="border-top: 1px solid rgba(255,255,255,0.06); margin: 20px 0;">
 
-                <input
-                    type="hidden"
-                    name="update_status"
-                    value="1"
-                >
+                <h5 class="mb-3" style="font-size: 14px; font-weight: 600; color: #ffffff;">
+                    Shipping Charges
+                </h5>
 
-                <div class="form-group">
+                <form method="POST">
+                    <input type="hidden" name="update_shipping" value="1">
+                    
+                    <div class="form-group mb-3">
+                        <label style="color: #94a3b8; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; display: block;">
+                            Shipping Charge
+                        </label>
+                        <input type="number" step="0.01" name="shipping_charge" class="form-control glass-input-control" value="<?= $order['shipping_charge'] ?>">
+                    </div>
 
-                    <label>
-                        Order Status
-                    </label>
+                    <div class="form-group mb-4">
+                        <label style="color: #94a3b8; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; display: block;">
+                            Shipping Note
+                        </label>
+                        <input type="text" name="shipping_note" class="form-control glass-input-control" value="<?= htmlspecialchars($order['shipping_note']) ?>" placeholder="e.g. Fragile glass logistics line">
+                    </div>
 
-                    <select
-                        name="order_status"
-                        class="form-control"
-                    >
+                    <button class="btn btn-block py-2" style="background: linear-gradient(135deg, #38bdf8, #0284c7); border: none; color: #ffffff; font-size: 13.5px; font-weight: 600; border-radius: 6px; box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15); transition: transform 0.2s, box-shadow 0.2s;"
+                        onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 16px rgba(56, 189, 248, 0.3)';"
+                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(56, 189, 248, 0.15)';">
+                        Update Shipping
+                    </button>
+                </form>
 
-                        <?php
-
-                        $statuses = [
-                            'pending',
-                            'confirmed',
-                            'packed',
-                            'shipped',
-                            'delivered',
-                            'cancelled'
-                        ];
-
-                        foreach($statuses as $status):
-
-                        ?>
-
-                            <option
-                                value="<?= $status ?>"
-                                <?= $order['order_status'] == $status ? 'selected' : '' ?>
-                            >
-
-                                <?= ucfirst($status) ?>
-
-                            </option>
-
-                        <?php endforeach; ?>
-
-                    </select>
-
-                </div>
-
-                <button class="btn btn-dark btn-block">
-
-                    Update Status
-
-                </button>
-
-            </form>
-            <hr class="my-4">
-
-            <h5 class="mb-3">
-                Shipping Charges
-            </h5>
-
-            <form method="POST">
-
-                <input
-                    type="hidden"
-                    name="update_shipping"
-                    value="1"
-                >
-
-                <div class="form-group">
-
-                    <label>
-                        Shipping Charge
-                    </label>
-
-                    <input
-                        type="number"
-                        step="0.01"
-                        name="shipping_charge"
-                        class="form-control"
-                        value="<?= $order['shipping_charge'] ?>"
-                    >
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-                        Shipping Note
-                    </label>
-
-                    <input
-                        type="text"
-                        name="shipping_note"
-                        class="form-control"
-                        value="<?= htmlspecialchars($order['shipping_note']) ?>"
-                        placeholder="Optional transport note"
-                    >
-
-                </div>
-
-                <button class="btn btn-primary btn-block">
-
-                    Update Shipping
-
-                </button>
-
-            </form>
+            </div>
 
         </div>
-
     </div>
-
-</div>
 
 </div>
 

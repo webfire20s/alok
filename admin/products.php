@@ -20,10 +20,8 @@ $products = $stmt->fetchAll();
 
 <div class="container-fluid py-4">
 
-    <!-- PAGE HEADER -->
-
     <div
-        class="d-flex flex-wrap justify-content-between align-items-center mb-4"
+        class="d-flex flex-wrap justify-content-between align-items-center mb-5"
     >
 
         <div>
@@ -32,32 +30,50 @@ $products = $stmt->fetchAll();
                 class="mb-1"
                 style="
                     font-weight: 700;
+                    letter-spacing: -0.02em;
+                    color: #ffffff;
                 "
             >
-                Products
+                Mould Inventory
             </h2>
 
-            <p class="text-muted mb-0">
-                Manage all ecommerce products
+            <p style="color: #64748b; font-size: 14px; margin: 0;">
+                Configure, update, and manage all glass bottle manufacturing product lines.
             </p>
 
         </div>
 
         <a
             href="add_product.php"
-            class="btn btn-dark px-4 py-2"
+            class="btn px-4 py-2"
+            style="
+                background: linear-gradient(135deg, #38bdf8, #0284c7);
+                color: #ffffff;
+                font-weight: 600;
+                font-size: 14px;
+                border: none;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+                transition: transform 0.2s ease;
+            "
+            onmouseover="this.style.transform='translateY(-1px)'"
+            onmouseout="this.style.transform='translateY(0)'"
         >
-            + Add Product
+            + Add New Design
         </a>
 
     </div>
 
-    <!-- CARD -->
-
     <div
-        class="card border-0 shadow-sm"
+        class="card border-0"
         style="
             border-radius: 14px;
+            background: rgba(21, 25, 34, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
         "
     >
 
@@ -67,42 +83,44 @@ $products = $stmt->fetchAll();
 
                 <table
                     class="table align-middle mb-0"
+                    style="color: #e2e8f0; border-color: rgba(255, 255, 255, 0.03);"
                 >
 
                     <thead
                         style="
-                            background: #f8f9fa;
+                            background: rgba(255, 255, 255, 0.02);
+                            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
                         "
                     >
 
                         <tr>
 
-                            <th class="px-4 py-3">
+                            <th class="px-4 py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
                                 ID
                             </th>
 
-                            <th class="py-3">
-                                Image
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                                Silhouette
                             </th>
 
-                            <th class="py-3">
-                                Product
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                                Product Specifications
                             </th>
 
-                            <th class="py-3">
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
                                 Category
                             </th>
 
-                            <th class="py-3">
-                                Price
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                                Base Unit Price
                             </th>
 
-                            <th class="py-3">
-                                Stock
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                                Batch Stock
                             </th>
 
-                            <th class="text-center py-3">
-                                Actions
+                            <th class="text-center py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                                Control Panel
                             </th>
 
                         </tr>
@@ -113,33 +131,30 @@ $products = $stmt->fetchAll();
 
                         <?php foreach($products as $product): ?>
 
-                            <tr>
-
-                                <!-- ID -->
+                            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
 
                                 <td class="px-4">
 
-                                    <strong>
+                                    <span style="font-size: 13px; font-family: monospace; color: #475569; font-weight: 600;">
                                         #<?= $product['id'] ?>
-                                    </strong>
+                                    </span>
 
                                 </td>
-
-                                <!-- IMAGE -->
 
                                 <td width="110">
 
                                     <div
                                         style="
-                                            width: 70px;
-                                            height: 70px;
+                                            width: 64px;
+                                            height: 64px;
                                             overflow: hidden;
-                                            border-radius: 10px;
-                                            border: 1px solid #eee;
-                                            background: #fff;
+                                            border-radius: 8px;
+                                            border: 1px solid rgba(255, 255, 255, 0.05);
+                                            background: rgba(15, 17, 21, 0.8);
                                             display: flex;
                                             align-items: center;
                                             justify-content: center;
+                                            padding: 4px;
                                         "
                                     >
 
@@ -151,6 +166,7 @@ $products = $stmt->fetchAll();
                                                 width: 100%;
                                                 height: 100%;
                                                 object-fit: contain;
+                                                filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
                                             "
                                         >
 
@@ -158,14 +174,14 @@ $products = $stmt->fetchAll();
 
                                 </td>
 
-                                <!-- PRODUCT NAME -->
-
                                 <td>
 
                                     <div
                                         style="
                                             font-weight: 600;
-                                            line-height: 1.5;
+                                            font-size: 15px;
+                                            color: #ffffff;
+                                            line-height: 1.4;
                                         "
                                     >
 
@@ -175,25 +191,27 @@ $products = $stmt->fetchAll();
 
                                     <?php if(!empty($product['sku'])): ?>
 
-                                        <small class="text-muted">
+                                        <div style="font-size: 11px; color: #475569; margin-top: 2px; font-family: monospace; letter-spacing: 0.02em;">
 
-                                            SKU:
-                                            <?= htmlspecialchars($product['sku']) ?>
+                                            REF-ID: <?= htmlspecialchars($product['sku']) ?>
 
-                                        </small>
+                                        </div>
 
                                     <?php endif; ?>
 
                                 </td>
 
-                                <!-- CATEGORY -->
-
                                 <td>
 
                                     <span
-                                        class="badge badge-light px-3 py-2"
+                                        class="badge px-3 py-2"
                                         style="
-                                            font-size: 13px;
+                                            font-size: 12px;
+                                            background: rgba(255, 255, 255, 0.03);
+                                            color: #94a3b8;
+                                            border: 1px solid rgba(255, 255, 255, 0.05);
+                                            font-weight: 500;
+                                            border-radius: 6px;
                                         "
                                     >
 
@@ -203,13 +221,13 @@ $products = $stmt->fetchAll();
 
                                 </td>
 
-                                <!-- PRICE -->
-
                                 <td>
 
                                     <strong
                                         style="
-                                            font-size: 16px;
+                                            font-size: 15px;
+                                            color: #ffffff;
+                                            font-weight: 600;
                                         "
                                     >
 
@@ -219,36 +237,48 @@ $products = $stmt->fetchAll();
 
                                 </td>
 
-                                <!-- STOCK -->
-
                                 <td>
 
                                     <?php if($product['stock'] > 0): ?>
 
                                         <span
-                                            class="badge badge-success px-3 py-2"
+                                            class="badge px-3 py-2"
+                                            style="
+                                                font-size: 12px;
+                                                background: rgba(16, 185, 129, 0.1);
+                                                color: #10b981;
+                                                border: 1px solid rgba(16, 185, 129, 0.15);
+                                                font-weight: 500;
+                                                border-radius: 6px;
+                                            "
                                         >
-                                            <?= $product['stock'] ?> In Stock
+                                            <?= $product['stock'] ?> Units
                                         </span>
 
                                     <?php else: ?>
 
                                         <span
-                                            class="badge badge-danger px-3 py-2"
+                                            class="badge px-3 py-2"
+                                            style="
+                                                font-size: 12px;
+                                                background: rgba(239, 68, 68, 0.1);
+                                                color: #f87171;
+                                                border: 1px solid rgba(239, 68, 68, 0.15);
+                                                font-weight: 500;
+                                                border-radius: 6px;
+                                            "
                                         >
-                                            Out of Stock
+                                            Depleted
                                         </span>
 
                                     <?php endif; ?>
 
                                 </td>
 
-                                <!-- ACTIONS -->
-
                                 <td class="text-center">
 
                                     <div
-                                        class="d-flex justify-content-center flex-wrap"
+                                        class="d-flex justify-content-center align-items-center"
                                         style="
                                             gap: 8px;
                                         "
@@ -256,14 +286,36 @@ $products = $stmt->fetchAll();
 
                                         <a
                                             href="edit_product.php?id=<?= $product['id'] ?>"
-                                            class="btn btn-sm btn-primary px-3"
+                                            class="btn btn-sm px-3 py-1.5"
+                                            style="
+                                                background: rgba(255,255,255,0.03);
+                                                color: #e2e8f0;
+                                                border: 1px solid rgba(255,255,255,0.08);
+                                                font-weight: 500;
+                                                font-size: 13px;
+                                                border-radius: 6px;
+                                                transition: all 0.2s;
+                                            "
+                                            onmouseover="this.style.background='rgba(255,255,255,0.08)'; this.style.color='#ffffff';"
+                                            onmouseout="this.style.background='rgba(255,255,255,0.03)'; this.style.color='#e2e8f0';"
                                         >
                                             Edit
                                         </a>
 
                                         <a
                                             href="delete_product.php?id=<?= $product['id'] ?>"
-                                            class="btn btn-sm btn-danger px-3"
+                                            class="btn btn-sm px-3 py-1.5"
+                                            style="
+                                                background: rgba(239, 68, 68, 0.05);
+                                                color: #f87171;
+                                                border: 1px solid rgba(239, 68, 68, 0.1);
+                                                font-weight: 500;
+                                                font-size: 13px;
+                                                border-radius: 6px;
+                                                transition: all 0.2s;
+                                            "
+                                            onmouseover="this.style.background='rgba(239, 68, 68, 0.15)'"
+                                            onmouseout="this.style.background='rgba(239, 68, 68, 0.05)'"
                                             onclick="return confirm('Delete this product?')"
                                         >
                                             Delete
@@ -289,5 +341,5 @@ $products = $stmt->fetchAll();
 
 </div>
 
-</body>
+</div> </div> </body>
 </html>

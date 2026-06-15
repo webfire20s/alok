@@ -97,142 +97,122 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 ?>
 
-<h2 class="mb-4">
-    Add Blog
-</h2>
+<style>
+    .glass-input-field {
+        background: rgba(15, 17, 21, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 8px !important;
+        color: #ffffff !important;
+        font-size: 14px !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+    .glass-input-field:focus {
+        background: rgba(15, 17, 21, 0.6) !important;
+        border-color: rgba(56, 189, 248, 0.5) !important;
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15) !important;
+    }
+    .glass-input-field::placeholder {
+        color: #475569 !important;
+    }
+    .glass-label {
+        color: #94a3b8; 
+        font-size: 12px; 
+        font-weight: 600; 
+        text-transform: uppercase; 
+        letter-spacing: 0.04em; 
+        margin-bottom: 8px; 
+        display: block;
+    }
+</style>
 
-<div class="card-box p-4">
+<div class="container-fluid py-4">
 
-    <form
-        method="POST"
-        enctype="multipart/form-data"
-    >
+    <div class="mb-5">
+        <h2 class="mb-1" style="font-weight: 700; letter-spacing: -0.02em; color: #ffffff;">
+            Add Blog
+        </h2>
+        <p style="color: #64748b; font-size: 14px; margin: 0;">
+            Compose fresh narrative posts, anchor interactive visual descriptions, and stage system publishing attributes.
+        </p>
+    </div>
 
-        <div class="form-group">
+    <div class="card border-0 p-4 mb-4" style="
+        max-width: 900px;
+        border-radius: 14px;
+        background: rgba(21, 25, 34, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    ">
 
-            <label>
-                Blog Title
-            </label>
+        <form method="POST" enctype="multipart/form-data">
 
-            <input
-                type="text"
-                name="title"
-                class="form-control"
-                required
-            >
+            <div class="row">
+                <div class="col-md-6 form-group mb-4">
+                    <label class="glass-label">Blog Title</label>
+                    <input type="text" name="title" class="form-control glass-input-field" required>
+                </div>
 
-        </div>
+                <div class="col-md-6 form-group mb-4">
+                    <label class="glass-label">Slug</label>
+                    <input type="text" name="slug" class="form-control glass-input-field" required>
+                    <small style="color: #64748b; font-size: 11px; display: block; margin-top: 4px;">
+                        Example: <span style="font-family: monospace; color: #94a3b8;">glass-bottle-buying-guide</span>
+                    </small>
+                </div>
+            </div>
 
-        <div class="form-group">
+            <div class="form-group mb-4">
+                <label class="glass-label">Short Description</label>
+                <textarea name="short_description" rows="3" class="form-control glass-input-field"></textarea>
+            </div>
 
-            <label>
-                Slug
-            </label>
+            <div class="form-group mb-4">
+                <label class="glass-label">Blog Content</label>
+                <textarea name="content" rows="12" class="form-control glass-input-field" style="line-height: 1.6;"></textarea>
+            </div>
 
-            <input
-                type="text"
-                name="slug"
-                class="form-control"
-                required
-            >
+            <div class="form-group mb-4">
+                <label class="glass-label">YouTube Video URL</label>
+                <input type="text" name="video_url" class="form-control glass-input-field" placeholder="https://www.youtube.com/embed/xxxxx">
+            </div>
 
-            <small class="text-muted">
+            <div class="row">
+                <div class="col-md-6 form-group mb-4">
+                    <label class="glass-label">Featured Image</label>
+                    <input type="file" name="image" class="form-control glass-input-field" style="padding: 7px 12px;">
+                </div>
 
-                Example:
-                glass-bottle-buying-guide
+                <div class="col-md-6 form-group mb-4">
+                    <label class="glass-label">Status</label>
+                    <select name="status" class="form-control glass-input-field" style="cursor: pointer;">
+                        <option value="1" style="background: #1e293b; color: #ffffff;">Published</option>
+                        <option value="0" style="background: #1e293b; color: #ffffff;">Draft</option>
+                    </select>
+                </div>
+            </div>
 
-            </small>
+            <div class="pt-2">
+                <button class="btn px-4 py-2" style="
+                    background: linear-gradient(135deg, #38bdf8, #0284c7); 
+                    border: none; 
+                    color: #ffffff; 
+                    font-size: 14px; 
+                    font-weight: 600; 
+                    border-radius: 6px; 
+                    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15); 
+                    transition: transform 0.2s, box-shadow 0.2s;
+                "
+                onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 16px rgba(56, 189, 248, 0.3)';"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(56, 189, 248, 0.15)';">
+                    Save Blog
+                </button>
+            </div>
 
-        </div>
+        </form>
 
-        <div class="form-group">
-
-            <label>
-                Short Description
-            </label>
-
-            <textarea
-                name="short_description"
-                rows="3"
-                class="form-control"
-            ></textarea>
-
-        </div>
-
-        <div class="form-group">
-
-            <label>
-                Blog Content
-            </label>
-
-            <textarea
-                name="content"
-                rows="12"
-                class="form-control"
-            ></textarea>
-
-        </div>
-
-        <div class="form-group">
-
-            <label>
-                YouTube Video URL
-            </label>
-
-            <input
-                type="text"
-                name="video_url"
-                class="form-control"
-                placeholder="https://www.youtube.com/embed/xxxxx"
-            >
-
-        </div>
-
-        <div class="form-group">
-
-            <label>
-                Featured Image
-            </label>
-
-            <input
-                type="file"
-                name="image"
-                class="form-control"
-            >
-
-        </div>
-
-        <div class="form-group">
-
-            <label>
-                Status
-            </label>
-
-            <select
-                name="status"
-                class="form-control"
-            >
-
-                <option value="1">
-                    Published
-                </option>
-
-                <option value="0">
-                    Draft
-                </option>
-
-            </select>
-
-        </div>
-
-        <button
-            class="btn btn-dark"
-        >
-            Save Blog
-        </button>
-
-    </form>
-
+    </div>
 </div>
 
 </div>

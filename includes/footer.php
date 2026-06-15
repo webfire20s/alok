@@ -9,20 +9,20 @@
                                     <div class="col-md-4 contact-bg pt-5 pb-5">
                                         <h4>Contact Us</h4>
                                         <ul>
-                                            <li class="pin"><b style="font-weight: bold;">Delhi:</b> Ajanta Bottle Pvt Ltd<br />B 226, Third Floor,<br />
-                        Naraina Industrial Area, Phase 1,<br />
-                        New Delhi - 110028</li>                 
+                                            <li class="pin"><b style="font-weight: bold;">Firozabad:</b> Alok Glass Works<br />Kia Showroom,    Agra Road,<br />
+                                            Firozabad – 283203 (U.P.) India<br />
+                                            </li>                 
 
-                        <li class="pin"><b style="font-weight: bold;">Mumbai:</b> Ajanta Bottle Pvt Ltd<br />Suit 4020, 4th Floor,<br />
+                        <!-- <li class="pin"><b style="font-weight: bold;">Mumbai:</b> Ajanta Bottle Pvt Ltd<br />Suit 4020, 4th Floor,<br />
                         1 Aerocity, NIBR Corporate Park, Andheri Kurla Road, Safed Pool, Sakinaka, <br />
                         Mumbai - 400072 Maharashtra</li>
 
                         <li class="pin"><b style="font-weight: bold;">Ahmedabad :</b> Ajanta Bottle Pvt Ltd<br />1117, Sankalp Square 3B, 11th floor, Near Taj Skyline Hotel, Sindhu Bhawan Road, <br />Ahmedabad - 380058 <br />
-                        </li>
+                        </li> -->
 
-                                            <li class="email">Email: sales@ajantabottle.com</li>
+                                            <li class="email">Email: pranjal@alokglass.com | sales@alokglass.com</li>
 
-                        <li class="phone">Phone/Whatsapp: +91 9891098918 (9:30-6:00 pm) </li>
+                        <li class="phone">Phone/Whatsapp: +91 999-747-7289 | +91 703-787-7289 (9:30-6:00 pm) </li>
                                         </ul>
                                     </div>
 
@@ -32,11 +32,11 @@
 
                                         <ul>
 
-                                            <li><a href="about-us.html" target="_blank">About Us</a></li>
+                                            <li><a href="decoration-services.php" target="_blank">About Us</a></li>
 
-                                            <li><a href="faq.html" target="_blank">FAQ's</a></li> 
+                                            <li><a href="#" target="_blank">FAQ's</a></li> 
 
-                                            <li><a href="blog/index.html" target="_blank">Blog</a></li>
+                                            <li><a href="blogs.php" target="_blank">Blog</a></li>
                                             
                                         <!-- <li><a href="https://www.ajantabottle.com/ajanta-team" target="_blank">Ajanta Team</a></li>
                                             
@@ -44,9 +44,9 @@
 
                                         </ul>
 
-                                        <a href="https://www.facebook.com/glassbottleindia/"  target="_blank"><img src="assets/themes/storefront/public/images/fb-icone8da.png?v=2.0.3" /></a> &nbsp;&nbsp; <a href="https://www.linkedin.com/company/ajantabottle" target="_blank"><img src="assets/themes/storefront/public/images/in-icone8da.png?v=2.0.3" /></a> &nbsp;&nbsp; <a href="https://www.youtube.com/c/Ajantabottle" target="_blank"><img src="assets/themes/storefront/public/images/yt-icone8da.png?v=2.0.3" /></a>
+                                        <a href="https://www.facebook.com/profile.php?id=61573026120811"  target="_blank"><img src="assets/themes/storefront/public/images/fb-icone8da.png?v=2.0.3" /></a> &nbsp;&nbsp; <a href="https://www.linkedin.com/feed/?trk=guest_homepage-basic_google-one-tap-submit" target="_blank"><img src="assets/themes/storefront/public/images/in-icone8da.png?v=2.0.3" /></a> &nbsp;&nbsp; <a href="https://www.youtube.com/@AlokGlassWorks/featured" target="_blank"><img src="assets/themes/storefront/public/images/yt-icone8da.png?v=2.0.3" /></a>
 
-                                        &nbsp;&nbsp; <a href="https://www.instagram.com/ajantabottle/"  target="_blank"><img src="assets/themes/storefront/public/images/instagram-icone8da.png?v=2.0.3" /></a>
+                                        &nbsp;&nbsp; <a href="https://www.instagram.com/official_alokglassworks/?hl=en"  target="_blank"><img src="assets/themes/storefront/public/images/instagram-icone8da.png?v=2.0.3" /></a>
 
                                     </div>
 
@@ -60,7 +60,7 @@
 
                                             <li><a href="https://www.ajantabottle.com">Compensation First</a></li> -->
 
-                                            <li><a href="login.html" target="_blank">My Account</a></li>
+                                            <li><a href="login" target="_blank">My Account</a></li>
 
                                             <li><a href="refund-and-return-policy.html" target="_blank">Refund and Return Policy</a></li>
 
@@ -72,17 +72,17 @@
 
                                             <li><a href="terms-conditions.html" target="_blank">Terms and Conditions</a></li> 
 
-                                            <li><a href="contact.html" target="_blank">Contact Us</a></li>
+                                            <li><a href="contact" target="_blank">Contact Us</a></li>
 
                                             
                                             
-                                            <li><a href="javascript:void(0)">Download Catalogue</a>
+                                            <!-- <li><a href="javascript:void(0)">Download Catalogue</a>
                                             
                                                 <ul><li><a href="https://drive.google.com/file/d/1252o3ZSXKlSAqWJjRvp40W0SFHRLzg2X/view?usp=sharing" target="_blank">Overall Catalogue</a></li>
                                             
                                                 <ul><li><a href="https://drive.google.com/file/d/1SxehgjYPj4AsnmbGEIOHU--IE3GKkFMa/view?usp=sharing" target="_blank">Food and Beverages Catalogue</a></li> 
                             
-                                                <!--<li><a href="https://drive.google.com/file/d/1ucWA_wNHprw3oYqFheWavKjpZjPQmlcR/view?usp=drive_link" target="_blank">Caps and Closures for Food and Beverages Catalogue</a></li> -->
+                                                
                                                 
                                                 <li><a href="https://drive.google.com/file/d/17xTS2x__sGaypA3Pjm8Y3IGDOw6Y9IwB/view?usp=sharing" target="_blank">Perfumes & Cosmetics Catalogue</a></li>
                                                 
@@ -90,9 +90,7 @@
                                                 
                                                 <li><a href="https://drive.google.com/file/d/1vbwPzo1K7Qq65A3i3pD1WGToPKmumk66/view?usp=sharing" target="_blank">Machine Catalogue</a></li>
                                                 
-                                                <!-- <li><a href="https://drive.google.com/file/d/1I_rdlLvyuDwNfqDHMla0qGscc9vZD6jE/view?usp=drive_link" target="_blank">Decoration & Value Addition</a></li> 
                                                 
-                                                <li><a href="https://drive.google.com/file/d/1LIxqVbLQTVLMUl7ewjmqVPQpXnr3sNkg/view?usp=sharing" target="_blank">Premium Liquor Bottles Catalogue</a></li> -->
                                                 
                                                 <li><a href="https://drive.google.com/file/d/1MlGCwskRobSN5SVQRwFsjbpv7pLlzKuK/view?usp=sharing" target="_blank">Nail Paint Catalogue</a></li> 
                                                 
@@ -100,13 +98,13 @@
                                                 
                                                 </ul>
                                             
-                                            </li>
+                                            </li> -->
                                             
-                                        <li><a href="https://forms.gle/NNqZacEXdATtjw25A" target="_blank">Careers</a></li>
+                                            <!-- <li><a href="https://forms.gle/NNqZacEXdATtjw25A" target="_blank">Careers</a></li>
                                             
                                             <li><a href="apply-for-csr.html" target="_blank">Apply for CSR</a></li>
                                             
-                                            <li><a href="apply-for-angel-funding.html" target="_blank">Apply for Angel Funding</a></li>
+                                            <li><a href="apply-for-angel-funding.html" target="_blank">Apply for Angel Funding</a></li> -->
 
                                         </ul>
 

@@ -129,354 +129,307 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 <div class="container-fluid py-4">
 
-    <div class="mb-4">
-
-        <h2 class="mb-1">
-            Add Product
+    <div class="mb-5">
+        <h2 class="mb-1" style="font-weight: 700; letter-spacing: -0.02em; color: #ffffff;">
+            Initialize Product Line
         </h2>
-
-        <p class="text-muted mb-0">
-            Create a new ecommerce product
+        <p style="color: #64748b; font-size: 14px; margin: 0;">
+            Register a new manufactured blueprint, configure baseline variables, and deploy to catalog node.
         </p>
-
     </div>
 
-    <div class="card shadow-sm border-0">
-
+    <div 
+        class="card border-0 shadow-sm" 
+        style="
+            border-radius: 14px; 
+            background: rgba(21, 25, 34, 0.6); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        "
+    >
         <div class="card-body p-4">
 
-            <form
-                method="POST"
-                enctype="multipart/form-data"
-            >
-
+            <form method="POST" enctype="multipart/form-data">
                 <div class="row">
-
-                    <!-- LEFT -->
 
                     <div class="col-lg-8">
 
-                        <!-- CATEGORY -->
-
                         <div class="form-group mb-4">
-
-                            <label class="font-weight-bold">
-                                Category
+                            <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                Segment Category
                             </label>
-
-                            <select
-                                name="category_id"
-                                class="form-control"
+                            <select 
+                                name="category_id" 
+                                class="form-control text-white" 
                                 required
+                                style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; height: 45px; font-size: 14px; box-shadow: none;"
+                                onfocus="this.style.borderColor='#38bdf8'; this.style.boxShadow='0 0 0 1px #38bdf8';"
+                                onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                             >
-
-                                <option value="">
-                                    Select Category
-                                </option>
-
+                                <option value="" style="background: #151922; color: #64748b;">Select Category</option>
                                 <?php foreach($categories as $category): ?>
-
-                                    <option value="<?= $category['id'] ?>">
-
+                                    <option value="<?= $category['id'] ?>" style="background: #151922; color: #ffffff;">
                                         <?= htmlspecialchars($category['name']) ?>
-
                                     </option>
-
                                 <?php endforeach; ?>
-
                             </select>
-
                         </div>
 
-                        <!-- PRODUCT NAME -->
-
                         <div class="form-group mb-4">
-
-                            <label class="font-weight-bold">
-                                Product Name
+                            <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                Design Nomenclature / Product Name
                             </label>
-
-                            <input
-                                type="text"
-                                name="name"
-                                id="productName"
-                                class="form-control"
+                            <input 
+                                type="text" 
+                                name="name" 
+                                id="productName" 
+                                class="form-control text-white" 
                                 required
+                                style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; height: 45px; font-size: 14px;"
+                                onfocus="this.style.borderColor='#38bdf8'; this.style.boxShadow='0 0 0 1px #38bdf8';"
+                                onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                             >
-
                         </div>
 
-                        <!-- SLUG -->
-
                         <div class="form-group mb-4">
-
-                            <label class="font-weight-bold">
-                                Slug
+                            <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                URL Node Token / Slug
                             </label>
-
-                            <input
-                                type="text"
-                                name="slug"
-                                id="slugField"
-                                class="form-control"
+                            <input 
+                                type="text" 
+                                name="slug" 
+                                id="slugField" 
+                                class="form-control text-white" 
                                 required
+                                style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; height: 45px; font-size: 14px; font-family: monospace;"
+                                onfocus="this.style.borderColor='#38bdf8'; this.style.boxShadow='0 0 0 1px #38bdf8';"
+                                onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                             >
-
                         </div>
 
-                        <!-- SHORT DESCRIPTION -->
-
                         <div class="form-group mb-4">
-
-                            <label class="font-weight-bold">
-                                Short Description
+                            <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                Excerpt Summary (Short Description)
                             </label>
-
-                            <textarea
-                                name="short_description"
-                                rows="3"
-                                class="form-control"
+                            <textarea 
+                                name="short_description" 
+                                rows="3" 
+                                class="form-control text-white"
+                                style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; font-size: 14px; line-height: 1.5;"
+                                onfocus="this.style.borderColor='#38bdf8'; this.style.boxShadow='0 0 0 1px #38bdf8';"
+                                onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                             ></textarea>
-
                         </div>
 
-                        <!-- FULL DESCRIPTION -->
-
                         <div class="form-group mb-4">
-
-                            <label class="font-weight-bold">
-                                Full Description
+                            <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                Master Specifications Sheet (Full Description)
                             </label>
-
-                            <textarea
-                                name="description"
-                                rows="8"
-                                class="form-control"
+                            <textarea 
+                                name="description" 
+                                rows="8" 
+                                class="form-control text-white"
+                                style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; font-size: 14px; line-height: 1.6;"
+                                onfocus="this.style.borderColor='#38bdf8'; this.style.boxShadow='0 0 0 1px #38bdf8';"
+                                onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                             ></textarea>
-
                         </div>
 
                     </div>
 
-                    <!-- RIGHT -->
-
                     <div class="col-lg-4">
-
-                        <div class="border rounded p-3 bg-light">
-
-                            <!-- IMAGE -->
+                        <div 
+                            class="p-4" 
+                            style="
+                                background: rgba(15, 17, 21, 0.4); 
+                                border: 1px solid rgba(255, 255, 255, 0.04); 
+                                border-radius: 10px;
+                            "
+                        >
 
                             <div class="form-group mb-4">
-
-                                <label class="font-weight-bold">
-                                    Product Image
+                                <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                    Product Silhouette File
                                 </label>
-
-                                <input
-                                    type="file"
-                                    name="image"
-                                    class="form-control"
+                                <input 
+                                    type="file" 
+                                    name="image" 
+                                    class="form-control text-white" 
                                     required
+                                    style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; font-size: 13px; height: auto; padding: 10px;"
                                 >
-
                             </div>
 
-                            <!-- SKU -->
-
                             <div class="form-group mb-4">
-
-                                <label class="font-weight-bold">
-                                    SKU
+                                <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                    Internal Code / SKU
                                 </label>
-
-                                <input
-                                    type="text"
-                                    name="sku"
-                                    class="form-control"
+                                <input 
+                                    type="text" 
+                                    name="sku" 
+                                    class="form-control text-white"
+                                    style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; height: 42px; font-size: 14px; font-family: monospace;"
+                                    onfocus="this.style.borderColor='#38bdf8'; this.style.boxShadow='0 0 0 1px #38bdf8';"
+                                    onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                                 >
-
                             </div>
 
-                            <!-- PRICE -->
-
                             <div class="form-group mb-4">
-
-                                <label class="font-weight-bold">
-                                    Price
+                                <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                    Standard Price (₹)
                                 </label>
-
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    name="price"
-                                    class="form-control"
+                                <input 
+                                    type="number" 
+                                    step="0.01" 
+                                    name="price" 
+                                    class="form-control text-white" 
                                     required
+                                    style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; height: 42px; font-size: 14px; font-weight: 600;"
+                                    onfocus="this.style.borderColor='#38bdf8'; this.style.boxShadow='0 0 0 1px #38bdf8';"
+                                    onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                                 >
-
                             </div>
 
-                            <!-- SALE PRICE -->
-
-                            <div class="form-group mb-4">
-
-                                <label class="font-weight-bold">
-                                    Sale Price
+                            <!-- <div class="form-group mb-4">
+                                <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                    High-Volume Contract Price (₹)
                                 </label>
-
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    name="sale_price"
-                                    class="form-control"
+                                <input 
+                                    type="number" 
+                                    step="0.01" 
+                                    name="sale_price" 
+                                    class="form-control text-white"
+                                    style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; height: 42px; font-size: 14px; font-weight: 600; color: #10b981 !important;"
+                                    onfocus="this.style.borderColor='#10b981'; this.style.boxShadow='0 0 0 1px #10b981';"
+                                    onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                                 >
-
-                            </div>
-
-                            <!-- STOCK -->
+                            </div> -->
 
                             <div class="form-group mb-4">
-
-                                <label class="font-weight-bold">
-                                    Stock
+                                <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                    Initial Allocation Stock
                                 </label>
-
-                                <input
-                                    type="number"
-                                    name="stock"
-                                    class="form-control"
+                                <input 
+                                    type="number" 
+                                    name="stock" 
+                                    class="form-control text-white" 
                                     required
+                                    style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; height: 42px; font-size: 14px;"
+                                    onfocus="this.style.borderColor='#38bdf8'; this.style.boxShadow='0 0 0 1px #38bdf8';"
+                                    onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                                 >
-
                             </div>
 
-                            <!-- GST -->
-
                             <div class="form-group mb-4">
-
-                                <label class="font-weight-bold">
-                                    GST %
+                                <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                    Regulatory GST Rate (%)
                                 </label>
-
-                                <input
-                                    type="number"
-                                    step="0.01"
-                                    name="gst_percent"
-                                    class="form-control"
-                                    value="18"
+                                <input 
+                                    type="number" 
+                                    step="0.01" 
+                                    name="gst_percent" 
+                                    class="form-control text-white" 
+                                    value="18" 
                                     required
+                                    style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; height: 42px; font-size: 14px;"
+                                    onfocus="this.style.borderColor='#38bdf8'; this.style.boxShadow='0 0 0 1px #38bdf8';"
+                                    onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                                 >
-
                             </div>
 
-                            <!-- SELLING TYPE -->
-
                             <div class="form-group mb-4">
-
-                                <label class="font-weight-bold">
-                                    Selling Type
+                                <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                    Dispatch Form Factors
                                 </label>
-
-                                <select
-                                    name="selling_type"
-                                    class="form-control"
+                                <select 
+                                    name="selling_type" 
+                                    class="form-control text-white" 
                                     id="sellingType"
+                                    style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; height: 42px; font-size: 14px;"
+                                    onfocus="this.style.borderColor='#38bdf8'; this.style.boxShadow='0 0 0 1px #38bdf8';"
+                                    onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                                 >
-
-                                    <option value="piece">
-                                        Piece Only
-                                    </option>
-
-                                    <option value="box">
-                                        Box Only
-                                    </option>
-
-                                    <option value="both">
-                                        Both Piece & Box
-                                    </option>
-
+                                    <option value="piece" style="background: #151922; color: #ffffff;">Piece Only</option>
+                                    <option value="box" style="background: #151922; color: #ffffff;">Box Only</option>
+                                    <option value="both" style="background: #151922; color: #ffffff;">Both Piece & Box</option>
                                 </select>
-
                             </div>
 
-                            <!-- PIECES PER BOX -->
-
-                            <div
-                                class="form-group mb-4"
-                                id="piecesPerBoxWrap"
-                            >
-
-                                <label class="font-weight-bold">
-                                    Pieces Per Box
+                            <div class="form-group mb-4" id="piecesPerBoxWrap">
+                                <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                    Volumetric Packaging (Pieces Per Box)
                                 </label>
-
-                                <input
-                                    type="number"
-                                    name="pieces_per_box"
-                                    class="form-control"
+                                <input 
+                                    type="number" 
+                                    name="pieces_per_box" 
+                                    class="form-control text-white"
+                                    style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; height: 42px; font-size: 14px;"
+                                    onfocus="this.style.borderColor='#38bdf8'; this.style.boxShadow='0 0 0 1px #38bdf8';"
+                                    onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                                 >
-
                             </div>
-
-                            <!-- MOQ -->
 
                             <div class="form-group mb-4">
-
-                                <label class="font-weight-bold">
-                                    Minimum Order Quantity
+                                <label style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px;">
+                                    Minimum Order Threshold (MOQ)
                                 </label>
-
-                                <input
-                                    type="number"
-                                    name="min_order_qty"
-                                    class="form-control"
-                                    value="1"
+                                <input 
+                                    type="number" 
+                                    name="min_order_qty" 
+                                    class="form-control text-white" 
+                                    value="1" 
                                     required
+                                    style="background: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; height: 42px; font-size: 14px;"
+                                    onfocus="this.style.borderColor='#38bdf8'; this.style.boxShadow='0 0 0 1px #38bdf8';"
+                                    onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                                 >
-
                             </div>
 
-                            <!-- FEATURED -->
-
-                            <div class="form-group mb-4">
-
-                                <div class="form-check">
-
-                                    <input
-                                        type="checkbox"
-                                        name="featured"
-                                        class="form-check-input"
+                            <div class="form-group mb-4 pt-2">
+                                <div class="form-check d-flex align-items-center" style="gap: 4px;">
+                                    <input 
+                                        type="checkbox" 
+                                        name="featured" 
+                                        class="form-check-input" 
                                         id="featuredCheck"
+                                        style="cursor: pointer; width: 16px; height: 16px; margin: 0; background-color: rgba(15, 17, 21, 0.5); border: 1px solid rgba(255, 255, 255, 0.2);"
                                     >
-
-                                    <label
-                                        class="form-check-label"
-                                        for="featuredCheck"
+                                    <label 
+                                        class="form-check-label text-white-50 pl-2" 
+                                        for="featuredCheck" 
+                                        style="font-size: 13px; font-weight: 500; cursor: pointer; user-select: none;"
                                     >
-                                        Featured Product
+                                        Highlight on Prime Showroom Showcases
                                     </label>
-
                                 </div>
-
                             </div>
 
-                            <!-- BUTTON -->
-
-                            <button
-                                class="btn btn-dark btn-block py-2"
+                            <button 
+                                class="btn btn-block py-2.5 mt-2"
+                                style="
+                                    background: linear-gradient(135deg, #38bdf8, #0284c7);
+                                    color: #ffffff;
+                                    font-weight: 600;
+                                    font-size: 14px;
+                                    border: none;
+                                    border-radius: 8px;
+                                    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+                                    transition: all 0.2s;
+                                "
+                                onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 16px rgba(56, 189, 248, 0.3)';"
+                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(56, 189, 248, 0.2)';"
                             >
-                                Save Product
+                                Save Production Blueprint
                             </button>
 
                         </div>
-
                     </div>
 
                 </div>
-
             </form>
 
         </div>
-
     </div>
 
 </div>
