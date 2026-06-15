@@ -58,17 +58,18 @@ include 'includes/header.php';
 
             <div class="mb-3">
                 <strong>Phone:</strong><br>
-                +91 XXXXX XXXXX
+                +91 999-747-7289 | +91 703-787-7289
             </div>
 
             <div class="mb-3">
                 <strong>Email:</strong><br>
-                info@alokglass.com
+                pranjal@alokglass.com | sales@alokglass.com
             </div>
 
             <div class="mb-3">
                 <strong>Address:</strong><br>
-                Company Address Here
+                Firozabad:</b> Alok Glass Works<br />Kia Showroom,    Agra Road,<br />
+                                            Firozabad – 283203 (U.P.) India<br />
             </div>
 
         </div>
