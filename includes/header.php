@@ -26,12 +26,12 @@ $navCategories = $navStmt->fetchAll();
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
         <base >
-        <base href="/ajanta-project/">
+        <base href="/">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
         <title>
-            Ajanta Bottle Pvt Ltd -
+            Alok Glass Works
         </title>
 
         <meta name="title" content="Buy Wholesale Glass Bottles &amp; Jars | Online &amp; Offline Shopping – Ajanta Bottle">
@@ -184,385 +184,346 @@ $navCategories = $navStmt->fetchAll();
     onload="titleMarquee()"
     >
         <div class="wrapper" id="app">
-          <!-- <section class="top-nav-wrap">
-    <div class="container">
-        <div class="top-nav">
-            <div class="row justify-content-between">
-                <div class="top-nav-left d-none d-lg-block">
-                    <span></span>
-                </div>
+          
+<!-- Header Start -->
+    <div class="head-inform-bar" style="background-color: FED8B1"><p style="color: 000000"><p>The minimum order value is only Rs 15,000/- now!&nbsp;</p></p></div>
+    <header>
 
-                <div class="top-nav-right">
-                    <ul class="list-inline top-nav-right-list">
-                        <li>
-                            <a href=../assets/contact">
-                                <i class="las la-phone"></i>
-                                Contact
-                            </a>
-                        </li>
+        <div class="container">
 
-                        <li>
-                            <a href=../assets/compare">
-                                <i class="las la-random"></i>
-                                Compare
-                            </a>
-                        </li>
+            <div class="row">
 
-                        
-                        
-                                                    <li>
-                                <a href=../assets/login">
-                                    <i class="las la-sign-in-alt"></i>
-                                    Login
-                                </a>
-                            </li>
-                                            </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
- --> 
-            <!-- Header Start -->
-<div class="head-inform-bar" style="background-color: FED8B1"><p style="color: 000000"><p>The minimum order value is only Rs 15,000/- now!&nbsp;</p></p></div>
+                <div class="col-md-4 txtm-center only-desktop">
 
-   <header>
-
-  <div class="container">
-
-    <div class="row">
-
-        <div class="col-md-4 txtm-center only-desktop">
-
-            <div
-                style="
-                    display:flex;
-                    align-items:center;
-                    gap:18px;
-                "
-            >
-
-                <a href="index.php">
-
-                    <img
-                        src="assets/themes/storefront/public/images/logo.jpeg?v=2.0.3"
-                        alt="Alok Glass"
+                    <div
                         style="
-                            height:90px;
-                            width:auto;
-                            object-fit:contain;
-                            display:block;
+                            display:flex;
+                            align-items:center;
+                            gap:18px;
                         "
                     >
 
-                </a>
+                        <a href="index.php">
 
-                <a href="index.php">
-
-                    <img
-                        src="assets/themes/storefront/public/images/40-years-trust2e8da.png?v=2.0.3"
-                        alt="40 Years Trust"
-                        style="
-                            height:70px;
-                            width:auto;
-                            object-fit:contain;
-                            display:block;
-                        "
-                    >
-
-                </a>
-
-            </div>
-
-        </div>
-
-        <div class="col-12 text-left only-mobile">
-
-            <!-- Navigation Start -->
-
-            <nav class="navbar navbar-expand-lg navbar-light"> <!--bg-light-->
-
-                <a class="navbar-brand" href="index.html"><img src="assets/themes/storefront/public/images/logoe8da.png?v=2.0.3" alt="" /></a>
-                <a href="index.html"><img src="assets/themes/storefront/public/images/40-years-trust2e8da.png?v=2.0.3" alt=""/ style="margin-left: -50px;"></a>
-                
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
-                    <span style="padding-top: 4px; display: inline-block; font-size: 14px;">MENU</span>
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-
-
-                <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
-
-                    <ul class="navbar-nav">
-
-                        <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown08" href="javascript:void(0);" aria-haspopup="true" aria-expanded="false"> Shop By Industry </a>
-                                
-                    
-                        
-                            <?php
-                            $navCategories = $pdo->query("
-                                SELECT name, slug
-                                FROM categories
-                                ORDER BY name ASC
-                            ")->fetchAll();
-                            ?>
-
-                            <div class="dropdown-menu" aria-labelledby="dropdown08">
-
-                                <?php foreach($navCategories as $cat): ?>
-
-                                    <a
-                                        class="dropdown-item"
-                                        href="category/<?= urlencode($cat['slug']) ?>"
-                                    >
-                                        <?= htmlspecialchars($cat['name']) ?>
-                                    </a>
-
-                                <?php endforeach; ?>
-
-                            </div>
-                    
-                        
-                        </li>
-                    
-                        <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown08" href="javascript:void(0);" aria-haspopup="true" aria-expanded="false"> Shop By Product </a>
-                                
-                    
-                        
-                            <div class="dropdown-menu" aria-labelledby="dropdown08">
-
-                                <?php foreach($navCategories as $cat): ?>
-
-                                    <a
-                                        class="dropdown-item"
-                                        href="category/<?= urlencode($cat['slug']) ?>"
-                                    >
-                                        <?= htmlspecialchars($cat['name']) ?>
-                                    </a>
-
-                                <?php endforeach; ?>
-
-                            </div>
-                    
-                        
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="decoration-services.php">
-                                Decoration Services
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="category.php?slug=akikai-packaging-machines">
-                                Akikai Packaging Machines
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="category.php?slug=colour-cosmetics-packaging">
-                                Colour Cosmetics Packaging
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="blogs.php">
-                                Blogs and Videos
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.php">
-                                Contact Us
-                            </a>
-                        </li>
-                
-                    </ul> 
-
-                </div>
-
-            </nav>
-
-            <!-- Navigation Ends -->
-
-        </div>
-
-        <div class="col-md-4 search-wrap-update">
-
-            <form
-                method="GET"
-                action="search.php"
-            >
-
-                <div class="input-group">
-
-                    <!-- SEARCH INPUT -->
-
-                    <input
-                        type="text"
-                        name="q"
-                        class="form-control"
-                        placeholder="Search bottles, jars, caps..."
-                        required
-                    >
-
-                    <!-- CATEGORY FILTER -->
-
-                    <select
-                        name="category"
-                        class="form-control"
-                        style="max-width:220px;"
-                    >
-
-                        <option value="">
-                            All Categories
-                        </option>
-
-                        <?php foreach($navCategories as $cat): ?>
-
-                            <option
-                                value="<?= htmlspecialchars($cat['slug']) ?>"
+                            <img
+                                src="assets/themes/storefront/public/images/logo.jpeg?v=2.0.3"
+                                alt="Alok Glass"
+                                style="
+                                    height:90px;
+                                    width:auto;
+                                    object-fit:contain;
+                                    display:block;
+                                "
                             >
-                                <?= htmlspecialchars($cat['name']) ?>
-                            </option>
 
-                        <?php endforeach; ?>
+                        </a>
 
-                    </select>
+                        <a href="index.php">
 
-                    <!-- BUTTON -->
+                            <img
+                                src="assets/themes/storefront/public/images/40-years-trust2e8da.png?v=2.0.3"
+                                alt="40 Years Trust"
+                                style="
+                                    height:70px;
+                                    width:auto;
+                                    object-fit:contain;
+                                    display:block;
+                                "
+                            >
 
-                    <div class="input-group-append">
-
-                        <button
-                            class="btn btn-dark"
-                            type="submit"
-                        >
-                            Search
-                        </button>
+                        </a>
 
                     </div>
 
                 </div>
 
-            </form>
+                <div class="col-12 text-left only-mobile">
 
-        </div>
+                    <!-- Navigation Start -->
 
-        <div class="col-md-4 text-right txtm-center menu-bar-new">
+                    <nav class="navbar navbar-expand-lg navbar-light"> <!--bg-light-->
 
-            <?php
+                        <a class="navbar-brand" href="index.html"><img src="assets/themes/storefront/public/images/logoe8da.png?v=2.0.3" alt="" /></a>
+                        <a href="index.html"><img src="assets/themes/storefront/public/images/40-years-trust2e8da.png?v=2.0.3" alt=""/ style="margin-left: -50px;"></a>
+                        
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+                            <span style="padding-top: 4px; display: inline-block; font-size: 14px;">MENU</span>
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
 
-            $cartCount = 0;
 
-            if(!empty($_SESSION['cart'])){
 
-                foreach($_SESSION['cart'] as $cartItem){
+                        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
 
-                    $cartCount += $cartItem['quantity'];
+                            <ul class="navbar-nav">
 
-                }
-            }
+                                <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown08" href="javascript:void(0);" aria-haspopup="true" aria-expanded="false"> Shop By Industry </a>
+                                        
+                            
+                                
+                                    <?php
+                                    $navCategories = $pdo->query("
+                                        SELECT name, slug
+                                        FROM categories
+                                        ORDER BY name ASC
+                                    ")->fetchAll();
+                                    ?>
 
-            ?>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown08">
 
-            <ul class="list-inline mb-0">
+                                        <?php foreach($navCategories as $cat): ?>
 
-                <?php if(isset($_SESSION['user_id'])): ?>
+                                            <a
+                                                class="dropdown-item"
+                                                href="category/<?= urlencode($cat['slug']) ?>"
+                                            >
+                                                <?= htmlspecialchars($cat['name']) ?>
+                                            </a>
 
-                    <li class="list-inline-item mr-3">
+                                        <?php endforeach; ?>
 
-                        <a href="my-account">
+                                    </div>
+                            
+                                
+                                </li>
+                            
+                                <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown08" href="javascript:void(0);" aria-haspopup="true" aria-expanded="false"> Shop By Product </a>
+                                        
+                            
+                                
+                                    <div class="dropdown-menu" aria-labelledby="dropdown08">
 
-                            Hello,
-                            <?= htmlspecialchars($_SESSION['user_name']) ?>
+                                        <?php foreach($navCategories as $cat): ?>
 
-                        </a>
+                                            <a
+                                                class="dropdown-item"
+                                                href="category/<?= urlencode($cat['slug']) ?>"
+                                            >
+                                                <?= htmlspecialchars($cat['name']) ?>
+                                            </a>
 
-                    </li>
+                                        <?php endforeach; ?>
 
-                    <li class="list-inline-item mr-3">
+                                    </div>
+                            
+                                
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link" href="decoration-services.php">
+                                        Decoration Services
+                                    </a>
+                                </li>
 
-                        <a href="logout.php">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="category.php?slug=akikai-packaging-machines">
+                                        Akikai Packaging Machines
+                                    </a>
+                                </li>
 
-                            Logout
+                                <li class="nav-item">
+                                    <a class="nav-link" href="category.php?slug=colour-cosmetics-packaging">
+                                        Colour Cosmetics Packaging
+                                    </a>
+                                </li>
 
-                        </a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="blogs.php">
+                                        Blogs and Videos
+                                    </a>
+                                </li>
 
-                    </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="contact.php">
+                                        Contact Us
+                                    </a>
+                                </li>
+                        
+                            </ul> 
 
-                <?php else: ?>
+                        </div>
 
-                    <li class="list-inline-item mr-3">
+                    </nav>
 
-                        <a href="login">
+                    <!-- Navigation Ends -->
 
-                            Login
+                </div>
 
-                        </a>
+                <div class="col-md-4 search-wrap-update">
 
-                    </li>
-
-                    <li class="list-inline-item mr-3">
-
-                        <a href="register">
-
-                            Register
-
-                        </a>
-
-                    </li>
-
-                <?php endif; ?>
-
-                <li class="list-inline-item">
-
-                    <a
-                        href="cart"
-                        class="position-relative"
+                    <form
+                        method="GET"
+                        action="search.php"
                     >
 
-                        Cart
+                        <div class="input-group">
 
-                        <?php if($cartCount > 0): ?>
+                            <!-- SEARCH INPUT -->
 
-                            <span
-                                style="
-                                    background:red;
-                                    color:#fff;
-                                    border-radius:50%;
-                                    padding:3px 8px;
-                                    font-size:12px;
-                                    position:absolute;
-                                    top:-10px;
-                                    right:-18px;
-                                "
+                            <input
+                                type="text"
+                                name="q"
+                                class="form-control"
+                                placeholder="Search bottles, jars, caps..."
+                                required
                             >
 
-                                <?= $cartCount ?>
+                            <!-- CATEGORY FILTER -->
 
-                            </span>
+                            <select
+                                name="category"
+                                class="form-control"
+                                style="max-width:220px;"
+                            >
+
+                                <option value="">
+                                    All Categories
+                                </option>
+
+                                <?php foreach($navCategories as $cat): ?>
+
+                                    <option
+                                        value="<?= htmlspecialchars($cat['slug']) ?>"
+                                    >
+                                        <?= htmlspecialchars($cat['name']) ?>
+                                    </option>
+
+                                <?php endforeach; ?>
+
+                            </select>
+
+                            <!-- BUTTON -->
+
+                            <div class="input-group-append">
+
+                                <button
+                                    class="btn btn-dark"
+                                    type="submit"
+                                >
+                                    Search
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="col-md-4 text-right txtm-center menu-bar-new">
+
+                    <?php
+
+                    $cartCount = 0;
+
+                    if(!empty($_SESSION['cart'])){
+
+                        foreach($_SESSION['cart'] as $cartItem){
+
+                            $cartCount += $cartItem['quantity'];
+
+                        }
+                    }
+
+                    ?>
+
+                    <ul class="list-inline mb-0">
+
+                        <?php if(isset($_SESSION['user_id'])): ?>
+
+                            <li class="list-inline-item mr-3">
+
+                                <a href="my-account">
+
+                                    Hello,
+                                    <?= htmlspecialchars($_SESSION['user_name']) ?>
+
+                                </a>
+
+                            </li>
+
+                            <li class="list-inline-item mr-3">
+
+                                <a href="logout.php">
+
+                                    Logout
+
+                                </a>
+
+                            </li>
+
+                        <?php else: ?>
+
+                            <li class="list-inline-item mr-3">
+
+                                <a href="login">
+
+                                    Login
+
+                                </a>
+
+                            </li>
+
+                            <li class="list-inline-item mr-3">
+
+                                <a href="register">
+
+                                    Register
+
+                                </a>
+
+                            </li>
 
                         <?php endif; ?>
 
-                    </a>
+                        <li class="list-inline-item">
 
-                </li>
+                            <a
+                                href="cart"
+                                class="position-relative"
+                            >
 
-            </ul>
+                                Cart
+
+                                <?php if($cartCount > 0): ?>
+
+                                    <span
+                                        style="
+                                            background:red;
+                                            color:#fff;
+                                            border-radius:50%;
+                                            padding:3px 8px;
+                                            font-size:12px;
+                                            position:absolute;
+                                            top:-10px;
+                                            right:-18px;
+                                        "
+                                    >
+
+                                        <?= $cartCount ?>
+
+                                    </span>
+
+                                <?php endif; ?>
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
 
         </div>
 
-    </div>
+    </header>
 
-  </div>
-
-  </header>
-
-  <!-- Header Ends -->
+<!-- Header Ends -->
 
 
 

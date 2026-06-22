@@ -3,8 +3,7 @@
 require 'includes/auth.php';
 require '../includes/db.php';
 
-include 'includes/admin_header.php';
-include 'includes/admin_sidebar.php';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -167,7 +166,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     header("Location: products.php");
     exit;
 }
-
+include 'includes/admin_header.php';
+include 'includes/admin_sidebar.php';
 ?>
 
 <h2 class="mb-4" style="font-weight: 700; letter-spacing: -0.02em; color: #ffffff; font-size: calc(1.4rem + 0.6vw);">

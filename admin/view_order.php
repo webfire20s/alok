@@ -3,8 +3,6 @@
 require 'includes/auth.php';
 require '../includes/db.php';
 
-include 'includes/admin_header.php';
-include 'includes/admin_sidebar.php';
 
 $orderId = (int)($_GET['id'] ?? 0);
 
@@ -126,6 +124,8 @@ if(
 
 <?php 
 // Existing backend processing layers are preserved identically above this layout block
+include 'includes/admin_header.php';
+include 'includes/admin_sidebar.php';
 ?>
 
 <style>

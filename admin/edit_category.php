@@ -3,8 +3,7 @@
 require 'includes/auth.php';
 require '../includes/db.php';
 
-include 'includes/admin_header.php';
-include 'includes/admin_sidebar.php';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -136,7 +135,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     header("Location: categories.php");
     exit;
 }
-
+include 'includes/admin_header.php';
+include 'includes/admin_sidebar.php';
 ?>
 
 <div class="container-fluid py-4">

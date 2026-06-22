@@ -3,8 +3,7 @@
 require 'includes/auth.php';
 require '../includes/db.php';
 
-include 'includes/admin_header.php';
-include 'includes/admin_sidebar.php';
+
 
 $id = (int)($_GET['id'] ?? 0);
 
@@ -79,7 +78,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     header("Location: pages.php");
     exit;
 }
-
+include 'includes/admin_header.php';
+include 'includes/admin_sidebar.php';
 ?>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
