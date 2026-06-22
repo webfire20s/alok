@@ -245,7 +245,7 @@ $navCategories = $navStmt->fetchAll();
                 <a href="index.php">
 
                     <img
-                        src="assets/themes/storefront/public/images/logo2.jpg?v=2.0.3"
+                        src="assets/themes/storefront/public/images/logo.jpeg?v=2.0.3"
                         alt="Alok Glass"
                         style="
                             height:90px;

@@ -68,122 +68,164 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
-<h2 class="mb-4">
-    Add Page
-</h2>
+<style>
+    .glass-input-field {
+        background: rgba(15, 17, 21, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 8px !important;
+        color: #ffffff !important;
+        font-size: 14px !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+    .glass-input-field:focus {
+        background: rgba(15, 17, 21, 0.6) !important;
+        border-color: rgba(56, 189, 248, 0.5) !important;
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15) !important;
+    }
+    .glass-input-field::placeholder {
+        color: #475569 !important;
+    }
+    .glass-label {
+        color: #94a3b8; 
+        font-size: 12px; 
+        font-weight: 600; 
+        text-transform: uppercase; 
+        letter-spacing: 0.04em; 
+        margin-bottom: 8px; 
+        display: block;
+    }
 
-<div class="card-box p-4">
+    /* CKEditor Deep Customization Override to blend with Cinematic Dark Theme */
+    .ck-reset_all, .ck-reset_all * {
+        color: #f1f5f9 !important;
+    }
+    .ck.ck-editor__top .ck-sticky-panel .ck-toolbar {
+        background: rgba(15, 17, 21, 0.7) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-bottom: none !important;
+        border-top-left-radius: 8px !important;
+        border-top-right-radius: 8px !important;
+    }
+    .ck.ck-editor__main>.ck-editor__editable {
+        background: rgba(15, 17, 21, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-bottom-left-radius: 8px !important;
+        border-bottom-right-radius: 8px !important;
+        color: #ffffff !important;
+        min-height: 250px;
+    }
+    .ck.ck-editor__main>.ck-editor__editable.ck-focused {
+        border-color: rgba(56, 189, 248, 0.5) !important;
+        box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.5) !important;
+    }
+    .ck.ck-button {
+        cursor: pointer !important;
+    }
+    .ck.ck-button:not(.ck-disabled):hover, a.ck.ck-button:not(.ck-disabled):hover {
+        background: rgba(255, 255, 255, 0.08) !important;
+    }
+    .ck.ck-button.ck-on {
+        background: rgba(56, 189, 248, 0.2) !important;
+        color: #38bdf8 !important;
+    }
+    .ck.ck-list {
+        background: #1e293b !important;
+    }
+    .ck.ck-list__item .ck-button:hover:not(.ck-disabled) {
+        background: rgba(56, 189, 248, 0.15) !important;
+    }
+</style>
 
-    <form method="POST">
+<div class="container-fluid py-4">
 
-        <div class="form-group">
+    <div class="mb-5">
+        <h2 class="mb-1" style="font-weight: 700; letter-spacing: -0.02em; color: #ffffff;">
+            Add Page
+        </h2>
+        <p style="color: #64748b; font-size: 14px; margin: 0;">
+            Create new structural interfaces, map platform layouts, and document semantic metadata definitions.
+        </p>
+    </div>
 
-            <label>Page Title</label>
+    <div class="card border-0 p-4 mb-4" style="
+        max-width: 950px;
+        border-radius: 14px;
+        background: rgba(21, 25, 34, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    ">
 
-            <input
-                type="text"
-                name="title"
-                class="form-control"
-                required
-            >
+        <form method="POST">
 
-        </div>
+            <div class="row">
+                <div class="col-md-6 form-group mb-4">
+                    <label class="glass-label">Page Title</label>
+                    <input type="text" name="title" class="form-control glass-input-field" required>
+                </div>
 
-        <div class="form-group">
+                <div class="col-md-6 form-group mb-4">
+                    <label class="glass-label">Slug</label>
+                    <input type="text" name="slug" class="form-control glass-input-field" placeholder="about-us" required>
+                </div>
+            </div>
 
-            <label>Slug</label>
+            <div class="row">
+                <div class="col-md-6 form-group mb-4">
+                    <label class="glass-label">Meta Title</label>
+                    <input type="text" name="meta_title" class="form-control glass-input-field">
+                </div>
 
-            <input
-                type="text"
-                name="slug"
-                class="form-control"
-                placeholder="about-us"
-                required
-            >
+                <div class="col-md-6 form-group mb-4">
+                    <label class="glass-label">Status</label>
+                    <select name="status" class="form-control glass-input-field" style="cursor: pointer;">
+                        <option value="published" style="background: #1e293b; color: #ffffff;">Published</option>
+                        <option value="draft" style="background: #1e293b; color: #ffffff;">Draft</option>
+                    </select>
+                </div>
+            </div>
 
-        </div>
+            <div class="form-group mb-4">
+                <label class="glass-label">Meta Description</label>
+                <textarea name="meta_description" rows="3" class="form-control glass-input-field"></textarea>
+            </div>
 
-        <div class="form-group">
+            <div class="form-group mb-4">
+                <label class="glass-label">Page Content</label>
+                <textarea name="content" id="editor" rows="10" class="form-control glass-input-field"></textarea>
+            </div>
 
-            <label>Meta Title</label>
+            <div class="pt-2">
+                <button class="btn px-4 py-2" style="
+                    background: linear-gradient(135deg, #38bdf8, #0284c7); 
+                    border: none; 
+                    color: #ffffff; 
+                    font-size: 14px; 
+                    font-weight: 600; 
+                    border-radius: 6px; 
+                    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15); 
+                    transition: transform 0.2s, box-shadow 0.2s;
+                "
+                onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 16px rgba(56, 189, 248, 0.3)';"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(56, 189, 248, 0.15)';">
+                    Save Page
+                </button>
+            </div>
 
-            <input
-                type="text"
-                name="meta_title"
-                class="form-control"
-            >
+        </form>
 
-        </div>
-
-        <div class="form-group">
-
-            <label>Meta Description</label>
-
-            <textarea
-                name="meta_description"
-                rows="3"
-                class="form-control"
-            ></textarea>
-
-        </div>
-
-        <div class="form-group">
-
-            <label>Status</label>
-
-            <select
-                name="status"
-                class="form-control"
-            >
-
-                <option value="published">
-                    Published
-                </option>
-
-                <option value="draft">
-                    Draft
-                </option>
-
-            </select>
-
-        </div>
-
-        <div class="form-group">
-
-            <label>Page Content</label>
-
-            <textarea
-                name="content"
-                id="editor"
-                rows="10"
-                class="form-control"
-            ></textarea>
-
-        </div>
-
-        <button class="btn btn-dark">
-
-            Save Page
-
-        </button>
-
-    </form>
-
+    </div>
 </div>
 
 <script>
-
-ClassicEditor
-.create(
-    document.querySelector('#editor')
-)
-.catch(error => {
-    console.error(error);
-});
-
+    ClassicEditor
+    .create(document.querySelector('#editor'))
+    .catch(error => {
+        console.error(error);
+    });
 </script>
 
 </div>
-
 </body>
 </html>

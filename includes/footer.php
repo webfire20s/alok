@@ -32,13 +32,13 @@
 
                                         <ul>
 
-                                            <li><a href="decoration-services.php" target="_blank">About Us</a></li>
+                                            <li><a href="about.php" target="_blank">About Us</a></li>
 
                                             <li><a href="#" target="_blank">FAQ's</a></li> 
 
                                             <li><a href="blogs.php" target="_blank">Blog</a></li>
                                             
-                                        <!-- <li><a href="https://www.ajantabottle.com/ajanta-team" target="_blank">Ajanta Team</a></li>
+                                            <!-- <li><a href="https://www.ajantabottle.com/ajanta-team" target="_blank">Ajanta Team</a></li>
                                             
                                             <li><a href="https://www.ajantabottle.com/newsletter" target="_blank">Newsletter</a></li>-->
 
