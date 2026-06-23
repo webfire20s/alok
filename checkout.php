@@ -71,278 +71,248 @@ $totalGST = 0;
 
 ?>
 
-<div class="container pt-5 pb-5">
+<div class="container pt-5 pb-5" style="font-family: 'Montserrat', sans-serif;">
 
     <form action="place_order.php" method="POST">   
+        
         <div class="row">
-
-            <!-- BILLING FORM -->
 
             <div class="col-md-7">
 
-                <h3 class="mb-4">
+                <h3 class="text-uppercase mb-4" style="font-size: 18px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; padding-bottom: 12px;">
                     Billing Details
+                    <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background-color: #c8232c;"></span>
                 </h3>
 
+                <div class="form-group mb-4">
+                    <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #111111; letter-spacing: 0.05em; margin-bottom: 8px; display: block;">
+                        Full Name <span style="color: #c8232c;">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="customer_name"
+                        class="form-control"
+                        required
+                        style="background-color: #ffffff; border: 1px solid #cccccc; border-radius: 4px; color: #111111; font-size: 14px; font-weight: 500; padding: 10px 14px; height: 44px; box-shadow: none; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='#111111';"
+                        onblur="this.style.borderColor='#cccccc';"
+                    >
+                </div>
 
-                        <div class="form-group">
-                            <label>Full Name</label>
+                <div class="form-group mb-4">
+                    <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #111111; letter-spacing: 0.05em; margin-bottom: 8px; display: block;">
+                        Email <span style="color: #c8232c;">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        name="customer_email"
+                        class="form-control"
+                        required
+                        style="background-color: #ffffff; border: 1px solid #cccccc; border-radius: 4px; color: #111111; font-size: 14px; font-weight: 500; padding: 10px 14px; height: 44px; box-shadow: none; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='#111111';"
+                        onblur="this.style.borderColor='#cccccc';"
+                    >
+                </div>
 
-                            <input
-                                type="text"
-                                name="customer_name"
-                                class="form-control"
-                                required
-                            >
-                        </div>
+                <div class="form-group mb-4">
+                    <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #111111; letter-spacing: 0.05em; margin-bottom: 8px; display: block;">
+                        Phone <span style="color: #c8232c;">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="customer_phone"
+                        class="form-control"
+                        required
+                        style="background-color: #ffffff; border: 1px solid #cccccc; border-radius: 4px; color: #111111; font-size: 14px; font-weight: 500; padding: 10px 14px; height: 44px; box-shadow: none; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='#111111';"
+                        onblur="this.style.borderColor='#cccccc';"
+                    >
+                </div>
 
-                        <div class="form-group">
-                            <label>Email</label>
+                <div class="form-group mb-4">
+                    <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #111111; letter-spacing: 0.05em; margin-bottom: 8px; display: block;">
+                        Company Name
+                    </label>
+                    <input
+                        type="text"
+                        name="customer_company"
+                        class="form-control"
+                        style="background-color: #ffffff; border: 1px solid #cccccc; border-radius: 4px; color: #111111; font-size: 14px; font-weight: 500; padding: 10px 14px; height: 44px; box-shadow: none; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='#111111';"
+                        onblur="this.style.borderColor='#cccccc';"
+                    >
+                </div>
 
-                            <input
-                                type="email"
-                                name="customer_email"
-                                class="form-control"
-                                required
-                            >
-                        </div>
+                <div class="form-group mb-4">
+                    <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #111111; letter-spacing: 0.05em; margin-bottom: 8px; display: block;">
+                        Address <span style="color: #c8232c;">*</span>
+                    </label>
+                    <textarea
+                        name="customer_address"
+                        class="form-control"
+                        rows="4"
+                        required
+                        style="background-color: #ffffff; border: 1px solid #cccccc; border-radius: 4px; color: #111111; font-size: 14px; font-weight: 500; padding: 12px 14px; box-shadow: none; transition: border-color 0.2s; resize: vertical;"
+                        onfocus="this.style.borderColor='#111111';"
+                        onblur="this.style.borderColor='#cccccc';"
+                    ></textarea>
+                </div>
 
-                        <div class="form-group">
-                            <label>Phone</label>
+                <div class="row">
 
-                            <input
-                                type="text"
-                                name="customer_phone"
-                                class="form-control"
-                                required
-                            >
-                        </div>
-
-                        <div class="form-group">
-                            <label>Company Name</label>
-
-                            <input
-                                type="text"
-                                name="customer_company"
-                                class="form-control"
-                            >
-                        </div>
-
-                        <div class="form-group">
-                            <label>Address</label>
-
-                            <textarea
-                                name="customer_address"
-                                class="form-control"
-                                rows="4"
-                                required
-                            ></textarea>
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-md-4">
-
-                                <div class="form-group">
-
-                                    <label>City</label>
-
-                                    <input
-                                        type="text"
-                                        name="customer_city"
-                                        class="form-control"
-                                        required
-                                    >
-
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-4">
-
-                                <div class="form-group">
-
-                                    <label>State</label>
-
-                                    <input
-                                        type="text"
-                                        name="customer_state"
-                                        class="form-control"
-                                        required
-                                    >
-
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-4">
-
-                                <div class="form-group">
-
-                                    <label>Pincode</label>
-
-                                    <input
-                                        type="text"
-                                        name="customer_pincode"
-                                        class="form-control"
-                                        required
-                                    >
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label>
-                                Payment Method
+                    <div class="col-md-4">
+                        <div class="form-group mb-4">
+                            <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #111111; letter-spacing: 0.05em; margin-bottom: 8px; display: block;">
+                                City <span style="color: #c8232c;">*</span>
                             </label>
-
-                            <select
-                                name="payment_method"
+                            <input
+                                type="text"
+                                name="customer_city"
                                 class="form-control"
+                                required
+                                style="background-color: #ffffff; border: 1px solid #cccccc; border-radius: 4px; color: #111111; font-size: 14px; font-weight: 500; padding: 10px 14px; height: 44px; box-shadow: none; transition: border-color 0.2s;"
+                                onfocus="this.style.borderColor='#111111';"
+                                onblur="this.style.borderColor='#cccccc';"
                             >
-
-                                <option value="inquiry">
-                                    Inquiry / Manual Payment
-                                </option>
-
-                                <option value="cod">
-                                    Cash on Delivery
-                                </option>
-
-                            </select>
-
                         </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group mb-4">
+                            <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #111111; letter-spacing: 0.05em; margin-bottom: 8px; display: block;">
+                                State <span style="color: #c8232c;">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                name="customer_state"
+                                class="form-control"
+                                required
+                                style="background-color: #ffffff; border: 1px solid #cccccc; border-radius: 4px; color: #111111; font-size: 14px; font-weight: 500; padding: 10px 14px; height: 44px; box-shadow: none; transition: border-color 0.2s;"
+                                onfocus="this.style.borderColor='#111111';"
+                                onblur="this.style.borderColor='#cccccc';"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group mb-4">
+                            <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #111111; letter-spacing: 0.05em; margin-bottom: 8px; display: block;">
+                                Pincode <span style="color: #c8232c;">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                name="customer_pincode"
+                                class="form-control"
+                                required
+                                style="background-color: #ffffff; border: 1px solid #cccccc; border-radius: 4px; color: #111111; font-size: 14px; font-weight: 500; padding: 10px 14px; height: 44px; box-shadow: none; transition: border-color 0.2s;"
+                                onfocus="this.style.borderColor='#111111';"
+                                onblur="this.style.borderColor='#cccccc';"
+                            >
+                        </div>
+                    </div>
 
                 </div>
 
-                <!-- ORDER SUMMARY -->
+                        <div class="form-group mb-4">
+                    <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #111111; letter-spacing: 0.05em; margin-bottom: 8px; display: block;">
+                        Payment Method <span style="color: #c8232c;">*</span>
+                    </label>
+                    <select
+                        name="payment_method"
+                        class="form-control"
+                        style="background-color: #ffffff; border: 1px solid #cccccc; border-radius: 4px; color: #111111; font-size: 14px; font-weight: 500; padding: 10px 14px; height: 44px; box-shadow: none; appearance: none; -webkit-appearance: none; transition: border-color 0.2s;"
+                        onfocus="this.style.borderColor='#111111';"
+                        onblur="this.style.borderColor='#cccccc';"
+                    >
+                        <option value="inquiry">Inquiry / Manual Payment</option>
+                        <option value="cod">Cash on Delivery</option>
+                    </select>
+                </div>
 
-                <div class="col-md-5">
+            </div>
 
-                    <div class="border p-4 shadow-sm">
+            <div class="col-md-5">
 
-                        <h4 class="mb-4">
-                            Order Summary
-                        </h4>
+                <div class="p-4 p-md-5" style="border: 1px solid #eeeeee; border-radius: 4px; background-color: #ffffff;">
 
-                        <?php foreach($cartItems as $item): ?>
+                    <h4 class="text-uppercase mb-4" style="font-size: 15px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; padding-bottom: 10px;">
+                        Order Summary
+                        <span style="position: absolute; bottom: 0; left: 0; width: 30px; height: 2px; background-color: #c8232c;"></span>
+                    </h4>
 
-                            <?php
-
-                            $qty = $item['quantity'];
-
-                            $price = $item['price'];
-
-                            $gstPercent = $item['gst_percent'];
-
-                            $lineSubtotal =
-                            $price * $qty;
-
-                            $gstAmount =
-                            ($lineSubtotal * $gstPercent) / 100;
-
-                            $lineTotal =
-                            $lineSubtotal + $gstAmount;
-
-                            $subtotal += $lineSubtotal;
-
-                            $totalGST += $gstAmount;
-
-                            ?>
-
-                            <div class="d-flex justify-content-between mb-3">
-
-                                <div>
-
-                                    <?= htmlspecialchars($item['name']) ?>
-
-                                    <br>
-
-                                    <small>
-
-                                        Qty:
-                                        <?= $qty ?>
-
-                                        (
-                                        <?= ucfirst($item['order_unit']) ?>
-                                        )
-
-                                    </small>
-
-                                </div>
-
-                                <div>
-
-                                    ₹<?= number_format($lineTotal, 2) ?>
-
-                                </div>
-
-                            </div>
-
-                        <?php endforeach; ?>
+                    <?php foreach($cartItems as $item): ?>
 
                         <?php
-
-                        $grandTotal =
-                        $subtotal + $totalGST;
-
+                        $qty = $item['quantity'];
+                        $price = $item['price'];
+                        $gstPercent = $item['gst_percent'];
+                        
+                        $lineSubtotal = $price * $qty;
+                        $gstAmount = ($lineSubtotal * $gstPercent) / 100;
+                        $lineTotal = $lineSubtotal + $gstAmount;
+                        
+                        $subtotal += $lineSubtotal;
+                        $totalGST += $gstAmount;
                         ?>
 
-                        <hr>
+                        <div class="d-flex justify-content-between mb-3 pb-3" style="border-bottom: 1px dashed #eeeeee; font-size: 14px;">
+                            
+                            <div>
+                                <span style="color: #111111; font-weight: 600; display: block; margin-bottom: 2px;">
+                                    <?= htmlspecialchars($item['name']) ?>
+                                </span>
+                                <small style="color: #777777; font-weight: 500; font-size: 12px;">
+                                    Qty: <?= $qty ?> (<?= ucfirst($item['order_unit']) ?>)
+                                </small>
+                            </div>
 
-                        <div class="d-flex justify-content-between">
-
-                            <strong>
-                                Subtotal
-                            </strong>
-
-                            <strong>
-                                ₹<?= number_format($subtotal, 2) ?>
-                            </strong>
-
-                        </div>
-
-                        <div class="d-flex justify-content-between mt-2">
-
-                            <strong>
-                                GST
-                            </strong>
-
-                            <strong>
-                                ₹<?= number_format($totalGST, 2) ?>
-                            </strong>
+                            <div style="color: #111111; font-weight: 600; padding-top: 2px;">
+                                ₹<?= number_format($lineTotal, 2) ?>
+                            </div>
 
                         </div>
 
-                        <div class="d-flex justify-content-between mt-3">
+                    <?php endforeach; ?>
 
-                            <h5>
-                                Grand Total
-                            </h5>
+                    <?php
+                    $grandTotal = $subtotal + $totalGST;
+                    ?>
 
-                            <h5>
-                                ₹<?= number_format($grandTotal, 2) ?>
-                            </h5>
+                    <div class="pt-2" style="font-size: 14px;">
 
+                        <div class="d-flex justify-content-between mb-2">
+                            <span style="color: #777777; font-weight: 500;">Subtotal</span>
+                            <span style="color: #111111; font-weight: 600;">₹<?= number_format($subtotal, 2) ?></span>
                         </div>
 
-                        <button
-                            type="submit"
-                            class="btn btn-org btn-block mt-4"
-                        >
-                            Place Order
-                        </button>
+                        <div class="d-flex justify-content-between mb-4">
+                            <span style="color: #777777; font-weight: 500;">GST</span>
+                            <span style="color: #111111; font-weight: 600;">₹<?= number_format($totalGST, 2) ?></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between pt-3 mb-4" style="border-top: 1px solid #eeeeee;">
+                            <h5 class="text-uppercase" style="font-size: 14px; font-weight: 700; color: #111111; letter-spacing: 0.03em; margin: 0;">Grand Total</h5>
+                            <h5 style="font-size: 16px; font-weight: 700; color: #c8232c; margin: 0;">₹<?= number_format($grandTotal, 2) ?></h5>
+                        </div>
 
                     </div>
 
-                    
+                    <button
+                        type="submit"
+                        class="btn btn-block text-uppercase"
+                        style="background-color: #111111; color: #ffffff; font-size: 13px; font-weight: 700; letter-spacing: 0.05em; padding: 14px 24px; border-radius: 4px; border: 1px solid #111111; transition: all 0.2s ease-in-out; box-shadow: none;"
+                        onmouseover="this.style.backgroundColor='#c8232c'; this.style.borderColor='#c8232c';"
+                        onmouseout="this.style.backgroundColor='#111111'; this.style.borderColor='#111111';"
+                    >
+                        Place Order
+                    </button>
+
                 </div>
+
+            </div>
                 
         </div>
+
     </form>
 
 </div>

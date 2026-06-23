@@ -1,7 +1,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
     /* Scope-isolated theme to ensure it never breaks your main code logic */
@@ -17,7 +16,7 @@
 
     .alok-industrial-footer h4 {
         font-family: 'Montserrat', sans-serif !important;
-        color: #ffffff !important;
+        color: #ffffff !important; /* Professional clean off-white */
         font-weight: 700 !important;
         font-size: 15px !important;
         text-transform: uppercase;
@@ -26,13 +25,13 @@
         position: relative;
     }
 
-    /* Minimalist line under headings matching glass design style */
+    /* Minimalist line under headings matching premium business palette */
     .alok-industrial-footer h4::after {
         content: '';
         display: block;
         width: 35px;
         height: 2px;
-        background: rgba(255, 255, 255, 0.4);
+        background: #c8232c; /* Crimson Red Accent Line */
         margin-top: 8px;
     }
 
@@ -68,12 +67,12 @@
     }
     
     .alok-industrial-footer .contact-info-list b {
-        color: #ffffff !important;
+        color: #ffffff !important; /* Standard clean white emphasis */
         font-weight: 600 !important;
     }
 
     .alok-industrial-footer .contact-info-list i {
-        color: rgba(255, 255, 255, 0.5);
+        color: #c8232c; /* Structured crimson accent for core contact icons */
         margin-top: 5px;
         width: 16px;
         text-align: center;
@@ -101,17 +100,19 @@
     .alok-social-wrapper a img {
         height: 16px;
         width: auto;
-        filter: brightness(0) invert(1); opacity: 0.7; /* Adapts default images seamlessly */
+        filter: brightness(0) invert(1); 
+        opacity: 0.9; /* Adapts default images seamlessly */
         transition: all 0.3s ease;
     }
 
     .alok-social-wrapper a:hover {
-        background: #ffffff;
-        border-color: #ffffff;
+        background: #c8232c; /* High-end corporate red hover state */
+        border-color: #c8232c;
     }
 
     .alok-social-wrapper a:hover img {
-        filter: none; opacity: 1;
+        filter: brightness(0) invert(1);
+        opacity: 1;
         transform: scale(1.05);
     }
 
@@ -129,16 +130,16 @@
         list-style: none;
         padding: 0;
         margin: 0;
+        display: flex;
+        justify-content: center;
     }
 </style>
 
 <footer class="lt-gray-bg mt-5 alok-industrial-footer">
-
     <div class="container">
-
         <div class="row justify-content-center">
 
-            <div class="col-md-4 contact-bg pt-5 pb-5">
+            <div class="col-md-4 contact pt-5 pb-5">
                 <h4>Contact Us</h4>
                 <ul class="contact-info-list">
                     <li class="pin">
@@ -163,29 +164,23 @@
             </div>
 
             <div class="col-md-3 pt-5 pb-5">
-
                 <h4>Useful Links</h4>
-
                 <ul>
                     <li><a href="about.php" target="_blank">About Us</a></li>
                     <li><a href="#" target="_blank">FAQ's</a></li> 
                     <li><a href="blogs.php" target="_blank">Blog</a></li>
-                    
-                    </ul>
+                </ul>
 
                 <div class="alok-social-wrapper">
-                    <a href="https://www.facebook.com/profile.php?id=61573026120811" target="_blank"><img src="assets/themes/storefront/public/images/fb-icone8da.png?v=2.0.3" /></a>
-                    <a href="https://www.linkedin.com/feed/?trk=guest_homepage-basic_google-one-tap-submit" target="_blank"><img src="assets/themes/storefront/public/images/in-icone8da.png?v=2.0.3" /></a>
-                    <a href="https://www.youtube.com/@AlokGlassWorks/featured" target="_blank"><img src="assets/themes/storefront/public/images/yt-icone8da.png?v=2.0.3" /></a>
-                    <a href="https://www.instagram.com/official_alokglassworks/?hl=en" target="_blank"><img src="assets/themes/storefront/public/images/instagram-icone8da.png?v=2.0.3" /></a>
+                    <a href="https://www.facebook.com/profile.php?id=61573026120811" target="_blank"><img src="assets/themes/storefront/public/images/fb-icone8da.png?v=2.0.3" alt="Facebook" /></a>
+                    <a href="https://www.linkedin.com/feed/?trk=guest_homepage-basic_google-one-tap-submit" target="_blank"><img src="assets/themes/storefront/public/images/in-icone8da.png?v=2.0.3" alt="LinkedIn" /></a>
+                    <a href="https://www.youtube.com/@AlokGlassWorks/featured" target="_blank"><img src="assets/themes/storefront/public/images/yt-icone8da.png?v=2.0.3" alt="YouTube" /></a>
+                    <a href="https://www.instagram.com/official_alokglassworks/?hl=en" target="_blank"><img src="assets/themes/storefront/public/images/instagram-icone8da.png?v=2.0.3" alt="Instagram" /></a>
                 </div>
-
             </div>
 
             <div class="col-md-3 pt-5 pb-5">
-
                 <h4>Let Us Help You</h4>
-
                 <ul>
                     <li><a href="login" target="_blank">My Account</a></li>
                     <li><a href="refund-and-return-policy.html" target="_blank">Refund and Return Policy</a></li>
@@ -194,15 +189,11 @@
                     <li><a href="exhibitions.html" target="_blank">Exhibitions</a></li>
                     <li><a href="terms-conditions.html" target="_blank">Terms and Conditions</a></li> 
                     <li><a href="contact" target="_blank">Contact Us</a></li>
-                    
-                    </ul>
-
+                </ul>
             </div>
 
-            </div>
-
+        </div>
     </div>
-
 </footer>
 
 <div class="container-fluid text-center p-3 alok-copyright-bar">
@@ -211,20 +202,18 @@
     </ul>
 </div>
 
-<script src="assets/themes/storefront/public/js/appe8da.js?v=2.0.3"></script>
-
-<script src="assets/themes/storefront/public/js/jquery-3.5.1.slim.min.js?v=2.0.3"></script>
-<script src="assets/themes/storefront/public/js/popper.min.js?v=2.0.3"></script>
-<script src="assets/themes/storefront/public/js/bootstrap.mine8da.js?v=2.0.3"></script>
-
 </body>
 </html>
 
 
 
 
-        
-        
+
+<!-- <script src="assets/themes/storefront/public/js/appe8da.js?v=2.0.3"></script> -->
+
+<!-- <script src="assets/themes/storefront/public/js/jquery-3.5.1.slim.min.js?v=2.0.3"></script> -->
+<!-- <script src="assets/themes/storefront/public/js/popper.min.js?v=2.0.3"></script> -->
+<!-- <script src="assets/themes/storefront/public/js/bootstrap.mine8da.js?v=2.0.3"></script> -->
         
          
 
