@@ -1785,7 +1785,7 @@ pre code {
 .table-hover .table-warning:hover,
 .table-hover .table-warning:hover>td,
 .table-hover .table-warning:hover>th {
-	background-color: #ffe8a1
+	background-color: #fdda70
 }
 
 .table-danger,
@@ -31237,3 +31237,179 @@ span.errormess {color: red; padding-top: 5px; display: block;}
 
 
 
+
+
+:root {
+	--primary-navy: #0f2042;
+	--accent-blue: #1d3557;
+	--neutral-dark: #2c323e;
+	--neutral-light: #f8f9fa;
+	--border-color: #e2e4e8;
+}
+
+body {
+	font-family: 'Montserrat', sans-serif;
+	color: var(--neutral-dark);
+	background-color: #ffffff;
+	overflow-x: hidden;
+}
+
+/* Smooth custom transitions for interactive thematic elements */
+.dropdown-item {
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+.dropdown-item:hover {
+	background-color: var(--neutral-light);
+	color: var(--primary-navy) !important;
+}
+
+
+        /* Scoped styles for high-fidelity animations and premium layouts on index.php */
+        
+/* 1. HERO SLIDER PREMIUM UPGRADES */
+.home-slider-wrap {
+	position: relative;
+	background-color: #0b0d10;
+}
+
+/* Cinematic overlay gradients with optimized contrast for premium glass photography */
+.slide-overlay-left {
+	background: linear-gradient(90deg, rgba(17, 20, 26, 0.85) 0%, rgba(17, 20, 26, 0.6) 40%, rgba(17, 20, 26, 0) 100%) !important;
+}
+
+.slide-overlay-right {
+	background: linear-gradient(270deg, rgba(17, 20, 26, 0.85) 0%, rgba(17, 20, 26, 0.6) 40%, rgba(17, 20, 26, 0) 100%) !important;
+}
+
+/* Hardware accelerated Ken Burns zoom effect for slides */
+.slider-image {
+	transition: transform 8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+	will-change: transform;
+}
+
+.slide:hover .slider-image {
+	transform: scale(1.05);
+}
+
+/* Captions entrance layout with high-performance CSS timing paths */
+.captions .caption-1 {
+	opacity: 0;
+	transform: translateY(20px);
+	animation: sliderFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	animation-delay: 0.3s;
+}
+
+.captions .caption-2 {
+	opacity: 0;
+	transform: translateY(25px);
+	animation: sliderFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	animation-delay: 0.5s;
+}
+
+.captions .btn-slider {
+	opacity: 0;
+	transform: translateY(30px);
+	animation: sliderFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	animation-delay: 0.7s;
+}
+
+@keyframes sliderFadeInUp {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* 2. TRUST VALUE PROPOSITIONS (TRUST CARDS) */
+.trust-cards-wrapper {
+	background-color: #ffffff;
+	border-bottom: 1px solid #eef1f5;
+}
+
+/* Professional card wrapper that transitions smoothly */
+.trust-card {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	background: #ffffff;
+	border: 1px solid rgba(17, 20, 26, 0.05);
+	padding: 20px 24px;
+	border-radius: 8px;
+	transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+}
+
+/* Premium hover states with delicate brand indicators */
+.trust-card::before {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background-color: var(--primary-accent, #c8232c);
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.trust-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 12px 30px rgba(17, 20, 26, 0.05);
+	border-color: rgba(200, 35, 44, 0.15);
+}
+
+.trust-card:hover::before {
+	transform: scaleX(1);
+}
+
+/* Micro-animations for card icon images */
+.trust-card-icon {
+	height: 40px !important;
+	width: auto;
+	object-fit: contain;
+	transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.trust-card:hover .trust-card-icon {
+	transform: scale(1.15) rotate(3deg);
+}
+
+.trust-card-text {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 13px;
+	font-weight: 500;
+	color: #2c323e;
+	line-height: 1.4;
+}
+
+.trust-card-text b, 
+.trust-card-text label {
+	font-family: 'Montserrat', sans-serif;
+	color: var(--primary-accent, #c8232c) !important;
+	font-weight: 700;
+	font-size: 14px;
+	margin: 0;
+	display: inline-block;
+}
+
+/* Fluid layout adjustments for responsiveness */
+@media (max-width: 991.98px) {
+	.trust-cards-grid {
+		display: grid !important;
+		grid-template-columns: repeat(2, 1fr) !important;
+		gap: 16px !important;
+		padding: 15px !important;
+	}
+	.trust-card {
+		padding: 16px 20px;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.trust-cards-grid {
+		grid-template-columns: 1fr !important;
+	}
+}

@@ -21,257 +21,382 @@ $featuredCategories = $pdo->query("
             
     <main role="main">
     
-        <div class="text-center header-bg-1920" style="background-color: #fcfbfa; overflow: hidden;"> 
+    <style>
+        /* Scoped styles for high-fidelity animations and premium layouts on index.php */
+        
+        /* 1. HERO SLIDER PREMIUM UPGRADES */
+        .home-slider-wrap {
+            position: relative;
+            background-color: #0b0d10;
+        }
 
-            <!-- banner code start here -->
-            
-                    <div class="home-slider-wrap">
-                        <div
-                            class="home-slider"
-                            data-speed="1500"
-                            data-autoplay="1"
-                            data-autoplay-speed="3000"
-                            data-fade="1"
-                            data-dots="1"
-                            data-arrows="1"
-                        >
-                                                                                <div class="slide" style="position: relative;">
-                                    <img src="assets/publics/storage/media/SOfX1kpP7ZEkLECuVjKJC2GrC7RzaNmGCJYUwUR4.jpg" data-animation-in="zoomInImage" class="slider-image animated" style="width: 100%; height: auto; object-fit: cover; min-height: 400px;">
+        /* Cinematic overlay gradients with optimized contrast for premium glass photography */
+        .slide-overlay-left {
+            background: linear-gradient(90deg, rgba(17, 20, 26, 0.85) 0%, rgba(17, 20, 26, 0.6) 40%, rgba(17, 20, 26, 0) 100%) !important;
+        }
+        
+        .slide-overlay-right {
+            background: linear-gradient(270deg, rgba(17, 20, 26, 0.85) 0%, rgba(17, 20, 26, 0.6) 40%, rgba(17, 20, 26, 0) 100%) !important;
+        }
 
-                                    <div class="slide-content align-left" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; background: linear-gradient(90deg, rgba(17, 17, 17, 0.45) 0%, rgba(17, 17, 17, 0.1) 100%); padding: 0 10%;">
-                                        <div class="captions" style="text-align: left;">
-                                            <span
-                                                class="caption caption-1"
-                                                data-animation-in="fadeInUp"
-                                                data-delay-in=""
-                                                style="display: block; font-family: 'Montserrat', sans-serif; font-size: 18px; color: #ffffff; margin-bottom: 10px; font-weight: 500; letter-spacing: 0.05em;"
-                                            >
-                                                
-                                            </span>
+        /* Hardware accelerated Ken Burns zoom effect for slides */
+        .slider-image {
+            transition: transform 8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            will-change: transform;
+        }
+        
+        .slide:hover .slider-image {
+            transform: scale(1.05);
+        }
 
-                                            <span
-                                                class="caption caption-2"
-                                                data-animation-in="fadeInUp"
-                                                data-delay-in=""
-                                                style="display: block; font-family: 'Montserrat', sans-serif; font-size: 48px; font-weight: 700; color: #ffffff; margin-bottom: 28px; line-height: 1.2;"
-                                            >
-                                                
-                                            </span>
+        /* Captions entrance layout with high-performance CSS timing paths */
+        .captions .caption-1 {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: sliderFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.3s;
+        }
 
-                                            <a
-                                                href="contact.html"
-                                                class="btn btn-primary btn-slider"
-                                                data-animation-in="fadeInUp"
-                                                data-delay-in=""
-                                                target="_self"
-                                                style="display: inline-block; background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; padding: 14px 36px; border-radius: 4px; border: 2px solid #c8232c; text-decoration: none; transition: all 0.25s ease-in-out; box-shadow: 0 4px 12px rgba(200, 35, 44, 0.2);"
-                                                onmouseover="this.style.backgroundColor='#111111'; this.style.borderColor='#111111'; this.style.transform='translateY(-2px)';"
-                                                onmouseout="this.style.backgroundColor='#c8232c'; this.style.borderColor='#c8232c'; this.style.transform='translateY(0)';"
-                                            >
-                                                Contact Us
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+        .captions .caption-2 {
+            opacity: 0;
+            transform: translateY(25px);
+            animation: sliderFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.5s;
+        }
 
-                                                                                <div class="slide" style="position: relative;">
-                                    <img src="assets/publics/storage/media/EGg2TgPh1xebIugmlrlpnw1dvHgRisNt1VDiZMyZ.jpg" data-animation-in="zoomInImage" class="slider-image animated" style="width: 100%; height: auto; object-fit: cover; min-height: 400px;">
+        .captions .btn-slider {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: sliderFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.7s;
+        }
 
-                                    <div class="slide-content align-right" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-end; background: linear-gradient(270deg, rgba(17, 17, 17, 0.45) 0%, rgba(17, 17, 17, 0.1) 100%); padding: 0 10%;">
-                                        <div class="captions" style="text-align: right;">
-                                            <span
-                                                class="caption caption-1"
-                                                data-animation-in="fadeInUp"
-                                                data-delay-in=""
-                                                style="display: block; font-family: 'Montserrat', sans-serif; font-size: 18px; color: #ffffff; margin-bottom: 10px; font-weight: 500; letter-spacing: 0.05em;"
-                                            >
-                                                
-                                            </span>
+        @keyframes sliderFadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-                                            <span
-                                                class="caption caption-2"
-                                                data-animation-in="fadeInUp"
-                                                data-delay-in=""
-                                                style="display: block; font-family: 'Montserrat', sans-serif; font-size: 48px; font-weight: 700; color: #ffffff; margin-bottom: 28px; line-height: 1.2;"
-                                            >
-                                                
-                                            </span>
+        /* 2. TRUST VALUE PROPOSITIONS (TRUST CARDS) */
+        .trust-cards-wrapper {
+            background-color: #ffffff;
+            border-bottom: 1px solid #eef1f5;
+        }
 
-                                            <a
-                                                href="contact.html"
-                                                class="btn btn-primary btn-slider"
-                                                data-animation-in="fadeInUp"
-                                                data-delay-in=""
-                                                target="_self"
-                                                style="display: inline-block; background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; padding: 14px 36px; border-radius: 4px; border: 2px solid #c8232c; text-decoration: none; transition: all 0.25s ease-in-out; box-shadow: 0 4px 12px rgba(200, 35, 44, 0.2);"
-                                                onmouseover="this.style.backgroundColor='#111111'; this.style.borderColor='#111111'; this.style.transform='translateY(-2px)';"
-                                                onmouseout="this.style.backgroundColor='#c8232c'; this.style.borderColor='#c8232c'; this.style.transform='translateY(0)';"
-                                            >
-                                                Contact Us
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                                </div>
-                    </div>
-                
+        /* Professional card wrapper that transitions smoothly */
+        .trust-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #ffffff;
+            border: 1px solid rgba(17, 20, 26, 0.05);
+            padding: 20px 24px;
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
 
-            <!-- banner code end here -->
+        /* Premium hover states with delicate brand indicators */
+        .trust-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-accent, #c8232c);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-        <!--    <img src="https://www.ajantabottle.com/assets/themes/storefront/public/images/banner.jpg?v=2.0.3" class="img-fluid" alt="" />  -->
-        </div>
+        .trust-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(17, 20, 26, 0.05);
+            border-color: rgba(200, 35, 44, 0.15);
+        }
 
-        <div class="container-fluid lt-gray-bg pt-5 pb-5 ptm-0 pbm-0" style="background-color: #fcfbfa; border-bottom: 1px solid #e2e4e8; overflow: hidden;">
-                    <div class="container banner-icons only-desktop">
-                        <div class="row no-gutters" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
-                            
-                            <div class="col-lg-2 col-6 pl-2 pr-2 ptm-20px pbm-20px" 
-                                style="display: flex; align-items: center; gap: 10px; transition: transform 0.3s ease; animation: fadeInUp linear both; animation-timeline: view(); animation-range: entry 10% cover 30%;"
-                                onmouseover="this.style.transform='translateY(-4px)'"
-                                onmouseout="this.style.transform='translateY(0)'">
-                                <img src="assets/themes/storefront/public/images/safe-shopping-icone8da.png?v=2.0.3" class="img-fluid float-left pr-2" alt="" style="height: 32px; width: auto; object-fit: contain;" />
-                                <span style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: #1a1a1a; line-height: 1.3;">
-                                    Trusted for <br/>
-                                    <label style="color: #c8232c; font-weight: 700; margin: 0; font-size: 13px;">4 Decades</label>
-                                </span>
-                            </div>
+        .trust-card:hover::before {
+            transform: scaleX(1);
+        }
 
-                            <div class="col-lg-2 col-6 pl-2 pr-2 ptm-20px pbm-20px" 
-                                style="display: flex; align-items: center; gap: 10px; transition: transform 0.3s ease; animation: fadeInUp linear both; animation-timeline: view(); animation-range: entry 10% cover 30%;"
-                                onmouseover="this.style.transform='translateY(-4px)'"
-                                onmouseout="this.style.transform='translateY(0)'">
-                                <img src="assets/themes/storefront/public/images/lowest-price-icone8da.png?v=2.0.3" class="img-fluid float-left pr-2" alt="" style="height: 32px; width: auto; object-fit: contain;" />
-                                <span style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: #1a1a1a; line-height: 1.3;">
-                                    Highest Quality <br/>
-                                    <label style="color: #c8232c; font-weight: 700; margin: 0; font-size: 13px;">Lowest Price</label>
-                                </span>
-                            </div>
+        /* Micro-animations for card icon images */
+        .trust-card-icon {
+            height: 40px !important;
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-                            <div class="col-lg-2 col-6 pl-2 pr-2 ptm-20px" 
-                                style="display: flex; align-items: center; gap: 10px; transition: transform 0.3s ease; animation: fadeInUp linear both; animation-timeline: view(); animation-range: entry 10% cover 30%;"
-                                onmouseover="this.style.transform='translateY(-4px)'"
-                                onmouseout="this.style.transform='translateY(0)'">
-                                <img src="assets/themes/storefront/public/images/guarantee-dispatch-icone8da.png?v=2.0.3" class="img-fluid float-left pr-2" alt="" style="height: 32px; width: auto; object-fit: contain;" />
-                                <span style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: #1a1a1a; line-height: 1.3;">
-                                    Fast Despatch <br/>
-                                    <label style="color: #c8232c; font-weight: 700; margin: 0; font-size: 13px;">Guaranteed</label>
-                                </span>
-                            </div>
+        .trust-card:hover .trust-card-icon {
+            transform: scale(1.15) rotate(3deg);
+        }
 
-                            <div class="col-lg-2 col-6 pl-2 pr-2 ptm-20px" 
-                                style="display: flex; align-items: center; gap: 10px; transition: transform 0.3s ease; animation: fadeInUp linear both; animation-timeline: view(); animation-range: entry 10% cover 30%;"
-                                onmouseover="this.style.transform='translateY(-4px)'"
-                                onmouseout="this.style.transform='translateY(0)'">
-                                <img src="assets/themes/storefront/public/images/30-days-icone8da.png?v=2.0.3" class="img-fluid float-left pr-2" alt="" style="height: 32px; width: auto; object-fit: contain;" />
-                                <span style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: #1a1a1a; line-height: 1.3;">
-                                    Hassle Free Return <br/>
-                                    <label style="color: #c8232c; font-weight: 700; margin: 0; font-size: 12px;">Money Back</label>
-                                </span>
-                            </div>
+        .trust-card-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #2c323e;
+            line-height: 1.4;
+        }
 
-                            <div class="col-lg-2 col-6 pl-2 pr-2 ptm-20px" 
-                                style="display: flex; align-items: center; gap: 10px; transition: transform 0.3s ease; animation: fadeInUp linear both; animation-timeline: view(); animation-range: entry 10% cover 30%;"
-                                onmouseover="this.style.transform='translateY(-4px)'"
-                                onmouseout="this.style.transform='translateY(0)'">
-                                <img src="assets/themes/storefront/public/images/safe-shopping-icone8da.png?v=2.0.3" class="img-fluid float-left pr-2" alt="" style="height: 32px; width: auto; object-fit: contain;" />
-                                <span style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: #1a1a1a; line-height: 1.3;">
-                                    Safe <br/>
-                                    <label style="color: #c8232c; font-weight: 700; margin: 0; font-size: 13px;">and Secure</label>
-                                </span>
-                            </div>
+        .trust-card-text b, 
+        .trust-card-text label {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-accent, #c8232c) !important;
+            font-weight: 700;
+            font-size: 14px;
+            margin: 0;
+            display: inline-block;
+        }
 
-                            <div class="col-lg-2 col-6 pl-2 pr-2 ptm-20px pbm-20px" 
-                                style="display: flex; align-items: center; gap: 10px; transition: transform 0.3s ease; animation: fadeInUp linear both; animation-timeline: view(); animation-range: entry 10% cover 30%;"
-                                onmouseover="this.style.transform='translateY(-4px)'"
-                                onmouseout="this.style.transform='translateY(0)'">
-                                <img src="assets/themes/storefront/public/images/verifiede8da.png?v=2.0.3" class="img-fluid float-left pr-2" alt="" style="height: 32px; width: auto; object-fit: contain;" />
-                                <span style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 500; color: #1a1a1a; line-height: 1.3;">
-                                    One Stop <br/>
-                                    <label style="color: #c8232c; font-weight: 700; margin: 0; font-size: 13px;">Solution</label>
-                                </span>
-                            </div>
+        /* Fluid layout adjustments for responsiveness */
+        @media (max-width: 991.98px) {
+            .trust-cards-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 16px !important;
+                padding: 15px !important;
+            }
+            .trust-card {
+                padding: 16px 20px;
+            }
+        }
 
+        @media (max-width: 575.98px) {
+            .trust-cards-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+
+    <div class="text-center header-bg-1920" style="background-color: #fcfbfa; overflow: hidden;"> 
+
+        <!-- banner code start here -->
+        <div class="home-slider-wrap">
+            <div
+                class="home-slider"
+                data-speed="1500"
+                data-autoplay="1"
+                data-autoplay-speed="3000"
+                data-fade="1"
+                data-dots="1"
+                data-arrows="1"
+            >
+                <!-- Slide 1 -->
+                <div class="slide" style="position: relative; overflow: hidden;">
+                    <img src="assets/publics/storage/media/SOfX1kpP7ZEkLECuVjKJC2GrC7RzaNmGCJYUwUR4.jpg" data-animation-in="zoomInImage" class="slider-image animated" style="width: 100%; height: auto; object-fit: cover; min-height: 400px; display: block;">
+
+                    <div class="slide-content align-left slide-overlay-left" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; padding: 0 10%;">
+                        <div class="captions" style="text-align: left; max-width: 600px;">
+                            <span
+                                class="caption caption-1"
+                                data-animation-in="fadeInUp"
+                                data-delay-in=""
+                                style="display: block; font-family: 'Montserrat', sans-serif; font-size: 18px; color: #ffffff; margin-bottom: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;"
+                            >
+                                Premium Glassware Solutions
+                            </span>
+
+                            <span
+                                class="caption caption-2"
+                                data-animation-in="fadeInUp"
+                                data-delay-in=""
+                                style="display: block; font-family: 'Montserrat', sans-serif; font-size: 44px; font-weight: 800; color: #ffffff; margin-bottom: 32px; line-height: 1.25; letter-spacing: -0.02em;"
+                            >
+                                Crafting Glass with Uncompromised Trust
+                            </span>
+
+                            <a
+                                href="contact"
+                                class="btn btn-primary btn-slider"
+                                data-animation-in="fadeInUp"
+                                data-delay-in=""
+                                target="_self"
+                                style="display: inline-block; text-decoration: none;"
+                            >
+                                Contact Us
+                            </a>
                         </div>
                     </div>
-        </div>
-
-        <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        </style>
-
-        <div class="container banner-icons only-mobile no-gutters pt-3 pb-3" style="background-color: #fcfbfa; border-bottom: 1px solid #e2e4e8; padding-left: 10px; padding-right: 10px;">
-                <div class="row no-gutters fs12" style="display: flex; flex-wrap: wrap; margin: 0;">
-                    
-                    <!-- MOBILE BADGE 1 -->
-                    <div class="col-6 pb-3" style="display: flex; align-items: center; gap: 8px; padding: 10px 4px; animation: mobileFadeIn 0.6s ease-out both;">
-                        <img src="assets/themes/storefront/public/images/safe-shopping-icone8da.png?v=2.0.3" alt="" style="height: 28px; width: auto; object-fit: contain; flex-shrink: 0;" />
-                        <span style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 500; color: #1a1a1a; line-height: 1.2; text-align: left;">
-                            Trusted for <br/>
-                            <label style="color: #c8232c; font-weight: 700; margin: 0; font-size: 11px;">4 Decades</label>
-                        </span>
-                    </div>
-
-                    <!-- MOBILE BADGE 2 -->
-                    <div class="col-6 pb-3" style="display: flex; align-items: center; gap: 8px; padding: 10px 4px; animation: mobileFadeIn 0.6s ease-out both;">
-                        <img src="assets/themes/storefront/public/images/lowest-price-icone8da.png?v=2.0.3" alt="" style="height: 28px; width: auto; object-fit: contain; flex-shrink: 0;" />
-                        <span style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 500; color: #1a1a1a; line-height: 1.2; text-align: left;">
-                            Highest Quality <br/>
-                            <label style="color: #c8232c; font-weight: 700; margin: 0; font-size: 11px;">Lowest Price</label>
-                        </span>
-                    </div>
-
-                    <!-- MOBILE BADGE 3 -->
-                    <div class="col-6 pb-3" style="display: flex; align-items: center; gap: 8px; padding: 10px 4px; animation: mobileFadeIn 0.6s ease-out both;">
-                        <img src="assets/themes/storefront/public/images/guarantee-dispatch-icone8da.png?v=2.0.3" alt="" style="height: 28px; width: auto; object-fit: contain; flex-shrink: 0;" />
-                        <span style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 500; color: #1a1a1a; line-height: 1.2; text-align: left;">
-                            Fast Despatch <br/>
-                            <label style="color: #c8232c; font-weight: 700; margin: 0; font-size: 11px;">Guaranteed</label>
-                        </span>
-                    </div>
-
-                    <!-- MOBILE BADGE 4 -->
-                    <div class="col-6 pb-3" style="display: flex; align-items: center; gap: 8px; padding: 10px 4px; animation: mobileFadeIn 0.6s ease-out both;">
-                        <img src="assets/themes/storefront/public/images/30-days-icone8da.png?v=2.0.3" alt="" style="height: 28px; width: auto; object-fit: contain; flex-shrink: 0;" />
-                        <span style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 500; color: #1a1a1a; line-height: 1.2; text-align: left;">
-                            Hassle Free Return <br/>
-                            <label style="color: #c8232c; font-weight: 700; margin: 0; font-size: 10px;">Money Back</label>
-                        </span>
-                    </div>
-
-                    <!-- MOBILE BADGE 5 -->
-                    <div class="col-6" style="display: flex; align-items: center; gap: 8px; padding: 10px 4px; animation: mobileFadeIn 0.6s ease-out both;">
-                        <img src="assets/themes/storefront/public/images/safe-shopping-icone8da.png?v=2.0.3" alt="" style="height: 28px; width: auto; object-fit: contain; flex-shrink: 0;" />
-                        <span style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 500; color: #1a1a1a; line-height: 1.2; text-align: left;">
-                            Safe <br/>
-                            <label style="color: #c8232c; font-weight: 700; margin: 0; font-size: 11px;">and Secure</label>
-                        </span>
-                    </div>
-
-                    <!-- MOBILE BADGE 6 -->
-                    <div class="col-6" style="display: flex; align-items: center; gap: 8px; padding: 10px 4px; animation: mobileFadeIn 0.6s ease-out both;">
-                        <img src="assets/themes/storefront/public/images/verifiede8da.png?v=2.0.3" alt="" style="height: 28px; width: auto; object-fit: contain; flex-shrink: 0;" />
-                        <span style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 500; color: #1a1a1a; line-height: 1.2; text-align: left;">
-                            One Stop <br/>
-                            <label style="color: #c8232c; font-weight: 700; margin: 0; font-size: 11px;">Solution</label>
-                        </span>
-                    </div>
-
                 </div>
+
+                <!-- Slide 2 -->
+                <div class="slide" style="position: relative; overflow: hidden;">
+                    <img src="assets/publics/storage/media/EGg2TgPh1xebIugmlrlpnw1dvHgRisNt1VDiZMyZ.jpg" data-animation-in="zoomInImage" class="slider-image animated" style="width: 100%; height: auto; object-fit: cover; min-height: 400px; display: block;">
+
+                    <div class="slide-content align-right slide-overlay-right" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-end; padding: 0 10%;">
+                        <div class="captions" style="text-align: right; max-width: 600px;">
+                            <span
+                                class="caption caption-1"
+                                data-animation-in="fadeInUp"
+                                data-delay-in=""
+                                style="display: block; font-family: 'Montserrat', sans-serif; font-size: 18px; color: #ffffff; margin-bottom: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;"
+                            >
+                                Over 40 Years of Excellence
+                            </span>
+
+                            <span
+                                class="caption caption-2"
+                                data-animation-in="fadeInUp"
+                                data-delay-in=""
+                                style="display: block; font-family: 'Montserrat', sans-serif; font-size: 44px; font-weight: 800; color: #ffffff; margin-bottom: 32px; line-height: 1.25; letter-spacing: -0.02em;"
+                            >
+                                Standard Packaging & Custom Designs
+                            </span>
+
+                            <a
+                                href="contact"
+                                class="btn btn-primary btn-slider"
+                                data-animation-in="fadeInUp"
+                                data-delay-in=""
+                                target="_self"
+                                style="display: inline-block; text-decoration: none;"
+                            >
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- banner code end here -->
 
-        <style>
-        @keyframes mobileFadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        </style>
+    </div>
+
+    <!-- Trust Cards Section -->
+    <div class="container-fluid trust-cards-wrapper pt-5 pb-5">
+        <div class="container pb-2 pt-2">
+            <div class="row trust-cards-grid" style="display: flex; flex-wrap: nowrap; gap: 0px; justify-content: space-between;">
+                
+                <!-- Trust Card 1 -->
+                <div class="col-lg-2 col-md-6 p-0" style=" width:60%;">
+                    <div class="trust-card">
+                        <img src="assets/themes/storefront/public/images/safe-shopping-icone8da.png?v=2.0.3" class="trust-card-icon" alt="Decades Trust" />
+                        <span class="trust-card-text">
+                            Trusted for <br/>
+                            <label>4 Decades</label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Trust Card 2 -->
+                <div class="col-lg-2 col-md-6 p-0" style=" width:60%;">
+                    <div class="trust-card">
+                        <img src="assets/themes/storefront/public/images/lowest-price-icone8da.png?v=2.0.3" class="trust-card-icon" alt="Lowest Price" />
+                        <span class="trust-card-text">
+                            Highest Quality <br/>
+                            <label>Lowest Price</label6
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Trust Card 3 -->
+                <div class="col-lg-2 col-md-6 p-0" style=" width:50%;">
+                    <div class="trust-card">
+                        <img src="assets/themes/storefront/public/images/guarantee-dispatch-icone8da.png?v=2.0.3" class="trust-card-icon" alt="Fast Dispatch" />
+                        <span class="trust-card-text">
+                            Fast Despatch <br/>
+                            <label>Guaranteed</label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Trust Card 4 -->
+                <div class="col-lg-2 col-md-6 p-0" style=" width:50%;">
+                    <div class="trust-card">
+                        <img src="assets/themes/storefront/public/images/30-days-icone8da.png?v=2.0.3" class="trust-card-icon" alt="Hassle Free Return" />
+                        <span class="trust-card-text">
+                            Hassle Free Return <br/>
+                            <label>Money Back</label>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mobile-trust-cards-container only-mobile pt-4 pb-4">
+        <div class="container-fluid no-gutters pl-2 pr-2">
+            <div class="row no-gutters" style="display: flex; flex-wrap: wrap; margin: 0; row-gap: 12px; column-gap: 0;">
+                
+                <!-- MOBILE BADGE 1 -->
+                <div class="col-6 mobile-badge-col" style="padding: 0 60px;">
+                    <div class="mobile-trust-card">
+                        <img src="assets/themes/storefront/public/images/safe-shopping-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Safe Shopping" />
+                        <span class="mobile-badge-text">
+                            Trusted for <br/>
+                            <label>4 Decades</label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- MOBILE BADGE 2 -->
+                <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
+                    <div class="mobile-trust-card">
+                        <img src="assets/themes/storefront/public/images/lowest-price-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Lowest Price" />
+                        <span class="mobile-badge-text">
+                            Highest Quality <br/>
+                            <label>Lowest Price</label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- MOBILE BADGE 3 -->
+                <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
+                    <div class="mobile-trust-card">
+                        <img src="assets/themes/storefront/public/images/guarantee-dispatch-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Guaranteed Dispatch" />
+                        <span class="mobile-badge-text">
+                            Fast Despatch <br/>
+                            <label>Guaranteed</label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- MOBILE BADGE 4 -->
+                <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
+                    <div class="mobile-trust-card">
+                        <img src="assets/themes/storefront/public/images/30-days-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Money Back" />
+                        <span class="mobile-badge-text">
+                            Hassle Free Return <br/>
+                            <label style="font-size: 10px;">Money Back</label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- MOBILE BADGE 5 -->
+                <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
+                    <div class="mobile-trust-card">
+                        <img src="assets/themes/storefront/public/images/safe-shopping-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Secure Shopping" />
+                        <span class="mobile-badge-text">
+                            Safe <br/>
+                            <label>and Secure</label>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- MOBILE BADGE 6 -->
+                <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
+                    <div class="mobile-trust-card">
+                        <img src="assets/themes/storefront/public/images/verifiede8da.png?v=2.0.3" class="mobile-badge-icon" alt="One Stop Solution" />
+                        <span class="mobile-badge-text">
+                            One Stop <br/>
+                            <label>Solution</label>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
         <!-- Shop by Industry Starts -->
         <!-- Shop by Industry Starts -->
-        <div class="container pt-6" style="padding-top: 5rem; padding-bottom: 3rem;">
+        <div class="container pt-6 reveal-on-scroll" style="padding-top: 5rem; padding-bottom: 3rem;">
 
             <!-- Section Title with Accent Underline -->
             <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem;">
@@ -358,7 +483,7 @@ $featuredCategories = $pdo->query("
         
        <!-- Shop by Product Starts -->
        <!-- Shop by Product Starts -->
-        <div class="container pt-6 only-desktop" style="padding-top: 5rem; padding-bottom: 3rem;">
+        <div class="container pt-6 reveal-on-scroll only-desktop" style="padding-top: 5rem; padding-bottom: 3rem;">
 
             <!-- Section Title with Brand Accent Accent Underline -->
             <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem;">
@@ -424,7 +549,7 @@ $featuredCategories = $pdo->query("
 
         </div>
         <!-- MOBILE VERSION -->
-        <div class="container pt-6 only-mobile" style="padding-top: 3.5rem; padding-bottom: 2.5rem; padding-left: 15px; padding-right: 0px; overflow-x: hidden;">
+        <div class="container pt-6 only-mobile animate__animated animate__fadeInUp" style="padding-top: 3.5rem; padding-bottom: 2.5rem; padding-left: 15px; padding-right: 0px; overflow-x: hidden; --animate-duration: 0.8s;">
 
             <!-- Section Title with Accent Underline -->
             <h2 class="text-center text-uppercase org-brd-btm mb-4" style="font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 700; color: #111111; letter-spacing: 0.04em; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 2.5rem; padding-right: 15px;">
@@ -530,7 +655,7 @@ $featuredCategories = $pdo->query("
         }
         ?>
 
-        <div class="container pt-6 pb-5" style="padding-top: 4rem; padding-bottom: 4rem;">
+        <div class="container pt-6 pb-5 reveal-on-scroll" style="padding-top: 4rem; padding-bottom: 4rem;">
 
             <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; padding-bottom: 14px; margin-bottom: 3.5rem;">
                 <?= htmlspecialchars($category['section_title']) ?>
@@ -552,7 +677,7 @@ $featuredCategories = $pdo->query("
                                  style="width: 100%; height: 100%; object-fit: contain; padding: 12px; margin: 0; transition: transform 0.4s ease;"
                                  alt="<?= htmlspecialchars($product['name']) ?>" />
 
-                            <button type="button" class="btn float-red-btn" style="position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%) translateY(10px); width: 85%; background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; border: none; padding: 10px 0; border-radius: 4px; box-shadow: 0 4px 12px rgba(200, 35, 44, 0.3); opacity: 0; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); pointer-events: none;">
+                            <button type="button" class="btn float-red-btn" style="position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%) translateY(10px); width: 85%; background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; border: none; padding: 10px 0; border-radius: 4px; box-shadow: 0 4px 12px rgba(219, 38, 47, 0.3); opacity: 0; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); pointer-events: none;">
                                 Buy Now
                             </button>
 
@@ -600,7 +725,7 @@ $featuredCategories = $pdo->query("
         
         
         <!-- Stats Starts -->
-        <div class="container-fluid lt-gray-bg text-center" style="background-color: #fcfbfa; border-top: 1px solid #eef0f2; border-bottom: 1px solid #eef0f2;">
+        <div class="container-fluid lt-gray-bg text-center mask-reveal" style="background-color: #fcfbfa; border-top: 1px solid #eef0f2; border-bottom: 1px solid #eef0f2;">
             
             <div class="container pt-5 only-desktop" style="padding-top: 4.5rem !important; padding-bottom: 2.5rem !important;">
                 <div class="row" style="display: flex; align-items: flex-start; justify-content: space-between;">
@@ -680,13 +805,13 @@ $featuredCategories = $pdo->query("
     
         <!-- International Coverage Starts -->
         <!-- International Coverage Starts -->
-        <div class="container pt-6" style="padding-top: 4rem; padding-bottom: 4rem;">
+        <div class="container pt-6 reveal-on-scroll" style="padding-top: 4rem; padding-bottom: 4rem;">
             
             <!-- Section Title with Accent Underline -->
             <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem;">
                 <img src="assets/themes/storefront/public/images/international-coverage-icone8da.png?v=2.0.3" class="pr-3" style="max-height: 32px; width: auto;" alt="" />
                 <span style="position: relative; padding-bottom: 12px;">
-                    International coverage on Ajanta Bottle
+                    International coverage on Alok Glass Works Bottle
                     <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #c8232c;"></span>
                 </span>
             </h2>
@@ -713,11 +838,11 @@ $featuredCategories = $pdo->query("
                         <div class="pt-4 pr-4 pb-4 pl-4" style="padding: 2rem 1.5rem;">
                             <p class="text-center fs18" style="margin-bottom: 1rem;">
                                 <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111; text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='#c8232c'" onmouseout="this.style.color='#111111'">
-                                    <strong>AJANTA PACKAGING:</strong> Key Account Management
+                                    <strong>Alok Glass Works PACKAGING:</strong> Key Account Management
                                 </a>
                             </p>
                             <p class="pb-4" style="font-family: 'Montserrat', sans-serif; font-size: 13.5px; line-height: 1.6; color: #555555; text-align: justify; margin-bottom: 1.5rem;">
-                                In the fall of 2017, Ajanta Packaging (Ajanta) was among the fastest growing glass bottle-packaging companies in India. Although the company had a large buyer base of 1,700 customers, buyer, S.F. Foods (SF) which accounted for 15 per cent of Ajanta's revenue.
+                                In the fall of 2017, Alok Glass Works Packaging (Alok Glass Works) was among the fastest growing glass bottle-packaging companies in India. Although the company had a large buyer base of 1,700 customers, buyer, S.F. Foods (SF) which accounted for 15 per cent of Alok Glass Works's revenue.
                             </p>
                             <div class="text-center">
                                 <a href="https://hbsp.harvard.edu/product/W18241-PDF-ENG" style="text-decoration: none;">
@@ -751,7 +876,7 @@ $featuredCategories = $pdo->query("
                         <div class="pt-4 pr-4 pb-4 pl-4" style="padding: 2rem 1.5rem;">
                             <p class="text-center fs18" style="margin-bottom: 1rem;">
                                 <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111; text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='#c8232c'" onmouseout="this.style.color='#111111'">
-                                    <strong>AJANTA PACKAGING</strong>
+                                    <strong>Alok Glass Works PACKAGING</strong>
                                 </a>
                             </p>
                             <p class="pb-4" style="font-family: 'Montserrat', sans-serif; font-size: 13.5px; line-height: 1.6; color: #555555; text-align: justify; margin-bottom: 1.5rem;">
@@ -776,7 +901,7 @@ $featuredCategories = $pdo->query("
         
         <!-- Latest Blog Starts -->
         <!-- Latest Blogs Starts -->
-        <div class="container pt-6" style="padding-top: 4rem; padding-bottom: 4rem;">
+        <div class="container pt-6 mask-reveal reveal-on-scroll" style="padding-top: 4rem; padding-bottom: 4rem;">
 
             <!-- Section Title with Accent Underline -->
             <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; padding-bottom: 14px; margin-bottom: 3.5rem;">
@@ -894,7 +1019,8 @@ $featuredCategories = $pdo->query("
 
         <!-- Google Review Starts -->
         <!-- Google Reviews Section Starts -->
-        <div class="container pt-6" style="padding-top: 4rem; padding-bottom: 4rem;">
+        <div class="container pt-6 reveal-on-scroll" style="padding-top: 4rem; padding-bottom: 4rem;">
+
             
             <!-- Heading Container with Red Accent Underline -->
             <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem; position: relative; padding-bottom: 14px;">
@@ -909,7 +1035,7 @@ $featuredCategories = $pdo->query("
                 
                 <!-- Left Column: Company Rating Summary Panel -->
                 <div class="col-md-4 pb-5 text-center google-company-details" style="margin-bottom: 1.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #fdfdfd; border: 1px solid #eef0f2; border-radius: 8px; padding: 2.5rem 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
-                    <h3 class="txt-333" style="font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 1rem;">Ajanta Bottle Pvt Ltd</h3>
+                    <h3 class="txt-333" style="font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 1rem;">Alok Glass Works Bottle Pvt Ltd</h3>
                     
                     <ul class="pb-4" style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; display: flex; align-items: center; justify-content: center; gap: 4px; flex-wrap: wrap;">
                         <li class="txt-gray fs32 pr-2 align-middle" style="font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 700; color: #111111; margin-right: 8px;">4.8</li>
@@ -1076,7 +1202,7 @@ $featuredCategories = $pdo->query("
                                         </div>
                                         <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
                                         <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
-                                            It was good experience with Ajanta, Bhawna, she really helped me related to there products and send me the samples which I had demanded for, Thanks
+                                            It was good experience with Alok Glass Works, Bhawna, she really helped me related to there products and send me the samples which I had demanded for, Thanks
                                         </div>
                                     </div>   
                                 </div>
@@ -1118,7 +1244,7 @@ $featuredCategories = $pdo->query("
                                         </div>
                                         <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
                                         <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify; max-height: 150px; overflow-y: auto; padding-right: 5px;">
-                                            My self Ved.Sahil Sharma (Ayurvedacharya) my feedback regards ur product your service is awesome and quality is 100 out of 100 ● I personally satisfied with price, special quality,air tight keep shinning keep growing Near 1 month ago our college National college of ayurveda ,barwala,hisar. we had already purchased 12,00 jars of around ₹22k around stay blessed ur product rocks # I always suggest all my known doctors or frnds to use this rating full out of full in every aspect... By heart really ur company hard works is valuable and a great value of Money......Thanku so much again....Jai bharat I heartly support made in bharat all hard working souls for our country for our earth....i had use First time this company a month ago and now always every time I will definitely use ajanta products in future from my experience and Strongly Recommend to all spcl to those who want premium quality and satisfaction anywhere they sell their product packed in ajanta jars/bottles who receives it will definitely satisfied.....
+                                            My self Ved.Sahil Sharma (Ayurvedacharya) my feedback regards ur product your service is awesome and quality is 100 out of 100 ● I personally satisfied with price, special quality,air tight keep shinning keep growing Near 1 month ago our college National college of ayurveda ,barwala,hisar. we had already purchased 12,00 jars of around ₹22k around stay blessed ur product rocks # I always suggest all my known doctors or frnds to use this rating full out of full in every aspect... By heart really ur company hard works is valuable and a great value of Money......Thanku so much again....Jai bharat I heartly support made in bharat all hard working souls for our country for our earth....i had use First time this company a month ago and now always every time I will definitely use Alok Glass Works products in future from my experience and Strongly Recommend to all spcl to those who want premium quality and satisfaction anywhere they sell their product packed in Alok Glass Works jars/bottles who receives it will definitely satisfied.....
                                         </div>
                                     </div>   
                                 </div>
@@ -1149,178 +1275,304 @@ $featuredCategories = $pdo->query("
 
         
         <!-- Brands Starts -->
-    <div class="container-fluid lt-gray-bg text-center" style="background-color: #f9f9f9; padding-top: 4rem; padding-bottom: 4rem;">
+    <!-- Brands Section -->
+<style>
+    /* Section Scoped Styling Variables */
+    :root {
+        --br-bg: #f9f9f9;
+        --br-card-bg: #ffffff;
+        --br-accent: #c8232c;
+        --br-text-dark: #111111;
+        --br-text-muted: #666666;
+        --br-border: rgba(0, 0, 0, 0.04);
+        --br-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .brands-trusted-wrapper {
+        background-color: var(--br-bg);
+    }
+
+    .brands-title-premium {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--br-text-dark);
+        letter-spacing: 0.05em;
+        position: relative;
+        padding-bottom: 16px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .brands-title-premium::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background-color: var(--br-accent);
+    }
+
+    .brands-title-icon {
+        max-height: 32px;
+        width: auto;
+    }
+
+    /* Grid Chassis Config */
+    .brands-premium-flexgrid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    /* Premium Logo Slot Chassis */
+    .brand-asset-chassis {
+        background: var(--br-card-bg);
+        border: 1px solid var(--br-border);
+        border-radius: 6px;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        transition: transform 0.4s var(--br-ease), box-shadow 0.4s var(--br-ease), border-color 0.4s var(--br-ease);
+    }
+
+    .brand-asset-chassis:hover {
+        transform: translateY(-3px);
+        border-color: rgba(200, 35, 44, 0.12);
+        box-shadow: 0 10px 25px rgba(200, 35, 44, 0.05);
+    }
+
+    .brand-vector-img {
+        max-height: 55px;
+        width: auto;
+        object-fit: contain;
+        filter: grayscale(20%);
+        transition: filter 0.4s var(--br-ease), transform 0.4s var(--br-ease);
+    }
+
+    .brand-asset-chassis:hover .brand-vector-img {
+        filter: grayscale(0%);
+        transform: scale(1.04);
+    }
+
+    .brands-footer-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--br-text-muted);
+        letter-spacing: 0.05em;
+    }
+
+    /* Custom Flex Items Breakdowns for a Clean 5-Column Desktop Flow */
+    @media (min-width: 992px) {
+        .brands-premium-flexgrid > div {
+            flex: 0 0 calc(20% - 13px) !important; /* Perfect 5 items row grid flow split */
+            max-width: calc(20% - 13px) !important;
+        }
+    }
+
+    /* Balanced Responsive Grid Downscaling Breakpoints */
+    @media (max-width: 991.98px) {
+        .brands-title-premium {
+            font-size: 22px;
+            padding-bottom: 12px;
+        }
+        .brands-title-premium::after {
+            width: 50px;
+        }
+        .brands-title-icon {
+            max-height: 28px;
+        }
+        .brands-premium-flexgrid > div {
+            flex: 0 0 calc(33.333% - 11px) !important; /* Balanced 3 item grid layout split */
+            max-width: calc(33.333% - 11px) !important;
+        }
+        .brand-asset-chassis {
+            padding: 16px;
+            height: 85px;
+        }
+        .brand-vector-img {
+            max-height: 44px;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .brands-premium-flexgrid {
+            gap: 10px;
+        }
+        .brands-premium-flexgrid > div {
+            flex: 0 0 calc(50% - 5px) !important; /* Balanced 2 item square grid mobile split */
+            max-width: calc(50% - 5px) !important;
+        }
+        .brand-asset-chassis {
+            padding: 12px;
+            height: 75px;
+        }
+        .brand-vector-img {
+            max-height: 38px;
+        }
+        .brands-footer-text {
+            font-size: 12px;
+            text-align: center !important;
+        }
+    }
+</style>
+
+<div class="container-fluid brands-trusted-wrapper py-5 mask-reveal reveal-on-scroll">
+    <div class="container py-4">
         
-        <!-- Desktop Grid Version -->
-        <div class="container p-5 pt-6 only-desktop">
-            
-            <!-- Heading Container with Red Accent Underline -->
-            <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem; position: relative; padding-bottom: 14px;">
-                <img src="assets/themes/storefront/public/images/brands-icone8da.png?v=2.0.3" class="pr-3" style="max-height: 32px; width: auto;" alt="" />
-                <span>
-                    BRANDS WHO TRUST US
-                    <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #c8232c;"></span>
-                </span>
+        <!-- Premium Section Header -->
+        <div class="text-center mb-5">
+            <h2 class="brands-title-premium text-uppercase">
+                <img src="assets/themes/storefront/public/images/brands-icone8da.png?v=2.0.3" class="brands-title-icon" alt="Trust Icon" />
+                <span>BRANDS WHO TRUST US</span>
             </h2>
-
-            <!-- Row 1 -->
-            <div class="row pb-4" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-1e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-2e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-3e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-4e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-5e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-            </div>
-
-            <!-- Row 2 -->
-            <div class="row pb-4" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-6e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <!--<div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="https://www.ajantabottle.com/assets/themes/storefront/public/images/brands-icon-7.png?v=2.0.3" class="img-fluid" alt="" />
-                </div> -->
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-18e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-8e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-9e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-10e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-            </div>
-
-            <!-- Row 3 -->
-            <div class="row pb-4" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-11e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-12e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-13e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-14e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-15e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-            </div>
-
-            <!-- Row 4 -->
-            <div class="row pb-4" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; margin-bottom: 2rem;">
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-16e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-17e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-19e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/Keventers-13e8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" /> 
-                </div>
-                <div class="col align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 15px;">
-                    <img src="assets/themes/storefront/public/images/TRUEOILe8da.png?v=2.0.3" class="img-fluid" style="max-height: 60px; width: auto; object-fit: contain;" alt="" /> 
-                </div>
-            </div>
-            
-            <div>
-                <h3 class="text-right" style="font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 600; color: #666666; letter-spacing: 0.05em; text-transform: uppercase; margin-right: 15px;">And many more</h3>
-            </div>
-            
         </div>
-        
-        <!-- Mobile Grid Version -->
-        <div class="container p-5 m-pl-5 pr-5 only-mobile">
-            
-            <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 2.5rem; position: relative; padding-bottom: 12px;">
-                <img src="assets/themes/storefront/public/images/brands-icone8da.png?v=2.0.3" class="pr-3" style="max-height: 28px; width: auto;" alt="" />
-                <span>
-                    BRANDS WHO TRUST US
-                    <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background-color: #c8232c;"></span>
-                </span>
-            </h2>
 
-            <div class="row" style="display: flex; flex-wrap: wrap; align-items: center;">
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-1e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-2e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-3e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-4e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-5e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-6e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-7e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-8e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-9e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-10e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-11e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-12e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-13e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-14e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-15e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-16e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-17e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-18e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
-                </div>
-                <div class="col-6 col-md-3 pb-4 align-self-center" style="display: flex; justify-content: center; align-items: center; padding: 12px;">
-                    <img src="assets/themes/storefront/public/images/brands-icon-19e8da.png?v=2.0.3" class="img-fluid" style="max-height: 50px; width: auto; object-fit: contain;" alt="" />
+        <!-- Premium Clean Layout Unified Brand Asset Grid Flow -->
+        <div class="row brands-premium-flexgrid mb-4">
+            
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-1e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 1" />
                 </div>
             </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-2e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 2" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-3e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 3" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-4e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 4" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-5e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 5" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-6e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 6" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-7e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 7" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-8e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 8" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-9e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 9" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-10e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 10" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-11e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 11" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-12e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 12" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-13e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 13" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-14e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 14" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-15e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 15" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-16e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 16" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-17e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 17" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-18e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 18" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/brands-icon-19e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 19" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/Keventers-13e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Keventers Logo" />
+                </div>
+            </div>
+
+            <div class="p-0">
+                <div class="brand-asset-chassis">
+                    <img src="assets/themes/storefront/public/images/TRUEOILe8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                </div>
+            </div>
+
         </div>
+
+        <!-- Section Accent Footer -->
+        <div class="pt-2">
+            <h3 class="text-md-right text-center text-uppercase brands-footer-text pr-md-2">And many more</h3>
+        </div>
+
     </div>
-    <!-- Brands Ends -->
+</div>
 
     <style>
         /* Premium Orange Accent Modifications over base style */

@@ -4,209 +4,255 @@ include 'includes/header.php';
 
 <!-- HERO -->
 
-<section class="py-5" style="background-color: #fcfcfc; font-family: 'Montserrat', sans-serif;">
+<!-- INTEGRATED DECORATION & BRANDING SYSTEM STYLES -->
+<style>
+    @keyframes srvFadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes srvLineExpand {
+        from { width: 0; }
+        to { width: 50px; }
+    }
+    .srv-animate-fade {
+        animation: srvFadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+    
+    /* Hero Banner Modern Elements */
+    .srv-hero-banner-frame {
+        background: #ffffff; 
+        border: 1px solid #eeeeee; 
+        padding: 12px; 
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    }
+    .srv-hero-img {
+        width: 100%; 
+        height: 100%; 
+        object-fit: cover; 
+        vertical-align: middle; 
+        border-radius: 8px;
+    }
+    
+    /* Premium Slide-Fill Action Button */
+    .srv-btn-quote {
+        background: linear-gradient(135deg, #c8232c 0%, #a81a21 100%);
+        color: #ffffff; 
+        font-size: 13px; 
+        font-weight: 700; 
+        letter-spacing: 0.06em; 
+        padding: 15px 34px; 
+        border: none; 
+        border-radius: 6px; 
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        transition: color 0.4s ease, box-shadow 0.4s ease;
+        display: inline-block;
+        text-decoration: none;
+    }
+    .srv-btn-quote::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(135deg, #111111 0%, #222222 100%);
+        z-index: -1;
+        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        transform: scaleX(0);
+        transform-origin: right;
+    }
+    .srv-btn-quote:hover::before {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+    .srv-btn-quote:hover {
+        color: #ffffff;
+        text-decoration: none;
+        box-shadow: 0 6px 20px rgba(200, 35, 44, 0.25);
+    }
 
+    /* Grid Functional Card Modular Matrix */
+    .srv-card {
+        border: 1px solid #eeeeee; 
+        border-radius: 12px; 
+        overflow: hidden; 
+        background: #ffffff; 
+        display: flex; 
+        flex-direction: column; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.01); 
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .srv-card:hover {
+        border-color: #e0e0e0;
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+    }
+    .srv-card-img-wrap {
+        height: 240px; 
+        background: #fafafa;
+        overflow: hidden;
+        position: relative;
+    }
+    .srv-card-img {
+        width: 100%; 
+        height: 100%; 
+        object-fit: cover; 
+        transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .srv-card:hover .srv-card-img {
+        transform: scale(1.05);
+    }
+    .srv-card:hover .srv-card-title {
+        color: #c8232c;
+    }
+    .srv-card-title {
+        font-size: 16px; 
+        font-weight: 800; 
+        color: #111111; 
+        margin-bottom: 12px; 
+        text-transform: uppercase; 
+        letter-spacing: 0.03em;
+        transition: color 0.3s ease;
+    }
+</style>
+
+<!-- HERO INTRODUCTORY SEGMENT -->
+<section class="py-5" style="background-color: #fafafa; font-family: 'Montserrat', sans-serif;">
     <div class="container py-4">
-
         <div class="row align-items-center">
 
-            <div class="col-lg-8 mb-4 mb-lg-0 pe-lg-5">
-
-                <h1 class="text-uppercase mb-4" style="font-size: 36px; font-weight: 700; color: #111111; letter-spacing: -0.01em; line-height: 1.2; position: relative; padding-bottom: 16px;">
+            <!-- Core Typography Text Column -->
+            <div class="col-lg-6 mb-5 mb-lg-0 pe-lg-5 srv-animate-fade" style="animation-delay: 0.05s;">
+                <h1 class="text-uppercase mb-4" style="font-size: 38px; font-weight: 800; color: #111111; letter-spacing: -0.01em; line-height: 1.25; position: relative; padding-bottom: 18px;">
                     Decoration & Branding Services
-                    <span style="position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background-color: #c8232c;"></span>
+                    <span style="position: absolute; bottom: 0; left: 0; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px; animation: srvLineExpand 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;"></span>
                 </h1>
 
-                <p class="mb-4" style="font-size: 15px; line-height: 1.8; color: #555555; font-weight: 400; margin-top: 20px;">
+                <p class="mb-4" style="font-size: 15px; line-height: 1.8; color: #555555; font-weight: 500; margin-top: 24px;">
                     Elevate your packaging with premium decoration solutions including screen printing, 
                     UV printing, frosting, coating, labeling, and custom branding for glass bottles and jars.
                 </p>
 
                 <div class="mt-4 pt-2">
-                    <a
-                        href="bulk_inquiry.php"
-                        class="btn text-uppercase"
-                        style="background-color: #c8232c; color: #ffffff; font-size: 13px; font-weight: 700; letter-spacing: 0.05em; padding: 14px 32px; border: 1px solid #c8232c; border-radius: 4px; transition: all 0.2s ease-in-out;"
-                        onmouseover="this.style.backgroundColor='#b01d24'; this.style.borderColor='#b01d24';"
-                        onmouseout="this.style.backgroundColor='#c8232c'; this.style.borderColor='#c8232c';"
-                    >
+                    <a href="bulk_inquiry.php" class="btn srv-btn-quote text-uppercase">
                         Request Bulk Quote
                     </a>
                 </div>
-
             </div>
 
-            <div class="col-lg-8 text-center">
-                <div style="background: #ffffff; border: 1px solid #eeeeee; padding: 12px; border-radius: 4px;">
-                    <img
-                        src="storage/media/decoration-banner.jpg"
-                        class="img-fluid"
-                        alt="Decoration Services"
-                        style="width: 200%; height:100%  ; object-fit: cover; vertical-align: middle; border-radius: 9px;"
-                    >
+            <!-- Visual Asset Column Wrapper -->
+            <div class="col-lg-6 srv-animate-fade" style="animation-delay: 0.15s;">
+                <div class="srv-hero-banner-frame">
+                    <img src="storage/media/decoration-banner.jpg" class="img-fluid srv-hero-img" alt="Decoration Services">
                 </div>
             </div>
 
         </div>
-
     </div>
-
 </section>
 
-<!-- SERVICES -->
-
+<!-- COMPREHENSIVE SERVICES GRID DETAILED MATRIX -->
 <section class="py-5" style="background-color: #ffffff; font-family: 'Montserrat', sans-serif;">
-
     <div class="container py-3">
 
-        <div class="text-center mb-5">
-            <h2 class="text-uppercase mb-3" style="font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; display: inline-block; padding-bottom: 12px;">
+        <!-- Grid Subsection Structural Header -->
+        <div class="text-center mb-5 srv-animate-fade" style="animation-delay: 0.2s;">
+            <h2 class="text-uppercase mb-3" style="font-size: 28px; font-weight: 800; color: #111111; letter-spacing: 0.02em; position: relative; display: inline-block; padding-bottom: 14px;">
                 Our Decoration Services
-                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 3px; background-color: #c8232c;"></span>
+                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px;"></span>
             </h2>
-            <p class="text-muted" style="font-size: 14px; font-weight: 400; color: #777777 !important; margin-top: 5px;">
+            <p class="text-muted" style="font-size: 14px; font-weight: 500; color: #777777 !important; margin-top: 6px;">
                 Complete packaging customization solutions.
             </p>
         </div>
 
-        <div class="row mb-2">
-
-            <div class="col-md-4 mb-4 d-flex align-items-stretch">
-                <div class="card w-100" style="border: 1px solid #eeeeee; border-radius: 4px; overflow: hidden; background: #ffffff; display: flex; flex-direction: column; box-shadow: none; transition: border-color 0.3s ease;" onmouseover="this.style.borderColor='#c8232c'" onmouseout="this.style.borderColor='#eeeeee'">
-                    <div class="overflow-hidden" style="height: 230px; background: #fdfdfd;">
-                        <img
-                            src="storage/media/screen-printing.jpg"
-                            class="card-img-top"
-                            alt="Screen Printing"
-                            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
-                            onmouseover="this.style.transform='scale(1.04)'"
-                            onmouseout="this.style.transform='scale(1.0)'"
-                        >
+        <!-- Dynamic Modular Row Matrix -->
+        <div class="row">
+            
+            <!-- Service Block 1 -->
+            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch srv-animate-fade" style="animation-delay: 0.25s;">
+                <div class="card srv-card w-100">
+                    <div class="srv-card-img-wrap">
+                        <img src="storage/media/screen-printing.jpg" class="srv-card-img" alt="Screen Printing" loading="lazy">
                     </div>
-                    <div class="card-body" style="padding: 24px; display: flex; flex-direction: column; flex-grow: 1;">
-                        <h4 style="font-size: 16px; font-weight: 700; color: #111111; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.02em;">
-                            Screen Printing
-                        </h4>
-                        <p style="font-size: 13px; line-height: 1.6; color: #666666; font-weight: 400; margin-bottom: 0;">
+                    <div class="card-body" style="padding: 28px; display: flex; flex-direction: column;">
+                        <h4 class="srv-card-title">Screen Printing</h4>
+                        <p style="font-size: 13.5px; line-height: 1.65; color: #666666; font-weight: 400; margin-bottom: 0;">
                             Permanent direct printing on glass bottles and jars with excellent durability.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4 d-flex align-items-stretch">
-                <div class="card w-100" style="border: 1px solid #eeeeee; border-radius: 4px; overflow: hidden; background: #ffffff; display: flex; flex-direction: column; box-shadow: none; transition: border-color 0.3s ease;" onmouseover="this.style.borderColor='#c8232c'" onmouseout="this.style.borderColor='#eeeeee'">
-                    <div class="overflow-hidden" style="height: 230px; background: #fdfdfd;">
-                        <img
-                            src="storage/media/uv-printing.jpg"
-                            class="card-img-top"
-                            alt="UV Printing"
-                            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
-                            onmouseover="this.style.transform='scale(1.04)'"
-                            onmouseout="this.style.transform='scale(1.0)'"
-                        >
+            <!-- Service Block 2 -->
+            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch srv-animate-fade" style="animation-delay: 0.3s;">
+                <div class="card srv-card w-100">
+                    <div class="srv-card-img-wrap">
+                        <img src="storage/media/uv-printing.jpg" class="srv-card-img" alt="UV Printing" loading="lazy">
                     </div>
-                    <div class="card-body" style="padding: 24px; display: flex; flex-direction: column; flex-grow: 1;">
-                        <h4 style="font-size: 16px; font-weight: 700; color: #111111; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.02em;">
-                            UV Printing
-                        </h4>
-                        <p style="font-size: 13px; line-height: 1.6; color: #666666; font-weight: 400; margin-bottom: 0;">
+                    <div class="card-body" style="padding: 28px; display: flex; flex-direction: column;">
+                        <h4 class="srv-card-title">UV Printing</h4>
+                        <p style="font-size: 13.5px; line-height: 1.65; color: #666666; font-weight: 400; margin-bottom: 0;">
                             Vibrant multi-color branding with premium finish and excellent clarity.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4 d-flex align-items-stretch">
-                <div class="card w-100" style="border: 1px solid #eeeeee; border-radius: 4px; overflow: hidden; background: #ffffff; display: flex; flex-direction: column; box-shadow: none; transition: border-color 0.3s ease;" onmouseover="this.style.borderColor='#c8232c'" onmouseout="this.style.borderColor='#eeeeee'">
-                    <div class="overflow-hidden" style="height: 230px; background: #fdfdfd;">
-                        <img
-                            src="storage/media/frosted-bottle.jpg"
-                            class="card-img-top"
-                            alt="Frosting & Coating"
-                            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
-                            onmouseover="this.style.transform='scale(1.04)'"
-                            onmouseout="this.style.transform='scale(1.0)'"
-                        >
+            <!-- Service Block 3 -->
+            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch srv-animate-fade" style="animation-delay: 0.35s;">
+                <div class="card srv-card w-100">
+                    <div class="srv-card-img-wrap">
+                        <img src="storage/media/frosted-bottle.jpg" class="srv-card-img" alt="Frosting & Coating" loading="lazy">
                     </div>
-                    <div class="card-body" style="padding: 24px; display: flex; flex-direction: column; flex-grow: 1;">
-                        <h4 style="font-size: 16px; font-weight: 700; color: #111111; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.02em;">
-                            Frosting & Coating
-                        </h4>
-                        <p style="font-size: 13px; line-height: 1.6; color: #666666; font-weight: 400; margin-bottom: 0;">
+                    <div class="card-body" style="padding: 28px; display: flex; flex-direction: column;">
+                        <h4 class="srv-card-title">Frosting & Coating</h4>
+                        <p style="font-size: 13.5px; line-height: 1.65; color: #666666; font-weight: 400; margin-bottom: 0;">
                             Elegant matte and luxury finishes for premium packaging products.
                         </p>
                     </div>
                 </div>
             </div>
 
-        </div>
-
-        <div class="row">
-
-            <div class="col-md-4 mb-4 d-flex align-items-stretch">
-                <div class="card w-100" style="border: 1px solid #eeeeee; border-radius: 4px; overflow: hidden; background: #ffffff; display: flex; flex-direction: column; box-shadow: none; transition: border-color 0.3s ease;" onmouseover="this.style.borderColor='#c8232c'" onmouseout="this.style.borderColor='#eeeeee'">
-                    <div class="overflow-hidden" style="height: 230px; background: #fdfdfd;">
-                        <img
-                            src="storage/media/metallic-coating.jpg"
-                            class="card-img-top"
-                            alt="Metallic Coating"
-                            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
-                            onmouseover="this.style.transform='scale(1.04)'"
-                            onmouseout="this.style.transform='scale(1.0)'"
-                        >
+            <!-- Service Block 4 -->
+            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch srv-animate-fade" style="animation-delay: 0.4s;">
+                <div class="card srv-card w-100">
+                    <div class="srv-card-img-wrap">
+                        <img src="storage/media/metallic-coating.jpg" class="srv-card-img" alt="Metallic Coating" loading="lazy">
                     </div>
-                    <div class="card-body" style="padding: 24px; display: flex; flex-direction: column; flex-grow: 1;">
-                        <h4 style="font-size: 16px; font-weight: 700; color: #111111; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.02em;">
-                            Metallic Coating
-                        </h4>
-                        <p style="font-size: 13px; line-height: 1.6; color: #666666; font-weight: 400; margin-bottom: 0;">
+                    <div class="card-body" style="padding: 28px; display: flex; flex-direction: column;">
+                        <h4 class="srv-card-title">Metallic Coating</h4>
+                        <p style="font-size: 13.5px; line-height: 1.65; color: #666666; font-weight: 400; margin-bottom: 0;">
                             Gold, silver and premium metallic decorative effects.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4 d-flex align-items-stretch">
-                <div class="card w-100" style="border: 1px solid #eeeeee; border-radius: 4px; overflow: hidden; background: #ffffff; display: flex; flex-direction: column; box-shadow: none; transition: border-color 0.3s ease;" onmouseover="this.style.borderColor='#c8232c'" onmouseout="this.style.borderColor='#eeeeee'">
-                    <div class="overflow-hidden" style="height: 230px; background: #fdfdfd;">
-                        <img
-                            src="storage/media/label-application.jpg"
-                            class="card-img-top"
-                            alt="Label Application"
-                            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
-                            onmouseover="this.style.transform='scale(1.04)'"
-                            onmouseout="this.style.transform='scale(1.0)'"
-                        >
+            <!-- Service Block 5 -->
+            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch srv-animate-fade" style="animation-delay: 0.45s;">
+                <div class="card srv-card w-100">
+                    <div class="srv-card-img-wrap">
+                        <img src="storage/media/label-application.jpg" class="srv-card-img" alt="Label Application" loading="lazy">
                     </div>
-                    <div class="card-body" style="padding: 24px; display: flex; flex-direction: column; flex-grow: 1;">
-                        <h4 style="font-size: 16px; font-weight: 700; color: #111111; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.02em;">
-                            Label Application
-                        </h4>
-                        <p style="font-size: 13px; line-height: 1.6; color: #666666; font-weight: 400; margin-bottom: 0;">
+                    <div class="card-body" style="padding: 28px; display: flex; flex-direction: column;">
+                        <h4 class="srv-card-title">Label Application</h4>
+                        <p style="font-size: 13.5px; line-height: 1.65; color: #666666; font-weight: 400; margin-bottom: 0;">
                             Accurate and professional labeling solutions for every industry.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4 d-flex align-items-stretch">
-                <div class="card w-100" style="border: 1px solid #eeeeee; border-radius: 4px; overflow: hidden; background: #ffffff; display: flex; flex-direction: column; box-shadow: none; transition: border-color 0.3s ease;" onmouseover="this.style.borderColor='#c8232c'" onmouseout="this.style.borderColor='#eeeeee'">
-                    <div class="overflow-hidden" style="height: 230px; background: #fdfdfd;">
-                        <img
-                            src="storage/media/perfume-decoration.jpg"
-                            class="card-img-top"
-                            alt="Custom Branding"
-                            style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;"
-                            onmouseover="this.style.transform='scale(1.04)'"
-                            onmouseout="this.style.transform='scale(1.0)'"
-                        >
+            <!-- Service Block 6 -->
+            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch srv-animate-fade" style="animation-delay: 0.5s;">
+                <div class="card srv-card w-100">
+                    <div class="srv-card-img-wrap">
+                        <img src="storage/media/perfume-decoration.jpg" class="srv-card-img" alt="Custom Branding" loading="lazy">
                     </div>
-                    <div class="card-body" style="padding: 24px; display: flex; flex-direction: column; flex-grow: 1;">
-                        <h4 style="font-size: 16px; font-weight: 700; color: #111111; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.02em;">
-                            Custom Branding
-                        </h4>
-                        <p style="font-size: 13px; line-height: 1.6; color: #666666; font-weight: 400; margin-bottom: 0;">
+                    <div class="card-body" style="padding: 28px; display: flex; flex-direction: column;">
+                        <h4 class="srv-card-title">Custom Branding</h4>
+                        <p style="font-size: 13.5px; line-height: 1.65; color: #666666; font-weight: 400; margin-bottom: 0;">
                             End-to-end packaging customization for your brand identity.
                         </p>
                     </div>
@@ -219,138 +265,166 @@ include 'includes/header.php';
 </section>
 
 <!-- VIDEO -->
+<!-- INTEGRATED DECORATION PROCESS & INDUSTRIES SYSTEM STYLES -->
+<style>
+    /* Responsive Premium Video Frame Container */
+    .proc-video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* Perfect 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+        border: 1px solid #eeeeee;
+        border-radius: 12px;
+        background: #111111;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.04);
+        padding: 10px;
+    }
+    .proc-video-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        border-radius: 8px;
+    }
 
-<section class="py-5" style="background-color: #fcfcfc; font-family: 'Montserrat', sans-serif;">
+    /* Industry Matrix Card Blocks */
+    .ind-card {
+        border: 1px solid #eeeeee; 
+        border-radius: 10px; 
+        padding: 28px 14px; 
+        background-color: #ffffff; 
+        height: 100%; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+        position: relative; 
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+    }
+    .ind-card:hover {
+        border-color: #c8232c; 
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(200, 35, 44, 0.08);
+    }
+    .ind-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, #c8232c, #e0535a);
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+    }
+    .ind-card:hover::after {
+        transform: scaleX(1);
+    }
+    .ind-card-text {
+        font-size: 13px; 
+        font-weight: 700; 
+        color: #111111; 
+        text-transform: uppercase; 
+        letter-spacing: 0.06em; 
+        line-height: 1.5;
+        transition: color 0.3s ease;
+    }
+    .ind-card:hover .ind-card-text {
+        color: #c8232c;
+    }
+</style>
 
+<!-- WATCH OUR DECORATION PROCESS VIDEO SEGMENT -->
+<section class="py-5" style="background-color: #fafafa; font-family: 'Montserrat', sans-serif;">
     <div class="container py-3">
 
         <div class="text-center mb-5">
-            <h2 class="text-uppercase mb-3" style="font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; display: inline-block; padding-bottom: 12px;">
+            <h2 class="text-uppercase mb-3" style="font-size: 28px; font-weight: 800; color: #111111; letter-spacing: 0.02em; position: relative; display: inline-block; padding-bottom: 14px;">
                 Watch Our Decoration Process
-                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 3px; background-color: #c8232c;"></span>
+                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px;"></span>
             </h2>
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-lg-8">
-                
-                <div
-                    style="
-                        position: relative;
-                        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-                        height: 60vh;
-                        overflow: hidden;
-                        border: 1px solid #eeeeee;
-                        border-radius: 4px;
-                        background: #000000;
-                        box-shadow: none;
-                        padding: 10px; /* Outer frame look */
-                    "
-                >
+            <div class="col-lg-9 col-xl-8">
+                <div class="proc-video-container">
                     <iframe
+                        class="proc-video-iframe"
                         src="https://www.youtube.com/embed/ScMzIvxBSi4"
-                        style="
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            border: 0;
-                        "
-                        frameborder="0"
                         allowfullscreen
                     ></iframe>
                 </div>
-
             </div>
         </div>
 
     </div>
-
 </section>
 
-<!-- INDUSTRIES -->
-
+<!-- INDUSTRIES WE SERVE MATRIX SEGMENT -->
 <section class="py-5" style="background-color: #ffffff; font-family: 'Montserrat', sans-serif;">
-
     <div class="container py-3">
 
         <div class="text-center mb-5">
-            <h2 class="text-uppercase mb-3" style="font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; display: inline-block; padding-bottom: 12px;">
+            <h2 class="text-uppercase mb-3" style="font-size: 28px; font-weight: 800; color: #111111; letter-spacing: 0.02em; position: relative; display: inline-block; padding-bottom: 14px;">
                 Industries We Serve
-                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 3px; background-color: #c8232c;"></span>
+                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px;"></span>
             </h2>
         </div>
 
-        <div class="row text-center justify-content-center">
+        <div class="row text-center justify-content-center g-4">
 
-            <div class="col-6 col-md-2 mb-4">
-                <div 
-                    style="border: 1px solid #eeeeee; border-radius: 4px; padding: 24px 10px; background-color: #ffffff; height: 100%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease-in-out; position: relative; overflow: hidden;"
-                    onmouseover="this.style.borderColor='#c8232c'; this.style.transform='translateY(-2px)';"
-                    onmouseout="this.style.borderColor='#eeeeee'; this.style.transform='translateY(0)';"
-                >
-                    <span style="font-size: 12px; font-weight: 700; color: #111111; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.4;">
+            <!-- Food & Beverage -->
+            <div class="col-6 col-lg-2 col-md-4">
+                <div class="ind-card">
+                    <span class="ind-card-text">
                         Food &<br>Beverage
                     </span>
                 </div>
             </div>
 
-            <div class="col-6 col-md-2 mb-4">
-                <div 
-                    style="border: 1px solid #eeeeee; border-radius: 4px; padding: 24px 10px; background-color: #ffffff; height: 100%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease-in-out; position: relative; overflow: hidden;"
-                    onmouseover="this.style.borderColor='#c8232c'; this.style.transform='translateY(-2px)';"
-                    onmouseout="this.style.borderColor='#eeeeee'; this.style.transform='translateY(0)';"
-                >
-                    <span style="font-size: 12px; font-weight: 700; color: #111111; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.4;">
+            <!-- Cosmetics -->
+            <div class="col-6 col-lg-2 col-md-4">
+                <div class="ind-card">
+                    <span class="ind-card-text">
                         Cosmetics
                     </span>
                 </div>
             </div>
 
-            <div class="col-6 col-md-2 mb-4">
-                <div 
-                    style="border: 1px solid #eeeeee; border-radius: 4px; padding: 24px 10px; background-color: #ffffff; height: 100%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease-in-out; position: relative; overflow: hidden;"
-                    onmouseover="this.style.borderColor='#c8232c'; this.style.transform='translateY(-2px)';"
-                    onmouseout="this.style.borderColor='#eeeeee'; this.style.transform='translateY(0)';"
-                >
-                    <span style="font-size: 12px; font-weight: 700; color: #111111; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.4;">
+            <!-- Perfumes -->
+            <div class="col-6 col-lg-2 col-md-4">
+                <div class="ind-card">
+                    <span class="ind-card-text">
                         Perfumes
                     </span>
                 </div>
             </div>
 
-            <div class="col-6 col-md-2 mb-4">
-                <div 
-                    style="border: 1px solid #eeeeee; border-radius: 4px; padding: 24px 10px; background-color: #ffffff; height: 100%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease-in-out; position: relative; overflow: hidden;"
-                    onmouseover="this.style.borderColor='#c8232c'; this.style.transform='translateY(-2px)';"
-                    onmouseout="this.style.borderColor='#eeeeee'; this.style.transform='translateY(0)';"
-                >
-                    <span style="font-size: 12px; font-weight: 700; color: #111111; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.4;">
+            <!-- Pharmaceuticals -->
+            <div class="col-6 col-lg-2 col-md-4">
+                <div class="ind-card">
+                    <span class="ind-card-text">
                         Pharmaceu&shy;ticals
                     </span>
                 </div>
             </div>
 
-            <div class="col-6 col-md-2 mb-4">
-                <div 
-                    style="border: 1px solid #eeeeee; border-radius: 4px; padding: 24px 10px; background-color: #ffffff; height: 100%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease-in-out; position: relative; overflow: hidden;"
-                    onmouseover="this.style.borderColor='#c8232c'; this.style.transform='translateY(-2px)';"
-                    onmouseout="this.style.borderColor='#eeeeee'; this.style.transform='translateY(0)';"
-                >
-                    <span style="font-size: 12px; font-weight: 700; color: #111111; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.4;">
+            <!-- Chemicals -->
+            <div class="col-6 col-lg-2 col-md-4">
+                <div class="ind-card">
+                    <span class="ind-card-text">
                         Chemicals
                     </span>
                 </div>
             </div>
 
-            <div class="col-6 col-md-2 mb-4">
-                <div 
-                    style="border: 1px solid #eeeeee; border-radius: 4px; padding: 24px 10px; background-color: #ffffff; height: 100%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease-in-out; position: relative; overflow: hidden;"
-                    onmouseover="this.style.borderColor='#c8232c'; this.style.transform='translateY(-2px)';"
-                    onmouseout="this.style.borderColor='#eeeeee'; this.style.transform='translateY(0)';"
-                >
-                    <span style="font-size: 12px; font-weight: 700; color: #111111; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.4;">
+            <!-- Hospitality -->
+            <div class="col-6 col-lg-2 col-md-4">
+                <div class="ind-card">
+                    <span class="ind-card-text">
                         Hospitality
                     </span>
                 </div>
@@ -363,72 +437,168 @@ include 'includes/header.php';
 
 <!-- WHY CHOOSE -->
 
-<section class="py-5" style="background-color: #fcfcfc; font-family: 'Montserrat', sans-serif;">
+<!-- INTEGRATED VALUE PROPOSITION & CTA SYSTEM STYLES -->
+<style>
+    /* Value Badge Feature Block Matrix */
+    .val-badge {
+        background-color: #ffffff; 
+        border: 1px solid #eeeeee; 
+        border-radius: 8px; 
+        padding: 20px 22px; 
+        display: flex; 
+        align-items: center; 
+        height: 100%;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.01);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .val-badge:hover {
+        border-color: #c8232c;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(200, 35, 44, 0.06);
+    }
+    .val-badge-icon {
+        margin-right: 14px; 
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+    }
+    .val-badge:hover .val-badge-icon {
+        transform: scale(1.15);
+    }
+    .val-badge-text {
+        font-size: 14px; 
+        font-weight: 700; 
+        color: #111111; 
+        letter-spacing: 0.01em;
+    }
 
+    /* Premium Dynamic CTA Section Variables */
+    .cta-premium-bg {
+        background: linear-gradient(135deg, #272727 0%, #252525 100%); 
+        color: #ffffff; 
+        position: relative;
+        overflow: hidden;
+    }
+    .cta-premium-bg::before {
+        content: '';
+        position: absolute;
+        top: -50%; left: -30%; width: 60%; height: 200%;
+        background: radial-gradient(circle, rgba(200,35,44,0.15) 0%, rgba(0,0,0,0) 70%);
+        transform: rotate(-15deg);
+        pointer-events: none;
+    }
+    
+    /* Sliding Interaction Button Link Layout */
+    .cta-btn-action {
+        background: #c8232c;
+        color: #ffffff; 
+        font-size: 13px; 
+        font-weight: 700; 
+        letter-spacing: 0.06em; 
+        padding: 15px 36px; 
+        border: 1px solid #c8232c; 
+        border-radius: 6px; 
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        transition: color 0.4s ease, border-color 0.4s ease;
+        display: inline-block;
+        text-decoration: none;
+    }
+    .cta-btn-action::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: #ffffff;
+        z-index: -1;
+        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        transform: scaleY(0);
+        transform-origin: bottom;
+    }
+    .cta-btn-action:hover::before {
+        transform: scaleY(1);
+    }
+    .cta-btn-action:hover {
+        color: #111111;
+        border-color: #ffffff;
+        text-decoration: none;
+        box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+    }
+</style>
+
+<!-- VALUE PROPOSITION GRID BLOCK -->
+<section class="py-5" style="background-color: #fafafa; font-family: 'Montserrat', sans-serif;">
     <div class="container py-3">
 
         <div class="text-center mb-5">
-            <h2 class="text-uppercase mb-3" style="font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; display: inline-block; padding-bottom: 12px;">
+            <h2 class="text-uppercase mb-3" style="font-size: 28px; font-weight: 800; color: #111111; letter-spacing: 0.02em; position: relative; display: inline-block; padding-bottom: 14px;">
                 Why Choose Alok Glass
-                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 3px; background-color: #c8232c;"></span>
+                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px;"></span>
             </h2>
         </div>
 
-        <div class="row">
+        <div class="row g-4">
 
-            <div class="col-md-3 mb-4">
-                <div style="background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 4px; padding: 18px 20px; display: flex; align-items: center; height: 100%;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span style="font-size: 14px; font-weight: 600; color: #111111; letter-spacing: 0.01em;">Low MOQ</span>
+            <!-- Core Value 1 -->
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="val-badge">
+                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span class="val-badge-text">Low MOQ</span>
                 </div>
             </div>
 
-            <div class="col-md-3 mb-4">
-                <div style="background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 4px; padding: 18px 20px; display: flex; align-items: center; height: 100%;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span style="font-size: 14px; font-weight: 600; color: #111111; letter-spacing: 0.01em;">Fast Turnaround</span>
+            <!-- Core Value 2 -->
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="val-badge">
+                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span class="val-badge-text">Fast Turnaround</span>
                 </div>
             </div>
 
-            <div class="col-md-3 mb-4">
-                <div style="background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 4px; padding: 18px 20px; display: flex; align-items: center; height: 100%;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span style="font-size: 14px; font-weight: 600; color: #111111; letter-spacing: 0.01em;">Premium Quality</span>
+            <!-- Core Value 3 -->
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="val-badge">
+                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span class="val-badge-text">Premium Quality</span>
                 </div>
             </div>
 
-            <div class="col-md-3 mb-4">
-                <div style="background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 4px; padding: 18px 20px; display: flex; align-items: center; height: 100%;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span style="font-size: 14px; font-weight: 600; color: #111111; letter-spacing: 0.01em;">Custom Branding</span>
+            <!-- Core Value 4 -->
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="val-badge">
+                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span class="val-badge-text">Custom Branding</span>
                 </div>
             </div>
 
-            <div class="col-md-3 mb-4">
-                <div style="background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 4px; padding: 18px 20px; display: flex; align-items: center; height: 100%;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span style="font-size: 14px; font-weight: 600; color: #111111; letter-spacing: 0.01em;">Food Grade Solutions</span>
+            <!-- Core Value 5 -->
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="val-badge">
+                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span class="val-badge-text">Food Grade Solutions</span>
                 </div>
             </div>
 
-            <div class="col-md-3 mb-4">
-                <div style="background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 4px; padding: 18px 20px; display: flex; align-items: center; height: 100%;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span style="font-size: 14px; font-weight: 600; color: #111111; letter-spacing: 0.01em;">Export Packaging</span>
+            <!-- Core Value 6 -->
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="val-badge">
+                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span class="val-badge-text">Export Packaging</span>
                 </div>
             </div>
 
-            <div class="col-md-3 mb-4">
-                <div style="background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 4px; padding: 18px 20px; display: flex; align-items: center; height: 100%;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span style="font-size: 14px; font-weight: 600; color: #111111; letter-spacing: 0.01em;">Experienced Team</span>
+            <!-- Core Value 7 -->
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="val-badge">
+                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span class="val-badge-text">Experienced Team</span>
                 </div>
             </div>
 
-            <div class="col-md-3 mb-4">
-                <div style="background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 4px; padding: 18px 20px; display: flex; align-items: center; height: 100%;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 12px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span style="font-size: 14px; font-weight: 600; color: #111111; letter-spacing: 0.01em;">End-to-End Support</span>
+            <!-- Core Value 8 -->
+            <div class="col-xl-3 col-md-4 col-sm-6">
+                <div class="val-badge">
+                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span class="val-badge-text">End-to-End Support</span>
                 </div>
             </div>
 
@@ -437,28 +607,20 @@ include 'includes/header.php';
     </div>
 </section>
 
-<!-- CTA-->
+<!-- CONVERSION-FOCUSED CLOSING CTA SEGMENT -->
+<section class="py-5 text-center cta-premium-bg" style="font-family: 'Montserrat', sans-serif;">
+    <div class="container py-4" style="position: relative; z-index: 2;">
 
-<section class="py-5 text-center" style="background-color: #f8ce9d; color: #ffffff; font-family: 'Montserrat', sans-serif;">
-
-    <div class="container py-4">
-
-        <h2 class="mb-3 text-uppercase" style="font-size: 26px; font-weight: 700; letter-spacing: 0.05em;">
+        <h2 class="mb-3 text-uppercase" style="font-size: 28px; font-weight: 800; letter-spacing: 0.04em;">
             Need Custom Decorated Packaging?
         </h2>
 
-        <p class="mb-4 mx-auto text-muted" style="font-size: 14px; font-weight: 400; max-width: 600px; color: #a79999 !important; line-height: 1.6;">
+        <p class="mb-4 mx-auto" style="font-size: 15px; font-weight: 400; max-width: 620px; color: #cccccc; line-height: 1.7;">
             Get in touch with our team for customized glass bottle and jar decoration solutions.
         </p>
 
         <div class="mt-4 pt-2">
-            <a
-                href="bulk_inquiry.php"
-                class="btn text-uppercase"
-                style="background-color: #c8232c; color: #ffffff; font-size: 13px; font-weight: 700; letter-spacing: 0.05em; padding: 14px 32px; border: 1px solid #c8232c; border-radius: 4px; transition: all 0.2s ease-in-out;"
-                onmouseover="this.style.backgroundColor='#ffffff'; this.style.borderColor='#ffffff'; this.style.color='#111111';"
-                onmouseout="this.style.backgroundColor='#c8232c'; this.style.borderColor='#c8232c'; this.style.color='#ffffff';"
-            >
+            <a href="bulk_inquiry.php" class="btn cta-btn-action text-uppercase">
                 Request Bulk Quote
             </a>
         </div>

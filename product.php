@@ -18,175 +18,129 @@ if(!$product){
 }
 ?>
 
-<div class="container pt-5 pb-5">
+<div class="container pt-5 pb-5" style="font-family: 'Montserrat', sans-serif;">
+    <style>
+        .product-hero-card {
+            background: #ffffff;
+            border: 1px solid #f0f0f0;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: transform 0.4s ease;
+        }
+        .product-hero-card:hover { transform: translateY(-5px); }
+        
+        .rating-star { color: #f1b434; font-size: 18px; }
+        
+        .purchase-alert {
+            background: rgba(200, 35, 44, 0.05) !important;
+            border: 1px solid rgba(200, 35, 44, 0.1) !important;
+            color: #111111 !important;
+            border-radius: 8px;
+            padding: 16px !important;
+        }
+        
+        .custom-select-theme {
+            height: 50px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            background-color: #fdfdfd;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .custom-select-theme:focus {
+            border-color: #c8232c;
+            box-shadow: 0 0 0 4px rgba(200, 35, 44, 0.1);
+        }
+    </style>
 
     <div class="row align-items-center">
 
-        <div class="col-md-6 mb-4 text-center">
-            <div style="background: #ffffff; border: 1px solid #eeeeee; padding: 20px; transition: border-color 0.3s ease;">
-                <img
-                    src="<?= htmlspecialchars($product['image']) ?>"
-                    class="img-fluid"
-                    alt="<?= htmlspecialchars($product['name']) ?>"
-                    style="max-height: 480px; width: auto; object-fit: contain; vertical-align: middle;"
-                >
+        <!-- Left: Product Image -->
+        <div class="col-md-6 mb-5 text-center">
+            <div class="product-hero-card">
+                <img src="<?= htmlspecialchars($product['image']) ?>" 
+                     class="img-fluid" 
+                     alt="<?= htmlspecialchars($product['name']) ?>"
+                     style="max-height: 480px; width: auto; object-fit: contain;">
             </div>
         </div>
 
+        <!-- Right: Product Details -->
         <div class="col-md-6">
             <?php
-            $ratingStmt = $pdo->prepare("
-                SELECT
-                    COUNT(*) AS total_reviews,
-                    AVG(rating) AS avg_rating
-                FROM product_reviews
-                WHERE product_id = ?
-                AND is_approved = 1
-            ");
-
+            $ratingStmt = $pdo->prepare("SELECT COUNT(*) AS total_reviews, AVG(rating) AS avg_rating FROM product_reviews WHERE product_id = ? AND is_approved = 1");
             $ratingStmt->execute([$product['id']]);
             $ratingData = $ratingStmt->fetch();
-
             $totalReviews = (int)($ratingData['total_reviews'] ?? 0);
             $avgRating = round($ratingData['avg_rating'] ?? 0, 1);
             ?>
 
             <?php if($totalReviews > 0): ?>
-
-                <div class="mb-4">
-                    <div
-                        style="
-                            font-family: 'Montserrat', sans-serif;
-                            font-size: 18px;
-                            color: #f1b434; /* Balanced corporate gold/amber */
-                            line-height: 1;
-                            display: flex;
-                            align-items: center;
-                            gap: 4px;
-                        "
-                    >
-                        <span>
-                            <?php
-                            $fullStars = floor($avgRating);
-                            for($i=1; $i<=5; $i++):
-                                if($i <= $fullStars):
-                                    echo '★';
-                                else:
-                                    echo '☆';
-                                endif;
-                            endfor;
-                            ?>
-                        </span>
-
-                        <span
-                            style="
-                                color: #666666;
-                                font-size: 14px;
-                                font-weight: 500;
-                                margin-left: 6px;
-                                letter-spacing: 0.02em;
-                            "
-                        >
-                            <strong style="color: #111111;"><?= $avgRating ?></strong> 
-                            (<?= $totalReviews ?> <?= $totalReviews === 1 ? 'Review' : 'Reviews' ?>)
-                        </span>
-                    </div>
+                <div class="mb-3 d-flex align-items-center gap-2">
+                    <span class="rating-star">
+                        <?php 
+                        $fullStars = floor($avgRating);
+                        for($i=1; $i<=5; $i++) echo ($i <= $fullStars) ? '★' : '☆';
+                        ?>
+                    </span>
+                    <span style="color: #666; font-size: 14px; font-weight: 500;">
+                        <strong style="color: #111;"><?= $avgRating ?></strong> (<?= $totalReviews ?> Reviews)
+                    </span>
                 </div>
-
             <?php endif; ?>
-            
 
-            <h2 class="mb-3 text-uppercase" style="font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #111111; letter-spacing: -0.01em; line-height: 1.3;">
+            <h2 class="mb-3 text-uppercase" style="font-size: 32px; font-weight: 800; color: #111; letter-spacing: -0.02em;">
                 <?= htmlspecialchars($product['name']) ?>
             </h2>
 
-            <h3 class="mb-4" style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 700; color: #111111; letter-spacing: -0.02em;">
+            <h3 class="mb-4" style="font-size: 28px; font-weight: 700; color: #c8232c;">
                 ₹<?= number_format($product['price'], 2) ?>
             </h3>
 
-            <p class="mb-4 text-muted" style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.7; color: #555555 !important; font-weight: 400;">
+            <p class="mb-4" style="font-size: 15px; line-height: 1.8; color: #666;">
                 <?= nl2br(htmlspecialchars($product['short_description'])) ?>
             </p>
 
-            <div class="mb-3" style="font-family: 'Montserrat', sans-serif; font-size: 14px; color: #333333;">
-                <strong style="color: #111111; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; display: inline-block; width: 120px;">SKU:</strong>
-                <span style="font-weight: 400; color: #666666;"><?= htmlspecialchars($product['sku']) ?></span>
+            <div class="d-flex mb-4 gap-4">
+                <div>
+                    <span style="display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #999; margin-bottom: 4px;">SKU</span>
+                    <span style="font-weight: 600; color: #333;"><?= htmlspecialchars($product['sku']) ?></span>
+                </div>
+                <div>
+                    <span style="display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #999; margin-bottom: 4px;">Availability</span>
+                    <span style="font-weight: 600; color: <?= $product['stock'] > 0 ? '#28a745' : '#c8232c' ?>;">
+                        <?= $product['stock'] > 0 ? 'In Stock' : 'Out of Stock' ?>
+                    </span>
+                </div>
             </div>
 
-            <div class="mb-4" style="font-family: 'Montserrat', sans-serif; font-size: 14px; color: #333333;">
-                <strong style="color: #111111; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; display: inline-block; width: 120px;">Availability:</strong>
-                <?php if($product['stock'] > 0): ?>
-                    <span class="text-success" style="font-weight: 600; letter-spacing: 0.02em;">
-                        In Stock
-                    </span>
-                <?php else: ?>
-                    <span class="text-danger" style="font-weight: 600; letter-spacing: 0.02em;">
-                        Out of Stock
-                    </span>
-                <?php endif; ?>
-            </div>
-
-            <form action="add-to-cart.php" method="POST" style="font-family: 'Montserrat', sans-serif;">
-
-                <input
-                    type="hidden"
-                    name="product_id"
-                    value="<?= $product['id'] ?>"
-                >
+            <form action="add-to-cart.php" method="POST">
+                <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
 
                 <div class="mb-4">
-
-                    <label class="d-block mb-2" style="font-size: 12px; font-weight: 600; text-transform: uppercase; color: #111111; letter-spacing: 0.05em;">
-                        Purchase Type
-                    </label>
-
+                    <label class="d-block mb-2" style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #111; letter-spacing: 0.05em;">Purchase Type</label>
+                    
                     <?php if($product['selling_type'] == 'both'): ?>
-
-                        <select
-                            name="order_unit"
-                            class="form-control"
-                            id="orderUnitSelect"
-                            style="height: 46px; border-radius: 4px; border: 1px solid #cccccc; font-size: 14px; font-weight: 500; color: #333333; box-shadow: none;"
-                        >
+                        <select name="order_unit" class="form-control custom-select-theme">
                             <option value="piece">Buy Individual Pieces</option>
                             <option value="box">Buy Full Boxes</option>
                         </select>
-
                         <?php if($product['pieces_per_box']): ?>
-                            <small class="text-muted d-block mt-2" style="font-size: 13px; font-weight: 400;">
-                                <i class="fa-solid fa-box-open text-secondary me-1"></i> 1 Box = <?= $product['pieces_per_box'] ?> Pieces
-                            </small>
+                            <small class="d-block mt-2" style="color: #888;">📦 1 Box = <?= $product['pieces_per_box'] ?> Pieces</small>
                         <?php endif; ?>
 
                     <?php elseif($product['selling_type'] == 'box'): ?>
-
-                        <input
-                            type="hidden"
-                            name="order_unit"
-                            value="box"
-                        >
-
-                        <div class="alert alert-neutral" style="background-color: #f8f9fa; border: 1px solid #e4e6eb; color: #333333; font-size: 14px; border-radius: 4px; padding: 22px 265px;">
-                            <strong style="color: #111111; font-weight: 600;">This product is sold only in boxes.</strong>
-                            <?php if($product['pieces_per_box']): ?>
-                                <div class="text-muted mt-1" style="font-size: 13px;">1 Box = <?= $product['pieces_per_box'] ?> Pieces</div>
-                            <?php endif; ?>
+                        <input type="hidden" name="order_unit" value="box">
+                        <div class="purchase-alert">
+                            <strong>Sold only in boxes.</strong><br>
+                            <span style="font-size: 13px; color: #666;">1 Box = <?= $product['pieces_per_box'] ?> Pieces</span>
                         </div>
 
                     <?php else: ?>
-
-                        <input
-                            type="hidden"
-                            name="order_unit"
-                            value="piece"
-                        >
-
-                        <div class="alert alert-neutral" style="background-color: #f8f9fa; border: 1px solid #e4e6eb; color: #555555; font-size: 14px; border-radius: 4px; padding: 12px 15px; font-weight: 500;">
-                            Sold individually per piece.
-                        </div>
-
+                        <input type="hidden" name="order_unit" value="piece">
+                        <div class="purchase-alert">Sold individually per piece.</div>
                     <?php endif; ?>
-
                 </div>
 
                 <div class="mb-4">

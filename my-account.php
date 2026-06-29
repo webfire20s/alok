@@ -56,168 +56,255 @@ $orders = $orderStmt->fetchAll();
 
 ?>
 
-<div class="container pt-5 pb-5" style="font-family: 'Montserrat', sans-serif;">
+<div class="container pt-5 pb-5" style="font-family: 'Montserrat', sans-serif; background-color: #fafafa; border-radius: 16px;">
+
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .dash-animate-fade {
+            animation: fadeInUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        .dash-card {
+            border: 1px solid #eeeeee; 
+            border-radius: 12px; 
+            background-color: #ffffff; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        .dash-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-color: #e2e2e2;
+        }
+        .dash-sidebar-link {
+            font-size: 13px;
+            color: #555555; 
+            font-weight: 600; 
+            text-decoration: none; 
+            transition: all 0.3s ease;
+            display: block;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 4px;
+        }
+        .dash-sidebar-link:hover, .dash-sidebar-link.active {
+            color: #c8232c;
+            background-color: rgba(200, 35, 44, 0.04);
+            padding-left: 22px;
+            text-decoration: none;
+        }
+        .dash-title {
+            font-size: 16px; 
+            font-weight: 800; 
+            color: #111111; 
+            letter-spacing: 0.06em; 
+            position: relative; 
+            padding-bottom: 12px;
+        }
+        .dash-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 35px;
+            height: 3px;
+            background: linear-gradient(90deg, #c8232c, #e0535a);
+            border-radius: 2px;
+        }
+        .profile-field-label {
+            font-weight: 700; 
+            text-transform: uppercase; 
+            font-size: 11px; 
+            color: #888888; 
+            letter-spacing: 0.08em; 
+            margin-bottom: 6px;
+        }
+        .profile-field-value {
+            color: #111111; 
+            font-weight: 500; 
+            border-bottom: 1px dashed #e5e5e5; 
+            padding-bottom: 10px;
+            font-size: 14px;
+        }
+        .dash-table-container {
+            border: 1px solid #eeeeee; 
+            border-radius: 8px; 
+            background-color: #ffffff;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.01);
+        }
+        .dash-table th {
+            background-color: #111111; 
+            color: #ffffff;
+            padding: 16px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.08em; 
+            border: 0; 
+            font-size: 11px;
+        }
+        .dash-table td {
+            padding: 16px;
+            vertical-align: middle;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .dash-table tr:last-child td {
+            border-bottom: 0;
+        }
+        .btn-dash-action {
+            font-size: 11px; 
+            font-weight: 700; 
+            padding: 8px 16px; 
+            border-radius: 6px; 
+            letter-spacing: 0.05em; 
+            transition: all 0.2s ease-in-out; 
+            text-decoration: none; 
+            display: inline-block;
+        }
+        .btn-dash-primary {
+            background-color: #111111; 
+            color: #ffffff;
+            border: 1px solid #111111;
+        }
+        .btn-dash-primary:hover {
+            background-color: #c8232c;
+            border-color: #c8232c;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(200, 35, 44, 0.2);
+            text-decoration: none;
+        }
+        .btn-dash-outline {
+            background-color: transparent; 
+            border: 1px solid #222222; 
+            color: #222222;
+        }
+        .btn-dash-outline:hover {
+            background-color: #111111;
+            color: #ffffff;
+            border-color: #111111;
+            text-decoration: none;
+        }
+    </style>
 
     <div class="row">
 
-        <div class="col-md-3 mb-4">
-
-            <div class="card" style="border: 1px solid #eeeeee; border-radius: 4px; background-color: #ffffff; box-shadow: none;">
-
+        <div class="col-md-3 mb-4 dash-animate-fade" style="animation-delay: 0.05s;">
+            <div class="card dash-card">
                 <div class="card-body p-4">
-
-                    <h4 class="text-uppercase mb-4" style="font-size: 15px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; padding-bottom: 10px;">
+                    <h4 class="text-uppercase mb-4 dash-title" style="font-size: 14px;">
                         My Account
-                        <span style="position: absolute; bottom: 0; left: 0; width: 30px; height: 2px; background-color: #c8232c;"></span>
                     </h4>
-
-                    <ul class="list-unstyled mb-0" style="font-size: 13px;">
-
-                        <li style="border-bottom: 1px solid #eeeeee;">
-                            <a href="my-account.php" class="d-block py-2" style="color: #111111; font-weight: 600; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#c8232c'" onmouseout="this.style.color='#111111'">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="my-account.php" class="dash-sidebar-link active">
                                 Dashboard
                             </a>
                         </li>
-
                         <li>
-                            <a href="logout.php" class="d-block py-2" style="color: #777777; font-weight: 500; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#c8232c'" onmouseout="this.style.color='#777777'">
+                            <a href="logout.php" class="dash-sidebar-link" style="color: #999999;">
                                 Logout
                             </a>
                         </li>
-
                     </ul>
-
                 </div>
-
             </div>
-
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-9 dash-animate-fade" style="animation-delay: 0.15s;">
 
-            <div class="card mb-4" style="border: 1px solid #eeeeee; border-radius: 4px; background-color: #ffffff; box-shadow: none;">
-
+            <div class="card dash-card mb-4">
                 <div class="card-body p-4 p-md-5">
-
-                    <h4 class="text-uppercase mb-4" style="font-size: 16px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; padding-bottom: 12px;">
+                    <h4 class="text-uppercase mb-4 dash-title">
                         Profile Details
-                        <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background-color: #c8232c;"></span>
                     </h4>
-
-                    <div class="row pt-2" style="font-size: 14px;">
-
+                    <div class="row pt-3">
                         <div class="col-md-6 mb-4 d-flex flex-column">
-                            <span style="font-weight: 600; text-transform: uppercase; font-size: 11px; color: #777777; letter-spacing: 0.05em; margin-bottom: 4px;">Name:</span>
-                            <span style="color: #111111; font-weight: 500; border-bottom: 1px dashed #eeeeee; padding-bottom: 8px;"><?= htmlspecialchars($user['full_name']) ?></span>
+                            <span class="profile-field-label">Name:</span>
+                            <span class="profile-field-value"><?= htmlspecialchars($user['full_name']) ?></span>
                         </div>
-
                         <div class="col-md-6 mb-4 d-flex flex-column">
-                            <span style="font-weight: 600; text-transform: uppercase; font-size: 11px; color: #777777; letter-spacing: 0.05em; margin-bottom: 4px;">Email:</span>
-                            <span style="color: #111111; font-weight: 500; border-bottom: 1px dashed #eeeeee; padding-bottom: 8px;"><?= htmlspecialchars($user['email']) ?></span>
+                            <span class="profile-field-label">Email Address:</span>
+                            <span class="profile-field-value"><?= htmlspecialchars($user['email']) ?></span>
                         </div>
-
                         <div class="col-md-6 mb-4 d-flex flex-column">
-                            <span style="font-weight: 600; text-transform: uppercase; font-size: 11px; color: #777777; letter-spacing: 0.05em; margin-bottom: 4px;">Phone:</span>
-                            <span style="color: #111111; font-weight: 500; border-bottom: 1px dashed #eeeeee; padding-bottom: 8px;"><?= htmlspecialchars($user['phone']) ?></span>
+                            <span class="profile-field-label">Phone:</span>
+                            <span class="profile-field-value"><?= htmlspecialchars($user['phone']) ?></span>
                         </div>
-
                         <div class="col-md-6 mb-4 d-flex flex-column">
-                            <span style="font-weight: 600; text-transform: uppercase; font-size: 11px; color: #777777; letter-spacing: 0.05em; margin-bottom: 4px;">Account Created:</span>
-                            <span style="color: #111111; font-weight: 500; border-bottom: 1px dashed #eeeeee; padding-bottom: 8px;"><?= date('d M Y', strtotime($user['created_at'])) ?></span>
+                            <span class="profile-field-label">Account Created:</span>
+                            <span class="profile-field-value"><?= date('d M Y', strtotime($user['created_at'])) ?></span>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
-            <div class="card" style="border: 1px solid #eeeeee; border-radius: 4px; background-color: #ffffff; box-shadow: none;">
-
+            <div class="card dash-card">
                 <div class="card-body p-4 p-md-5">
-
-                    <h4 class="text-uppercase mb-4" style="font-size: 16px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; padding-bottom: 12px;">
+                    <h4 class="text-uppercase mb-4 dash-title">
                         My Orders
-                        <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background-color: #c8232c;"></span>
                     </h4>
 
                     <?php if(empty($orders)): ?>
-                        
-                        <div class="alert py-3 px-4 mb-0" style="background-color: #fffdf0; border-left: 4px solid #f0ad4e; border-top: 1px solid #faebcc; border-right: 1px solid #faebcc; border-bottom: 1px solid #faebcc; color: #8a6d3b; font-size: 14px; font-weight: 500; border-radius: 4px;">
-                            No orders found.
+                        <div class="alert py-3 px-4 mb-0" style="background-color: #fffdf0; border-left: 4px solid #f0ad4e; color: #8a6d3b; font-size: 14px; font-weight: 600; border-radius: 8px; box-shadow: 0 4px 12px rgba(240, 173, 78, 0.04);">
+                            No orders found under this account profile registry index node.
                         </div>
-
                     <?php else: ?>
-
-                        <div class="table-responsive" style="border: 1px solid #eeeeee; border-radius: 4px; background-color: #ffffff;">
-                            <table class="table align-middle mb-0" style="font-size: 13px; color: #333333;">
-                                
+                        <div class="table-responsive dash-table-container">
+                            <table class="table dash-table align-middle mb-0" style="color: #444444;">
                                 <thead>
-                                    <tr style="background-color: #111111; color: #ffffff;">
-                                        <th style="padding: 14px 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: 0; font-size: 11px;">Order No</th>
-                                        <th style="padding: 14px 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: 0; font-size: 11px;">Date</th>
-                                        <th style="padding: 14px 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: 0; font-size: 11px;">Status</th>
-                                        <th style="padding: 14px 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: 0; font-size: 11px;">Shipping</th>
-                                        <th style="padding: 14px 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: 0; font-size: 11px;">Total</th>
-                                        <th style="padding: 14px 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; border: 0; font-size: 11px; text-align: right;" width="220">Actions</th>
+                                    <tr>
+                                        <th scope="col">Order No</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Shipping</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col" style="text-align: right;" width="200">Actions</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
                                     <?php foreach($orders as $order): ?>
-                                        <tr style="border-bottom: 1px solid #eeeeee;">
-                                            
-                                            <td style="padding: 16px; font-weight: 700; color: #111111;">
+                                        <tr>
+                                            <td style="font-weight: 700; color: #111111; font-size: 13.5px;">
                                                 <?= htmlspecialchars($order['order_number']) ?>
                                             </td>
-                                            
-                                            <td style="padding: 16px; font-weight: 500; color: #555555;">
+                                            <td style="font-weight: 500; color: #666666; font-size: 13px;">
                                                 <?= date('d M Y', strtotime($order['created_at'])) ?>
                                             </td>
-                                            
-                                            <td style="padding: 16px;">
-                                                <span class="badge text-uppercase" style="background-color: #f4f6f8; color: #111111; border: 1px solid #cccccc; font-size: 10px; font-weight: 700; letter-spacing: 0.03em; padding: 5px 10px; border-radius: 4px;">
+                                            <td>
+                                                <span class="badge text-uppercase" style="background-color: #f8f9fa; color: #111111; border: 1px solid #dddddd; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; padding: 6px 12px; border-radius: 20px;">
                                                     <?= htmlspecialchars(ucfirst($order['order_status'])) ?>
                                                 </span>
                                             </td>
-
-                                            <td style="padding: 16px; font-weight: 500; color: #555555;">
+                                            <td style="font-weight: 500; color: #666666; font-size: 13px;">
                                                 ₹<?= number_format($order['shipping_charge'], 2) ?>
                                             </td>
-
-                                            <td style="padding: 16px; font-weight: 700; color: #111111;">
+                                            <td style="font-weight: 700; color: #111111; font-size: 13.5px;">
                                                 ₹<?= number_format($order['grand_total'], 2) ?>
                                             </td>
-                                            
-                                            <td style="padding: 16px; text-align: right;">
-                                                
-                                                <a href="order-details.php?id=<?= $order['id'] ?>" class="btn text-uppercase mr-2" style="background-color: #111111; color: #ffffff; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 4px; letter-spacing: 0.05em; transition: all 0.2s ease-in-out; text-decoration: none; display: inline-block;" onmouseover="this.style.backgroundColor='#c8232c';" onmouseout="this.style.backgroundColor='#111111';">
-                                                    View
-                                                </a>
-
-                                                <a href="invoice.php?order=<?= $order['id'] ?>" target="_blank" class="btn text-uppercase" style="background-color: transparent; border: 1px solid #111111; color: #111111; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 4px; letter-spacing: 0.05em; transition: all 0.2s ease-in-out; text-decoration: none; display: inline-block;" onmouseover="this.style.backgroundColor='#c8232c'; this.style.borderColor='#c8232c'; this.style.color='#ffffff';" onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='#111111'; this.style.color='#111111';">
-                                                    Invoice
-                                                </a>
-
+                                            <td style="text-align: right;">
+                                                <div class="d-inline-flex gap-2">
+                                                    <a href="order-details.php?id=<?= $order['id'] ?>" class="btn-dash-action btn-dash-primary me-2">
+                                                        View
+                                                    </a>
+                                                    <a href="invoice.php?order=<?= $order['id'] ?>" target="_blank" class="btn-dash-action btn-dash-outline">
+                                                        Invoice
+                                                    </a>
+                                                </div>
                                             </td>
-
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
-
                             </table>
                         </div>
-
                     <?php endif; ?>
 
                 </div>
-
             </div>
 
         </div>
 
     </div>
-
 </div>
 
 <?php include 'includes/footer.php'; ?>

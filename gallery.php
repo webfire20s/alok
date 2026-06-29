@@ -71,13 +71,58 @@ $categories = $catStmt->fetchAll(PDO::FETCH_COLUMN);
         font-family: 'Montserrat', sans-serif;
     }
 
+    /* MODERN CSS GRID SYSTEM (Replaces Bootstrap Floating Rows) */
+    .gallery-grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-auto-rows: 260px; /* Forces a clean, structural baseline height */
+        gap: 20px;
+        width: 100%;
+    }
+
     .gallery-card {
         overflow: hidden;
         border: 1px solid #eeeeee;
         border-radius: 4px;
         background-color: #ffffff;
         transition: border-color 0.25s ease-in-out;
-        box-shadow: none !important; /* Stripping default shadow for flat geometry */
+        box-shadow: none !important;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        
+        /* Native Scroll Animation */
+        view-timeline-name: --card-reveal;
+        view-timeline-axis: block;
+        animation-name: revealCard;
+        animation-timeline: --card-reveal;
+        animation-range: entry 5% cover 25%;
+        animation-fill-mode: both;
+    }
+    /* --- ASYMMETRICAL GRID LAYOUT LOGIC --- */
+    /* Every 3rd item spans two vertical rows (Perfect for tall perfume style shots) */
+    .gallery-grid-container > .gallery-card:nth-child(3n+1) {
+        grid-row: span 2;
+    }
+
+    /* Every 5th item spans two horizontal columns for cinematic wider shots */
+    @media (min-width: 768px) {
+        .gallery-grid-container > .gallery-card:nth-child(5n+3) {
+            grid-column: span 2;
+        }
+    }
+
+    /* Hardware-accelerated smooth entry on scroll */
+    @keyframes revealCard {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .gallery-card:hover {
@@ -85,9 +130,21 @@ $categories = $catStmt->fetchAll(PDO::FETCH_COLUMN);
         transform: none; /* Removing floating behavior for high-end aesthetic */
     }
 
+    .gallery-card a {
+        display: block;
+        overflow: hidden;
+        background-color: #0b0d10;
+        flex-grow: 1; /* Allows image frame to expand to full height of grid row spans */
+        height: 100%;
+        position: relative;
+    }
+
     .gallery-card img {
-        height: 280px;
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
+        height: 100%;
         object-fit: cover;
         transition: transform 0.4s ease-in-out;
     }
@@ -162,7 +219,6 @@ $categories = $catStmt->fetchAll(PDO::FETCH_COLUMN);
 
     </div>
 </section>
-<!-- FILTERS -->
 
 <section class="py-4" style="background-color: #fafafa; border-bottom: 1px solid #eeeeee;">
     <div class="container text-center gallery-filter">
@@ -201,42 +257,38 @@ $categories = $catStmt->fetchAll(PDO::FETCH_COLUMN);
 
         <?php else: ?>
 
-            <div class="row">
+            <div class="gallery-grid-container">
                 <?php foreach($gallery as $item): ?>
                     
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                        <div class="card gallery-card" style="border: 1px solid #eeeeee; border-radius: 4px; background-color: #ffffff; box-shadow: none; overflow: hidden; height: 100%; display: flex; flex-direction: column;">
-                            
-                            <a href="javascript:void(0)" 
-                               onclick="openLightbox('<?= htmlspecialchars($item['image']) ?>')"
-                               style="display: block; overflow: hidden; background-color: #0b0d10;">
-                                <img src="<?= htmlspecialchars($item['image']) ?>" 
-                                     alt="<?= htmlspecialchars($item['title']) ?>"
-                                     class="img-fluid"
-                                     style="width: 100%; height: 240px; object-fit: cover; display: block; transition: transform 0.4s ease-in-out;"
-                                     onmouseover="this.style.transform='scale(1.04)';"
-                                     onmouseout="this.style.transform='scale(1.0)';">
-                            </a>
+                    <div class="gallery-card">
+                        
+                        <a href="javascript:void(0)" 
+                        onclick="openLightbox('<?= htmlspecialchars($item['image']) ?>')">
+                            <img src="<?= htmlspecialchars($item['image']) ?>" 
+                                alt="<?= htmlspecialchars($item['title']) ?>"
+                                class="img-fluid"
+                                onmouseover="this.style.transform='scale(1.04)';"
+                                onmouseout="this.style.transform='scale(1.0)';">
+                        </a>
 
-                            <?php if(!empty($item['title']) || !empty($item['description'])): ?>
-                                <div class="card-body p-3" style="border-top: 1px solid #fafafa; flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
-                                    
-                                    <?php if(!empty($item['title'])): ?>
-                                        <h5 style="font-size: 13px; font-weight: 700; color: #c8232c; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; word-wrap: break-word;">
-                                            <?= htmlspecialchars($item['title']) ?>
-                                        </h5>
-                                    <?php endif; ?>
+                        <?php if(!empty($item['title']) || !empty($item['description'])): ?>
+                            <div class="card-body p-3" style="border-top: 1px solid #fafafa; flex-shrink: 0; background: #ffffff;">
+                                
+                                <?php if(!empty($item['title'])): ?>
+                                    <h5 style="font-size: 13px; font-weight: 700; color: #c8232c; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; word-wrap: break-word;">
+                                        <?= htmlspecialchars($item['title']) ?>
+                                    </h5>
+                                <?php endif; ?>
 
-                                    <?php if(!empty($item['description'])): ?>
-                                        <p class="mb-0" style="font-size: 12px; line-height: 1.5; color: #777777; font-weight: 400; word-wrap: break-word;">
-                                            <?= htmlspecialchars($item['description']) ?>
-                                        </p>
-                                    <?php endif; ?>
+                                <?php if(!empty($item['description'])): ?>
+                                    <p class="mb-0" style="font-size: 12px; line-height: 1.5; color: #777777; font-weight: 400; word-wrap: break-word;">
+                                        <?= htmlspecialchars($item['description']) ?>
+                                    </p>
+                                <?php endif; ?>
 
-                                </div>
-                            <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
 
-                        </div>
                     </div>
 
                 <?php endforeach; ?>

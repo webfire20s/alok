@@ -173,16 +173,159 @@ include 'includes/header.php';
     }
 </style>
 
-<div class="alok-privacy-wrapper">
+<div class="alok-privacy-wrapper" style="font-family: 'Montserrat', sans-serif; background: #fafafa; color: #444444;">
+
+    <!-- Integrated Corporate Theme Styles & Keyframes -->
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes lineExpandLeft {
+            from { width: 0; }
+            to { width: 50px; }
+        }
+        .animate-fade-in {
+            animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        .privacy-hero-panel {
+            background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+            padding: 80px 0;
+            color: #ffffff;
+            border-bottom: 4px solid #c8232c;
+        }
+        .privacy-meta-date {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .privacy-section-node {
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            border: 1px solid #eeeeee;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        .privacy-section-node:hover {
+            border-color: #e0e0e0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .privacy-section-node h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: #111111;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        .privacy-section-node h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 35px;
+            background: #c8232c;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        .privacy-section-node:hover h3::after {
+            width: 55px;
+        }
+        .privacy-section-node p {
+            font-size: 14.5px;
+            line-height: 1.75;
+            color: #555555;
+            margin-bottom: 15px;
+        }
+        .privacy-section-node p:last-child {
+            margin-bottom: 0;
+        }
+        .privacy-section-node ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 15px;
+            margin-bottom: 0;
+        }
+        .privacy-section-node ul li {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555555;
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        .privacy-section-node ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 6px;
+            height: 6px;
+            background: #c8232c;
+            border-radius: 50%;
+        }
+        .privacy-sidebar-nav {
+            position: sticky;
+            top: 40px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #eeeeee;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+        .privacy-sidebar-nav ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .privacy-sidebar-nav li {
+            margin-bottom: 12px;
+        }
+        .privacy-sidebar-nav li:last-child {
+            margin-bottom: 0;
+        }
+        .privacy-sidebar-nav a {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666666;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            display: block;
+            padding: 4px 0 4px 12px;
+            border-left: 2px solid #eeeeee;
+            transition: all 0.3s ease;
+        }
+        .privacy-sidebar-nav a:hover {
+            color: #c8232c;
+            border-left-color: #c8232c;
+            padding-left: 16px;
+            background: rgba(200, 35, 44, 0.02);
+        }
+        .privacy-contact-card {
+            background: #fafafa;
+            border-left: 4px solid #c8232c;
+            padding: 24px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
 
     <!-- HERO PANEL BLOCK SECTION -->
     <section class="privacy-hero-panel">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <span class="privacy-meta-date">Corporate Compliance Statement</span>
-                    <h1 class="mt-2 d-block">Privacy Policy</h1>
-                    <div class="privacy-meta-date" style="color: #777777; margin-top: 5px;">Last Updated: <?= date('d M Y') ?></div>
+                <div class="col-12 class animate-fade-in" style="animation-delay: 0.1s;">
+                    <span class="privacy-meta-date" style="color: #c8232c;">Corporate Compliance Statement</span>
+                    <h1 class="mt-2 d-block text-uppercase" style="font-size: 38px; font-weight: 800; letter-spacing: 0.05em; color: #ffffff;">Privacy Policy</h1>
+                    <div class="privacy-meta-date" style="color: #aaaaaa; margin-top: 10px;">Last Updated: <?= date('d M Y') ?></div>
                 </div>
             </div>
         </div>
@@ -194,7 +337,7 @@ include 'includes/header.php';
             <div class="row">
 
                 <!-- Left Content Stream Segment Node -->
-                <div class="col-lg-9 col-12">
+                <div class="col-lg-9 col-12 segments-wrapper animate-fade-in" style="animation-delay: 0.2s;">
                     <div class="privacy-content-stream">
 
                         <!-- Section 1 -->
@@ -319,9 +462,9 @@ include 'includes/header.php';
                         <div class="privacy-section-node" id="sec-12">
                             <h3>12. Contact Us</h3>
                             <div class="privacy-contact-card">
-                                <strong style="font-weight: 700; color: #111111; text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em; display: block; margin-bottom: 8px;">Alok Glass Works</strong>
-                                <span style="display: block; margin-bottom: 4px;"><strong>Email:</strong> pranjal@alokglass.com</span>
-                                <span style="display: block;"><strong>Phone:</strong> +91 999-747-7289</span>
+                                <strong style="font-weight: 800; color: #111111; text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em; display: block; margin-bottom: 10px;">Alok Glass Works</strong>
+                                <span style="display: block; margin-bottom: 6px; color: #555555;"><strong>Email:</strong> pranjal@alokglass.com</span>
+                                <span style="display: block; color: #555555;"><strong>Phone:</strong> +91 999-747-7289</span>
                             </div>
                         </div>
 
@@ -329,9 +472,12 @@ include 'includes/header.php';
                 </div>
 
                 <!-- Right Sidebar Navigation Panel Index Column Block -->
-                <div class="col-lg-3 d-none d-lg-block">
+                <div class="col-lg-3 d-none d-lg-block animate-fade-in" style="animation-delay: 0.3s;">
                     <div class="privacy-sidebar-nav">
-                        <h4 style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #111111; margin-bottom: 22px;">Index</h4>
+                        <h4 style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #111111; margin-bottom: 22px; position: relative; padding-bottom: 8px;">
+                            Index System
+                            <span style="position: absolute; bottom: 0; left: 0; height: 2px; width: 25px; background-color: #c8232c; animation: lineExpandLeft 0.8s ease forwards;"></span>
+                        </h4>
                         <ul>
                             <li><a href="#sec-1">1. Introduction</a></li>
                             <li><a href="#sec-2">2. Information Collect</a></li>
@@ -354,7 +500,6 @@ include 'includes/header.php';
     </section>
 
 </div>
-
 <?php
 include 'includes/footer.php';
 ?>
