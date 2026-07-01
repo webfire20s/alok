@@ -173,159 +173,265 @@ $featuredCategories = $pdo->query("
         }
     </style>
 
-    <div class="text-center header-bg-1920" style="background-color: #fcfbfa; overflow: hidden;"> 
+    <!-- INTEGRATED YOUTUBE HERO SYSTEM -->
+    <style>
+        /* Hero Container Setup */
+        .hero-yt-section {
+            position: relative;
+            width: 100%;
+            min-height: 80vh; 
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background-color: #111111;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-        <!-- banner code start here -->
-        <div class="home-slider-wrap">
-            <div
-                class="home-slider"
-                data-speed="1500"
-                data-autoplay="1"
-                data-autoplay-speed="3000"
-                data-fade="1"
-                data-dots="1"
-                data-arrows="1"
-            >
-                <!-- Slide 1 -->
-                <div class="slide" style="position: relative; overflow: hidden;">
-                    <img src="assets/publics/storage/media/SOfX1kpP7ZEkLECuVjKJC2GrC7RzaNmGCJYUwUR4.jpg" data-animation-in="zoomInImage" class="slider-image animated" style="width: 100%; height: auto; object-fit: cover; min-height: 400px; display: block;">
+        /* YouTube Iframe Scaling Wrapper */
+        .hero-yt-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Crucial: Makes the video unclickable */
+            z-index: 1;
+        }
 
-                    <div class="slide-content align-left slide-overlay-left" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; padding: 0 10%;">
-                        <div class="captions" style="text-align: left; max-width: 600px;">
-                            <span
-                                class="caption caption-1"
-                                data-animation-in="fadeInUp"
-                                data-delay-in=""
-                                style="display: block; font-family: 'Montserrat', sans-serif; font-size: 18px; color: #ffffff; margin-bottom: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;"
-                            >
-                                Premium Glassware Solutions
-                            </span>
+        /* Scaling the iframe to cover the full container like 'object-fit: cover' */
+        .hero-yt-wrapper iframe {
+            width: 100vw;
+            height: 56.25vw; /* 16:9 Aspect Ratio */
+            min-height: 100vh;
+            min-width: 177.77vh; /* 16:9 Aspect Ratio */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
-                            <span
-                                class="caption caption-2"
-                                data-animation-in="fadeInUp"
-                                data-delay-in=""
-                                style="display: block; font-family: 'Montserrat', sans-serif; font-size: 44px; font-weight: 800; color: #ffffff; margin-bottom: 32px; line-height: 1.25; letter-spacing: -0.02em;"
-                            >
-                                Crafting Glass with Uncompromised Trust
-                            </span>
+        /* Overlay for Legibility */
+        .hero-yt-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(75deg, rgba(17, 17, 17, 0.85) 0%, rgba(17, 17, 17, 0.4) 60%, rgba(17, 17, 17, 0.2) 100%);
+            z-index: 2;
+        }
 
-                            <a
-                                href="contact"
-                                class="btn btn-primary btn-slider"
-                                data-animation-in="fadeInUp"
-                                data-delay-in=""
-                                target="_self"
-                                style="display: inline-block; text-decoration: none;"
-                            >
-                                Contact Us
-                            </a>
-                        </div>
+        .hero-yt-content {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+        }
+
+        /* Premium Dynamic Button Link Layout */
+        .hero-btn-action {
+            background: #c8232c;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            padding: 16px 36px;
+            border: 1px solid #c8232c;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.4s ease, border-color 0.4s ease;
+            display: inline-block;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        .hero-btn-action::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffffff;
+            z-index: -1;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: scaleY(0);
+            transform-origin: bottom;
+        }
+        .hero-btn-action:hover::before {
+            transform: scaleY(1);
+        }
+        .hero-btn-action:hover {
+            color: #111111;
+            border-color: #ffffff;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile Fluid Interventions */
+        @media (max-width: 767.98px) {
+            .hero-yt-section {
+                min-height: 600px; /* Locks solid height on smaller portrait touch screens */
+            }
+            .hero-yt-content {
+                text-align: center !important;
+            }
+            .hero-yt-content .text-start {
+                text-align: center !important;
+            }
+        }
+    </style>
+
+    <!-- YOUTUBE HERO SECTION -->
+    <div class="hero-yt-section">
+
+        <!-- Configured YouTube Video Background Source -->
+        <div class="hero-yt-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/2NvHXuq7Dq4?autoplay=1&mute=1&loop=1&playlist=2NvHXuq7Dq4&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Overlay Mask -->
+        <div class="hero-yt-overlay"></div>
+
+        <!-- Content Panel -->
+        <div class="container hero-yt-content py-5">
+            <div class="row">
+                <div class="col-xl-7 col-lg-8 text-start">
+                    
+                    <span class="text-uppercase d-block mb-3" style="font-size: 14px; font-weight: 600; color: #ffffff; letter-spacing: 0.12em; opacity: 0.9;">
+                        Premium Glassware Solutions
+                    </span>
+
+                    <h1 class="text-uppercase mb-4" style="font-size: 46px; font-weight: 800; color: #ffffff; line-height: 1.2; letter-spacing: 0.01em;">
+                        Crafting Glass With<br>Uncompromised Trust
+                    </h1>
+                    
+                    <p class="mb-5" style="font-size: 16px; color: #dddddd; line-height: 1.7; max-width: 580px; font-weight: 400;">
+                        Over 40 years of precision engineering excellence. Discover standard wholesale distribution lines and automated custom decoration systems built for international brands.
+                    </p>
+
+                    <div>
+                        <a href="contact" class="hero-btn-action">
+                            Contact Us
+                        </a>
                     </div>
-                </div>
 
-                <!-- Slide 2 -->
-                <div class="slide" style="position: relative; overflow: hidden;">
-                    <img src="assets/publics/storage/media/EGg2TgPh1xebIugmlrlpnw1dvHgRisNt1VDiZMyZ.jpg" data-animation-in="zoomInImage" class="slider-image animated" style="width: 100%; height: auto; object-fit: cover; min-height: 400px; display: block;">
-
-                    <div class="slide-content align-right slide-overlay-right" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: flex-end; padding: 0 10%;">
-                        <div class="captions" style="text-align: right; max-width: 600px;">
-                            <span
-                                class="caption caption-1"
-                                data-animation-in="fadeInUp"
-                                data-delay-in=""
-                                style="display: block; font-family: 'Montserrat', sans-serif; font-size: 18px; color: #ffffff; margin-bottom: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;"
-                            >
-                                Over 40 Years of Excellence
-                            </span>
-
-                            <span
-                                class="caption caption-2"
-                                data-animation-in="fadeInUp"
-                                data-delay-in=""
-                                style="display: block; font-family: 'Montserrat', sans-serif; font-size: 44px; font-weight: 800; color: #ffffff; margin-bottom: 32px; line-height: 1.25; letter-spacing: -0.02em;"
-                            >
-                                Standard Packaging & Custom Designs
-                            </span>
-
-                            <a
-                                href="contact"
-                                class="btn btn-primary btn-slider"
-                                data-animation-in="fadeInUp"
-                                data-delay-in=""
-                                target="_self"
-                                style="display: inline-block; text-decoration: none;"
-                            >
-                                Contact Us
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-        <!-- banner code end here -->
 
     </div>
 
-    <!-- Trust Cards Section -->
-    <div class="container-fluid trust-cards-wrapper pt-5 pb-5">
-        <div class="container pb-2 pt-2">
-            <div class="row trust-cards-grid" style="display: flex; flex-wrap: nowrap; gap: 0px; justify-content: space-between;">
+    <!-- PREMIUM VALUE PROPOSITION BAR STYLES -->
+    <style>
+        .brand-value-bar {
+            background-color: #ffffff;
+            border-top: 1px solid #eeeeee;
+            border-bottom: 1px solid #eeeeee;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .value-item {
+            padding: 24px 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        /* Subtle interaction accent */
+        .value-item:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Elegant top metric */
+        .value-metric {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #777777;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        /* Bold accent baseline */
+        .value-title {
+            display: block;
+            font-size: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #111111;
+            letter-spacing: 0.02em;
+        }
+
+        /* Subtle left borders between elements on desktop layouts */
+        @media (min-width: 768px) {
+            .value-item {
+                border-left: 1px solid #f0f0f0;
+            }
+            .row > .value-item:first-child {
+                border-left: none;
+            }
+        }
+
+        /* Clean row gaps on small viewports */
+        @media (max-width: 767.98px) {
+            .value-item {
+                padding: 20px 10px;
+            }
+            /* Visual separation for 2x2 grid format on phones */
+            .value-item:nth-child(1), .value-item:nth-child(2) {
+                border-bottom: 1px solid #f5f5f5;
+            }
+        }
+    </style>
+
+    <!-- VALUE PROPOSITION SECTION -->
+    <div class="container-fluid brand-value-bar py-2">
+        <div class="container">
+            <!-- 
+            Using proper Bootstrap responsive columns:
+            col-6  = 2 items per row on mobile (neat 2x2 grid)
+            col-md-3 = 4 items in a single line on tablets and desktops
+            -->
+            <div class="row g-0">
                 
-                <!-- Trust Card 1 -->
-                <div class="col-lg-2 col-md-6 p-0" style=" width:60%;">
-                    <div class="trust-card">
-                        <img src="assets/themes/storefront/public/images/safe-shopping-icone8da.png?v=2.0.3" class="trust-card-icon" alt="Decades Trust" />
-                        <span class="trust-card-text">
-                            Trusted for <br/>
-                            <label>4 Decades</label>
-                        </span>
-                    </div>
+                <!-- Metric Card 1 -->
+                <div class="col-6 col-md-3 value-item">
+                    <span class="value-metric">Trusted For</span>
+                    <span class="value-title" style="color: #c8232c;">4 Decades</span>
                 </div>
 
-                <!-- Trust Card 2 -->
-                <div class="col-lg-2 col-md-6 p-0" style=" width:60%;">
-                    <div class="trust-card">
-                        <img src="assets/themes/storefront/public/images/lowest-price-icone8da.png?v=2.0.3" class="trust-card-icon" alt="Lowest Price" />
-                        <span class="trust-card-text">
-                            Highest Quality <br/>
-                            <label>Lowest Price</label6
-                        </span>
-                    </div>
+                <!-- Metric Card 2 -->
+                <div class="col-6 col-md-3 value-item">
+                    <span class="value-metric">Highest Quality</span>
+                    <span class="value-title">Wholesale Rates</span>
                 </div>
 
-                <!-- Trust Card 3 -->
-                <div class="col-lg-2 col-md-6 p-0" style=" width:50%;">
-                    <div class="trust-card">
-                        <img src="assets/themes/storefront/public/images/guarantee-dispatch-icone8da.png?v=2.0.3" class="trust-card-icon" alt="Fast Dispatch" />
-                        <span class="trust-card-text">
-                            Fast Despatch <br/>
-                            <label>Guaranteed</label>
-                        </span>
-                    </div>
+                <!-- Metric Card 3 -->
+                <div class="col-6 col-md-3 value-item">
+                    <span class="value-metric">Fast Dispatch</span>
+                    <span class="value-title">Guaranteed</span>
                 </div>
 
-                <!-- Trust Card 4 -->
-                <div class="col-lg-2 col-md-6 p-0" style=" width:50%;">
-                    <div class="trust-card">
-                        <img src="assets/themes/storefront/public/images/30-days-icone8da.png?v=2.0.3" class="trust-card-icon" alt="Hassle Free Return" />
-                        <span class="trust-card-text">
-                            Hassle Free Return <br/>
-                            <label>Money Back</label>
-                        </span>
-                    </div>
+                <!-- Metric Card 4 -->
+                <div class="col-6 col-md-3 value-item">
+                    <span class="value-metric">Secure Support</span>
+                    <span class="value-title">Hassle-Free</span>
                 </div>
 
             </div>
         </div>
     </div>
 
-    <div class="container-fluid mobile-trust-cards-container only-mobile pt-4 pb-4">
+    <!-- <div class="container-fluid mobile-trust-cards-container only-mobile pt-4 pb-4">
         <div class="container-fluid no-gutters pl-2 pr-2">
             <div class="row no-gutters" style="display: flex; flex-wrap: wrap; margin: 0; row-gap: 12px; column-gap: 0;">
                 
                 <!-- MOBILE BADGE 1 -->
-                <div class="col-6 mobile-badge-col" style="padding: 0 60px;">
+                <!-- <div class="col-6 mobile-badge-col" style="padding: 0 60px;">
                     <div class="mobile-trust-card">
                         <img src="assets/themes/storefront/public/images/safe-shopping-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Safe Shopping" />
                         <span class="mobile-badge-text">
@@ -333,10 +439,10 @@ $featuredCategories = $pdo->query("
                             <label>4 Decades</label>
                         </span>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- MOBILE BADGE 2 -->
-                <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
+                <!-- <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
                     <div class="mobile-trust-card">
                         <img src="assets/themes/storefront/public/images/lowest-price-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Lowest Price" />
                         <span class="mobile-badge-text">
@@ -344,10 +450,10 @@ $featuredCategories = $pdo->query("
                             <label>Lowest Price</label>
                         </span>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- MOBILE BADGE 3 -->
-                <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
+                <!-- <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
                     <div class="mobile-trust-card">
                         <img src="assets/themes/storefront/public/images/guarantee-dispatch-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Guaranteed Dispatch" />
                         <span class="mobile-badge-text">
@@ -355,10 +461,10 @@ $featuredCategories = $pdo->query("
                             <label>Guaranteed</label>
                         </span>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- MOBILE BADGE 4 -->
-                <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
+                <!-- <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
                     <div class="mobile-trust-card">
                         <img src="assets/themes/storefront/public/images/30-days-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Money Back" />
                         <span class="mobile-badge-text">
@@ -366,10 +472,10 @@ $featuredCategories = $pdo->query("
                             <label style="font-size: 10px;">Money Back</label>
                         </span>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- MOBILE BADGE 5 -->
-                <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
+                <!-- <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
                     <div class="mobile-trust-card">
                         <img src="assets/themes/storefront/public/images/safe-shopping-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Secure Shopping" />
                         <span class="mobile-badge-text">
@@ -377,10 +483,10 @@ $featuredCategories = $pdo->query("
                             <label>and Secure</label>
                         </span>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- MOBILE BADGE 6 -->
-                <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
+                <!-- <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
                     <div class="mobile-trust-card">
                         <img src="assets/themes/storefront/public/images/verifiede8da.png?v=2.0.3" class="mobile-badge-icon" alt="One Stop Solution" />
                         <span class="mobile-badge-text">
@@ -388,43 +494,148 @@ $featuredCategories = $pdo->query("
                             <label>Solution</label>
                         </span>
                     </div>
-                </div>
+                </div> -->
 
-            </div>
+            <!-- </div>
         </div>
-    </div>
+    </div> -->
 
         <!-- Shop by Industry Starts -->
         <!-- Shop by Industry Starts -->
-        <div class="container pt-6 reveal-on-scroll" style="padding-top: 5rem; padding-bottom: 3rem;">
+        <!-- HIGHER-END COMPONENT STYLING ENGINE -->
+        <style>
+            /* Component Reset & Scoping */
+            .industry-section-wrapper {
+                font-family: 'Montserrat', sans-serif;
+                background-color: #ffffff;
+            }
 
-            <!-- Section Title with Accent Underline -->
-            <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem;">
-                <img src="assets/themes/storefront/public/images/shop-by-industry-icone8da.png?v=2.0.3" class="pr-3" style="max-height: 36px; width: auto;" alt="" />
-                <span style="position: relative; padding-bottom: 12px;">
+            /* Minimalist High-End Section Title */
+            .industry-main-title {
+                font-size: 32px;
+                font-weight: 800;
+                color: #111111;
+                letter-spacing: 0.04em;
+                position: relative;
+                display: inline-block;
+                padding-bottom: 16px;
+            }
+            .industry-main-title::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 50px;
+                height: 3px;
+                background-color: #c8232c;
+            }
+
+            /* B2B Industry Mega Container Card */
+            .industry-mega-card {
+                background-color: #ffffff;
+                border: 1px solid #eef0f2;
+                border-top: 4px solid #111111;
+                border-radius: 6px;
+                height: 100%;
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                            border-top-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            }
+            .industry-mega-card:hover {
+                transform: translateY(-6px);
+                border-color: #e2e4e8;
+                border-top-color: #c8232c;
+                box-shadow: 0 20px 38px rgba(17, 17, 17, 0.07);
+            }
+
+            /* Elegant Structural Heading Links */
+            .industry-card-heading {
+                font-size: 20px;
+                font-weight: 700;
+                color: #111111;
+                letter-spacing: 0.01em;
+            }
+
+            /* Product Mini Grid Wrappers */
+            .industry-product-media-link {
+                display: block;
+                overflow: hidden;
+                border-radius: 6px;
+                background-color: #ffffff;
+                border: 1px solid #f0f0f0;
+                padding: 12px;
+                transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            }
+            .industry-product-media-link img {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                object-fit: contain;
+                transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            
+            /* Interactive States tied logically to hovering any part of the micro item */
+            .industry-product-cell:hover .industry-product-media-link {
+                border-color: #e2e4e8;
+                box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+            }
+            .industry-product-cell:hover .industry-product-media-link img {
+                transform: scale(1.06);
+            }
+            .industry-product-cell:hover .industry-product-title {
+                color: #c8232c;
+            }
+
+            /* Typography Clamping Engine */
+            .industry-product-title {
+                font-size: 13px;
+                font-weight: 600;
+                color: #222222;
+                text-decoration: none;
+                line-height: 1.4;
+                margin-top: 10px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                height: 36px;
+                transition: color 0.2s ease;
+            }
+            .industry-product-title:hover {
+                text-decoration: none;
+            }
+        </style>
+
+        <!-- INDUSTRY DISPLAY LAYOUT MODALITY -->
+        <div class="container industry-section-wrapper py-5 reveal-on-scroll">
+
+            <!-- Section Title Area -->
+            <div class="text-center mb-5 pb-2">
+                <h2 class="text-uppercase industry-main-title">
                     Shop by Industry
-                    <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #c8232c;"></span>
-                </span>
-            </h2>
+                </h2>
+            </div>
 
-            <div class="row" style="display: flex; flex-wrap: wrap;">
+            <!-- Active Structural Row Grid -->
+            <div class="row">
 
                 <?php foreach($categories as $category): ?>
 
-                    <div class="col-md-6 mb-4" style="margin-bottom: 2rem;">
+                    <div class="col-lg-6 mb-4 pb-2">
 
                         <!-- Industry Category Card Container -->
-                        <div class="lt-gray-bg height-equal p-4" 
-                             style="background-color: #fdfdfd; border: 1px solid #eef0f2; border-top: 3px solid #111111; border-radius: 4px; padding: 2rem; height: 100%; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 2px 8px rgba(0,0,0,0.04);"
-                             onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='#e2e4e8'; this.style.boxShadow='0 12px 24px rgba(17,17,17,0.06)'; this.style.borderTopColor='#c8232c';"
-                             onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='#eef0f2'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.04)'; this.style.borderTopColor='#111111';">
+                        <div class="industry-mega-card p-4 p-md-5">
 
                             <!-- Category Heading -->
-                            <h3 class="head-org-bold" style="font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; color: #111111; margin-bottom: 1.5rem; letter-spacing: 0.02em;">
+                            <h3 class="industry-card-heading mb-4">
                                 <?= htmlspecialchars($category['name']) ?>
                             </h3>
 
-                            <div class="row" style="display: flex; flex-wrap: wrap;">
+                            <!-- Fluid Inner Grid Layout -->
+                            <div class="row g-3">
 
                                 <?php
                                 $stmt = $pdo->prepare("
@@ -432,40 +643,33 @@ $featuredCategories = $pdo->query("
                                     WHERE category_id = ?
                                     LIMIT 4
                                 ");
-
                                 $stmt->execute([$category['id']]);
-
                                 $categoryProducts = $stmt->fetchAll();
                                 ?>
 
                                 <?php foreach($categoryProducts as $product): ?>
 
-                                    <!-- Product Grid Cell -->
-                                    <div class="col-6 col-md-6 text-center pb-4 product-name txt-black" style="padding-bottom: 1.5rem; margin-bottom: 0.5rem; display: flex; flex-direction: column; align-items: center;">
+                                    <!-- Product Grid Cell Element -->
+                                    <div class="col-6 col-sm-3 col-md-6 col-lg-3 text-center industry-product-cell d-flex flex-column align-items-center">
 
                                         <!-- Interactive Image Link wrapper -->
-                                        <a href="product.php?slug=<?= $product['slug'] ?>" style="display: block; overflow: hidden; border-radius: 4px; margin-bottom: 0.75rem; width: 100%; max-width: 140px; background-color: #ffffff;">
-                                            <img
-                                                src="<?= $product['image'] ?>"
-                                                class="img-fluid mb-3 shadow"
-                                                style="width: 100%; height: auto; aspect-ratio: 1/1; object-fit: contain; padding: 8px; transition: transform 0.4s ease-in-out; border: 1px solid #f0f0f0; border-radius: 4px;"
-                                                onmouseover="this.style.transform='scale(1.08)';"
-                                                onmouseout="this.style.transform='scale(1)';"
-                                                alt="<?= htmlspecialchars($product['name']) ?>"
-                                            >
+                                        <a href="product.php?slug=<?= $product['slug'] ?>" class="industry-product-media-link w-100">
+                                            <img src="<?= $product['image'] ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                                         </a>
 
                                         <!-- Product Anchor Title -->
-                                        <a href="product.php?slug=<?= $product['slug'] ?>" 
-                                           style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: #222222; text-decoration: none; line-height: 1.4; transition: color 0.2s ease; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 36px;"
-                                           onmouseover="this.style.color='#c8232c';"
-                                           onmouseout="this.style.color='#222222';">
+                                        <a href="product.php?slug=<?= $product['slug'] ?>" class="industry-product-title">
                                             <?= htmlspecialchars($product['name']) ?>
                                         </a>
 
                                     </div>
 
                                 <?php endforeach; ?>
+
+                                <!-- Empty Result Space Control Fallback if needed -->
+                                <?php if (empty($categoryProducts)): ?>
+                                    <div class="col-12 text-muted py-3" style="font-size: 13px;">No direct product configurations allocated inside this grouping.</div>
+                                <?php endif; ?>
 
                             </div>
 
@@ -483,60 +687,144 @@ $featuredCategories = $pdo->query("
         
        <!-- Shop by Product Starts -->
        <!-- Shop by Product Starts -->
-        <div class="container pt-6 reveal-on-scroll only-desktop" style="padding-top: 5rem; padding-bottom: 3rem;">
+        <!-- PREMIUM PRODUCT CATEGORIES STYLES -->
+        <style>
+            /* Component Reset & Scoping */
+            .product-section-wrapper {
+                font-family: 'Montserrat', sans-serif;
+                background-color: #ffffff;
+            }
 
-            <!-- Section Title with Brand Accent Accent Underline -->
-            <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem;">
-                <img src="assets/themes/storefront/public/images/shop-by-product-icone8da.png?v=2.0.3" class="pr-3 pt-2" style="max-height: 36px; width: auto;" alt="" />
-                <span style="position: relative; padding-bottom: 12px;">
+            /* Minimalist High-End Section Title */
+            .product-main-title {
+                font-size: 32px;
+                font-weight: 800;
+                color: #111111;
+                letter-spacing: 0.04em;
+                position: relative;
+                display: inline-block;
+                padding-bottom: 16px;
+            }
+            .product-main-title::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 50px;
+                height: 3px;
+                background-color: #c8232c;
+            }
+
+            /* B2B Premium Category Card Structure */
+            .product-category-card {
+                border: 1px solid #eef0f2;
+                border-radius: 6px;
+                overflow: hidden;
+                background-color: #ffffff;
+                height: 100%;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            /* Image Scaling Mechanism */
+            .product-card-media {
+                display: block;
+                overflow: hidden;
+                aspect-ratio: 4 / 3;
+                background-color: #ffffff;
+                position: relative;
+            }
+            .product-card-media img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            /* Text Band Base Layer Setup */
+            .product-card-banner {
+                padding: 18px 12px;
+                text-align: center;
+                text-transform: uppercase;
+                transition: background-color 0.3s ease;
+            }
+            
+            .product-card-link {
+                font-size: 14px;
+                font-weight: 700;
+                color: #ffffff;
+                text-decoration: none;
+                display: block;
+                letter-spacing: 0.05em;
+            }
+            .product-card-link:hover {
+                text-decoration: none;
+                color: #ffffff;
+            }
+
+            /* Dynamic Parent-Child Animation Sync */
+            .product-category-card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 16px 32px rgba(17, 17, 17, 0.08);
+            }
+            .product-category-card:hover .product-card-media img {
+                transform: scale(1.05);
+            }
+
+            /* Palette Variant Engine */
+            .bg-palette-accent {
+                background-color: #c8232c;
+                border-top: 2px solid #a11b22;
+            }
+            .bg-palette-charcoal {
+                background-color: #111111;
+                border-top: 2px solid #222222;
+            }
+        </style>
+
+        <!-- PRODUCT CATEGORY GRID LAYOUT -->
+        <div class="container product-section-wrapper py-5 reveal-on-scroll">
+
+            <!-- Section Header Area -->
+            <div class="text-center mb-5 pb-2">
+                <h2 class="text-uppercase product-main-title">
                     Shop by Product
-                    <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #c8232c;"></span>
-                </span>
-            </h2>
+                </h2>
+            </div>
 
-            <div class="row" style="display: flex; flex-wrap: wrap;">
+            <!-- Active Responsive Column Grid Matrix -->
+            <div class="row g-4">
 
                 <?php foreach($featuredCategories as $index => $category): ?>
 
                     <?php
-                    // Map old theme background loops directly to your logo palette colors
-                    $bgStyle = ($index % 2 == 0)
-                        ? 'background-color: #c8232c; border-top: 2px solid #a11b22;' // Alok Red
-                        : 'background-color: #111111; border-top: 2px solid #222222;'; // Alok Matte Charcoal
+                    // Assign custom high-end palette classification tokens based on original indexing
+                    $variantClass = ($index % 2 == 0) ? 'bg-palette-accent' : 'bg-palette-charcoal';
                     ?>
 
-                    <div class="col-md-4 mb-4" style="margin-bottom: 2rem;">
+                    <!-- 
+                        Replaced exclusive desktop lock with smooth fluid breaks:
+                        col-12 = Full stack on mobile
+                        col-sm-6 = 2 cards side-by-side on tablets
+                        col-lg-4 = 3 cards clean row on wide desktop displays
+                    -->
+                    <div class="col-16 col-sm-6 col-lg-6 mb-2">
 
                         <!-- Product Category Card Frame with modern lifting effect -->
-                        <div class="gray-brd-right-bottom" 
-                             style="border: 1px solid #eef0f2; border-radius: 4px; overflow: hidden; background-color: #ffffff; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 3px 10px rgba(0,0,0,0.03);"
-                             onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 28px rgba(17,17,17,0.08)';"
-                             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.03)';">
+                        <div class="product-category-card">
 
                             <!-- Image Wrapper Container for Zoom Effect -->
-                            <a href="category.php?slug=<?= $category['slug'] ?>" style="display: block; overflow: hidden; aspect-ratio: 4/3; background-color: #ffffff;">
-                                <img
-                                    src="<?= $category['image'] ?>"
-                                    class="img-fluid"
-                                    style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
-                                    onmouseover="this.style.transform='scale(1.06)';"
-                                    onmouseout="this.style.transform='scale(1)';"
-                                    alt="<?= htmlspecialchars($category['name']) ?>"
-                                >
+                            <a href="category.php?slug=<?= $category['slug'] ?>" class="product-card-media">
+                                <img src="<?= $category['image'] ?>" alt="<?= htmlspecialchars($category['name']) ?>">
                             </a>
 
                             <!-- Styled Banner Text Band -->
-                            <div class="sb text-uppercase fs18 text-center p-2" 
-                                 style="<?= $bgStyle ?> padding: 14px 10px; transition: background-color 0.25s ease;">
-
-                                <a
-                                    href="category.php?slug=<?= $category['slug'] ?>"
-                                    class="link-block text-white"
-                                    style="font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; text-decoration: none; display: block; letter-spacing: 0.04em;"
-                                >
+                            <div class="product-card-banner <?= $variantClass ?>">
+                                <a href="category.php?slug=<?= $category['slug'] ?>" class="product-card-link">
                                     <?= htmlspecialchars($category['name']) ?>
                                 </a>
-
                             </div>
 
                         </div>
@@ -549,31 +837,31 @@ $featuredCategories = $pdo->query("
 
         </div>
         <!-- MOBILE VERSION -->
-        <div class="container pt-6 only-mobile animate__animated animate__fadeInUp" style="padding-top: 3.5rem; padding-bottom: 2.5rem; padding-left: 15px; padding-right: 0px; overflow-x: hidden; --animate-duration: 0.8s;">
+        <!-- <div class="container pt-6 only-mobile animate__animated animate__fadeInUp" style="padding-top: 3.5rem; padding-bottom: 2.5rem; padding-left: 15px; padding-right: 0px; overflow-x: hidden; --animate-duration: 0.8s;"> -->
 
             <!-- Section Title with Accent Underline -->
-            <h2 class="text-center text-uppercase org-brd-btm mb-4" style="font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 700; color: #111111; letter-spacing: 0.04em; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 2.5rem; padding-right: 15px;">
+            <!-- <h2 class="text-center text-uppercase org-brd-btm mb-4" style="font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 700; color: #111111; letter-spacing: 0.04em; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 2.5rem; padding-right: 15px;">
                 <img src="assets/themes/storefront/public/images/shop-by-product-icone8da.png?v=2.0.3" class="pr-3 pt-2" style="max-height: 28px; width: auto;" alt="" />
                 <span style="position: relative; padding-bottom: 10px;">
                     Shop by Product
                     <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 45px; height: 3px; background-color: #c8232c;"></span>
                 </span>
-            </h2>
+            </h2> -->
 
             <!-- Smooth Horizontal Touch Scroller Container -->
-            <div class="mobile-product-scroller" style="display: flex; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; gap: 16px; padding-bottom: 15px; padding-right: 15px; scroll-snap-type: x mandatory;">
+            <!-- <div class="mobile-product-scroller" style="display: flex; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; gap: 16px; padding-bottom: 15px; padding-right: 15px; scroll-snap-type: x mandatory;">
 
                 <?php foreach($featuredCategories as $index => $category): ?>
 
                     <?php
-                    // Alternating brand themes for item cards
-                    $bgStyle = ($index % 2 == 0)
-                        ? 'background-color: #c8232c; border-top: 2px solid #a11b22;' 
-                        : 'background-color: #111111; border-top: 2px solid #222222;';
-                    ?>
+                    // Alternating brand themes for item cards -->
+                    // $bgStyle = ($index % 2 == 0)
+                    //     ? 'background-color: #c8232c; border-top: 2px solid #a11b22;' 
+                    //     : 'background-color: #111111; border-top: 2px solid #222222;';
+                    // ?>
 
                     <!-- Individual Product Card Item -->
-                    <div class="scroller-item <?= $index == 0 ? 'active' : '' ?>" style="flex: 0 0 78%; min-width: 260px; max-width: 300px; background-color: #ffffff; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 12px rgba(17, 17, 17, 0.06); border: 1px solid #eef0f2; scroll-snap-align: start; transition: transform 0.2s ease;">
+                    <!-- <div class="scroller-item <?= $index == 0 ? 'active' : '' ?>" style="flex: 0 0 78%; min-width: 260px; max-width: 300px; background-color: #ffffff; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 12px rgba(17, 17, 17, 0.06); border: 1px solid #eef0f2; scroll-snap-align: start; transition: transform 0.2s ease;">
 
                         <a href="category.php?slug=<?= $category['slug'] ?>" style="display: block; width: 100%; aspect-ratio: 4/3; overflow: hidden;">
                             <img
@@ -582,10 +870,10 @@ $featuredCategories = $pdo->query("
                                 style="width: 100%; height: 100%; object-fit: cover;"
                                 alt="<?= htmlspecialchars($category['name']) ?>"
                             >
-                        </a>
+                        </a> -->
 
                         <!-- Styled Text Band Label -->
-                        <div class="<?= $bgClass ?> sb text-uppercase fs18 text-center p-2" style="<?= $bgStyle ?> padding: 14px 8px;">
+                        <!-- <div class="<?= $bgClass ?> sb text-uppercase fs18 text-center p-2" style="<?= $bgStyle ?> padding: 14px 8px;">
 
                             <a
                                 href="category.php?slug=<?= $category['slug'] ?>"
@@ -603,9 +891,9 @@ $featuredCategories = $pdo->query("
 
             </div>
 
-        </div>
+        </div> -->
         <!-- Custom Style Component to hide scrollbars elegantly across browsers -->
-        <style>
+        <!-- <style>
             .mobile-product-scroller::-webkit-scrollbar {
                 display: none;
             }
@@ -613,7 +901,7 @@ $featuredCategories = $pdo->query("
                 -ms-overflow-style: none;  /* IE and Edge */
                 scrollbar-width: none;  /* Firefox */
             }
-        </style>
+        </style> -->
 
         <!-- Shop by Product Ends -->
         <!-- Shop by Product Ends -->
@@ -655,51 +943,206 @@ $featuredCategories = $pdo->query("
         }
         ?>
 
-        <div class="container pt-6 pb-5 reveal-on-scroll" style="padding-top: 4rem; padding-bottom: 4rem;">
+        <!-- B2B HIGH-END PRODUCT GRID SYSTEM STYLES -->
+        <style>
+            /* Section Scoping Base Layout */
+            .showcase-grid-wrapper {
+                font-family: 'Montserrat', sans-serif;
+                background-color: #ffffff;
+            }
 
-            <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; padding-bottom: 14px; margin-bottom: 3.5rem;">
-                <?= htmlspecialchars($category['section_title']) ?>
-                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #c8232c;"></span>
-            </h2>
+            /* Minimalist High-End Section Title */
+            .showcase-main-title {
+                font-size: 32px;
+                font-weight: 800;
+                color: #111111;
+                letter-spacing: 0.04em;
+                position: relative;
+                display: inline-block;
+                padding-bottom: 16px;
+            }
+            .showcase-main-title::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 50px;
+                height: 3px;
+                background-color: #c8232c;
+            }
 
-            <div class="row" style="display: flex; flex-wrap: wrap;">
+            /* Product Item Core Card Frame */
+            .showcase-product-card {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+            /* Media Frame Isolation Matrix */
+            .showcase-media-box {
+                position: relative;
+                overflow: hidden;
+                border: 1px solid #eef0f2;
+                border-radius: 6px;
+                background-color: #ffffff;
+                margin-bottom: 16px;
+                transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .showcase-media-box img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                padding: 16px;
+                margin: 0;
+                transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            /* Premium Dynamic Sliding Floating Button Custom Setup */
+            .showcase-action-btn {
+                position: absolute;
+                bottom: 16px;
+                left: 50%;
+                transform: translateX(-50%) translateY(15px);
+                width: 85%;
+                background-color: #c8232c;
+                color: #ffffff;
+                font-weight: 700;
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                border: none;
+                padding: 11px 0;
+                border-radius: 4px;
+                box-shadow: 0 6px 20px rgba(200, 35, 44, 0.3);
+                opacity: 0;
+                pointer-events: none; /* Prevents splitting anchor target focus errors */
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                            opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                            background-color 0.2s ease;
+            }
+
+            /* Content Data Panel Layout */
+            .showcase-details-box {
+                text-align: left;
+                padding: 0 4px;
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+            }
+            .showcase-product-title {
+                font-size: 14px;
+                font-weight: 600;
+                color: #111111;
+                text-decoration: none;
+                line-height: 1.4;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                height: 38px;
+                margin-bottom: 8px;
+                transition: color 0.2s ease;
+            }
+            .showcase-product-title:hover {
+                text-decoration: none;
+                color: #c8232c;
+            }
+            .showcase-product-price {
+                font-size: 16px;
+                font-weight: 800;
+                color: #c8232c;
+                margin-top: auto;
+            }
+
+            /* Synchronized Micro Interactivity Animations */
+            .showcase-product-card:hover .showcase-media-box {
+                border-color: #e2e4e8;
+                box-shadow: 0 12px 24px rgba(17, 17, 17, 0.06);
+            }
+            .showcase-product-card:hover .showcase-media-box img {
+                transform: scale(1.05);
+            }
+            .showcase-product-card:hover .showcase-action-btn {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            .showcase-product-card:hover .showcase-product-title {
+                color: #c8232c;
+            }
+
+            /* Fluid Fallback Fixes for Mobile Touch Screens */
+            @media (max-width: 767.98px) {
+                /* Persistent elegant exposure instead of hiding actions on mobile */
+                .showcase-action-btn {
+                    position: relative;
+                    bottom: 0;
+                    left: 0;
+                    transform: none !important;
+                    width: 100%;
+                    opacity: 1 !important;
+                    margin-top: 8px;
+                    box-shadow: none;
+                    padding: 8px 0;
+                }
+                .showcase-media-box {
+                    margin-bottom: 10px;
+                }
+            }
+        </style>
+
+        <!-- PRODUCT SHOWCASE SECTION -->
+        <div class="container showcase-grid-wrapper py-5 reveal-on-scroll">
+
+            <!-- Section Heading Area -->
+            <div class="text-center mb-5 pb-2">
+                <h2 class="text-uppercase showcase-main-title">
+                    <?= htmlspecialchars($category['section_title']) ?>
+                </h2>
+            </div>
+
+            <!-- Active Grid Architecture Component Container -->
+            <div class="row g-3 g-md-4">
 
                 <?php foreach($products as $product): ?>
 
-                <div class="col-6 col-md-3 pb-4" style="padding-bottom: 2rem; display: flex; flex-direction: column;">
+                    <!-- Responsive Frame Partitioning Model Structure -->
+                    <div class="col-6 col-md-4 col-lg-3 mb-4">
 
-                    <div class="show-buy-now-btn position-relative" style="overflow: hidden; border-radius: 4px; background-color: #ffffff; border: 1px solid #f0f0f0; margin-bottom: 12px;">
+                        <div class="showcase-product-card">
 
-                        <a href="product.php?slug=<?= urlencode($product['slug']) ?>" style="display: block; width: 100%; aspect-ratio: 1/1; position: relative;" class="product-link-wrapper">
+                            <!-- Image & Action Container Frame -->
+                            <div class="showcase-media-box">
 
-                            <img src="<?= htmlspecialchars($product['image']) ?>"
-                                 class="img-fluid mb-3 shadow"
-                                 style="width: 100%; height: 100%; object-fit: contain; padding: 12px; margin: 0; transition: transform 0.4s ease;"
-                                 alt="<?= htmlspecialchars($product['name']) ?>" />
+                                <a href="product.php?slug=<?= urlencode($product['slug']) ?>" class="d-block w-100 position-relative aspect-ratio-box" style="aspect-ratio: 1 / 1;">
 
-                            <button type="button" class="btn float-red-btn" style="position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%) translateY(10px); width: 85%; background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; border: none; padding: 10px 0; border-radius: 4px; box-shadow: 0 4px 12px rgba(219, 38, 47, 0.3); opacity: 0; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); pointer-events: none;">
-                                Buy Now
-                            </button>
+                                    <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="img-fluid">
 
-                        </a>
+                                    <button type="button" class="btn showcase-action-btn">
+                                        Buy Now
+                                    </button>
+
+                                </a>
+
+                            </div>
+
+                            <!-- Meta Content Labels Details Block -->
+                            <div class="showcase-details-box">
+
+                                <a href="product.php?slug=<?= urlencode($product['slug']) ?>" class="showcase-product-title">
+                                    <?= htmlspecialchars($product['name']) ?>
+                                </a>
+
+                                <span class="showcase-product-price">
+                                    ₹<?= number_format($product['price'], 2) ?>
+                                </span>
+
+                            </div>
+
+                        </div>
 
                     </div>
-
-                    <div class="product-name" style="text-align: left; padding: 0 4px; display: flex; flex-direction: column; flex-grow: 1;">
-
-                        <a href="product.php?slug=<?= urlencode($product['slug']) ?>"
-                           class="txt-org"
-                           style="font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 600; color: #111111; text-decoration: none; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 38px; margin-bottom: 6px; transition: color 0.2s ease;">
-                            <?= htmlspecialchars($product['name']) ?>
-                        </a>
-
-                        <span class="txt-black" style="font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; color: #c8232c; margin-top: auto;">
-                            ₹<?= number_format($product['price'], 2) ?>
-                        </span>
-
-                    </div>
-
-                </div>
 
                 <?php endforeach; ?>
 
@@ -707,99 +1150,159 @@ $featuredCategories = $pdo->query("
 
         </div>
 
-        <style>
-        .col-6.col-md-3:hover .float-red-btn {
-            opacity: 1 !important;
-            transform: translateX(-50%) translateY(0) !important;
-        }
-        .col-6.col-md-3:hover img {
-            transform: scale(1.06);
-        }
-        .col-6.col-md-3:hover .txt-org {
-            color: #c8232c !important;
-        }
-        </style>
-
         <?php endforeach; ?>
         <!-- Popular bottle Ends -->
         
         
         <!-- Stats Starts -->
-        <div class="container-fluid lt-gray-bg text-center mask-reveal" style="background-color: #fcfbfa; border-top: 1px solid #eef0f2; border-bottom: 1px solid #eef0f2;">
+        <style>
+            .counter-scaffolding {
+                background-color: #fcfbfa; 
+                border-top: 1px solid #eef0f2; 
+                border-bottom: 1px solid #eef0f2;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            .stat-metric-node {
+                padding: 40px 15px;
+                text-align: center;
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
             
-            <div class="container pt-5 only-desktop" style="padding-top: 4.5rem !important; padding-bottom: 2.5rem !important;">
-                <div class="row" style="display: flex; align-items: flex-start; justify-content: space-between;">
+            .stat-metric-node:hover {
+                transform: translateY(-5px);
+            }
+
+            .stat-node-icon {
+                height: 44px; 
+                width: auto; 
+                object-fit: contain;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.02));
+                transition: transform 0.3s ease;
+            }
+            .stat-metric-node:hover .stat-node-icon {
+                transform: scale(1.08);
+            }
+
+            .stat-node-number {
+                font-size: 32px; 
+                font-weight: 800; 
+                color: #c8232c; 
+                margin: 12px 0 4px 0;
+                line-height: 1.1;
+                letter-spacing: -0.02em;
+            }
+
+            .stat-node-label {
+                font-size: 12px; 
+                font-weight: 700; 
+                color: #111111; 
+                margin: 0; 
+                text-transform: uppercase; 
+                letter-spacing: 0.06em;
+                line-height: 1.4;
+            }
+
+            /* Mobile & Tablet Fine-Tuning Overrides */
+            @media (max-width: 991.98px) {
+                .stat-metric-node {
+                    padding: 25px 10px;
+                }
+                .stat-node-number {
+                    font-size: 26px;
+                }
+            }
+        </style>
+
+        <div class="container-fluid counter-scaffolding mask-reveal">
+            <div class="container">
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 justify-content-center g-2 g-md-4">
                     
-                    <div class="col pb-5" style="flex: 1; padding: 0 15px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <img src="assets/themes/storefront/public/images/stats-satisfied-customer-icone8da.png?v=2.0.3" style="height: 48px; width: auto; object-fit: contain;" alt="" />
-                        <h3 class="txt-org font-weight-bold mb0 pt-2" style="font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #c8232c; margin: 8px 0 4px 0;">7379+</h3>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: #111111; margin: 0; text-transform: uppercase; letter-spacing: 0.03em;">Satisfied Customers</p>
+                    <div class="col stat-metric-node">
+                        <img src="assets/themes/storefront/public/images/stats-satisfied-customer-icone8da.png?v=2.0.3" class="stat-node-icon" alt="Customers" />
+                        <h3 class="stat-node-number">
+                            <span class="live-count" data-target="7379">0</span>+
+                        </h3>
+                        <p class="stat-node-label">Satisfied Customers</p>
                     </div>
                     
-                    <div class="col pb-5" style="flex: 1; padding: 0 15px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <img src="assets/themes/storefront/public/images/stats-bottle-choose-icone8da.png?v=2.0.3" style="height: 48px; width: auto; object-fit: contain;" alt="" />
-                        <h3 class="txt-org font-weight-bold mb0 pt-2" style="font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #c8232c; margin: 8px 0 4px 0;">157+ Bottle</h3>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: #111111; margin: 0; text-transform: uppercase; letter-spacing: 0.03em;">To Choose from</p>
+                    <div class="col stat-metric-node">
+                        <img src="assets/themes/storefront/public/images/stats-bottle-choose-icone8da.png?v=2.0.3" class="stat-node-icon" alt="Selection" />
+                        <h3 class="stat-node-number">
+                            <span class="live-count" data-target="157">0</span>+ Bottles
+                        </h3>
+                        <p class="stat-node-label">To Choose From</p>
                     </div>
                     
-                    <div class="col pb-5" style="flex: 1; padding: 0 15px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <img src="assets/themes/storefront/public/images/stats-bottle-sold-icone8da.png?v=2.0.3" style="height: 48px; width: auto; object-fit: contain;" alt="" />
-                        <h3 class="txt-org font-weight-bold mb0 pt-2" style="font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #c8232c; margin: 8px 0 4px 0;">3Billion +</h3>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: #111111; margin: 0; text-transform: uppercase; letter-spacing: 0.03em;">Bottles Sold</p>
+                    <div class="col stat-metric-node">
+                        <img src="assets/themes/storefront/public/images/stats-bottle-sold-icone8da.png?v=2.0.3" class="stat-node-icon" alt="Volume" />
+                        <h3 class="stat-node-number">
+                            <span class="live-count" data-target="3">0</span>Billion+
+                        </h3>
+                        <p class="stat-node-label">Bottles Sold</p>
                     </div>
                     
-                    <div class="col pb-5" style="flex: 1; padding: 0 15px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <img src="assets/themes/storefront/public/images/stats-experience-icone8da.png?v=2.0.3" style="height: 48px; width: auto; object-fit: contain;" alt="" />
-                        <h3 class="txt-org font-weight-bold mb0 pt-2" style="font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #c8232c; margin: 8px 0 4px 0;">40+</h3>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: #111111; margin: 0; text-transform: uppercase; letter-spacing: 0.03em;">Year Experience</p>
+                    <div class="col stat-metric-node">
+                        <img src="assets/themes/storefront/public/images/stats-experience-icone8da.png?v=2.0.3" class="stat-node-icon" alt="History" />
+                        <h3 class="stat-node-number">
+                            <span class="live-count" data-target="40">0</span>+
+                        </h3>
+                        <p class="stat-node-label">Years Experience</p>
                     </div>
                     
-                    <div class="col pb-5 text-center" style="flex: 1; padding: 0 15px; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <img src="assets/themes/storefront/public/images/stats-revenue-icone8da.png?v=2.0.3" style="height: 48px; width: auto; object-fit: contain;" alt="" />
-                        <h3 class="txt-org font-weight-bold mb0 pt-2" style="font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; color: #c8232c; margin: 8px 0 4px 0;">96% REVENUE</h3>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: #111111; margin: 0; text-transform: uppercase; letter-spacing: 0.03em;">From Repeat Customers</p>
+                    <div class="col col-12 col-md-4 col-lg stat-metric-node">
+                        <img src="assets/themes/storefront/public/images/stats-revenue-icone8da.png?v=2.0.3" class="stat-node-icon" alt="Retention" />
+                        <h3 class="stat-node-number">
+                            <span class="live-count" data-target="96">0</span>%
+                        </h3>
+                        <p class="stat-node-label">Repeat Revenue</p>
                     </div>
                     
                 </div>
             </div>
-
-            <div class="container pt-5 only-mobile" style="padding-top: 3rem !important; padding-bottom: 1.5rem !important; padding-left: 10px; padding-right: 10px;">
-                <div class="row" style="display: flex; flex-wrap: wrap; margin: 0;">
-                    
-                    <div class="col-6 pb-3" style="padding: 0 6px 2rem 6px; box-sizing: border-box;">
-                        <img src="assets/themes/storefront/public/images/stats-satisfied-customer-icone8da.png?v=2.0.3" style="height: 38px; width: auto; object-fit: contain;" alt="" />
-                        <h3 class="txt-org font-weight-bold mb0 pt-2" style="font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; color: #c8232c; margin: 6px 0 2px 0;">7379+</h3>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; color: #111111; margin: 0; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.3;">Satisfied Customer</p>
-                    </div>
-                    
-                    <div class="col-6 pb-3" style="padding: 0 6px 2rem 6px; box-sizing: border-box;">
-                        <img src="assets/themes/storefront/public/images/stats-bottle-choose-icone8da.png?v=2.0.3" style="height: 38px; width: auto; object-fit: contain;" alt="" />
-                        <h3 class="txt-org font-weight-bold mb0 pt-2" style="font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; color: #c8232c; margin: 6px 0 2px 0;">157+ Bottle</h3>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; color: #111111; margin: 0; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.3;">To Choose from</p>
-                    </div>
-                    
-                    <div class="col-6 pb-3" style="padding: 0 6px 2rem 6px; box-sizing: border-box;">
-                        <img src="assets/themes/storefront/public/images/stats-bottle-sold-icone8da.png?v=2.0.3" style="height: 38px; width: auto; object-fit: contain;" alt="" />
-                        <h3 class="txt-org font-weight-bold mb0 pt-2" style="font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; color: #c8232c; margin: 6px 0 2px 0;">3Billion +</h3>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; color: #111111; margin: 0; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.3;">Bottles Sold</p>
-                    </div>
-                    
-                    <div class="col-6 pb-3" style="padding: 0 6px 2rem 6px; box-sizing: border-box;">
-                        <img src="assets/themes/storefront/public/images/stats-experience-icone8da.png?v=2.0.3" style="height: 38px; width: auto; object-fit: contain;" alt="" />
-                        <h3 class="txt-org font-weight-bold mb0 pt-2" style="font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; color: #c8232c; margin: 6px 0 2px 0;">40+</h3>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; color: #111111; margin: 0; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.3;">Year Experience</p>
-                    </div>
-                    
-                    <div class="col-12 pb-5 text-center" style="padding: 0 6px 1rem 6px; box-sizing: border-box; width: 100%;">
-                        <img src="assets/themes/storefront/public/images/stats-revenue-icone8da.png?v=2.0.3" style="height: 38px; width: auto; object-fit: contain;" alt="" />
-                        <h3 class="txt-org font-weight-bold mb0 pt-2" style="font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; color: #c8232c; margin: 6px 0 2px 0;">96% REVENUE</h3>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; color: #111111; margin: 0; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.3;">From Repeat Customer</p>
-                    </div>
-                    
-                </div>
-            </div>
-
         </div>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const counterElements = document.querySelectorAll(".live-count");
+            
+            const runCounterAnimation = (element) => {
+                const targetValue = parseInt(element.getAttribute("data-target"), 10);
+                const cycleDuration = 2000; // Total runtime speed in milliseconds
+                const frameRateInterval = 1000 / 60; // 60 FPS Calculations
+                const totalFrames = Math.round(cycleDuration / frameRateInterval);
+                let currentFrame = 0;
+
+                const countingTick = () => {
+                    currentFrame++;
+                    // Smooth progress easing curve
+                    const progressionRatio = currentFrame / totalFrames;
+                    const currentValCalculated = Math.floor(targetValue * progressionRatio);
+
+                    if (currentFrame < totalFrames) {
+                        element.innerText = currentValCalculated;
+                        requestAnimationFrame(countingTick);
+                    } else {
+                        element.innerText = targetValue; // Snap perfectly to absolute target
+                    }
+                };
+                
+                requestAnimationFrame(countingTick);
+            };
+
+            // Intersection Observer Engine triggers animation ONLY when user scrolls to it
+            const moduleScrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        runCounterAnimation(entry.target);
+                        observer.unobserve(entry.target); // Prevents re-triggering when scrolling away
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            counterElements.forEach(element => moduleScrollObserver.observe(element));
+        });
+        </script>
         <!-- Stats Starts -->
 
     

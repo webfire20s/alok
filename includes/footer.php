@@ -243,7 +243,7 @@
                 <h4>Useful Links</h4>
                 <ul>
                     <li><a href="about.php" target="_blank">About Us</a></li>
-                    <li><a href="infrastructure" target="_blank">Infrastructure</a></li> 
+                    <!-- <li><a href="infrastructure" target="_blank">Infrastructure</a></li>  -->
                     <li><a href="gallery" target="_blank">Gallery</a></li> 
                     <li><a href="blogs" target="_blank">Blog</a></li>
                     <li><a href="search.php" target="_blank">Search</a></li>
