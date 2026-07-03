@@ -1,4 +1,4 @@
-<?php
+    <?php
 if(session_status() === PHP_SESSION_NONE){
     session_start();
 }
@@ -103,12 +103,12 @@ $navCategories = $navStmt->fetchAll();
             -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        /* h1, h2, h3, h4, h5, h6 {
             font-family: 'Montserrat', sans-serif !important;
             font-weight: 700 !important;
             color: var(--dark-industrial) !important;
             letter-spacing: -0.02em;
-        }
+        } */
 
         /* Refined primary elements & anchors transition */
         a {
@@ -313,6 +313,44 @@ $navCategories = $navStmt->fetchAll();
         .navbar-toggler:active {
             transform: scale(0.92);
         }
+        #google_translate_element,
+        #google_translate_element_mobile{
+            font-size:13px;
+        }
+
+        .goog-te-gadget{
+            font-family:inherit!important;
+            color:transparent!important;
+        }
+
+        .goog-te-gadget img{
+            display:none!important;
+        }
+
+        .goog-te-gadget-simple{
+            background:#fff!important;
+            border:1px solid #ddd!important;
+            border-radius:8px!important;
+            padding:6px 10px!important;
+            box-shadow:none!important;
+        }
+
+        .goog-te-gadget-simple span{
+            color:#333!important;
+            font-size:13px!important;
+        }
+
+        .goog-logo-link{
+            display:none!important;
+        }
+
+        .goog-te-banner-frame.skiptranslate{
+            display:none!important;
+        }
+
+        body{
+            top:0!important;
+        }
     </style>
 
 
@@ -465,11 +503,11 @@ $navCategories = $navStmt->fetchAll();
         </p>
     </div>
 
-    <header style="background-color: #ffffff; padding: 22px 0; border-bottom: 1px solid #f1f3f5; box-shadow: 0 4px 20px rgba(0,0,0,0.01);">
+    <header style="background-color: #ffffff; padding: 12px 0; border-bottom: 1px solid #f1f3f5; box-shadow: 0 4px 20px rgba(0,0,0,0.01);">
         <div class="container">
             <div class="row" style="align-items: center;">
                 <div class="col-md-4 txtm-center only-desktop">
-                    <div style="display: flex; align-items: center; gap: 24px;">
+                    <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
                         <a href="index.php" class="header-logo-link" style="display: inline-block;">
                             <img
                                 src="assets/themes/storefront/public/images/logo.jpeg?v=2.0.3"
@@ -498,6 +536,9 @@ $navCategories = $navStmt->fetchAll();
                                 "
                             >
                         </a>
+                        <div id="google_translate_element"
+                            style="margin-left:18px; min-width:160px;">
+                        </div>
                     </div>
                 </div>
 
@@ -509,12 +550,19 @@ $navCategories = $navStmt->fetchAll();
                         <!-- Flex layout container for responsive brand balancing -->
                         <div class="d-flex align-items-center" style="gap: 12px; max-width: 70%;">
                             <a class="navbar-brand header-logo-link" href="index.html" style="margin: 0; padding: 0;">
-                                <img src="assets/themes/storefront/public/images/logoe8da.png?v=2.0.3" alt="Alok Glass Works" style="height: 45px; width: auto; object-fit: contain;" />
+                                <img src="assets/themes/storefront/public/images/logo.jpeg?v=2.0.3" alt="Alok Glass Works" style="height: 45px; width: auto; object-fit: contain;" />
                             </a>
                             <div style="height: 25px; width: 1px; background-color: #e2e4e8;"></div>
                             <a href="index.html" class="header-logo-link" style="display: inline-block; filter: grayscale(1) contrast(1.1); opacity: 0.85;">
                                 <img src="assets/themes/storefront/public/images/40-years-trust2e8da.png?v=2.0.3" alt="40 Years Trust" style="height: 35px; width: auto; object-fit: contain;" />
                             </a>
+                            <div id="google_translate_element"
+                                style="margin-left:18px; min-width:160px;">
+                            </div>
+                        </div>
+
+                        <div id="google_translate_element_mobile"
+                            style="margin-left:auto; margin-right:12px;">
                         </div>
                         
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" style="border: none; background: transparent; padding: 4px 0; outline: none !important;">

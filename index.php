@@ -305,9 +305,9 @@ $featuredCategories = $pdo->query("
                         Premium Glassware Solutions
                     </span>
 
-                    <h1 class="text-uppercase mb-4" style="font-size: 46px; font-weight: 800; color: #ffffff; line-height: 1.2; letter-spacing: 0.01em;">
+                    <h2 class="text-uppercase mb-4" style="font-size: 46px; font-weight: 800; color: var(--light-bg) !important; line-height: 1.2; letter-spacing: 0.001em;">
                         Crafting Glass With<br>Uncompromised Trust
-                    </h1>
+                    </h2>
                     
                     <p class="mb-5" style="font-size: 16px; color: #dddddd; line-height: 1.7; max-width: 580px; font-weight: 400;">
                         Over 40 years of precision engineering excellence. Discover standard wholesale distribution lines and automated custom decoration systems built for international brands.

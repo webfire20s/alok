@@ -219,7 +219,7 @@
                 <ul class="contact-info-list">
                     <li class="pin">
                         <i class="fa-solid fa-location-dot"></i>
-                        <div>
+                        <div style="color: #dddddd;">
                             <b style="font-weight: bold;">Firozabad:</b> Alok Glass Works<br />
                             Kia Showroom, Agra Road,<br />
                             Firozabad – 283203 (U.P.) India
@@ -228,12 +228,12 @@
 
                     <li class="email">
                         <i class="fa-solid fa-envelope"></i>
-                        <div>Email: pranjal@alokglass.com | sales@alokglass.com</div>
+                        <div style="color: #dddddd;">Email: pranjal@alokglass.com | sales@alokglass.com</div>
                     </li>
 
                     <li class="phone">
                         <i class="fa-solid fa-phone"></i>
-                        <div>Phone/Whatsapp: +91 999-747-7289 | +91 703-787-7289 (9:30-6:00 pm)</div>
+                        <div style="color: #dddddd;">Phone/Whatsapp: +91 999-747-7289 | +91 703-787-7289 (9:30-6:00 pm)</div>
                     </li>
                 </ul>
             </div>
@@ -296,7 +296,39 @@
         <li>&copy; <?php echo date("Y"); ?> Alok Glass Works. All Rights Reserved.</li>
     </ul>
 </div>
+<script>
 
+function googleTranslateElementInit() {
+
+    new google.translate.TranslateElement({
+
+        pageLanguage: 'en',
+
+        includedLanguages: 'en,hi,gu,mr,ta,te,bn,pa,ur,fr,de,es,it,pt,ru,ja,ko,zh-CN',
+
+        autoDisplay: false,
+
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+
+    }, 'google_translate_element');
+
+    new google.translate.TranslateElement({
+
+        pageLanguage: 'en',
+
+        includedLanguages: 'en,hi,gu,mr,ta,te,bn,pa,ur,fr,de,es,it,pt,ru,ja,ko,zh-CN',
+
+        autoDisplay: false,
+
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+
+    }, 'google_translate_element_mobile');
+
+}
+
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
 

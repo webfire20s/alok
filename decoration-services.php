@@ -25,13 +25,19 @@ include 'includes/header.php';
         padding: 12px; 
         border-radius: 12px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+        width:50vw;
     }
     .srv-hero-img {
         width: 100%; 
         height: 100%; 
         object-fit: cover; 
-        vertical-align: middle; 
+        vertical-align: right; 
         border-radius: 8px;
+    }
+    @media (max-width: 992px) {
+        .srv-hero-banner-frame {
+            width: 100vw;
+        }
     }
     
     /* Premium Slide-Fill Action Button */

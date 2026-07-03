@@ -5,7 +5,7 @@ include 'includes/header.php';
 <style>
     /* Hero Banner Architecture */
     .about-hero {
-        background: linear-gradient(135deg, #111111 0%, #5a5a5a 100%);
+        background: linear-gradient(135deg, #8d8c8c 0%, #5a5a5a 100%);
         color: #ffffff;
         position: relative;
         overflow: hidden;
@@ -14,8 +14,131 @@ include 'includes/header.php';
         content: '';
         position: absolute;
         top: 0; right: 0; width: 50%; height: 100%;
-        background: radial-gradient(circle, rgba(200,35,44,0.12) 0%, rgba(0,0,0,0) 80%);
+        background: radial-gradient(circle, rgba(252, 252, 252, 0.12) 0%, rgba(236, 225, 225, 0) 80%);
         pointer-events: none;
+    }
+    /* Scoping and Base Typography Configuration */
+    .about-hero, .certificates-section {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Modern Hero Image Engine with Deep Readable Vignette Overlay */
+    .about-hero {
+        /* Replace 'path/to/your-hero-image.jpg' with your active image asset file path */
+        background-image: linear-gradient(to right, rgba(49, 48, 48, 0.95) 30%, rgba(0, 0, 0, 0.6) 100%), 
+                          url('assets/themes/storefront/public/images/aboutherobanner.jpg');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Ambient Subtle Identity Glow Grid Overlay */
+    .about-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; 
+        right: 0; 
+        width: 50%; 
+        height: 100%;
+        background: radial-gradient(circle, rgba(200, 35, 44, 0.2) 0%, rgba(0, 0, 0, 0) 80%);
+        pointer-events: none;
+    }
+
+    /* Certificates Subsection Base Structural Styling */
+    .certificates-section {
+        background-color: #ffffff;
+    }
+
+    /* High-End Clean Section Title */
+    .cert-main-title {
+        font-size: 26px;
+        font-weight: 800;
+        color: #111111;
+        letter-spacing: 0.04em;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 16px;
+    }
+    .cert-main-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background-color: #c8232c;
+    }
+
+    /* Industrial Premium Certificate Display Card Frame */
+    .certificate-premium-card {
+        background: #ffffff;
+        border: 1px solid #eef0f2;
+        border-radius: 6px;
+        padding: 24px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Framed Graphic Wrapper Display Target */
+    .certificate-media-wrapper {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        background-color: #fcfbfa;
+        border: 1px solid #f0f0f0;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .certificate-media-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Keeps certificate proportions crisp and undistorted */
+        padding: 10px;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .certificate-title-label {
+        font-size: 15px;
+        font-weight: 700;
+        color: #111111;
+        margin-bottom: 6px;
+        line-height: 1.4;
+        transition: color 0.3s ease;
+    }
+    .certificate-sub-label {
+        font-size: 12px;
+        font-weight: 500;
+        color: #777777;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    /* Interactive Parent-Child Animation Synchronization Engine */
+    .certificate-premium-card:hover {
+        transform: translateY(-6px);
+        border-color: #e2e4e8;
+        box-shadow: 0 16px 36px rgba(17, 17, 17, 0.08);
+    }
+    .certificate-premium-card:hover .certificate-media-wrapper img {
+        transform: scale(1.04);
+    }
+    .certificate-premium-card:hover .certificate-title-label {
+        color: #c8232c;
     }
 
     /* Core Metrics Dashboard Counters */
@@ -149,12 +272,17 @@ include 'includes/header.php';
 </style>
 
 <!-- HEADER HERO BANNER SEGMENT -->
-<section class="py-5 about-hero" style="font-family: 'Montserrat', sans-serif;">
+<!-- HERO & CERTIFICATE COMPONENT ENGINE STYLES -->
+
+<!-- HEADER HERO BANNER SEGMENT -->
+<section class="py-5 about-hero">
     <div class="container py-5">
         <div class="row align-items-center">
             <div class="col-lg-7">
-                <span class="text-uppercase d-block mb-2" style="color: #c8232c; font-size: 13px; font-weight: 700; letter-spacing: 0.1em;">Crafting Visual Identities Since 1998</span>
-                <h1 class="text-uppercase mb-4" style="font-size: 42px; font-weight: 800; letter-spacing: 0.02em; line-height: 1.2;">
+                <span class="text-uppercase d-block mb-2" style="color: #c8232c; font-size: 13px; font-weight: 700; letter-spacing: 0.1em;">
+                    Crafting Visual Identities Since 1998
+                </span>
+                <h1 class="text-uppercase mb-4" style=" color: #cccccc; font-size: 42px; font-weight: 800; letter-spacing: 0.02em; line-height: 1.2;">
                     Pioneers in Premium Glass Decoration
                 </h1>
                 <p class="mb-0" style="color: #cccccc; font-size: 16px; line-height: 1.8; max-width: 620px;">
@@ -162,6 +290,61 @@ include 'includes/header.php';
                 </p>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- RESPONSIVE ANIMATED CERTIFICATIONS SECTION -->
+<section class="py-5 certificates-section reveal-on-scroll">
+    <div class="container py-4">
+        
+        <!-- Section Title Area -->
+        <div class="text-center mb-5 pb-2">
+            <h2 class="text-uppercase cert-main-title">
+                Our Certifications
+            </h2>
+        </div>
+
+        <!-- 3-Column Certificate Display Layout Model Grid -->
+        <div class="row g-4 justify-content-center">
+            
+            <!-- Certificate 01 -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="certificate-premium-card">
+                    <div class="certificate-media-wrapper">
+                        <!-- Update image path below -->
+                        <img src="assets/themes/storefront/public/images/reg1.jpg" alt="ISO Certification Quality Management" />
+                    </div>
+                    <h3 class="certificate-title-label">ISO 9001:2015 Certification</h3>
+                    <p class="certificate-sub-label">Quality Management Standard</p>
+                </div>
+            </div>
+
+            <!-- Certificate 02 -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="certificate-premium-card">
+                    <div class="certificate-media-wrapper">
+                        <!-- Update image path below -->
+                        <img src="assets/themes/storefront/public/images/reg2.jpg" alt="Safety Standard Certification" />
+                    </div>
+                    <h3 class="certificate-title-label">Operational Safety Compliance</h3>
+                    <p class="certificate-sub-label">Industrial Standards Certified</p>
+                </div>
+            </div>
+
+            <!-- Certificate 03 -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="certificate-premium-card">
+                    <div class="certificate-media-wrapper">
+                        <!-- Update image path below -->
+                        <img src="assets/themes/storefront/public/images/reg3.jpg" alt="Manufacturing Excellence Award" />
+                    </div>
+                    <h3 class="certificate-title-label">Premium Manufacturing Excellence</h3>
+                    <p class="certificate-sub-label">Verified Glass Decorator</p>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </section>
 
