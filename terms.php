@@ -6,7 +6,7 @@ include 'includes/header.php';
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <style>
+    <!-- <style>
         /* Scope-Isolated Framework matching your site design signature */
         .alok-terms-wrapper {
             font-family: 'Montserrat', sans-serif !important;
@@ -146,7 +146,7 @@ include 'includes/header.php';
                 padding-right: 0px;
             }
         }
-    </style>
+    </style> -->
 
 <div class="alok-terms-wrapper" style="font-family: 'Montserrat', sans-serif; background: #fafafa; color: #444444;">
 
@@ -164,7 +164,7 @@ include 'includes/header.php';
             animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
         .terms-hero-panel {
-            background: linear-gradient(105deg, #0c0b0b 0%, #222222 10%);
+            background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
             padding: 80px 0;
             color: #ffffff;
             border-bottom: 4px solid #c8232c;
@@ -275,7 +275,7 @@ include 'includes/header.php';
             <div class="row">
                 <div class="col-12 class animate-fade-in" style="animation-delay: 0.1s;">
                     <span class="terms-meta-date" style="color: #c8232c;">Corporate Compliance Statement</span>
-                    <h1 class="mt-2 d-block text-uppercase" style="font-size: 38px; font-weight: 800; letter-spacing: 0.05em; color: #ffffff;">Terms & Conditions</h1>
+                    <h1 class="mt-2 d-block text-uppercase" style="font-size: 38px; font-weight: 800; letter-spacing: 0.05em; color: var(--light-bg) !important;">Terms & Conditions</h1>
                     <div class="terms-meta-date" style="color: #aaaaaa; margin-top: 10px;">Last Updated: <?= date('d M Y') ?></div>
                 </div>
             </div>

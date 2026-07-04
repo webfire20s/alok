@@ -246,7 +246,7 @@
                     <!-- <li><a href="infrastructure" target="_blank">Infrastructure</a></li>  -->
                     <li><a href="gallery" target="_blank">Gallery</a></li> 
                     <li><a href="blogs" target="_blank">Blog</a></li>
-                    <li><a href="search.php" target="_blank">Search</a></li>
+                    <li><a href="video.php" target="_blank">Videos</a></li>
                 </ul>
 
                 <div class="alok-social-wrapper">
@@ -304,7 +304,7 @@ function googleTranslateElementInit() {
 
         pageLanguage: 'en',
 
-        includedLanguages: 'en,hi,gu,mr,ta,te,bn,pa,ur,fr,de,es,it,pt,ru,ja,ko,zh-CN',
+        includedLanguages: 'en,hi,bn,te,mr,ta,ur,gu,kn,ml,or,pa,as,doi,kok,ks,ma,mni,ne,san,sat,sd,zh-CN,zh-TW,es,fr,de,it,pt,ru,ja,ko,ar,nl,tr,vi,th,id,pl,uk,fa,sv,no,fi,da,he,ms,tl,ro,el,cs,hu',
 
         autoDisplay: false,
 
@@ -316,7 +316,7 @@ function googleTranslateElementInit() {
 
         pageLanguage: 'en',
 
-        includedLanguages: 'en,hi,gu,mr,ta,te,bn,pa,ur,fr,de,es,it,pt,ru,ja,ko,zh-CN',
+        includedLanguages: 'en,hi,bn,te,mr,ta,ur,gu,kn,ml,or,pa,as,doi,kok,ks,ma,mni,ne,san,sat,sd,zh-CN,zh-TW,es,fr,de,it,pt,ru,ja,ko,ar,nl,tr,vi,th,id,pl,uk,fa,sv,no,fi,da,he,ms,tl,ro,el,cs,hu',
 
         autoDisplay: false,
 
