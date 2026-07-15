@@ -14,12 +14,11 @@ $featuredCategories = $pdo->query("
     SELECT *
     FROM categories
     WHERE featured = 1
-    LIMIT 4
 ")->fetchAll();
 ?>
             
             
-    <main role="main">
+<main role="main">
     
     <style>
         /* Scoped styles for high-fidelity animations and premium layouts on index.php */
@@ -225,7 +224,24 @@ $featuredCategories = $pdo->query("
             position: relative;
             z-index: 3;
             width: 100%;
+            
+            /* Add animation properties */
+            animation: heroFadeIn 1s ease-in forwards;
+            opacity: 0; /* Starts hidden before animation */
         }
+
+        /* Define the animation keyframes */
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(200px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
 
         /* Premium Dynamic Button Link Layout */
         .hero-btn-action {
@@ -277,20 +293,39 @@ $featuredCategories = $pdo->query("
                 text-align: center !important;
             }
         }
+
+        .hero-yt-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-local-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Forces the video to fill the container without distorting */
+            pointer-events: none; /* Prevents users from right-clicking to pause or save the video */
+        }
     </style>
 
     <!-- YOUTUBE HERO SECTION -->
     <div class="hero-yt-section">
 
-        <!-- Configured YouTube Video Background Source -->
         <div class="hero-yt-wrapper">
-            <iframe 
-                src="https://www.youtube.com/embed/2NvHXuq7Dq4?autoplay=1&mute=1&loop=1&playlist=2NvHXuq7Dq4&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen>
-            </iframe>
+            <video 
+                autoplay 
+                muted 
+                loop 
+                playsinline 
+                preload="auto"
+                class="hero-local-video">
+                <source src="assets/storage/media/hero-background.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
 
         <!-- Overlay Mask -->
@@ -407,282 +442,27 @@ $featuredCategories = $pdo->query("
                 <!-- Metric Card 2 -->
                 <div class="col-6 col-md-3 value-item">
                     <span class="value-metric">Highest Quality</span>
-                    <span class="value-title">Wholesale Rates</span>
+                    <span class="value-title" style="color: #c8232c;">Wholesale Rates</span>
                 </div>
 
                 <!-- Metric Card 3 -->
                 <div class="col-6 col-md-3 value-item">
                     <span class="value-metric">Fast Dispatch</span>
-                    <span class="value-title">Guaranteed</span>
+                    <span class="value-title" style="color: #c8232c;">Guaranteed</span>
                 </div>
 
                 <!-- Metric Card 4 -->
                 <div class="col-6 col-md-3 value-item">
                     <span class="value-metric">Secure Support</span>
-                    <span class="value-title">Hassle-Free</span>
+                    <span class="value-title" style="color: #c8232c;">Hassle-Free</span>
                 </div>
 
             </div>
         </div>
     </div>
 
-    <!-- <div class="container-fluid mobile-trust-cards-container only-mobile pt-4 pb-4">
-        <div class="container-fluid no-gutters pl-2 pr-2">
-            <div class="row no-gutters" style="display: flex; flex-wrap: wrap; margin: 0; row-gap: 12px; column-gap: 0;">
-                
-                <!-- MOBILE BADGE 1 -->
-                <!-- <div class="col-6 mobile-badge-col" style="padding: 0 60px;">
-                    <div class="mobile-trust-card">
-                        <img src="assets/themes/storefront/public/images/safe-shopping-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Safe Shopping" />
-                        <span class="mobile-badge-text">
-                            Trusted for <br/>
-                            <label>4 Decades</label>
-                        </span>
-                    </div>
-                </div> -->
-
-                <!-- MOBILE BADGE 2 -->
-                <!-- <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
-                    <div class="mobile-trust-card">
-                        <img src="assets/themes/storefront/public/images/lowest-price-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Lowest Price" />
-                        <span class="mobile-badge-text">
-                            Highest Quality <br/>
-                            <label>Lowest Price</label>
-                        </span>
-                    </div>
-                </div> -->
-
-                <!-- MOBILE BADGE 3 -->
-                <!-- <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
-                    <div class="mobile-trust-card">
-                        <img src="assets/themes/storefront/public/images/guarantee-dispatch-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Guaranteed Dispatch" />
-                        <span class="mobile-badge-text">
-                            Fast Despatch <br/>
-                            <label>Guaranteed</label>
-                        </span>
-                    </div>
-                </div> -->
-
-                <!-- MOBILE BADGE 4 -->
-                <!-- <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
-                    <div class="mobile-trust-card">
-                        <img src="assets/themes/storefront/public/images/30-days-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Money Back" />
-                        <span class="mobile-badge-text">
-                            Hassle Free Return <br/>
-                            <label style="font-size: 10px;">Money Back</label>
-                        </span>
-                    </div>
-                </div> -->
-
-                <!-- MOBILE BADGE 5 -->
-                <!-- <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
-                    <div class="mobile-trust-card">
-                        <img src="assets/themes/storefront/public/images/safe-shopping-icone8da.png?v=2.0.3" class="mobile-badge-icon" alt="Secure Shopping" />
-                        <span class="mobile-badge-text">
-                            Safe <br/>
-                            <label>and Secure</label>
-                        </span>
-                    </div>
-                </div> -->
-
-                <!-- MOBILE BADGE 6 -->
-                <!-- <div class="col-6 mobile-badge-col" style="padding: 0 6px;">
-                    <div class="mobile-trust-card">
-                        <img src="assets/themes/storefront/public/images/verifiede8da.png?v=2.0.3" class="mobile-badge-icon" alt="One Stop Solution" />
-                        <span class="mobile-badge-text">
-                            One Stop <br/>
-                            <label>Solution</label>
-                        </span>
-                    </div>
-                </div> -->
-
-            <!-- </div>
-        </div>
-    </div> -->
-
         <!-- Shop by Industry Starts -->
-        <!-- Shop by Industry Starts -->
-        <!-- HIGHER-END COMPONENT STYLING ENGINE -->
-        <style>
-            /* Component Reset & Scoping */
-            .industry-section-wrapper {
-                font-family: 'Montserrat', sans-serif;
-                background-color: #ffffff;
-            }
-
-            /* Minimalist High-End Section Title */
-            .industry-main-title {
-                font-size: 32px;
-                font-weight: 800;
-                color: #111111;
-                letter-spacing: 0.04em;
-                position: relative;
-                display: inline-block;
-                padding-bottom: 16px;
-            }
-            .industry-main-title::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 50px;
-                height: 3px;
-                background-color: #c8232c;
-            }
-
-            /* B2B Industry Mega Container Card */
-            .industry-mega-card {
-                background-color: #ffffff;
-                border: 1px solid #eef0f2;
-                border-top: 4px solid #111111;
-                border-radius: 6px;
-                height: 100%;
-                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                            border-top-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-            }
-            .industry-mega-card:hover {
-                transform: translateY(-6px);
-                border-color: #e2e4e8;
-                border-top-color: #c8232c;
-                box-shadow: 0 20px 38px rgba(17, 17, 17, 0.07);
-            }
-
-            /* Elegant Structural Heading Links */
-            .industry-card-heading {
-                font-size: 20px;
-                font-weight: 700;
-                color: #111111;
-                letter-spacing: 0.01em;
-            }
-
-            /* Product Mini Grid Wrappers */
-            .industry-product-media-link {
-                display: block;
-                overflow: hidden;
-                border-radius: 6px;
-                background-color: #ffffff;
-                border: 1px solid #f0f0f0;
-                padding: 12px;
-                transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            }
-            .industry-product-media-link img {
-                width: 100%;
-                height: auto;
-                aspect-ratio: 1 / 1;
-                object-fit: contain;
-                transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-            
-            /* Interactive States tied logically to hovering any part of the micro item */
-            .industry-product-cell:hover .industry-product-media-link {
-                border-color: #e2e4e8;
-                box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
-            }
-            .industry-product-cell:hover .industry-product-media-link img {
-                transform: scale(1.06);
-            }
-            .industry-product-cell:hover .industry-product-title {
-                color: #c8232c;
-            }
-
-            /* Typography Clamping Engine */
-            .industry-product-title {
-                font-size: 13px;
-                font-weight: 600;
-                color: #222222;
-                text-decoration: none;
-                line-height: 1.4;
-                margin-top: 10px;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                height: 36px;
-                transition: color 0.2s ease;
-            }
-            .industry-product-title:hover {
-                text-decoration: none;
-            }
-        </style>
-
-        <!-- INDUSTRY DISPLAY LAYOUT MODALITY -->
-        <div class="container industry-section-wrapper py-5 reveal-on-scroll">
-
-            <!-- Section Title Area -->
-            <div class="text-center mb-5 pb-2">
-                <h2 class="text-uppercase industry-main-title">
-                    Shop by Industry
-                </h2>
-            </div>
-
-            <!-- Active Structural Row Grid -->
-            <div class="row">
-
-                <?php foreach($categories as $category): ?>
-
-                    <div class="col-lg-6 mb-4 pb-2">
-
-                        <!-- Industry Category Card Container -->
-                        <div class="industry-mega-card p-4 p-md-5">
-
-                            <!-- Category Heading -->
-                            <h3 class="industry-card-heading mb-4">
-                                <?= htmlspecialchars($category['name']) ?>
-                            </h3>
-
-                            <!-- Fluid Inner Grid Layout -->
-                            <div class="row g-3">
-
-                                <?php
-                                $stmt = $pdo->prepare("
-                                    SELECT * FROM products
-                                    WHERE category_id = ?
-                                    LIMIT 4
-                                ");
-                                $stmt->execute([$category['id']]);
-                                $categoryProducts = $stmt->fetchAll();
-                                ?>
-
-                                <?php foreach($categoryProducts as $product): ?>
-
-                                    <!-- Product Grid Cell Element -->
-                                    <div class="col-6 col-sm-3 col-md-6 col-lg-3 text-center industry-product-cell d-flex flex-column align-items-center">
-
-                                        <!-- Interactive Image Link wrapper -->
-                                        <a href="product.php?slug=<?= $product['slug'] ?>" class="industry-product-media-link w-100">
-                                            <img src="<?= $product['image'] ?>" alt="<?= htmlspecialchars($product['name']) ?>">
-                                        </a>
-
-                                        <!-- Product Anchor Title -->
-                                        <a href="product.php?slug=<?= $product['slug'] ?>" class="industry-product-title">
-                                            <?= htmlspecialchars($product['name']) ?>
-                                        </a>
-
-                                    </div>
-
-                                <?php endforeach; ?>
-
-                                <!-- Empty Result Space Control Fallback if needed -->
-                                <?php if (empty($categoryProducts)): ?>
-                                    <div class="col-12 text-muted py-3" style="font-size: 13px;">No direct product configurations allocated inside this grouping.</div>
-                                <?php endif; ?>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                <?php endforeach; ?>
-
-            </div>
-
-        </div>
-        <!-- Shop by Industry Ends -->
+        
         <!-- Shop by Industry Ends -->
         
        <!-- Shop by Product Starts -->
@@ -931,7 +711,7 @@ $featuredCategories = $pdo->query("
             WHERE category_id = ?
             AND show_on_home = 1
             ORDER BY id DESC
-            LIMIT 8
+            
         ");
 
         $productStmt->execute([$category['id']]);
@@ -944,212 +724,313 @@ $featuredCategories = $pdo->query("
         ?>
 
         <!-- B2B HIGH-END PRODUCT GRID SYSTEM STYLES -->
+        <!-- DEPENDENCIES FOR ICONS ONLY -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
         <style>
-            /* Section Scoping Base Layout */
-            .showcase-grid-wrapper {
-                font-family: 'Montserrat', sans-serif;
+            /* ==========================================================================
+            PREMIUM INTERACTIVE SCROLLER SYSTEM
+            ========================================================================== */
+            .ticker-showcase-wrapper {
                 background-color: #ffffff;
+                padding: 60px 0;
+                font-family: 'Montserrat', sans-serif;
+                position: relative;
             }
 
-            /* Minimalist High-End Section Title */
-            .showcase-main-title {
-                font-size: 32px;
+            /* Header Grid: Title on Left, Custom Arrows on Right */
+            .ticker-header-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                margin-bottom: 30px;
+                border-bottom: 2px solid #eef0f2;
+                padding-bottom: 15px;
+            }
+
+            .ticker-section-title {
+                font-size: 28px;
                 font-weight: 800;
                 color: #111111;
-                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                margin: 0;
                 position: relative;
-                display: inline-block;
-                padding-bottom: 16px;
             }
-            .showcase-main-title::after {
+            .ticker-section-title::after {
                 content: '';
                 position: absolute;
-                bottom: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 50px;
+                bottom: -17px;
+                left: 0;
+                width: 60px;
                 height: 3px;
-                background-color: #c8232c;
+                background-color: #c8232c; /* Alok Red Accent */
             }
 
-            /* Product Item Core Card Frame */
-            .showcase-product-card {
+            /* Sleek Navigation Controls */
+            .ticker-control-btns {
                 display: flex;
-                flex-direction: column;
-                height: 100%;
+                gap: 8px;
             }
-
-            /* Media Frame Isolation Matrix */
-            .showcase-media-box {
-                position: relative;
-                overflow: hidden;
-                border: 1px solid #eef0f2;
-                border-radius: 6px;
-                background-color: #ffffff;
-                margin-bottom: 16px;
-                transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-            .showcase-media-box img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                padding: 16px;
-                margin: 0;
-                transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-
-            /* Premium Dynamic Sliding Floating Button Custom Setup */
-            .showcase-action-btn {
-                position: absolute;
-                bottom: 16px;
-                left: 50%;
-                transform: translateX(-50%) translateY(15px);
-                width: 85%;
-                background-color: #c8232c;
-                color: #ffffff;
-                font-weight: 700;
-                font-size: 11px;
-                text-transform: uppercase;
-                letter-spacing: 0.08em;
-                border: none;
-                padding: 11px 0;
+            .ticker-control-btns button {
+                background: #161616 !important;
+                border: 1px solid #262626 !important;
+                color: #ffffff !important;
+                width: 40px;
+                height: 40px;
                 border-radius: 4px;
-                box-shadow: 0 6px 20px rgba(200, 35, 44, 0.3);
-                opacity: 0;
-                pointer-events: none; /* Prevents splitting anchor target focus errors */
-                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                            opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                            background-color 0.2s ease;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+            .ticker-control-btns button:hover {
+                background: #c8232c !important;
+                border-color: #c8232c !important;
             }
 
-            /* Content Data Panel Layout */
-            .showcase-details-box {
-                text-align: left;
-                padding: 0 4px;
+            /* THE MANUAL SCROLL WINDOW (With custom high-end scrollbar) */
+            .ticker-viewport {
+                width: 100%;
+                overflow-x: auto;
+                overflow-y: hidden;
+                white-space: nowrap;
+                position: relative;
+                padding: 15px 0 25px 0;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch; /* Butter-smooth iOS momentum scrolling */
+            }
+
+            /* Premium Sleek Scrollbar Styling */
+            .ticker-viewport::-webkit-scrollbar {
+                height: 6px;
+            }
+            .ticker-viewport::-webkit-scrollbar-track {
+                background: #eef0f2;
+                border-radius: 10px;
+            }
+            .ticker-viewport::-webkit-scrollbar-thumb {
+                background: #c8232c; /* Red Scrollbar Grabber */
+                border-radius: 10px;
+                transition: background 0.3s ease;
+            }
+            .ticker-viewport::-webkit-scrollbar-thumb:hover {
+                background: #111111; /* Darkens on hover */
+            }
+
+            .ticker-track {
+                display: inline-flex;
+                gap: 24px;
+            }
+
+            /* ==========================================================================
+            PRODUCT ITEM CARD ARCHITECTURE (Charcoal and Red Theme)
+            ========================================================================== */
+            .ticker-product-card {
+                display: inline-flex;
+                flex-direction: column;
+                width: 240px; /* Fixed standard sizing */
+                background: #161616; /* Clean Charcoal Base */
+                border: 1px solid #262626;
+                border-radius: 18px;
+                padding: 16px;
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                text-decoration: none !important;
+                white-space: normal; /* Restores normal text wrapping inside card blocks */
+                box-sizing: border-box;
+            }
+
+            .ticker-product-card:hover {
+                transform: translateY(-5px);
+                border-color: #c8232c;
+                box-shadow: 0 12px 30px rgba(200, 35, 44, 0.15);
+            }
+
+            /* White Background Container to Pop Your Glassware Products */
+            .ticker-media-box {
+                width: 100%;
+                aspect-ratio: 1 / 1;
+                background-color: #ffffff;
+                border-radius: 4px;
+                overflow: hidden;
+                margin-bottom: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px;
+                box-sizing: border-box;
+            }
+
+            .ticker-media-box img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                transition: transform 0.5s ease;
+            }
+
+            .ticker-product-card:hover .ticker-media-box img {
+                transform: scale(1.06);
+            }
+
+            /* Details Panel Typography */
+            .ticker-details-box {
                 display: flex;
                 flex-direction: column;
                 flex-grow: 1;
             }
-            .showcase-product-title {
-                font-size: 14px;
+
+            .ticker-product-title {
+                font-size: 13.5px;
                 font-weight: 600;
-                color: #111111;
-                text-decoration: none;
+                color: #c8232c !important;
                 line-height: 1.4;
+                margin: 0 0 8px 0;
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 height: 38px;
-                margin-bottom: 8px;
-                transition: color 0.2s ease;
             }
-            .showcase-product-title:hover {
-                text-decoration: none;
-                color: #c8232c;
-            }
-            .showcase-product-price {
-                font-size: 16px;
-                font-weight: 800;
-                color: #c8232c;
+
+            .ticker-product-price {
+                font-size: 15px;
+                font-weight: 700;
+                color: #ffffff;
                 margin-top: auto;
             }
 
-            /* Synchronized Micro Interactivity Animations */
-            .showcase-product-card:hover .showcase-media-box {
-                border-color: #e2e4e8;
-                box-shadow: 0 12px 24px rgba(17, 17, 17, 0.06);
-            }
-            .showcase-product-card:hover .showcase-media-box img {
-                transform: scale(1.05);
-            }
-            .showcase-product-card:hover .showcase-action-btn {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-            .showcase-product-card:hover .showcase-product-title {
-                color: #c8232c;
-            }
-
-            /* Fluid Fallback Fixes for Mobile Touch Screens */
+            /* RESPONSIVE LAYOUT MATRIX ADJUSTMENTS */
             @media (max-width: 767.98px) {
-                /* Persistent elegant exposure instead of hiding actions on mobile */
-                .showcase-action-btn {
-                    position: relative;
-                    bottom: 0;
-                    left: 0;
-                    transform: none !important;
-                    width: 100%;
-                    opacity: 1 !important;
-                    margin-top: 8px;
-                    box-shadow: none;
-                    padding: 8px 0;
-                }
-                .showcase-media-box {
-                    margin-bottom: 10px;
-                }
+                .ticker-showcase-wrapper { padding: 40px 0; }
+                .ticker-header-container { flex-direction: column; align-items: flex-start; gap: 15px; }
+                .ticker-section-title { font-size: 22px; }
+                .ticker-product-card { width: 190px; padding: 12px; }
+                .ticker-product-title { font-size: 12.5px; height: 34px; }
+                .ticker-product-price { font-size: 14px; }
+                .ticker-control-btns { display: none; } /* On mobile, standard native touch swiping is preferred */
             }
         </style>
 
-        <!-- PRODUCT SHOWCASE SECTION -->
-        <div class="container showcase-grid-wrapper py-5 reveal-on-scroll">
+    <!-- PRODUCT SHOWCASE SECTION -->
+        <div class="ticker-showcase-wrapper">
+            <div class="container">
+                
+                <!-- Premium Section Header Console -->
+                <div class="ticker-header-container">
+                    <h2 class="ticker-section-title">
+                        <?= htmlspecialchars($category['section_title'] ?? 'Our Featured Range') ?>
+                    </h2>
+                    
+                    <!-- Sleek Control Pillar -->
+                    <div class="ticker-control-btns">
+                        <button id="scroller-prev-btn" aria-label="Scroll Left"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button id="scroller-next-btn" aria-label="Scroll Right"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
 
-            <!-- Section Heading Area -->
-            <div class="text-center mb-5 pb-2">
-                <h2 class="text-uppercase showcase-main-title">
-                    <?= htmlspecialchars($category['section_title']) ?>
-                </h2>
-            </div>
-
-            <!-- Active Grid Architecture Component Container -->
-            <div class="row g-3 g-md-4">
-
-                <?php foreach($products as $product): ?>
-
-                    <!-- Responsive Frame Partitioning Model Structure -->
-                    <div class="col-6 col-md-4 col-lg-3 mb-4">
-
-                        <div class="showcase-product-card">
-
-                            <!-- Image & Action Container Frame -->
-                            <div class="showcase-media-box">
-
-                                <a href="product.php?slug=<?= urlencode($product['slug']) ?>" class="d-block w-100 position-relative aspect-ratio-box" style="aspect-ratio: 1 / 1;">
-
-                                    <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="img-fluid">
-
-                                    <button type="button" class="btn showcase-action-btn">
-                                        Buy Now
-                                    </button>
-
-                                </a>
-
-                            </div>
-
-                            <!-- Meta Content Labels Details Block -->
-                            <div class="showcase-details-box">
-
-                                <a href="product.php?slug=<?= urlencode($product['slug']) ?>" class="showcase-product-title">
-                                    <?= htmlspecialchars($product['name']) ?>
-                                </a>
-
-                                <span class="showcase-product-price">
-                                    ₹<?= number_format($product['price'], 2) ?>
-                                </span>
-
-                            </div>
-
-                        </div>
+                <!-- Scrollable Window Area -->
+                <div class="ticker-viewport" id="scroll-engine-viewport">
+                    <div class="ticker-track">
+                        
+                        <?php foreach($products as $product): ?>
+                            <a href="product.php?slug=<?= urlencode($product['slug']) ?>" class="ticker-product-card">
+                                <div class="ticker-media-box">
+                                    <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" loading="lazy">
+                                </div>
+                                <div class="ticker-details-box">
+                                    <h3 class="ticker-product-title"><?= htmlspecialchars($product['name']) ?></h3>
+                                    <span class="ticker-product-price">₹<?= number_format($product['price'], 2) ?></span>
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
 
                     </div>
-
-                <?php endforeach; ?>
+                </div>
 
             </div>
-
         </div>
 
+    <!-- STABLE MULTI-INTERACTION CONTROLLER SCRIPT -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const viewport = document.getElementById('scroll-engine-viewport');
+                const nextBtn = document.getElementById('scroller-next-btn');
+                const prevBtn = document.getElementById('scroller-prev-btn');
+                
+                const scrollAmount = 264; // Distance to scroll on click (240px card width + 24px gap)
+                const autoScrollSpeed = 1; // Pixels to slide per interval step
+                const autoScrollInterval = 30; // Milliseconds between steps
+                
+                let autoPlayActive = true;
+                let scrollDirection = 1; // 1 = Right, -1 = Left
+                let autoScrollTimer;
+
+                // Smooth Auto-Scrolling System
+                function runAutoScroll() {
+                    if (!autoPlayActive) return;
+                    
+                    // Increment container scroll layout
+                    viewport.scrollLeft += (autoScrollSpeed * scrollDirection);
+                    
+                    // Loop scroll direction boundaries smoothly
+                    const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
+                    if (viewport.scrollLeft >= maxScrollLeft - 1) {
+                        scrollDirection = -1; // Reverse to left once the end is reached
+                    } else if (viewport.scrollLeft <= 1) {
+                        scrollDirection = 1; // Slide forward once the beginning is reached
+                    }
+                }
+
+                // Start running the loop
+                function startLoop() {
+                    stopLoop();
+                    autoScrollTimer = setInterval(runAutoScroll, autoScrollInterval);
+                }
+
+                function stopLoop() {
+                    if (autoScrollTimer) clearInterval(autoScrollTimer);
+                }
+
+                // Action Click Events (Standard behavior)
+                if (nextBtn && prevBtn) {
+                    nextBtn.addEventListener('click', function() {
+                        autoPlayActive = false;
+                        stopLoop();
+                        viewport.scrollLeft += scrollAmount;
+                    });
+
+                    prevBtn.addEventListener('click', function() {
+                        autoPlayActive = false;
+                        stopLoop();
+                        viewport.scrollLeft -= scrollAmount;
+                    });
+                }
+
+                // Hover Pausing Loops for Mouse Users
+                viewport.addEventListener('mouseenter', () => {
+                    autoPlayActive = false;
+                    stopLoop();
+                });
+
+                viewport.addEventListener('mouseleave', () => {
+                    autoPlayActive = true;
+                    startLoop();
+                });
+
+                // Touch Interaction Safety Hooks
+                viewport.addEventListener('touchstart', () => {
+                    autoPlayActive = false;
+                    stopLoop();
+                });
+
+                // Start initialization sequence
+                startLoop();
+            });
+        </script>
         <?php endforeach; ?>
         <!-- Popular bottle Ends -->
         
@@ -1404,119 +1285,209 @@ $featuredCategories = $pdo->query("
         
         <!-- Latest Blog Starts -->
         <!-- Latest Blogs Starts -->
-        <div class="container pt-6 mask-reveal reveal-on-scroll" style="padding-top: 4rem; padding-bottom: 4rem;">
 
-            <!-- Section Title with Accent Underline -->
-            <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; padding-bottom: 14px; margin-bottom: 3.5rem;">
-                Latest Blogs
-                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #c8232c;"></span>
-            </h2>
+            <?php
 
-            <div class="row">
+            $homeBlogsStmt = $pdo->query("
+                SELECT
+                    id,
+                    title,
+                    slug,
+                    image
+                FROM blogs
+                WHERE status = 1
+                ORDER BY id DESC
+                LIMIT 4
+            ");
 
-                <div class="col-md-12">
+            $homeBlogs = $homeBlogsStmt->fetchAll(PDO::FETCH_ASSOC);
 
-                    <div class="row" style="display: flex; flex-wrap: wrap;">
+            ?>
+         
+            <div class="container pt-6 mask-reveal reveal-on-scroll" style="padding-top: 4rem; padding-bottom: 4rem;">
 
-                        <!-- Blog Item 1 -->
-                        <div class="col-md-3 col-6" style="margin-bottom: 2rem; display: flex; flex-direction: column;">
+                <!-- Section Title with Accent Underline -->
+                <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; position: relative; padding-bottom: 14px; margin-bottom: 3.5rem;">
+                    Latest Blogs
+                    <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #c8232c;"></span>
+                </h2>
 
-                            <div class="latest-image-box" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 4px; overflow: hidden; height: 100%; display: flex; flex-direction: column; box-shadow: 0 3px 10px rgba(0,0,0,0.03); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 20px rgba(17,17,17,0.06)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.03)';">
+                <div class="row">
 
-                                <a href="public/blog/vacuum-packaging-machine/index.html" style="display: block; width: 100%; aspect-ratio: 16/10; overflow: hidden; background-color: #f7f7f7;">
-                                    <img src="blog/wp-content/uploads/2026/03/blog-Heading-12.png" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';" alt="" />
-                                </a>
+                    <div class="col-md-12">
 
-                                <div style="padding: 14px; flex-grow: 1; display: flex; flex-direction: column;">
-                                    <a href="public/blog/vacuum-packaging-machine/index.html" class="blog-title-link" style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: #111111; text-decoration: none; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; transition: color 0.2s ease;">
-                                        2026 Complete Vacuum Packaging Machine Guide for Better Freshness & Reduced Product Waste
+                        <div class="row" style="display: flex; flex-wrap: wrap;">
+
+                            <!-- Blog Item 1 -->
+                            <?php
+                            $delay = 100;
+                            foreach($homeBlogs as $blog):
+                            ?>
+
+                            <div
+                                class="col-md-3 col-6"
+                                style="margin-bottom:2rem;display:flex;flex-direction:column;"
+                                data-aos="fade-up"
+                                data-aos-delay="<?= $delay ?>"
+                                data-aos-duration="700">
+
+                                <div class="latest-image-box">
+
+                                    <a
+                                        href="blog.php?slug=<?= urlencode($blog['slug']) ?>"
+                                        class="blog-image-link">
+
+                                        <img
+                                            src="<?= htmlspecialchars($blog['image']) ?>"
+                                            class="img-fluid"
+                                            alt="<?= htmlspecialchars($blog['title']) ?>">
                                     </a>
+
+                                    <div class="blog-content-box">
+
+                                        <a
+                                            href="blog.php?slug=<?= urlencode($blog['slug']) ?>"
+                                            class="blog-title-link">
+
+                                            <?= htmlspecialchars($blog['title']) ?>
+
+                                        </a>
+
+                                    </div>
+
                                 </div>
 
                             </div>
 
-                        </div>
-
-                        <!-- Blog Item 2 -->
-                        <div class="col-md-3 col-6" style="margin-bottom: 2rem; display: flex; flex-direction: column;">
-
-                            <div class="latest-image-box" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 4px; overflow: hidden; height: 100%; display: flex; flex-direction: column; box-shadow: 0 3px 10px rgba(0,0,0,0.03); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 20px rgba(17,17,17,0.06)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.03)';">
-
-                                <a href="public/blog/amber-glass-bottles/index.html" style="display: block; width: 100%; aspect-ratio: 16/10; overflow: hidden; background-color: #f7f7f7;">
-                                    <img src="blog/wp-content/uploads/2026/02/blog-Heading-10.png" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';" alt="" />
-                                </a>
-
-                                <div style="padding: 14px; flex-grow: 1; display: flex; flex-direction: column;">
-                                    <a href="public/blog/amber-glass-bottles/index.html" class="blog-title-link" style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: #111111; text-decoration: none; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; transition: color 0.2s ease;">
-                                        High Impact Amber Glass Bottles For 2026: Uses, Benefits, Sizes, and How to Choose the Right One
-                                    </a>
-                                </div>
-
-                            </div>
+                            <?php
+                            $delay += 100;
+                            endforeach;
+                            ?>
 
                         </div>
 
-                        <!-- Blog Item 3 -->
-                        <div class="col-md-3 col-6" style="margin-bottom: 2rem; display: flex; flex-direction: column;">
-
-                            <div class="latest-image-box" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 4px; overflow: hidden; height: 100%; display: flex; flex-direction: column; box-shadow: 0 3px 10px rgba(0,0,0,0.03); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 20px rgba(17,17,17,0.06)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.03)';">
-
-                                <a href="public/blog/dropper-bottles/index.html" style="display: block; width: 100%; aspect-ratio: 16/10; overflow: hidden; background-color: #f7f7f7;">
-                                    <img src="blog/wp-content/uploads/2026/02/blog-Heading-9.png" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';" alt="" />
-                                </a>
-
-                                <div style="padding: 14px; flex-grow: 1; display: flex; flex-direction: column;">
-                                    <a href="public/blog/dropper-bottles/index.html" class="blog-title-link" style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: #111111; text-decoration: none; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; transition: color 0.2s ease;">
-                                        5 Powerful Dropper Bottles Insights for Serums & Oils: Perfect Fit, Leak-Free Design & Costly Mistakes to Avoid
-                                    </a>
-                                </div>
-
-                            </div>
-
+                        <!-- Footer View Action Button -->
+                        <div class="text-center pt-4 pb-3">
+                            <a href="blogs.php" style="text-decoration: none;">
+                                <button type="button" class="btn btn-org-1" style="background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; border: none; padding: 10px 24px; border-radius: 4px; box-shadow: 0 4px 12px rgba(200, 35, 44, 0.2); transition: all 0.2s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='#111111'" onmouseout="this.style.backgroundColor='#c8232c'">
+                                    More Blogs &rsaquo;
+                                </button>
+                            </a>
                         </div>
 
-                        <!-- Blog Item 4 -->
-                        <div class="col-md-3 col-6" style="margin-bottom: 2rem; display: flex; flex-direction: column;">
-
-                            <div class="latest-image-box" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 4px; overflow: hidden; height: 100%; display: flex; flex-direction: column; box-shadow: 0 3px 10px rgba(0,0,0,0.03); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 10px 20px rgba(17,17,17,0.06)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.03)';">
-
-                                <a href="public/blog/liquid-filling-machine/index.html" style="display: block; width: 100%; aspect-ratio: 16/10; overflow: hidden; background-color: #f7f7f7;">
-                                    <img src="blog/wp-content/uploads/2026/02/blog-Heading-7.png" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';" alt="" />
-                                </a>
-
-                                <div style="padding: 14px; flex-grow: 1; display: flex; flex-direction: column;">
-                                    <a href="public/blog/liquid-filling-machine/index.html" class="blog-title-link" style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: #111111; text-decoration: none; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; transition: color 0.2s ease;">
-                                        7 Key Tips To Select The Perfect Liquid Filling Machine For Your Business
-                                    </a>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- Footer View Action Button -->
-                    <div class="text-center pt-4 pb-3">
-                        <a href="blogs.php" style="text-decoration: none;">
-                            <button type="button" class="btn btn-org-1" style="background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; border: none; padding: 10px 24px; border-radius: 4px; box-shadow: 0 4px 12px rgba(200, 35, 44, 0.2); transition: all 0.2s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='#111111'" onmouseout="this.style.backgroundColor='#c8232c'">
-                                More Blogs &rsaquo;
-                            </button>
-                        </a>
                     </div>
 
                 </div>
 
             </div>
 
-        </div>
+            <!-- Dynamic styling hooks for link title hover triggers -->
+            <style>
+                .latest-image-box:hover .blog-title-link {
+                    color: #c8232c !important;
+                }
+                .latest-image-box{
 
-        <!-- Dynamic styling hooks for link title hover triggers -->
-        <style>
-        .latest-image-box:hover .blog-title-link {
-            color: #c8232c !important;
-        }
-        </style>
+                    background:#ffffff;
+                    border:1px solid #eef0f2;
+                    border-radius:4px;
+                    overflow:hidden;
+
+                    height:100%;
+
+                    display:flex;
+                    flex-direction:column;
+
+                    box-shadow:0 3px 10px rgba(0,0,0,.03);
+
+                    transition:
+                        transform .45s cubic-bezier(.22,.61,.36,1),
+                        box-shadow .45s ease;
+
+                }
+
+                .latest-image-box:hover{
+
+                    transform:translateY(-6px);
+
+                    box-shadow:0 14px 28px rgba(17,17,17,.08);
+
+                }
+
+                .blog-image-link{
+
+                    display:block;
+
+                    width:100%;
+
+                    aspect-ratio:16/10;
+
+                    overflow:hidden;
+
+                    background:#f7f7f7;
+
+                }
+
+                .blog-image-link img{
+
+                    width:100%;
+
+                    height:100%;
+
+                    object-fit:cover;
+
+                    transition:transform .55s ease;
+
+                }
+
+                .latest-image-box:hover img{
+
+                    transform:scale(1.06);
+
+                }
+
+                .blog-content-box{
+
+                    padding:14px;
+
+                    display:flex;
+
+                    flex-grow:1;
+
+                }
+
+                .blog-title-link{
+
+                    font-family:'Montserrat',sans-serif;
+
+                    font-size:13px;
+
+                    font-weight:600;
+
+                    color:#111;
+
+                    text-decoration:none;
+
+                    line-height:1.5;
+
+                    display:-webkit-box;
+
+                    -webkit-line-clamp:3;
+
+                    -webkit-box-orient:vertical;
+
+                    overflow:hidden;
+
+                    transition:color .25s ease;
+
+                }
+
+                .latest-image-box:hover .blog-title-link{
+
+                    color:#c8232c;
+
+                }
+            </style>
         <!-- Latest Blogs Ends -->
         <!-- Latest Blogs Ends -->
 
@@ -1776,320 +1747,765 @@ $featuredCategories = $pdo->query("
         <!-- Google Reviews Section Ends -->
         <!-- Google Review Ends -->
 
-        
-        <!-- Brands Starts -->
-    <!-- Brands Section -->
-<style>
-    /* Section Scoped Styling Variables */
-    :root {
-        --br-bg: #f9f9f9;
-        --br-card-bg: #ffffff;
-        --br-accent: #c8232c;
-        --br-text-dark: #111111;
-        --br-text-muted: #666666;
-        --br-border: rgba(0, 0, 0, 0.04);
-        --br-ease: cubic-bezier(0.16, 1, 0.3, 1);
-    }
 
-    .brands-trusted-wrapper {
-        background-color: var(--br-bg);
-    }
+            <style>
+                /* ==========================================================================
+                INFINITE ASSOCIATE MARQUEE SYSTEM
+                ========================================================================== */
+                .marquee-section {
+                    background-color: #161616; /* Premium Charcoal Black Base */
+                    padding: 40px 0;
+                    overflow: hidden;
+                    border-top: 1px solid #262626;
+                    border-bottom: 1px solid #262626;
+                    position: relative;
+                }
 
-    .brands-title-premium {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 26px;
-        font-weight: 700;
-        color: var(--br-text-dark);
-        letter-spacing: 0.05em;
-        position: relative;
-        padding-bottom: 16px;
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-    }
+                /* Subtle industrial framing gradient overlays to fade logos at edges */
+                .marquee-section::before,
+                .marquee-section::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    width: 150px;
+                    height: 100%;
+                    z-index: 2;
+                    pointer-events: none;
+                }
+                .marquee-section::before {
+                    left: 0;
+                    background: linear-gradient(to right, #161616 0%, rgba(22, 22, 22, 0) 100%);
+                }
+                .marquee-section::after {
+                    right: 0;
+                    background: linear-gradient(to left, #161616 0%, rgba(22, 22, 22, 0) 100%);
+                }
 
-    .brands-title-premium::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 3px;
-        background-color: var(--br-accent);
-    }
+                /* Flex container housing the track wrapper */
+                .marquee-viewport {
+                    display: flex;
+                    width: 100%;
+                }
 
-    .brands-title-icon {
-        max-height: 32px;
-        width: auto;
-    }
+                /* The moving track containing duplicated lists for a perfect infinite loop */
+                .marquee-track {
+                    display: flex;
+                    gap: 60px; /* Uniform spatial distancing between logos */
+                    padding-right: 60px;
+                    animation: premiumMarqueeLoop 25s linear infinite;
+                    will-change: transform;
+                }
 
-    /* Grid Chassis Config */
-    .brands-premium-flexgrid {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        justify-content: center;
-        gap: 16px;
-    }
+                /* Pause on hover mechanism for premium interactive control */
+                .marquee-viewport:hover .marquee-track {
+                    animation-play-state: paused;
+                }
 
-    /* Premium Logo Slot Chassis */
-    .brand-asset-chassis {
-        background: var(--br-card-bg);
-        border: 1px solid var(--br-border);
-        border-radius: 6px;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100px;
-        transition: transform 0.4s var(--br-ease), box-shadow 0.4s var(--br-ease), border-color 0.4s var(--br-ease);
-    }
+                /* Individual Logo Item Architecture */
+                .marquee-logo-item {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 50px;
+                    width: 140px;
+                    flex-shrink: 0;
+                }
 
-    .brand-asset-chassis:hover {
-        transform: translateY(-3px);
-        border-color: rgba(200, 35, 44, 0.12);
-        box-shadow: 0 10px 25px rgba(200, 35, 44, 0.05);
-    }
+                .marquee-logo-item img {
+                    max-width: 100%;
+                    max-height: 100%;
+                    object-fit: contain;
+                    filter: grayscale(0%) brightness(1) invert(0); /* Forces logos to clean White */
+                    opacity: 1;
+                    transition: opacity 0.3s ease, filter 0.3s ease;
+                }
 
-    .brand-vector-img {
-        max-height: 55px;
-        width: auto;
-        object-fit: contain;
-        filter: grayscale(20%);
-        transition: filter 0.4s var(--br-ease), transform 0.4s var(--br-ease);
-    }
+                /* Interactive logo activation highlights on individual focus */
+                .marquee-logo-item img:hover {
+                    opacity: 1;
+                    filter: grayscale(0%) brightness(1) invert(0); /* Restores brand color or fully pops image */
+                }
 
-    .brand-asset-chassis:hover .brand-vector-img {
-        filter: grayscale(0%);
-        transform: scale(1.04);
-    }
+                /* ==========================================================================
+                HARDWARE-ACCELERATED CSS TRACK TRANSLATION KEYFRAMES
+                ========================================================================== */
+                @keyframes premiumMarqueeLoop {
+                    0% {
+                        transform: translate3d(0, 0, 0);
+                    }
+                    100% {
+                        transform: translate3d(-100%, 0, 0);
+                    }
+                }
 
-    .brands-footer-text {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--br-text-muted);
-        letter-spacing: 0.05em;
-    }
+                /* RESPONSIVE CONTROL MATRIX */
+                @media (max-width: 767.98px) {
+                    .marquee-section { padding: 30px 0; }
+                    .marquee-track { gap: 40px; padding-right: 40px; animation-duration: 18s; } /* Slightly faster speed adjustment on small viewports */
+                    .marquee-logo-item { width: 110px; height: 40px; }
+                    .marquee-section::before, .marquee-section::after { width: 60px; }
+                }
+            </style>
 
-    /* Custom Flex Items Breakdowns for a Clean 5-Column Desktop Flow */
-    @media (min-width: 992px) {
-        .brands-premium-flexgrid > div {
-            flex: 0 0 calc(20% - 13px) !important; /* Perfect 5 items row grid flow split */
-            max-width: calc(20% - 13px) !important;
-        }
-    }
-
-    /* Balanced Responsive Grid Downscaling Breakpoints */
-    @media (max-width: 991.98px) {
-        .brands-title-premium {
-            font-size: 22px;
-            padding-bottom: 12px;
-        }
-        .brands-title-premium::after {
-            width: 50px;
-        }
-        .brands-title-icon {
-            max-height: 28px;
-        }
-        .brands-premium-flexgrid > div {
-            flex: 0 0 calc(33.333% - 11px) !important; /* Balanced 3 item grid layout split */
-            max-width: calc(33.333% - 11px) !important;
-        }
-        .brand-asset-chassis {
-            padding: 16px;
-            height: 85px;
-        }
-        .brand-vector-img {
-            max-height: 44px;
-        }
-    }
-
-    @media (max-width: 575.98px) {
-        .brands-premium-flexgrid {
-            gap: 10px;
-        }
-        .brands-premium-flexgrid > div {
-            flex: 0 0 calc(50% - 5px) !important; /* Balanced 2 item square grid mobile split */
-            max-width: calc(50% - 5px) !important;
-        }
-        .brand-asset-chassis {
-            padding: 12px;
-            height: 75px;
-        }
-        .brand-vector-img {
-            max-height: 38px;
-        }
-        .brands-footer-text {
-            font-size: 12px;
-            text-align: center !important;
-        }
-    }
-</style>
-
-<div class="container-fluid brands-trusted-wrapper py-5 mask-reveal reveal-on-scroll">
-    <div class="container py-4">
-        
-        <!-- Premium Section Header -->
-        <div class="text-center mb-5">
-            <h2 class="brands-title-premium text-uppercase">
-                <img src="assets/themes/storefront/public/images/brands-icone8da.png?v=2.0.3" class="brands-title-icon" alt="Trust Icon" />
-                <span>BRANDS WHO TRUST US</span>
+        <!-- ASSOCIATES MARQUEE STRIP -->
+            <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem;">
+                <span style="position: relative; padding-bottom: 12px;">
+                    Our Group Of Plants
+                    <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 90px; height: 3px; background-color: #c8232c;"></span>
+                </span>
             </h2>
-        </div>
+            <div class="marquee-section">
+                <div class="marquee-viewport">
+                    
+                    <!-- TRACK SET A: Primary sequence element loop -->
+                    <div class="marquee-track">
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_01.png" alt="Associate Brand One" loading="lazy"></div>
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_02.png" alt="Associate Brand Two" loading="lazy"></div>
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_03.png" alt="Associate Brand Three" loading="lazy"></div>
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_04.png" alt="Associate Brand Four" loading="lazy"></div>
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_05.png" alt="Associate Brand Five" loading="lazy"></div>
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_06.png" alt="Associate Brand Six" loading="lazy"></div>
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_07.png" alt="Associate Brand Seven" loading="lazy"></div>
+                    </div>
 
-        <!-- Premium Clean Layout Unified Brand Asset Grid Flow -->
-        <div class="row brands-premium-flexgrid mb-4">
-            
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-1e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 1" />
+                    <!-- TRACK SET B: Exact clone sequence element to prevent visual popping/gaps at loop boundaries -->
+                    <div class="marquee-track" aria-hidden="true">
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_01.png" alt="Associate Brand One" loading="lazy"></div>
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_02.png" alt="Associate Brand Two" loading="lazy"></div>
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_03.png" alt="Associate Brand Three" loading="lazy"></div>
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_04.png" alt="Associate Brand Four" loading="lazy"></div>
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_05.png" alt="Associate Brand Five" loading="lazy"></div>
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_06.png" alt="Associate Brand Six" loading="lazy"></div>
+                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_07.png" alt="Associate Brand Seven" loading="lazy"></div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-2e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 2" />
-                </div>
-            </div>
 
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-3e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 3" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-4e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 4" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-5e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 5" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-6e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 6" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-7e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 7" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-8e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 8" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-9e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 9" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-10e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 10" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-11e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 11" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-12e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 12" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-13e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 13" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-14e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 14" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-15e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 15" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-16e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 16" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-17e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 17" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-18e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 18" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/brands-icon-19e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 19" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/Keventers-13e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Keventers Logo" />
-                </div>
-            </div>
-
-            <div class="p-0">
-                <div class="brand-asset-chassis">
-                    <img src="assets/themes/storefront/public/images/TRUEOILe8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Section Accent Footer -->
-        <div class="pt-2">
-            <h3 class="text-md-right text-center text-uppercase brands-footer-text pr-md-2">And many more</h3>
-        </div>
-
-    </div>
-</div>
-
-    <style>
-        /* Premium Orange Accent Modifications over base style */
-        .btn-org { background: #c8232c; color: #fff; font-size: 14px; padding: 6px 30px; border-radius: 5px; transition: background 0.2s ease; }
-        .btn-org:hover, .btn-org:focus { color: #fff; background: #111111; }
-        .btn-org-1 { background: #c8232c; color: #fff; font-size: 14px; padding: 6px 20px; border-radius: 5px; transition: background 0.2s ease; }
-        .btn-org-1:hover { color: #fff; background: #111111; }
-        .btn-white-outline { background: #fff; color: #404040; border: 1px solid #cccccc; font-size: 14px; padding: 2px 16px; }
-        .btm-colors { width: 100%; min-height: 25px; }
-        .float-red-btn { position: absolute; width: 50%; margin: 0 auto; background: #c8232c; text-align: center; font-size: 14px; color: #fff; left: 26%; bottom: 18%; display: none; }
         
-        div.show-buy-now-btn { position: relative; }
-        div.show-buy-now-btn:hover button { display: block; }
-    </style>
+        
+            <!-- Brands Starts -->
+        <!-- Brands Section -->
+        <style>
+            /* Section Scoped Styling Variables */
+            :root {
+                --br-bg: #f9f9f9;
+                --br-card-bg: #ffffff;
+                --br-accent: #c8232c;
+                --br-text-dark: #111111;
+                --br-text-muted: #666666;
+                --br-border: rgba(0, 0, 0, 0.04);
+                --br-ease: cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .brands-trusted-wrapper {
+                background-color: var(--br-bg);
+            }
+
+            .brands-title-premium {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 26px;
+                font-weight: 700;
+                color: var(--br-text-dark);
+                letter-spacing: 0.05em;
+                position: relative;
+                padding-bottom: 16px;
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .brands-title-premium::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 3px;
+                background-color: var(--br-accent);
+            }
+
+            .brands-title-icon {
+                max-height: 32px;
+                width: auto;
+            }
+
+            /* Grid Chassis Config */
+            .brands-premium-flexgrid {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                justify-content: center;
+                gap: 16px;
+            }
+
+            /* Premium Logo Slot Chassis */
+            .brand-asset-chassis {
+                background: var(--br-card-bg);
+                border: 1px solid var(--br-border);
+                border-radius: 6px;
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100px;
+                transition: transform 0.4s var(--br-ease), box-shadow 0.4s var(--br-ease), border-color 0.4s var(--br-ease);
+            }
+
+            .brand-asset-chassis:hover {
+                transform: translateY(-3px);
+                border-color: rgba(200, 35, 44, 0.12);
+                box-shadow: 0 10px 25px rgba(200, 35, 44, 0.05);
+            }
+
+            .brand-vector-img {
+                max-height: 55px;
+                width: auto;
+                object-fit: contain;
+                filter: grayscale(20%);
+                transition: filter 0.4s var(--br-ease), transform 0.4s var(--br-ease);
+            }
+
+            .brand-asset-chassis:hover .brand-vector-img {
+                filter: grayscale(0%);
+                transform: scale(1.04);
+            }
+
+            .brands-footer-text {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--br-text-muted);
+                letter-spacing: 0.05em;
+            }
+
+            /* Custom Flex Items Breakdowns for a Clean 5-Column Desktop Flow */
+            @media (min-width: 992px) {
+                .brands-premium-flexgrid > div {
+                    flex: 0 0 calc(20% - 13px) !important; /* Perfect 5 items row grid flow split */
+                    max-width: calc(20% - 13px) !important;
+                }
+            }
+
+            /* Balanced Responsive Grid Downscaling Breakpoints */
+            @media (max-width: 991.98px) {
+                .brands-title-premium {
+                    font-size: 22px;
+                    padding-bottom: 12px;
+                }
+                .brands-title-premium::after {
+                    width: 50px;
+                }
+                .brands-title-icon {
+                    max-height: 28px;
+                }
+                .brands-premium-flexgrid > div {
+                    flex: 0 0 calc(33.333% - 11px) !important; /* Balanced 3 item grid layout split */
+                    max-width: calc(33.333% - 11px) !important;
+                }
+                .brand-asset-chassis {
+                    padding: 16px;
+                    height: 85px;
+                }
+                .brand-vector-img {
+                    max-height: 44px;
+                }
+            }
+
+            @media (max-width: 575.98px) {
+                .brands-premium-flexgrid {
+                    gap: 10px;
+                }
+                .brands-premium-flexgrid > div {
+                    flex: 0 0 calc(50% - 5px) !important; /* Balanced 2 item square grid mobile split */
+                    max-width: calc(50% - 5px) !important;
+                }
+                .brand-asset-chassis {
+                    padding: 12px;
+                    height: 75px;
+                }
+                .brand-vector-img {
+                    max-height: 38px;
+                }
+                .brands-footer-text {
+                    font-size: 12px;
+                    text-align: center !important;
+                }
+            }
+        </style>
+
+        <div class="container-fluid brands-trusted-wrapper py-5 mask-reveal reveal-on-scroll">
+            <div class="container py-4">
+                
+                <!-- Premium Section Header -->
+                <div class="text-center mb-5">
+                    <h2 class="brands-title-premium text-uppercase">
+                        <img src="assets/themes/storefront/public/images/brands-icone8da.png?v=2.0.3" class="brands-title-icon" alt="Trust Icon" />
+                        <span>BRANDS WHO TRUST US</span>
+                    </h2>
+                </div>
+
+                <!-- Premium Clean Layout Unified Brand Asset Grid Flow -->
+                <div class="row brands-premium-flexgrid mb-4">
+                    
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-1e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 1" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-2e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 2" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-3e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 3" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-4e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 4" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-5e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 5" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-6e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 6" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-7e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 7" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-8e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 8" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-9e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 9" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-10e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 10" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-11e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 11" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-12e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 12" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-13e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 13" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-14e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 14" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-15e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 15" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-16e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 16" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-17e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 17" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-18e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 18" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brands-icon-19e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 19" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/Keventers-13e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Keventers Logo" />
+                        </div>
+                    </div>
+
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/TRUEOILe8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Section Accent Footer -->
+                <div class="pt-2">
+                    <h3 class="text-md-right text-center text-uppercase brands-footer-text pr-md-2">And many more</h3>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- DEPENDENCIES FOR ICONS AND FONTS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        <style>
+            /* ==========================================================================
+            CATALOG SYSTEM BASE ARCHITECTURE
+            ========================================================================== */
+            .catalog-section {
+                background-color: #ffffff;
+                padding: 80px 0;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            /* Section Typography Header Block */
+            .catalog-header {
+                max-width: 700px;
+                margin-bottom: 50px;
+            }
+
+            .catalog-pretitle {
+                display: inline-block;
+                font-size: 11px;
+                font-weight: 700;
+                color: #c8232c; /* Alok Red */
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+                margin-bottom: 12px;
+            }
+
+            .catalog-title {
+                font-size: 32px;
+                font-weight: 800;
+                color: #111111; /* Charcoal Black base */
+                text-transform: uppercase;
+                letter-spacing: 0.03em;
+                line-height: 1.2;
+            }
+
+            /* ==========================================================================
+            ASYMMETRIC GRID WORKSPACE
+            ========================================================================== */
+            .catalog-master-grid {
+                display: flex;
+                gap: 30px;
+                align-items: stretch;
+            }
+
+            /* PRIMARY FEATURED BLOCK CONTAINER */
+            .catalog-featured-pillar {
+                flex: 0 0 45%;
+                display: flex;
+            }
+
+            .catalog-featured-card {
+                background: #161616; /* Charcoal Panel Frame */
+                border: 1px solid #262626;
+                border-radius: 8px;
+                padding: 40px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: relative;
+                overflow: hidden;
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            /* Subtle decorative industrial structural element inside card background */
+            .catalog-featured-card::before {
+                content: '\f1c1';
+                font-family: 'Font Awesome 6 Free';
+                font-weight: 900;
+                position: absolute;
+                right: -20px;
+                bottom: -30px;
+                font-size: 200px;
+                color: rgba(255, 255, 255, 0.02);
+                pointer-events: none;
+                transition: color 0.4s ease;
+            }
+
+            .catalog-featured-card:hover::before {
+                color: rgba(200, 35, 44, 0.04); /* Glows faint red on focus */
+            }
+
+            /* SECONDARY PRODUCT RANGE GRID */
+            .catalog-matrix-pillar {
+                flex: 1;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .catalog-item-card {
+                background: #ffffff;
+                border: 1px solid #eef0f2;
+                border-radius: 8px;
+                padding: 24px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            /* ==========================================================================
+            TYPOGRAPHY AND INTERACTIVE BUTTON ELEMENT ACTIONS
+            ========================================================================== */
+            .catalog-badge {
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                padding: 4px 10px;
+                border-radius: 2px;
+                display: inline-block;
+                margin-bottom: 20px;
+            }
+            
+            .featured-badge { background: #c8232c; color: #ffffff; }
+            .standard-badge { background: #f4f5f7; color: #666666; }
+
+            .catalog-name {
+                font-weight: 700;
+                line-height: 1.4;
+                margin-bottom: 8px;
+                color: #ffffff !important;
+            }
+            .featured-name { font-size: 24px; color: #ffffff; }
+            .standard-name { font-size: 16px; color: #111111; }
+
+            .catalog-meta {
+                font-size: 12px;
+                font-weight: 500;
+                margin-bottom: 30px;
+            }
+            .featured-meta { color: #888888; }
+            .standard-meta { color: #999999; }
+
+            /* Clean Action Icons Buttons Layout */
+            .catalog-download-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                font-size: 12px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                text-decoration: none !important;
+                padding: 14px 24px;
+                border-radius: 4px;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+
+            .btn-premium-red {
+                background: #c8232c;
+                color: #ffffff;
+                border: 1px solid #c8232c;
+            }
+            .btn-premium-red:hover {
+                background: #ffffff;
+                color: #c8232c;
+            }
+
+            .btn-outline-charcoal {
+                background: transparent;
+                color: #111111;
+                border: 1px solid #111111;
+                margin-top: auto;
+            }
+            .btn-outline-charcoal:hover {
+                background: #c8232c;
+                color: #ffffff;
+                border-color: #c8232c;
+            }
+
+            /* CARD HOVER TRIGGER EFFECTS */
+            .catalog-featured-card:hover {
+                transform: translateY(-5px);
+                border-color: #c8232c;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            }
+
+            .catalog-item-card:hover {
+                transform: translateY(-5px);
+                border-color: #c8232c;
+                box-shadow: 0 15px 35px rgba(17, 17, 17, 0.05);
+            }
+
+            /* ==========================================================================
+            RESPONSIVE MATRIX BREAKPOINTS
+            ========================================================================== */
+            @media (max-width: 991.98px) {
+                .catalog-master-grid {
+                    flex-direction: column;
+                }
+                .catalog-featured-pillar {
+                    width: 100%;
+                    flex: 0 0 auto;
+                }
+            }
+
+            @media (max-width: 767.98px) {
+                .catalog-section { padding: 50px 0; }
+                .catalog-title { font-size: 26px; }
+                .catalog-matrix-pillar {
+                    grid-template-columns: 1fr;
+                    gap: 16px;
+                }
+                .catalog-featured-card { padding: 30px; }
+                .featured-name { font-size: 20px; }
+            }
+        </style>
+
+        <!-- CATALOG DOWNLOAD SECTION -->
+        <div class="catalog-section">
+            <div class="container">
+                
+                <!-- Premium Section Header Box -->
+                <div class="catalog-header">
+                    <span class="catalog-pretitle">Resources</span>
+                    <h2 class="catalog-title">Product Catalogs & Technical Media</h2>
+                </div>
+
+                <!-- Master Asymmetric Grid Layout -->
+                <div class="catalog-master-grid">
+                    
+                    <!-- MASTER/MAIN CATALOG FLANK -->
+                    <div class="catalog-featured-pillar">
+                        <div class="catalog-featured-card">
+                            <div>
+                                <span class="catalog-badge featured-badge">Complete Collection</span>
+                                <h3 class="catalog-name featured-name">2026 Master Product Catalog</h3>
+                                <p class="catalog-meta featured-meta"><i class="fa-regular fa-file-pdf"></i> PDF Format &bull; 45 MB &bull; English</p>
+                            </div>
+                            <div>
+                                <a href="assets/docs/catalogs/master_catalog_2026.pdf" download class="catalog-download-btn btn-premium-red w-100">
+                                    <i class="fa-solid fa-arrow-down-to-line"></i> Download Master Catalog
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SPECIALIZED SUB-CATALOGS GRID FLANK -->
+                    <div class="catalog-matrix-pillar">
+                        
+                        <!-- Item Card 1 -->
+                        <div class="catalog-item-card">
+                            <div>
+                                <span class="catalog-badge standard-badge">Range 01</span>
+                                <h4 class="catalog-name standard-name">Square & Round Glass Jars</h4>
+                                <p class="catalog-meta standard-meta"><i class="fa-regular fa-file-pdf"></i> PDF &bull; 12 MB</p>
+                            </div>
+                            <a href="assets/docs/catalogs/glass_jars_brochure.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </a>
+                        </div>
+
+                        <!-- Item Card 2 -->
+                        <div class="catalog-item-card">
+                            <div>
+                                <span class="catalog-badge standard-badge">Range 02</span>
+                                <h4 class="catalog-name standard-name">Premium Beverage Bottles</h4>
+                                <p class="catalog-meta standard-meta"><i class="fa-regular fa-file-pdf"></i> PDF &bull; 8.4 MB</p>
+                            </div>
+                            <a href="assets/docs/catalogs/beverage_bottles_brochure.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </a>
+                        </div>
+
+                        <!-- Item Card 3 -->
+                        <div class="catalog-item-card">
+                            <div>
+                                <span class="catalog-badge standard-badge">Technical</span>
+                                <h4 class="catalog-name standard-name">Specifications & Tolerances</h4>
+                                <p class="catalog-meta standard-meta"><i class="fa-regular fa-file-pdf"></i> PDF &bull; 4.2 MB</p>
+                            </div>
+                            <a href="assets/docs/catalogs/technical_specifications.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </a>
+                        </div>
+
+                        <!-- Item Card 4 -->
+                        <div class="catalog-item-card">
+                            <div>
+                                <span class="catalog-badge standard-badge">Logistics</span>
+                                <h4 class="catalog-name standard-name">Packaging & Shipping Guide</h4>
+                                <p class="catalog-meta standard-meta"><i class="fa-regular fa-file-pdf"></i> PDF &bull; 3.1 MB</p>
+                            </div>
+                            <a href="assets/docs/catalogs/shipping_packaging_guide.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        
+
+        <style>
+            /* Premium Orange Accent Modifications over base style */
+            .btn-org { background: #c8232c; color: #fff; font-size: 14px; padding: 6px 30px; border-radius: 5px; transition: background 0.2s ease; }
+            .btn-org:hover, .btn-org:focus { color: #fff; background: #111111; }
+            .btn-org-1 { background: #c8232c; color: #fff; font-size: 14px; padding: 6px 20px; border-radius: 5px; transition: background 0.2s ease; }
+            .btn-org-1:hover { color: #fff; background: #111111; }
+            .btn-white-outline { background: #fff; color: #404040; border: 1px solid #cccccc; font-size: 14px; padding: 2px 16px; }
+            .btm-colors { width: 100%; min-height: 25px; }
+            .float-red-btn { position: absolute; width: 50%; margin: 0 auto; background: #c8232c; text-align: center; font-size: 14px; color: #fff; left: 26%; bottom: 18%; display: none; }
+            
+            div.show-buy-now-btn { position: relative; }
+            div.show-buy-now-btn:hover button { display: block; }
+        </style>
 </main>
 
 <?php include 'includes/footer.php'; ?>

@@ -6,7 +6,7 @@
     /* Scope-isolated theme to ensure it never breaks your main code logic */
     .alok-industrial-footer {
         font-family: 'Montserrat', sans-serif !important;
-        background: #11141a !important; /* Deep industrial slate black */
+        background: #000000 !important; /* Deep industrial slate black */
         color: #a3aab5 !important;
         font-size: 14px;
         line-height: 1.8;
@@ -91,7 +91,7 @@
     }
 
     .alok-industrial-footer ul li a:hover {
-        color: #ffffff !important;
+        color: #c8232c !important;
         transform: translateX(6px); /* Clean sliding link interaction */
     }
 
@@ -157,8 +157,8 @@
     /* Premium Bottom Copyright Bar with subtle pulse */
     .alok-copyright-bar {
         font-family: 'Montserrat', sans-serif !important;
-        background: #090b0e !important;
-        color: #626973 !important;
+        background: #000000 !important;
+        color: #c8232c !important;
         font-size: 13px;
         font-weight: 400;
         border-top: 1px solid #161a22;
@@ -284,6 +284,7 @@
                     <li><a href="privacy.php" target="_blank">Privacy Policy</a></li>
                     <li><a href="terms.php" target="_blank">Terms and Conditions</a></li> 
                     <li><a href="contact" target="_blank">Contact Us</a></li>
+                    <li><a href="tour.php" target="_blank">Factory Tour</a></li>
                 </ul>
             </div>
 
@@ -329,6 +330,9 @@ function googleTranslateElementInit() {
 </script>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- Bootstrap 5 JavaScript Bundle with Popper -->
+<script src="https://jsdelivr.net"></script>
+
 </body>
 </html>
 

@@ -18,7 +18,7 @@ $navCategories = $navStmt->fetchAll();
 <!-- Mirrored from www.ajantabottle.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 May 2026 05:30:04 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-    <base href="/">
+    <base href="/ajanta-project/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
@@ -545,11 +545,11 @@ $navCategories = $navStmt->fetchAll();
                         
                         <!-- Flex layout container for responsive brand balancing -->
                         <div class="d-flex align-items-center" style="gap: 12px; max-width: 70%;">
-                            <a class="navbar-brand header-logo-link" href="index.html" style="margin: 0; padding: 0;">
+                            <a class="navbar-brand header-logo-link" href="index.php" style="margin: 0; padding: 0;">
                                 <img src="assets/themes/storefront/public/images/logo.jpeg?v=2.0.3" alt="Alok Glass Works" style="height: 45px; width: auto; object-fit: contain;" />
                             </a>
                             <div style="height: 25px; width: 1px; background-color: #e2e4e8;"></div>
-                            <a href="index.html" class="header-logo-link" style="display: inline-block; filter: grayscale(1) contrast(1.1); opacity: 0.85;">
+                            <a href="index.php" class="header-logo-link" style="display: inline-block; filter: grayscale(1) contrast(1.1); opacity: 0.85;">
                                 <img src="assets/themes/storefront/public/images/40-years-trust2e8da.png?v=2.0.3" alt="40 Years Trust" style="height: 35px; width: auto; object-fit: contain;" />
                             </a>
                             <div id="google_translate_element"
@@ -561,7 +561,8 @@ $navCategories = $navStmt->fetchAll();
                             style="margin-left:auto; margin-right:12px;">
                         </div>
                         
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" style="border: none; background: transparent; padding: 4px 0; outline: none !important;">
+                        <!-- Fixed Toggler Button: Changed data-toggle and data-target to data-bs-toggle and data-bs-target -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" style="border: none; background: transparent; padding: 4px 0; outline: none !important;">
                             <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 0.05em; margin-right: 4px; color: #11141a; vertical-align: middle;">MENU</span>
                             <span class="navbar-toggler-icon" style="width: 20px; height: 20px; vertical-align: middle;"></span>
                         </button>
@@ -569,8 +570,9 @@ $navCategories = $navStmt->fetchAll();
                         <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
                             <ul class="navbar-nav" style="padding-top: 15px;">
 
+                                <!-- Fixed Dropdown Link: Changed data-toggle to data-bs-toggle -->
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown08" href="javascript:void(0);" aria-haspopup="true" aria-expanded="false" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;"> Shop By Industry </a>
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="dropdown08" href="javascript:void(0);" aria-haspopup="true" aria-expanded="false" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;"> Shop By Industry </a>
                                         
                                     <?php
                                     $navCategories = $pdo->query("
@@ -580,29 +582,22 @@ $navCategories = $navStmt->fetchAll();
                                     ")->fetchAll();
                                     ?>
 
-                                        <div class="dropdown-menu" aria-labelledby="dropdown08" style="border: none; background-color: #f8f9fa; border-radius: 6px; padding: 10px 15px;">
+                                    <div class="dropdown-menu" aria-labelledby="dropdown08" style="border: none; background-color: #f8f9fa; border-radius: 6px; padding: 10px 15px;">
                                         <?php foreach($navCategories as $cat): ?>
-                                            <a
-                                                class="dropdown-item"
-                                                href="category/<?= urlencode($cat['slug']) ?>"
-                                                style="font-size: 14px; padding: 10px 0; color: #2c323e; font-weight: 500;"
-                                            >
+                                            <a class="dropdown-item" href="category/<?= urlencode($cat['slug']) ?>" style="font-size: 14px; padding: 10px 0; color: #2c323e; font-weight: 500;">
                                                 <?= htmlspecialchars($cat['name']) ?>
                                             </a>
-                                            <?php endforeach; ?>
-                                        </div>
+                                        <?php endforeach; ?>
+                                    </div>
                                 </li>
                             
+                                <!-- Fixed Dropdown Link: Changed data-toggle to data-bs-toggle -->
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown08_prod" href="javascript:void(0);" aria-haspopup="true" aria-expanded="false" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;"> Shop By Product </a>
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="dropdown08_prod" href="javascript:void(0);" aria-haspopup="true" aria-expanded="false" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;"> Shop By Product </a>
                                         
                                     <div class="dropdown-menu" aria-labelledby="dropdown08_prod" style="border: none; background-color: #f8f9fa; border-radius: 6px; padding: 10px 15px;">
                                         <?php foreach($navCategories as $cat): ?>
-                                            <a
-                                                class="dropdown-item"
-                                                href="category/<?= urlencode($cat['slug']) ?>"
-                                                style="font-size: 14px; padding: 10px 0; color: #2c323e; font-weight: 500;"
-                                                >
+                                            <a class="dropdown-item" href="category/<?= urlencode($cat['slug']) ?>" style="font-size: 14px; padding: 10px 0; color: #2c323e; font-weight: 500;">
                                                 <?= htmlspecialchars($cat['name']) ?>
                                             </a>
                                         <?php endforeach; ?>
@@ -611,19 +606,18 @@ $navCategories = $navStmt->fetchAll();
                                 
                                 <li class="nav-item">
                                     <a class="nav-link" href="decoration-services.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
-                                        Decoration Services
+                                        Our Associates
                                     </a>
                                 </li>
-                                
                                 <li class="nav-item">
-                                    <a class="nav-link" href="category.php?slug=akikai-packaging-machines" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
-                                        Akikai Packaging Machines
+                                    <a class="nav-link" href="decoration-services.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
+                                        Decoration Services
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="category.php?slug=colour-cosmetics-packaging" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
-                                        Colour Cosmetics Packaging
+                                    <a class="nav-link" href="about.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
+                                        About Us
                                     </a>
                                 </li>
 
@@ -638,9 +632,15 @@ $navCategories = $navStmt->fetchAll();
                                         Contact Us
                                     </a>
                                 </li>
-                        
+                                <li class="nav-item">
+                                    <a class="nav-link" href="track-order.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
+                                        Track Order
+                                    </a>
+                                </li>
+
                             </ul> 
                         </div>
+
 
                     </nav>
                     <!-- Navigation Ends -->
@@ -674,7 +674,7 @@ $navCategories = $navStmt->fetchAll();
                             <select
                                 name="category"
                                 class="form-control"
-                                style="max-width: 160px; border: none; font-size: 13px; font-weight: 500; color: #5a6578; padding: 10px 12px; height: auto; box-shadow: none; background: transparent; cursor: pointer; -webkit-appearance: none; -moz-appearance: none;"
+                                style="max-width: 160px; border: none; font-size: 13px; font-weight: 500; color: #c8232c; padding: 10px 12px; height: auto; box-shadow: none; background: transparent; cursor: pointer; -webkit-appearance: none; -moz-appearance: none;"
                             >
                                 <option value="">
                                     All Categories
@@ -694,9 +694,9 @@ $navCategories = $navStmt->fetchAll();
                                 <button
                                     class="btn btn-dark"
                                     type="submit"
-                                    style="border: none; border-radius: 0; background-color: #11141a; color: #ffffff; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; padding: 12px 20px; height: auto; transition: background-color 0.2s ease;"
+                                    style="border: none; border-radius: 0; background-color: #c8232c; color: #ffffff; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; padding: 12px 20px; height: auto; transition: background-color 0.2s ease;"
                                     onmouseover="this.style.backgroundColor='#2c323e'"
-                                    onmouseout="this.style.backgroundColor='#11141a'"
+                                    onmouseout="this.style.backgroundColor='#c8232c'"
                                 >
                                     Search
                                 </button>
@@ -858,6 +858,11 @@ $navCategories = $navStmt->fetchAll();
 
                     <!-- Decoration Services -->
                     <li class="nav-item">
+                        <a class="nav-link" href="plants.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+                            Our Associates
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="decoration-services.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
                             Decoration Services
                         </a>
@@ -865,14 +870,14 @@ $navCategories = $navStmt->fetchAll();
 
                     <!-- Colour Cosmetics Packaging -->
                     <li class="nav-item">
-                        <a class="nav-link" href="category.php?slug=colour-cosmetics-packaging" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
-                            Colour Cosmetics Packaging
+                        <a class="nav-link" href="about.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+                            About Us
                         </a>
                     </li>
 
                     <!-- Blogs and Videos -->
                     <li class="nav-item">
-                        <a class="nav-link" href="blogs.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+                        <a class="nav-link" href="resources.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
                             Blogs &amp; Videos
                         </a>
                     </li>

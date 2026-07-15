@@ -1,3 +1,243 @@
+TARGET = AAJ ALOK KHATAM KARNA HAI 
+
+sales@alokglass.com, Agarwalp2084!
+
+things to do first 
+
+our clients page 
+gift pack products sections
+contact inquiry should go to sales@alokglass.com as well 
+
+
+
+
+
+DATABASE CHANGES:-
+
+category table me section_title bhar diye h local me 
+
+
+
+
+removed shop by industry section from home page 
+changed footer to black - red branding 
+track-order , no need to be logged in 
+made one page for blogs and videos that fetches few latest things with view all buttons to redirect 
+changed home hero video to old website's one .
+arranged products as better as desired
+fetch our latest blogs on home page 
+factory tour page added 
+made a section for catalog to download on home before footer
+made our plant/group/factories section with their logos 
+
+
+
+
+
+
+ <!-- Colour Cosmetics Packaging -->
+    <li class="nav-item">
+        <a class="nav-link" href="category.php?slug=colour-cosmetics-packaging" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+            Colour Cosmetics Packaging
+        </a>
+    </li>
+
+
+<!-- Shop by Industry Starts -->
+        <!-- HIGHER-END COMPONENT STYLING ENGINE -->
+        <style>
+            /* Component Reset & Scoping */
+            .industry-section-wrapper {
+                font-family: 'Montserrat', sans-serif;
+                background-color: #ffffff;
+            }
+
+            /* Minimalist High-End Section Title */
+            .industry-main-title {
+                font-size: 32px;
+                font-weight: 800;
+                color: #111111;
+                letter-spacing: 0.04em;
+                position: relative;
+                display: inline-block;
+                padding-bottom: 16px;
+            }
+            .industry-main-title::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 50px;
+                height: 3px;
+                background-color: #c8232c;
+            }
+
+            /* B2B Industry Mega Container Card */
+            .industry-mega-card {
+                background-color: #ffffff;
+                border: 1px solid #eef0f2;
+                border-top: 4px solid #111111;
+                border-radius: 6px;
+                height: 100%;
+                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                            border-top-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            }
+            .industry-mega-card:hover {
+                transform: translateY(-6px);
+                border-color: #e2e4e8;
+                border-top-color: #c8232c;
+                box-shadow: 0 20px 38px rgba(17, 17, 17, 0.07);
+            }
+
+            /* Elegant Structural Heading Links */
+            .industry-card-heading {
+                font-size: 20px;
+                font-weight: 700;
+                color: #111111;
+                letter-spacing: 0.01em;
+            }
+
+            /* Product Mini Grid Wrappers */
+            .industry-product-media-link {
+                display: block;
+                overflow: hidden;
+                border-radius: 6px;
+                background-color: #ffffff;
+                border: 1px solid #f0f0f0;
+                padding: 12px;
+                transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            }
+            .industry-product-media-link img {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+                object-fit: contain;
+                transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            
+            /* Interactive States tied logically to hovering any part of the micro item */
+            .industry-product-cell:hover .industry-product-media-link {
+                border-color: #e2e4e8;
+                box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+            }
+            .industry-product-cell:hover .industry-product-media-link img {
+                transform: scale(1.06);
+            }
+            .industry-product-cell:hover .industry-product-title {
+                color: #c8232c;
+            }
+
+            /* Typography Clamping Engine */
+            .industry-product-title {
+                font-size: 13px;
+                font-weight: 600;
+                color: #222222;
+                text-decoration: none;
+                line-height: 1.4;
+                margin-top: 10px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                height: 36px;
+                transition: color 0.2s ease;
+            }
+            .industry-product-title:hover {
+                text-decoration: none;
+            }
+        </style>
+
+        <!-- INDUSTRY DISPLAY LAYOUT MODALITY -->
+        <div class="container industry-section-wrapper py-5 reveal-on-scroll">
+
+            <!-- Section Title Area -->
+            <div class="text-center mb-5 pb-2">
+                <h2 class="text-uppercase industry-main-title">
+                    Shop by Industry
+                </h2>
+            </div>
+
+            <!-- Active Structural Row Grid -->
+            <div class="row">
+
+                <?php foreach($categories as $category): ?>
+
+                    <div class="col-lg-6 mb-4 pb-2">
+
+                        <!-- Industry Category Card Container -->
+                        <div class="industry-mega-card p-4 p-md-5">
+
+                            <!-- Category Heading -->
+                            <h3 class="industry-card-heading mb-4">
+                                <?= htmlspecialchars($category['name']) ?>
+                            </h3>
+
+                            <!-- Fluid Inner Grid Layout -->
+                            <div class="row g-3">
+
+                                <?php
+                                $stmt = $pdo->prepare("
+                                    SELECT * FROM products
+                                    WHERE category_id = ?
+                                    LIMIT 4
+                                ");
+                                $stmt->execute([$category['id']]);
+                                $categoryProducts = $stmt->fetchAll();
+                                ?>
+
+                                <?php foreach($categoryProducts as $product): ?>
+
+                                    <!-- Product Grid Cell Element -->
+                                    <div class="col-6 col-sm-3 col-md-6 col-lg-3 text-center industry-product-cell d-flex flex-column align-items-center">
+
+                                        <!-- Interactive Image Link wrapper -->
+                                        <a href="product.php?slug=<?= $product['slug'] ?>" class="industry-product-media-link w-100">
+                                            <img src="<?= $product['image'] ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                                        </a>
+
+                                        <!-- Product Anchor Title -->
+                                        <a href="product.php?slug=<?= $product['slug'] ?>" class="industry-product-title">
+                                            <?= htmlspecialchars($product['name']) ?>
+                                        </a>
+
+                                    </div>
+
+                                <?php endforeach; ?>
+
+                                <!-- Empty Result Space Control Fallback if needed -->
+                                <?php if (empty($categoryProducts)): ?>
+                                    <div class="col-12 text-muted py-3" style="font-size: 13px;">No direct product configurations allocated inside this grouping.</div>
+                                <?php endif; ?>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        </div>
+<!-- Shop by Industry Ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 STEP 1
 
 Create database:

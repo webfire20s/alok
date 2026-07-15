@@ -95,7 +95,7 @@ include 'includes/header.php';
         width: 100%;
         aspect-ratio: 4 / 3;
         background-color: #fcfbfa;
-        border: 1px solid #f0f0f0;
+        border: 1px solid #c8232c;
         border-radius: 4px;
         overflow: hidden;
         margin-bottom: 20px;
@@ -293,54 +293,220 @@ include 'includes/header.php';
     </div>
 </section>
 
-<!-- RESPONSIVE ANIMATED CERTIFICATIONS SECTION -->
-<section class="py-5 certificates-section reveal-on-scroll">
-    <div class="container py-4">
+<!-- RESPONSIVE ANIMATED OUR JOURNEY SECTION -->
+<style>
+    /* COMPACT VISIBILITY TIMELINE ENGINE */
+    .brand-journey-wrapper {
+        background: #111111 !important;
+        padding: 50px 0;
+        font-family: 'Poppins', sans-serif;
+        position: relative;
+    }
+
+    /* Horizontal Grid Controller */
+    .journey-split-grid {
+        display: flex;
+        align-items: stretch; /* Forces both columns to match height perfectly */
+        gap: 30px;
+    }
+
+    /* Left Column matching the exact structure of the right container */
+    .journey-left-pillar {
+        flex: 0 0 35%;
+        z-index: 2;
+        background: #161616 !important;
+        border: 1px solid #262626;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 30px;
+        height: 320px;
+        box-sizing: border-box;
+    }
+
+    .journey-main-title {
+        font-size: 28px;
+        font-weight: 800;
+        color: #ffffff !important;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+        margin: 0;
+    }
+    .journey-main-title span {
+        color: #c8232c !important; /* Brand Crimson */
+    }
+
+    /* Navigation Arrow Placements inside the left card */
+    .brand-journey-wrapper .journey-nav-wrapper {
+        display: flex;
+        gap: 8px;
+        margin-top: auto;
+    }
+    .brand-journey-wrapper .journey-nav-wrapper button {
+        background: #222222 !important;
+        border: 1px solid #333333 !important;
+        color: #ffffff !important;
+        width: 40px;
+        height: 40px;
+        border-radius: 4px !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px !important;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .brand-journey-wrapper .journey-nav-wrapper button:hover {
+        background: #c8232c !important;
+        border-color: #c8232c !important;
+    }
+
+    /* RIGHT QUADRANT: SLIDING CONTAINER AREA */
+    .journey-right-canvas {
+        flex: 1;
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid #262626;
+        height: 320px;
+        background: #161616 !important;
+    }
+
+    /* Pure CSS Content Node - Handled natively without plugins */
+    .journey-slide-item-native {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #1a1a1a !important;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        transform: translateX(20px); /* Tighter clean entrance feel */
+    }
+
+    /* Visible State Activation Rules */
+    .journey-slide-item-native.active-slide {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0);
+    }
+
+    /* Identical Shape & Style Content Card Frame */
+    .journey-sliding-card {
+        position: relative;
+        z-index: 10;
+        background: #161616 !important; /* Exact same color matching left panel */
+        border-left: 4px solid #c8232c !important;
+        padding: 30px;
+        margin: 0 30px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .journey-meta-year {
+        font-size: 38px;
+        font-weight: 800;
+        color: #ffffff !important;
+        line-height: 1;
+        margin: 0 0 12px 0;
+        letter-spacing: -0.01em;
+    }
+
+    .journey-slide-desc {
+        font-size: 14px;
+        color: #e5e7eb !important;
+        line-height: 1.6;
+        font-weight: 400;
+        margin-bottom: 0;
+    }
+
+    /* MOBILE RESPONSE LAYOUT MATRIX ADJUSTMENTS */
+    @media (max-width: 991.98px) {
+        .brand-journey-wrapper { padding: 40px 0; }
+        .journey-split-grid { flex-direction: column; gap: 20px; }
+        .journey-left-pillar { flex: 0 0 auto; width: 100%; height: auto; min-height: 180px; text-align: center; align-items: center; }
+        .journey-right-canvas { height: 280px; }
+        .journey-sliding-card { margin: 0; padding: 20px; border-radius: 4px; }
+        .journey-meta-year { font-size: 32px; }
+        .brand-journey-wrapper .journey-nav-wrapper { justify-content: center; margin-top: 20px; }
+    }
+</style>
+
+<section class="brand-journey-wrapper">
+    <div class="container">
         
-        <!-- Section Title Area -->
-        <div class="text-center mb-5 pb-2">
-            <h2 class="text-uppercase cert-main-title">
-                Our Certifications
-            </h2>
-        </div>
-
-        <!-- 3-Column Certificate Display Layout Model Grid -->
-        <div class="row g-4 justify-content-center">
+        <div class="journey-split-grid">
             
-            <!-- Certificate 01 -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="certificate-premium-card">
-                    <div class="certificate-media-wrapper">
-                        <!-- Update image path below -->
-                        <img src="assets/themes/storefront/public/images/reg1.jpg" alt="ISO Certification Quality Management" />
-                    </div>
-                    <h3 class="certificate-title-label">ISO 9001:2015 Certification</h3>
-                    <p class="certificate-sub-label">Quality Management Standard</p>
+            <!-- LEFT COLUMN: SECTION HEADING HOLDER CARD -->
+            <div class="journey-left-pillar">
+                <h2 class="journey-main-title">
+                    Our Successful<br><span>Journey</span>
+                </h2>
+                
+                <!-- Explicit Target Actions Mapping Native Script Control Hooks -->
+                <div class="journey-nav-wrapper">
+                    <button id="native-prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button id="native-next-btn"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
             </div>
 
-            <!-- Certificate 02 -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="certificate-premium-card">
-                    <div class="certificate-media-wrapper">
-                        <!-- Update image path below -->
-                        <img src="assets/themes/storefront/public/images/reg2.jpg" alt="Safety Standard Certification" />
+            <!-- RIGHT COLUMN: HIGH-VISIBILITY NATIVE AUTOMATED TIMELINE SLIDER -->
+            <div class="journey-right-canvas" id="native-journey-container">
+                
+                <!-- Slide Item: 1972 (Set active-slide here by default) -->
+                <div class="journey-slide-item-native active-slide" style="background-image: url('images/1972.png');">
+                    <div class="journey-sliding-card">
+                        <h3 class="journey-meta-year">1972</h3>
+                        <p class="journey-slide-desc">
+                            The journey began when Shri Harendra Gupta arrived in Mumbai, starting a venture from a modest 100 sq. ft. rented storefront on V.V Chandan Street, Masjid Bunder.
+                        </p>
                     </div>
-                    <h3 class="certificate-title-label">Operational Safety Compliance</h3>
-                    <p class="certificate-sub-label">Industrial Standards Certified</p>
                 </div>
-            </div>
 
-            <!-- Certificate 03 -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="certificate-premium-card">
-                    <div class="certificate-media-wrapper">
-                        <!-- Update image path below -->
-                        <img src="assets/themes/storefront/public/images/reg3.jpg" alt="Manufacturing Excellence Award" />
+                <!-- Slide Item: 1974 -->
+                <div class="journey-slide-item-native" style="background-image: url('images/1974.png');">
+                    <div class="journey-sliding-card">
+                        <h3 class="journey-meta-year">1974</h3>
+                        <p class="journey-slide-desc">
+                            Operations advanced as grandfather Shri Ratiram Gupta managed bulk glass transport logistics via freight rails, laying the foundation for our packaging networks.
+                        </p>
                     </div>
-                    <h3 class="certificate-title-label">Premium Manufacturing Excellence</h3>
-                    <p class="certificate-sub-label">Verified Glass Decorator</p>
                 </div>
+
+                <!-- Slide Item: 2016 -->
+                <div class="journey-slide-item-native" style="background-image: url('images/2016image.png');">
+                    <div class="journey-sliding-card">
+                        <h3 class="journey-meta-year">2016</h3>
+                        <p class="journey-slide-desc">
+                            Glass Ideas achieved registered vendor compliance status for top-tier multinational corporations including Unilever, Coca-Cola, ITC, Diageo, Sula Wines, and Ipca.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Slide Item: 2018 -->
+                <div class="journey-slide-item-native" style="background-image: url('images/2018image.png');">
+                    <div class="journey-sliding-card">
+                        <h3 class="journey-meta-year">2018</h3>
+                        <p class="journey-slide-desc">
+                            Strategic expansion brought our total core distributor hubs to six, creating dedicated regional operational pipelines across Kerala, Navi Mumbai, Hyderabad, and Pune.
+                        </p>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -455,6 +621,63 @@ include 'includes/header.php';
     </div>
 </section>
 
+
+<!-- RESPONSIVE ANIMATED CERTIFICATIONS SECTION -->
+<section class="py-5 certificates-section reveal-on-scroll">
+    <div class="container py-4">
+        
+        <!-- Section Title Area -->
+        <div class="text-center mb-5 pb-2">
+            <h2 class="text-uppercase cert-main-title">
+                Our Certifications
+            </h2>
+        </div>
+
+        <!-- 3-Column Certificate Display Layout Model Grid -->
+        <div class="row g-4 justify-content-center">
+            
+            <!-- Certificate 01 -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="certificate-premium-card">
+                    <div class="certificate-media-wrapper">
+                        <!-- Update image path below -->
+                        <img src="assets/themes/storefront/public/images/reg1.jpg" alt="ISO Certification Quality Management" />
+                    </div>
+                    <h3 class="certificate-title-label">ISO 9001:2015 Certification</h3>
+                    <p class="certificate-sub-label">Quality Management Standard</p>
+                </div>
+            </div>
+
+            <!-- Certificate 02 -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="certificate-premium-card">
+                    <div class="certificate-media-wrapper">
+                        <!-- Update image path below -->
+                        <img src="assets/themes/storefront/public/images/reg2.jpg" alt="Safety Standard Certification" />
+                    </div>
+                    <h3 class="certificate-title-label">Operational Safety Compliance</h3>
+                    <p class="certificate-sub-label">Industrial Standards Certified</p>
+                </div>
+            </div>
+
+            <!-- Certificate 03 -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="certificate-premium-card">
+                    <div class="certificate-media-wrapper">
+                        <!-- Update image path below -->
+                        <img src="assets/themes/storefront/public/images/reg3.jpg" alt="Manufacturing Excellence Award" />
+                    </div>
+                    <h3 class="certificate-title-label">Premium Manufacturing Excellence</h3>
+                    <p class="certificate-sub-label">Verified Glass Decorator</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
 <!-- VALUES & OPERATIONAL PILLARS SEGMENT -->
 <section class="py-5" style="background-color: #ffffff; font-family: 'Montserrat', sans-serif;">
     <div class="container py-3">
@@ -509,23 +732,83 @@ include 'includes/header.php';
 <!-- CONVERSION-FOCUSED CLOSING CTA SEGMENT -->
 <section class="py-5 text-center cta-premium-bg" style="font-family: 'Montserrat', sans-serif;">
     <div class="container py-4" style="position: relative; z-index: 2;">
-
+        
         <h2 class="mb-3 text-uppercase" style="font-size: 28px; font-weight: 800; letter-spacing: 0.04em;">
             Partner With Alok Glass Today
         </h2>
 
-        <p class="mb-4 mx-auto" style="font-size: 15px; font-weight: 400; max-width: 620px; color: #cccccc; line-height: 1.7;">
+        <p class="mb-4 mx-auto" style="font-size: 15px; font-weight: 400; max-width: 620px; color: #c8232c; line-height: 1.7;">
             Connect directly with our engineering and business consulting team to explore technical solutions for your custom branding goals.
         </p>
-
+        
         <div class="mt-4 pt-2">
-            <a href="bulk_inquiry.php" class="btn cta-btn-action text-uppercase">
+            <a href="bulk_inquiry.php" class="btn cta-btn-action text-uppercase" >
                 Request Bulk Quote
             </a>
         </div>
 
     </div>
 </section>
+<!-- DEPENDENCIES FOR ICONS ONLY -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+<!-- LIGHTWEIGHT NATIVE SLIDER ENGINE -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var slides = document.querySelectorAll('.journey-slide-item-native');
+        var nextBtn = document.getElementById('native-next-btn');
+        var prevBtn = document.getElementById('native-prev-btn');
+        var currentIndex = 0;
+        var slideInterval;
+
+        function updateSlides(nextIndex) {
+            // Remove active status from currently shown slide element
+            slides[currentIndex].classList.remove('active-slide');
+            
+            // Loop boundaries safely
+            currentIndex = (nextIndex + slides.length) % slides.length;
+            
+            // Activate next matching item card view
+            slides[currentIndex].classList.add('active-slide');
+        }
+
+        function startAutoPlay() {
+            stopAutoPlay(); // Protect loop from creating multiple timers
+            slideInterval = setInterval(function() {
+                updateSlides(currentIndex + 1);
+            }, 5000); // Transitions or interchanges automatically every 5 seconds
+        }
+
+        function stopAutoPlay() {
+            if (slideInterval) clearInterval(slideInterval);
+        }
+
+        // Click Interactions Engine
+        nextBtn.addEventListener('click', function() {
+            stopAutoPlay();
+            updateSlides(currentIndex + 1);
+            startAutoPlay();
+        });
+
+        prevBtn.addEventListener('click', function() {
+            stopAutoPlay();
+            updateSlides(currentIndex - 1);
+            startAutoPlay();
+        });
+
+        // Pause tracking loops if mouse hover matches container profile
+        var container = document.getElementById('native-journey-container');
+        container.addEventListener('mouseenter', stopAutoPlay);
+        container.addEventListener('mouseleave', startAutoPlay);
+
+        // Turn on the system timeline loop automatically
+        if(slides.length > 0) {
+            startAutoPlay();
+        }
+    });
+</script>
 
 <?php
 include 'includes/footer.php';
