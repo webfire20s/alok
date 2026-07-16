@@ -170,6 +170,101 @@ $featuredCategories = $pdo->query("
                 grid-template-columns: 1fr !important;
             }
         }
+
+        /* Certificates Subsection Base Structural Styling */
+    .certificates-section {
+        background-color: #ffffff;
+    }
+
+    /* High-End Clean Section Title */
+    .cert-main-title {
+        font-size: 26px;
+        font-weight: 800;
+        color: #111111;
+        letter-spacing: 0.04em;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 16px;
+    }
+    .cert-main-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background-color: #c8232c;
+    }
+
+    /* Industrial Premium Certificate Display Card Frame */
+    .certificate-premium-card {
+        background: #ffffff;
+        border: 1px solid #eef0f2;
+        border-radius: 6px;
+        padding: 24px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Framed Graphic Wrapper Display Target */
+    .certificate-media-wrapper {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        background-color: #fcfbfa;
+        border: 1px solid #c8232c;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .certificate-media-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Keeps certificate proportions crisp and undistorted */
+        padding: 10px;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .certificate-title-label {
+        font-size: 15px;
+        font-weight: 700;
+        color: #111111;
+        margin-bottom: 6px;
+        line-height: 1.4;
+        transition: color 0.3s ease;
+    }
+    .certificate-sub-label {
+        font-size: 12px;
+        font-weight: 500;
+        color: #777777;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    /* Interactive Parent-Child Animation Synchronization Engine */
+    .certificate-premium-card:hover {
+        transform: translateY(-6px);
+        border-color: #e2e4e8;
+        box-shadow: 0 16px 36px rgba(17, 17, 17, 0.08);
+    }
+    .certificate-premium-card:hover .certificate-media-wrapper img {
+        transform: scale(1.04);
+    }
+    .certificate-premium-card:hover .certificate-title-label {
+        color: #c8232c;
+    }
+
     </style>
 
     <!-- INTEGRATED YOUTUBE HERO SYSTEM -->
@@ -694,7 +789,6 @@ $featuredCategories = $pdo->query("
         $stmt = $pdo->prepare("
             SELECT *
             FROM categories
-            WHERE section_title IS NOT NULL
         ");
 
         $stmt->execute();
@@ -1490,6 +1584,63 @@ $featuredCategories = $pdo->query("
             </style>
         <!-- Latest Blogs Ends -->
         <!-- Latest Blogs Ends -->
+        
+        
+        <!-- OUR  CERTIFICATES STARTS -->
+        <section class="py-5 certificates-section reveal-on-scroll">
+            <div class="container py-4">
+                
+                <!-- Section Title Area -->
+                <div class="text-center mb-5 pb-2">
+                    <h2 class="text-uppercase cert-main-title">
+                        Our Certifications
+                    </h2>
+                </div>
+
+                <!-- 3-Column Certificate Display Layout Model Grid -->
+                <div class="row g-4 justify-content-center">
+                    
+                    <!-- Certificate 01 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="certificate-premium-card">
+                            <div class="certificate-media-wrapper">
+                                <!-- Update image path below -->
+                                <img src="assets/themes/storefront/public/images/reg1.jpg" alt="ISO Certification Quality Management" />
+                            </div>
+                            <h3 class="certificate-title-label">ISO 9001:2015 Certification</h3>
+                            <p class="certificate-sub-label">Quality Management Standard</p>
+                        </div>
+                    </div>
+
+                    <!-- Certificate 02 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="certificate-premium-card">
+                            <div class="certificate-media-wrapper">
+                                <!-- Update image path below -->
+                                <img src="assets/themes/storefront/public/images/reg2.jpg" alt="Safety Standard Certification" />
+                            </div>
+                            <h3 class="certificate-title-label">Operational Safety Compliance</h3>
+                            <p class="certificate-sub-label">Industrial Standards Certified</p>
+                        </div>
+                    </div>
+
+                    <!-- Certificate 03 -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="certificate-premium-card">
+                            <div class="certificate-media-wrapper">
+                                <!-- Update image path below -->
+                                <img src="assets/themes/storefront/public/images/reg3.jpg" alt="Manufacturing Excellence Award" />
+                            </div>
+                            <h3 class="certificate-title-label">Premium Manufacturing Excellence</h3>
+                            <p class="certificate-sub-label">Verified Glass Decorator</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- OUR CERTIFICATES ENDS -->
 
         <!-- Google Review Starts -->
         <!-- Google Reviews Section Starts -->
@@ -1753,11 +1904,11 @@ $featuredCategories = $pdo->query("
                 INFINITE ASSOCIATE MARQUEE SYSTEM
                 ========================================================================== */
                 .marquee-section {
-                    background-color: #161616; /* Premium Charcoal Black Base */
+                    background-color: #fff; /* Premium Charcoal Black Base */
                     padding: 40px 0;
                     overflow: hidden;
-                    border-top: 1px solid #262626;
-                    border-bottom: 1px solid #262626;
+                    border-top: 1px solid #fff;
+                    border-bottom: 1px solid #fff;
                     position: relative;
                 }
 
@@ -1774,11 +1925,11 @@ $featuredCategories = $pdo->query("
                 }
                 .marquee-section::before {
                     left: 0;
-                    background: linear-gradient(to right, #161616 0%, rgba(22, 22, 22, 0) 100%);
+                    background: linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
                 }
                 .marquee-section::after {
                     right: 0;
-                    background: linear-gradient(to left, #161616 0%, rgba(22, 22, 22, 0) 100%);
+                    background: linear-gradient(to left, #ffffff 0%, rgba(22, 22, 22, 0) 100%);
                 }
 
                 /* Flex container housing the track wrapper */
@@ -1815,8 +1966,8 @@ $featuredCategories = $pdo->query("
                     max-width: 100%;
                     max-height: 100%;
                     object-fit: contain;
-                    filter: grayscale(0%) brightness(1) invert(0); /* Forces logos to clean White */
-                    opacity: 1;
+                    filter: grayscale(0%) brightness(0.7) invert(0); /* Forces logos to clean White */
+                    opacity: 10;
                     transition: opacity 0.3s ease, filter 0.3s ease;
                 }
 

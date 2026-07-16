@@ -18,7 +18,7 @@ $navCategories = $navStmt->fetchAll();
 <!-- Mirrored from www.ajantabottle.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 19 May 2026 05:30:04 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-    <base href="/ajanta-project/">
+    <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
