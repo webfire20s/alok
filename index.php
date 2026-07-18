@@ -16,397 +16,19 @@ $featuredCategories = $pdo->query("
     WHERE featured = 1
 ")->fetchAll();
 ?>
-            
-            
+
+
+
+<!-- DEPENDENCIES FOR ICONS AND FONTS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- DEPENDENCIES FOR ICONS ONLY -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<link rel="stylesheet" href="style.css">   
 <main role="main">
     
-    <style>
-        /* Scoped styles for high-fidelity animations and premium layouts on index.php */
-        
-        /* 1. HERO SLIDER PREMIUM UPGRADES */
-        .home-slider-wrap {
-            position: relative;
-            background-color: #0b0d10;
-        }
-
-        /* Cinematic overlay gradients with optimized contrast for premium glass photography */
-        .slide-overlay-left {
-            background: linear-gradient(90deg, rgba(17, 20, 26, 0.85) 0%, rgba(17, 20, 26, 0.6) 40%, rgba(17, 20, 26, 0) 100%) !important;
-        }
-        
-        .slide-overlay-right {
-            background: linear-gradient(270deg, rgba(17, 20, 26, 0.85) 0%, rgba(17, 20, 26, 0.6) 40%, rgba(17, 20, 26, 0) 100%) !important;
-        }
-
-        /* Hardware accelerated Ken Burns zoom effect for slides */
-        .slider-image {
-            transition: transform 8s cubic-bezier(0.16, 1, 0.3, 1) !important;
-            will-change: transform;
-        }
-        
-        .slide:hover .slider-image {
-            transform: scale(1.05);
-        }
-
-        /* Captions entrance layout with high-performance CSS timing paths */
-        .captions .caption-1 {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: sliderFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.3s;
-        }
-
-        .captions .caption-2 {
-            opacity: 0;
-            transform: translateY(25px);
-            animation: sliderFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.5s;
-        }
-
-        .captions .btn-slider {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: sliderFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.7s;
-        }
-
-        @keyframes sliderFadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* 2. TRUST VALUE PROPOSITIONS (TRUST CARDS) */
-        .trust-cards-wrapper {
-            background-color: #ffffff;
-            border-bottom: 1px solid #eef1f5;
-        }
-
-        /* Professional card wrapper that transitions smoothly */
-        .trust-card {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            background: #ffffff;
-            border: 1px solid rgba(17, 20, 26, 0.05);
-            padding: 20px 24px;
-            border-radius: 8px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-            height: 100%;
-        }
-
-        /* Premium hover states with delicate brand indicators */
-        .trust-card::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: var(--primary-accent, #c8232c);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .trust-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(17, 20, 26, 0.05);
-            border-color: rgba(200, 35, 44, 0.15);
-        }
-
-        .trust-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        /* Micro-animations for card icon images */
-        .trust-card-icon {
-            height: 40px !important;
-            width: auto;
-            object-fit: contain;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .trust-card:hover .trust-card-icon {
-            transform: scale(1.15) rotate(3deg);
-        }
-
-        .trust-card-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
-            font-weight: 500;
-            color: #2c323e;
-            line-height: 1.4;
-        }
-
-        .trust-card-text b, 
-        .trust-card-text label {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--primary-accent, #c8232c) !important;
-            font-weight: 700;
-            font-size: 14px;
-            margin: 0;
-            display: inline-block;
-        }
-
-        /* Fluid layout adjustments for responsiveness */
-        @media (max-width: 991.98px) {
-            .trust-cards-grid {
-                display: grid !important;
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 16px !important;
-                padding: 15px !important;
-            }
-            .trust-card {
-                padding: 16px 20px;
-            }
-        }
-
-        @media (max-width: 575.98px) {
-            .trust-cards-grid {
-                grid-template-columns: 1fr !important;
-            }
-        }
-
-        /* Certificates Subsection Base Structural Styling */
-    .certificates-section {
-        background-color: #ffffff;
-    }
-
-    /* High-End Clean Section Title */
-    .cert-main-title {
-        font-size: 26px;
-        font-weight: 800;
-        color: #111111;
-        letter-spacing: 0.04em;
-        position: relative;
-        display: inline-block;
-        padding-bottom: 16px;
-    }
-    .cert-main-title::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 50px;
-        height: 3px;
-        background-color: #c8232c;
-    }
-
-    /* Industrial Premium Certificate Display Card Frame */
-    .certificate-premium-card {
-        background: #ffffff;
-        border: 1px solid #eef0f2;
-        border-radius: 6px;
-        padding: 24px;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Framed Graphic Wrapper Display Target */
-    .certificate-media-wrapper {
-        width: 100%;
-        aspect-ratio: 4 / 3;
-        background-color: #fcfbfa;
-        border: 1px solid #c8232c;
-        border-radius: 4px;
-        overflow: hidden;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .certificate-media-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain; /* Keeps certificate proportions crisp and undistorted */
-        padding: 10px;
-        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .certificate-title-label {
-        font-size: 15px;
-        font-weight: 700;
-        color: #111111;
-        margin-bottom: 6px;
-        line-height: 1.4;
-        transition: color 0.3s ease;
-    }
-    .certificate-sub-label {
-        font-size: 12px;
-        font-weight: 500;
-        color: #777777;
-        margin: 0;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    /* Interactive Parent-Child Animation Synchronization Engine */
-    .certificate-premium-card:hover {
-        transform: translateY(-6px);
-        border-color: #e2e4e8;
-        box-shadow: 0 16px 36px rgba(17, 17, 17, 0.08);
-    }
-    .certificate-premium-card:hover .certificate-media-wrapper img {
-        transform: scale(1.04);
-    }
-    .certificate-premium-card:hover .certificate-title-label {
-        color: #c8232c;
-    }
-
-    </style>
 
     <!-- INTEGRATED YOUTUBE HERO SYSTEM -->
-    <style>
-        /* Hero Container Setup */
-        .hero-yt-section {
-            position: relative;
-            width: 100%;
-            min-height: 80vh; 
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            background-color: #111111;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        /* YouTube Iframe Scaling Wrapper */
-        .hero-yt-wrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Crucial: Makes the video unclickable */
-            z-index: 1;
-        }
-
-        /* Scaling the iframe to cover the full container like 'object-fit: cover' */
-        .hero-yt-wrapper iframe {
-            width: 100vw;
-            height: 56.25vw; /* 16:9 Aspect Ratio */
-            min-height: 100vh;
-            min-width: 177.77vh; /* 16:9 Aspect Ratio */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* Overlay for Legibility */
-        .hero-yt-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(75deg, rgba(17, 17, 17, 0.85) 0%, rgba(17, 17, 17, 0.4) 60%, rgba(17, 17, 17, 0.2) 100%);
-            z-index: 2;
-        }
-
-        .hero-yt-content {
-            position: relative;
-            z-index: 3;
-            width: 100%;
-            
-            /* Add animation properties */
-            animation: heroFadeIn 1s ease-in forwards;
-            opacity: 0; /* Starts hidden before animation */
-        }
-
-        /* Define the animation keyframes */
-        @keyframes heroFadeIn {
-            from {
-                opacity: 0;
-                transform: translateX(200px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-
-        /* Premium Dynamic Button Link Layout */
-        .hero-btn-action {
-            background: #c8232c;
-            color: #ffffff;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            padding: 16px 36px;
-            border: 1px solid #c8232c;
-            border-radius: 4px;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            transition: color 0.4s ease, border-color 0.4s ease;
-            display: inline-block;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-        .hero-btn-action::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #ffffff;
-            z-index: -1;
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            transform: scaleY(0);
-            transform-origin: bottom;
-        }
-        .hero-btn-action:hover::before {
-            transform: scaleY(1);
-        }
-        .hero-btn-action:hover {
-            color: #111111;
-            border-color: #ffffff;
-            text-decoration: none;
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
-        }
-
-        /* Mobile Fluid Interventions */
-        @media (max-width: 767.98px) {
-            .hero-yt-section {
-                min-height: 600px; /* Locks solid height on smaller portrait touch screens */
-            }
-            .hero-yt-content {
-                text-align: center !important;
-            }
-            .hero-yt-content .text-start {
-                text-align: center !important;
-            }
-        }
-
-        .hero-yt-wrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .hero-local-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Forces the video to fill the container without distorting */
-            pointer-events: none; /* Prevents users from right-clicking to pause or save the video */
-        }
-    </style>
-
     <!-- YOUTUBE HERO SECTION -->
     <div class="hero-yt-section">
 
@@ -456,68 +78,6 @@ $featuredCategories = $pdo->query("
     </div>
 
     <!-- PREMIUM VALUE PROPOSITION BAR STYLES -->
-    <style>
-        .brand-value-bar {
-            background-color: #ffffff;
-            border-top: 1px solid #eeeeee;
-            border-bottom: 1px solid #eeeeee;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .value-item {
-            padding: 24px 15px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        /* Subtle interaction accent */
-        .value-item:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Elegant top metric */
-        .value-metric {
-            display: block;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #777777;
-            letter-spacing: 0.1em;
-            margin-bottom: 4px;
-        }
-
-        /* Bold accent baseline */
-        .value-title {
-            display: block;
-            font-size: 15px;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: #111111;
-            letter-spacing: 0.02em;
-        }
-
-        /* Subtle left borders between elements on desktop layouts */
-        @media (min-width: 768px) {
-            .value-item {
-                border-left: 1px solid #f0f0f0;
-            }
-            .row > .value-item:first-child {
-                border-left: none;
-            }
-        }
-
-        /* Clean row gaps on small viewports */
-        @media (max-width: 767.98px) {
-            .value-item {
-                padding: 20px 10px;
-            }
-            /* Visual separation for 2x2 grid format on phones */
-            .value-item:nth-child(1), .value-item:nth-child(2) {
-                border-bottom: 1px solid #f5f5f5;
-            }
-        }
-    </style>
-
     <!-- VALUE PROPOSITION SECTION -->
     <div class="container-fluid brand-value-bar py-2">
         <div class="container">
@@ -556,109 +116,13 @@ $featuredCategories = $pdo->query("
         </div>
     </div>
 
-        <!-- Shop by Industry Starts -->
+    <!-- Shop by Industry Starts -->
+    <!-- Shop by Industry Ends -->
         
-        <!-- Shop by Industry Ends -->
-        
-       <!-- Shop by Product Starts -->
-       <!-- Shop by Product Starts -->
+    <!-- Shop by Product Starts -->
+    <!-- Shop by Product Starts -->
         <!-- PREMIUM PRODUCT CATEGORIES STYLES -->
-        <style>
-            /* Component Reset & Scoping */
-            .product-section-wrapper {
-                font-family: 'Montserrat', sans-serif;
-                background-color: #ffffff;
-            }
-
-            /* Minimalist High-End Section Title */
-            .product-main-title {
-                font-size: 32px;
-                font-weight: 800;
-                color: #111111;
-                letter-spacing: 0.04em;
-                position: relative;
-                display: inline-block;
-                padding-bottom: 16px;
-            }
-            .product-main-title::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 50px;
-                height: 3px;
-                background-color: #c8232c;
-            }
-
-            /* B2B Premium Category Card Structure */
-            .product-category-card {
-                border: 1px solid #eef0f2;
-                border-radius: 6px;
-                overflow: hidden;
-                background-color: #ffffff;
-                height: 100%;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-
-            /* Image Scaling Mechanism */
-            .product-card-media {
-                display: block;
-                overflow: hidden;
-                aspect-ratio: 4 / 3;
-                background-color: #ffffff;
-                position: relative;
-            }
-            .product-card-media img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-
-            /* Text Band Base Layer Setup */
-            .product-card-banner {
-                padding: 18px 12px;
-                text-align: center;
-                text-transform: uppercase;
-                transition: background-color 0.3s ease;
-            }
-            
-            .product-card-link {
-                font-size: 14px;
-                font-weight: 700;
-                color: #ffffff;
-                text-decoration: none;
-                display: block;
-                letter-spacing: 0.05em;
-            }
-            .product-card-link:hover {
-                text-decoration: none;
-                color: #ffffff;
-            }
-
-            /* Dynamic Parent-Child Animation Sync */
-            .product-category-card:hover {
-                transform: translateY(-6px);
-                box-shadow: 0 16px 32px rgba(17, 17, 17, 0.08);
-            }
-            .product-category-card:hover .product-card-media img {
-                transform: scale(1.05);
-            }
-
-            /* Palette Variant Engine */
-            .bg-palette-accent {
-                background-color: #c8232c;
-                border-top: 2px solid #a11b22;
-            }
-            .bg-palette-charcoal {
-                background-color: #111111;
-                border-top: 2px solid #222222;
-            }
-        </style>
-
+        
         <!-- PRODUCT CATEGORY GRID LAYOUT -->
         <div class="container product-section-wrapper py-5 reveal-on-scroll">
 
@@ -711,78 +175,13 @@ $featuredCategories = $pdo->query("
             </div>
 
         </div>
-        <!-- MOBILE VERSION -->
-        <!-- <div class="container pt-6 only-mobile animate__animated animate__fadeInUp" style="padding-top: 3.5rem; padding-bottom: 2.5rem; padding-left: 15px; padding-right: 0px; overflow-x: hidden; --animate-duration: 0.8s;"> -->
+        
 
-            <!-- Section Title with Accent Underline -->
-            <!-- <h2 class="text-center text-uppercase org-brd-btm mb-4" style="font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 700; color: #111111; letter-spacing: 0.04em; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 2.5rem; padding-right: 15px;">
-                <img src="assets/themes/storefront/public/images/shop-by-product-icone8da.png?v=2.0.3" class="pr-3 pt-2" style="max-height: 28px; width: auto;" alt="" />
-                <span style="position: relative; padding-bottom: 10px;">
-                    Shop by Product
-                    <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 45px; height: 3px; background-color: #c8232c;"></span>
-                </span>
-            </h2> -->
-
-            <!-- Smooth Horizontal Touch Scroller Container -->
-            <!-- <div class="mobile-product-scroller" style="display: flex; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; gap: 16px; padding-bottom: 15px; padding-right: 15px; scroll-snap-type: x mandatory;">
-
-                <?php foreach($featuredCategories as $index => $category): ?>
-
-                    <?php
-                    // Alternating brand themes for item cards -->
-                    // $bgStyle = ($index % 2 == 0)
-                    //     ? 'background-color: #c8232c; border-top: 2px solid #a11b22;' 
-                    //     : 'background-color: #111111; border-top: 2px solid #222222;';
-                    // ?>
-
-                    <!-- Individual Product Card Item -->
-                    <!-- <div class="scroller-item <?= $index == 0 ? 'active' : '' ?>" style="flex: 0 0 78%; min-width: 260px; max-width: 300px; background-color: #ffffff; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 12px rgba(17, 17, 17, 0.06); border: 1px solid #eef0f2; scroll-snap-align: start; transition: transform 0.2s ease;">
-
-                        <a href="category.php?slug=<?= $category['slug'] ?>" style="display: block; width: 100%; aspect-ratio: 4/3; overflow: hidden;">
-                            <img
-                                src="<?= $category['image'] ?>"
-                                class="d-block w-100"
-                                style="width: 100%; height: 100%; object-fit: cover;"
-                                alt="<?= htmlspecialchars($category['name']) ?>"
-                            >
-                        </a> -->
-
-                        <!-- Styled Text Band Label -->
-                        <!-- <div class="<?= $bgClass ?> sb text-uppercase fs18 text-center p-2" style="<?= $bgStyle ?> padding: 14px 8px;">
-
-                            <a
-                                href="category.php?slug=<?= $category['slug'] ?>"
-                                class="link-block text-white"
-                                style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: #ffffff; text-decoration: none; display: block; letter-spacing: 0.03em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
-                            >
-                                <?= htmlspecialchars($category['name']) ?>
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                <?php endforeach; ?>
-
-            </div>
-
-        </div> -->
-        <!-- Custom Style Component to hide scrollbars elegantly across browsers -->
-        <!-- <style>
-            .mobile-product-scroller::-webkit-scrollbar {
-                display: none;
-            }
-            .mobile-product-scroller {
-                -ms-overflow-style: none;  /* IE and Edge */
-                scrollbar-width: none;  /* Firefox */
-            }
-        </style> -->
-
-        <!-- Shop by Product Ends -->
-        <!-- Shop by Product Ends -->
+    <!-- Shop by Product Ends -->
+    <!-- Shop by Product Ends -->
 
 
-        <!-- Popular bottle Starts -->
+    <!-- Popular bottle Starts -->
         <?php
         require 'includes/db.php';
 
@@ -818,376 +217,130 @@ $featuredCategories = $pdo->query("
         ?>
 
         <!-- B2B HIGH-END PRODUCT GRID SYSTEM STYLES -->
-        <!-- DEPENDENCIES FOR ICONS ONLY -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        
 
-        <style>
-            /* ==========================================================================
-            PREMIUM INTERACTIVE SCROLLER SYSTEM
-            ========================================================================== */
-            .ticker-showcase-wrapper {
-                background-color: #ffffff;
-                padding: 60px 0;
-                font-family: 'Montserrat', sans-serif;
-                position: relative;
-            }
-
-            /* Header Grid: Title on Left, Custom Arrows on Right */
-            .ticker-header-container {
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-end;
-                margin-bottom: 30px;
-                border-bottom: 2px solid #eef0f2;
-                padding-bottom: 15px;
-            }
-
-            .ticker-section-title {
-                font-size: 28px;
-                font-weight: 800;
-                color: #111111;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-                margin: 0;
-                position: relative;
-            }
-            .ticker-section-title::after {
-                content: '';
-                position: absolute;
-                bottom: -17px;
-                left: 0;
-                width: 60px;
-                height: 3px;
-                background-color: #c8232c; /* Alok Red Accent */
-            }
-
-            /* Sleek Navigation Controls */
-            .ticker-control-btns {
-                display: flex;
-                gap: 8px;
-            }
-            .ticker-control-btns button {
-                background: #161616 !important;
-                border: 1px solid #262626 !important;
-                color: #ffffff !important;
-                width: 40px;
-                height: 40px;
-                border-radius: 4px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 14px;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
-            .ticker-control-btns button:hover {
-                background: #c8232c !important;
-                border-color: #c8232c !important;
-            }
-
-            /* THE MANUAL SCROLL WINDOW (With custom high-end scrollbar) */
-            .ticker-viewport {
-                width: 100%;
-                overflow-x: auto;
-                overflow-y: hidden;
-                white-space: nowrap;
-                position: relative;
-                padding: 15px 0 25px 0;
-                scroll-behavior: smooth;
-                -webkit-overflow-scrolling: touch; /* Butter-smooth iOS momentum scrolling */
-            }
-
-            /* Premium Sleek Scrollbar Styling */
-            .ticker-viewport::-webkit-scrollbar {
-                height: 6px;
-            }
-            .ticker-viewport::-webkit-scrollbar-track {
-                background: #eef0f2;
-                border-radius: 10px;
-            }
-            .ticker-viewport::-webkit-scrollbar-thumb {
-                background: #c8232c; /* Red Scrollbar Grabber */
-                border-radius: 10px;
-                transition: background 0.3s ease;
-            }
-            .ticker-viewport::-webkit-scrollbar-thumb:hover {
-                background: #111111; /* Darkens on hover */
-            }
-
-            .ticker-track {
-                display: inline-flex;
-                gap: 24px;
-            }
-
-            /* ==========================================================================
-            PRODUCT ITEM CARD ARCHITECTURE (Charcoal and Red Theme)
-            ========================================================================== */
-            .ticker-product-card {
-                display: inline-flex;
-                flex-direction: column;
-                width: 240px; /* Fixed standard sizing */
-                background: #161616; /* Clean Charcoal Base */
-                border: 1px solid #262626;
-                border-radius: 18px;
-                padding: 16px;
-                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-                text-decoration: none !important;
-                white-space: normal; /* Restores normal text wrapping inside card blocks */
-                box-sizing: border-box;
-            }
-
-            .ticker-product-card:hover {
-                transform: translateY(-5px);
-                border-color: #c8232c;
-                box-shadow: 0 12px 30px rgba(200, 35, 44, 0.15);
-            }
-
-            /* White Background Container to Pop Your Glassware Products */
-            .ticker-media-box {
-                width: 100%;
-                aspect-ratio: 1 / 1;
-                background-color: #ffffff;
-                border-radius: 4px;
-                overflow: hidden;
-                margin-bottom: 14px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 15px;
-                box-sizing: border-box;
-            }
-
-            .ticker-media-box img {
-                max-width: 100%;
-                max-height: 100%;
-                object-fit: contain;
-                transition: transform 0.5s ease;
-            }
-
-            .ticker-product-card:hover .ticker-media-box img {
-                transform: scale(1.06);
-            }
-
-            /* Details Panel Typography */
-            .ticker-details-box {
-                display: flex;
-                flex-direction: column;
-                flex-grow: 1;
-            }
-
-            .ticker-product-title {
-                font-size: 13.5px;
-                font-weight: 600;
-                color: #c8232c !important;
-                line-height: 1.4;
-                margin: 0 0 8px 0;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                height: 38px;
-            }
-
-            .ticker-product-price {
-                font-size: 15px;
-                font-weight: 700;
-                color: #ffffff;
-                margin-top: auto;
-            }
-
-            /* RESPONSIVE LAYOUT MATRIX ADJUSTMENTS */
-            @media (max-width: 767.98px) {
-                .ticker-showcase-wrapper { padding: 40px 0; }
-                .ticker-header-container { flex-direction: column; align-items: flex-start; gap: 15px; }
-                .ticker-section-title { font-size: 22px; }
-                .ticker-product-card { width: 190px; padding: 12px; }
-                .ticker-product-title { font-size: 12.5px; height: 34px; }
-                .ticker-product-price { font-size: 14px; }
-                .ticker-control-btns { display: none; } /* On mobile, standard native touch swiping is preferred */
-            }
-        </style>
-
-    <!-- PRODUCT SHOWCASE SECTION -->
-        <div class="ticker-showcase-wrapper">
-            <div class="container">
-                
-                <!-- Premium Section Header Console -->
-                <div class="ticker-header-container">
-                    <h2 class="ticker-section-title">
-                        <?= htmlspecialchars($category['section_title'] ?? 'Our Featured Range') ?>
-                    </h2>
+        <!-- PRODUCT SHOWCASE SECTION -->
+            <div class="ticker-showcase-wrapper">
+                <div class="container">
                     
-                    <!-- Sleek Control Pillar -->
-                    <div class="ticker-control-btns">
-                        <button id="scroller-prev-btn" aria-label="Scroll Left"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button id="scroller-next-btn" aria-label="Scroll Right"><i class="fa-solid fa-chevron-right"></i></button>
-                    </div>
-                </div>
-
-                <!-- Scrollable Window Area -->
-                <div class="ticker-viewport" id="scroll-engine-viewport">
-                    <div class="ticker-track">
+                    <!-- Premium Section Header Console -->
+                    <div class="ticker-header-container">
+                        <h2 class="ticker-section-title">
+                            <?= htmlspecialchars($category['section_title'] ?? 'Our Featured Range') ?>
+                        </h2>
                         
-                        <?php foreach($products as $product): ?>
-                            <a href="product.php?slug=<?= urlencode($product['slug']) ?>" class="ticker-product-card">
-                                <div class="ticker-media-box">
-                                    <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" loading="lazy">
-                                </div>
-                                <div class="ticker-details-box">
-                                    <h3 class="ticker-product-title"><?= htmlspecialchars($product['name']) ?></h3>
-                                    <span class="ticker-product-price">₹<?= number_format($product['price'], 2) ?></span>
-                                </div>
-                            </a>
-                        <?php endforeach; ?>
-
+                        <!-- Sleek Control Pillar -->
+                        <div class="ticker-control-btns">
+                            <button id="scroller-prev-btn" aria-label="Scroll Left"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button id="scroller-next-btn" aria-label="Scroll Right"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
                     </div>
+
+                    <!-- Scrollable Window Area -->
+                    <div class="ticker-viewport" id="scroll-engine-viewport">
+                        <div class="ticker-track">
+                            
+                            <?php foreach($products as $product): ?>
+                                <a href="product.php?slug=<?= urlencode($product['slug']) ?>" class="ticker-product-card">
+                                    <div class="ticker-media-box">
+                                        <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" loading="lazy">
+                                    </div>
+                                    <div class="ticker-details-box">
+                                        <h3 class="ticker-product-title"><?= htmlspecialchars($product['name']) ?></h3>
+                                        <span class="ticker-product-price">₹<?= number_format($product['price'], 2) ?></span>
+                                    </div>
+                                </a>
+                            <?php endforeach; ?>
+
+                        </div>
+                    </div>
+
                 </div>
-
             </div>
-        </div>
 
-    <!-- STABLE MULTI-INTERACTION CONTROLLER SCRIPT -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const viewport = document.getElementById('scroll-engine-viewport');
-                const nextBtn = document.getElementById('scroller-next-btn');
-                const prevBtn = document.getElementById('scroller-prev-btn');
-                
-                const scrollAmount = 264; // Distance to scroll on click (240px card width + 24px gap)
-                const autoScrollSpeed = 1; // Pixels to slide per interval step
-                const autoScrollInterval = 30; // Milliseconds between steps
-                
-                let autoPlayActive = true;
-                let scrollDirection = 1; // 1 = Right, -1 = Left
-                let autoScrollTimer;
+        <!-- STABLE MULTI-INTERACTION CONTROLLER SCRIPT -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const viewport = document.getElementById('scroll-engine-viewport');
+                    const nextBtn = document.getElementById('scroller-next-btn');
+                    const prevBtn = document.getElementById('scroller-prev-btn');
+                    
+                    const scrollAmount = 264; // Distance to scroll on click (240px card width + 24px gap)
+                    const autoScrollSpeed = 1; // Pixels to slide per interval step
+                    const autoScrollInterval = 30; // Milliseconds between steps
+                    
+                    let autoPlayActive = true;
+                    let scrollDirection = 1; // 1 = Right, -1 = Left
+                    let autoScrollTimer;
 
-                // Smooth Auto-Scrolling System
-                function runAutoScroll() {
-                    if (!autoPlayActive) return;
-                    
-                    // Increment container scroll layout
-                    viewport.scrollLeft += (autoScrollSpeed * scrollDirection);
-                    
-                    // Loop scroll direction boundaries smoothly
-                    const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
-                    if (viewport.scrollLeft >= maxScrollLeft - 1) {
-                        scrollDirection = -1; // Reverse to left once the end is reached
-                    } else if (viewport.scrollLeft <= 1) {
-                        scrollDirection = 1; // Slide forward once the beginning is reached
+                    // Smooth Auto-Scrolling System
+                    function runAutoScroll() {
+                        if (!autoPlayActive) return;
+                        
+                        // Increment container scroll layout
+                        viewport.scrollLeft += (autoScrollSpeed * scrollDirection);
+                        
+                        // Loop scroll direction boundaries smoothly
+                        const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
+                        if (viewport.scrollLeft >= maxScrollLeft - 1) {
+                            scrollDirection = -1; // Reverse to left once the end is reached
+                        } else if (viewport.scrollLeft <= 1) {
+                            scrollDirection = 1; // Slide forward once the beginning is reached
+                        }
                     }
-                }
 
-                // Start running the loop
-                function startLoop() {
-                    stopLoop();
-                    autoScrollTimer = setInterval(runAutoScroll, autoScrollInterval);
-                }
+                    // Start running the loop
+                    function startLoop() {
+                        stopLoop();
+                        autoScrollTimer = setInterval(runAutoScroll, autoScrollInterval);
+                    }
 
-                function stopLoop() {
-                    if (autoScrollTimer) clearInterval(autoScrollTimer);
-                }
+                    function stopLoop() {
+                        if (autoScrollTimer) clearInterval(autoScrollTimer);
+                    }
 
-                // Action Click Events (Standard behavior)
-                if (nextBtn && prevBtn) {
-                    nextBtn.addEventListener('click', function() {
+                    // Action Click Events (Standard behavior)
+                    if (nextBtn && prevBtn) {
+                        nextBtn.addEventListener('click', function() {
+                            autoPlayActive = false;
+                            stopLoop();
+                            viewport.scrollLeft += scrollAmount;
+                        });
+
+                        prevBtn.addEventListener('click', function() {
+                            autoPlayActive = false;
+                            stopLoop();
+                            viewport.scrollLeft -= scrollAmount;
+                        });
+                    }
+
+                    // Hover Pausing Loops for Mouse Users
+                    viewport.addEventListener('mouseenter', () => {
                         autoPlayActive = false;
                         stopLoop();
-                        viewport.scrollLeft += scrollAmount;
                     });
 
-                    prevBtn.addEventListener('click', function() {
+                    viewport.addEventListener('mouseleave', () => {
+                        autoPlayActive = true;
+                        startLoop();
+                    });
+
+                    // Touch Interaction Safety Hooks
+                    viewport.addEventListener('touchstart', () => {
                         autoPlayActive = false;
                         stopLoop();
-                        viewport.scrollLeft -= scrollAmount;
                     });
-                }
 
-                // Hover Pausing Loops for Mouse Users
-                viewport.addEventListener('mouseenter', () => {
-                    autoPlayActive = false;
-                    stopLoop();
-                });
-
-                viewport.addEventListener('mouseleave', () => {
-                    autoPlayActive = true;
+                    // Start initialization sequence
                     startLoop();
                 });
-
-                // Touch Interaction Safety Hooks
-                viewport.addEventListener('touchstart', () => {
-                    autoPlayActive = false;
-                    stopLoop();
-                });
-
-                // Start initialization sequence
-                startLoop();
-            });
-        </script>
-        <?php endforeach; ?>
-        <!-- Popular bottle Ends -->
+            </script>
+            <?php endforeach; ?>
+    <!-- Popular bottle Ends -->
         
         
         <!-- Stats Starts -->
-        <style>
-            .counter-scaffolding {
-                background-color: #fcfbfa; 
-                border-top: 1px solid #eef0f2; 
-                border-bottom: 1px solid #eef0f2;
-                font-family: 'Montserrat', sans-serif;
-            }
-
-            .stat-metric-node {
-                padding: 40px 15px;
-                text-align: center;
-                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-            
-            .stat-metric-node:hover {
-                transform: translateY(-5px);
-            }
-
-            .stat-node-icon {
-                height: 44px; 
-                width: auto; 
-                object-fit: contain;
-                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.02));
-                transition: transform 0.3s ease;
-            }
-            .stat-metric-node:hover .stat-node-icon {
-                transform: scale(1.08);
-            }
-
-            .stat-node-number {
-                font-size: 32px; 
-                font-weight: 800; 
-                color: #c8232c; 
-                margin: 12px 0 4px 0;
-                line-height: 1.1;
-                letter-spacing: -0.02em;
-            }
-
-            .stat-node-label {
-                font-size: 12px; 
-                font-weight: 700; 
-                color: #111111; 
-                margin: 0; 
-                text-transform: uppercase; 
-                letter-spacing: 0.06em;
-                line-height: 1.4;
-            }
-
-            /* Mobile & Tablet Fine-Tuning Overrides */
-            @media (max-width: 991.98px) {
-                .stat-metric-node {
-                    padding: 25px 10px;
-                }
-                .stat-node-number {
-                    font-size: 26px;
-                }
-            }
-        </style>
+        
 
         <div class="container-fluid counter-scaffolding mask-reveal">
             <div class="container">
@@ -1476,112 +629,7 @@ $featuredCategories = $pdo->query("
             </div>
 
             <!-- Dynamic styling hooks for link title hover triggers -->
-            <style>
-                .latest-image-box:hover .blog-title-link {
-                    color: #c8232c !important;
-                }
-                .latest-image-box{
-
-                    background:#ffffff;
-                    border:1px solid #eef0f2;
-                    border-radius:4px;
-                    overflow:hidden;
-
-                    height:100%;
-
-                    display:flex;
-                    flex-direction:column;
-
-                    box-shadow:0 3px 10px rgba(0,0,0,.03);
-
-                    transition:
-                        transform .45s cubic-bezier(.22,.61,.36,1),
-                        box-shadow .45s ease;
-
-                }
-
-                .latest-image-box:hover{
-
-                    transform:translateY(-6px);
-
-                    box-shadow:0 14px 28px rgba(17,17,17,.08);
-
-                }
-
-                .blog-image-link{
-
-                    display:block;
-
-                    width:100%;
-
-                    aspect-ratio:16/10;
-
-                    overflow:hidden;
-
-                    background:#f7f7f7;
-
-                }
-
-                .blog-image-link img{
-
-                    width:100%;
-
-                    height:100%;
-
-                    object-fit:cover;
-
-                    transition:transform .55s ease;
-
-                }
-
-                .latest-image-box:hover img{
-
-                    transform:scale(1.06);
-
-                }
-
-                .blog-content-box{
-
-                    padding:14px;
-
-                    display:flex;
-
-                    flex-grow:1;
-
-                }
-
-                .blog-title-link{
-
-                    font-family:'Montserrat',sans-serif;
-
-                    font-size:13px;
-
-                    font-weight:600;
-
-                    color:#111;
-
-                    text-decoration:none;
-
-                    line-height:1.5;
-
-                    display:-webkit-box;
-
-                    -webkit-line-clamp:3;
-
-                    -webkit-box-orient:vertical;
-
-                    overflow:hidden;
-
-                    transition:color .25s ease;
-
-                }
-
-                .latest-image-box:hover .blog-title-link{
-
-                    color:#c8232c;
-
-                }
-            </style>
+            
         <!-- Latest Blogs Ends -->
         <!-- Latest Blogs Ends -->
         
@@ -1899,105 +947,6 @@ $featuredCategories = $pdo->query("
         <!-- Google Review Ends -->
 
 
-            <style>
-                /* ==========================================================================
-                INFINITE ASSOCIATE MARQUEE SYSTEM
-                ========================================================================== */
-                .marquee-section {
-                    background-color: #fff; /* Premium Charcoal Black Base */
-                    padding: 40px 0;
-                    overflow: hidden;
-                    border-top: 1px solid #fff;
-                    border-bottom: 1px solid #fff;
-                    position: relative;
-                }
-
-                /* Subtle industrial framing gradient overlays to fade logos at edges */
-                .marquee-section::before,
-                .marquee-section::after {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    width: 150px;
-                    height: 100%;
-                    z-index: 2;
-                    pointer-events: none;
-                }
-                .marquee-section::before {
-                    left: 0;
-                    background: linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
-                }
-                .marquee-section::after {
-                    right: 0;
-                    background: linear-gradient(to left, #ffffff 0%, rgba(22, 22, 22, 0) 100%);
-                }
-
-                /* Flex container housing the track wrapper */
-                .marquee-viewport {
-                    display: flex;
-                    width: 100%;
-                }
-
-                /* The moving track containing duplicated lists for a perfect infinite loop */
-                .marquee-track {
-                    display: flex;
-                    gap: 60px; /* Uniform spatial distancing between logos */
-                    padding-right: 60px;
-                    animation: premiumMarqueeLoop 25s linear infinite;
-                    will-change: transform;
-                }
-
-                /* Pause on hover mechanism for premium interactive control */
-                .marquee-viewport:hover .marquee-track {
-                    animation-play-state: paused;
-                }
-
-                /* Individual Logo Item Architecture */
-                .marquee-logo-item {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 50px;
-                    width: 140px;
-                    flex-shrink: 0;
-                }
-
-                .marquee-logo-item img {
-                    max-width: 100%;
-                    max-height: 100%;
-                    object-fit: contain;
-                    filter: grayscale(0%) brightness(0.7) invert(0); /* Forces logos to clean White */
-                    opacity: 10;
-                    transition: opacity 0.3s ease, filter 0.3s ease;
-                }
-
-                /* Interactive logo activation highlights on individual focus */
-                .marquee-logo-item img:hover {
-                    opacity: 1;
-                    filter: grayscale(0%) brightness(1) invert(0); /* Restores brand color or fully pops image */
-                }
-
-                /* ==========================================================================
-                HARDWARE-ACCELERATED CSS TRACK TRANSLATION KEYFRAMES
-                ========================================================================== */
-                @keyframes premiumMarqueeLoop {
-                    0% {
-                        transform: translate3d(0, 0, 0);
-                    }
-                    100% {
-                        transform: translate3d(-100%, 0, 0);
-                    }
-                }
-
-                /* RESPONSIVE CONTROL MATRIX */
-                @media (max-width: 767.98px) {
-                    .marquee-section { padding: 30px 0; }
-                    .marquee-track { gap: 40px; padding-right: 40px; animation-duration: 18s; } /* Slightly faster speed adjustment on small viewports */
-                    .marquee-logo-item { width: 110px; height: 40px; }
-                    .marquee-section::before, .marquee-section::after { width: 60px; }
-                }
-            </style>
-
         <!-- ASSOCIATES MARQUEE STRIP -->
             <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem;">
                 <span style="position: relative; padding-bottom: 12px;">
@@ -2034,9 +983,7 @@ $featuredCategories = $pdo->query("
             </div>
 
 
-        
-        
-            <!-- Brands Starts -->
+        <!-- Brands Starts -->
         <!-- Brands Section -->
         <style>
             /* Section Scoped Styling Variables */
@@ -2336,226 +1283,6 @@ $featuredCategories = $pdo->query("
             </div>
         </div>
 
-
-        <!-- DEPENDENCIES FOR ICONS AND FONTS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-        <style>
-            /* ==========================================================================
-            CATALOG SYSTEM BASE ARCHITECTURE
-            ========================================================================== */
-            .catalog-section {
-                background-color: #ffffff;
-                padding: 80px 0;
-                font-family: 'Montserrat', sans-serif;
-            }
-
-            /* Section Typography Header Block */
-            .catalog-header {
-                max-width: 700px;
-                margin-bottom: 50px;
-            }
-
-            .catalog-pretitle {
-                display: inline-block;
-                font-size: 11px;
-                font-weight: 700;
-                color: #c8232c; /* Alok Red */
-                text-transform: uppercase;
-                letter-spacing: 0.15em;
-                margin-bottom: 12px;
-            }
-
-            .catalog-title {
-                font-size: 32px;
-                font-weight: 800;
-                color: #111111; /* Charcoal Black base */
-                text-transform: uppercase;
-                letter-spacing: 0.03em;
-                line-height: 1.2;
-            }
-
-            /* ==========================================================================
-            ASYMMETRIC GRID WORKSPACE
-            ========================================================================== */
-            .catalog-master-grid {
-                display: flex;
-                gap: 30px;
-                align-items: stretch;
-            }
-
-            /* PRIMARY FEATURED BLOCK CONTAINER */
-            .catalog-featured-pillar {
-                flex: 0 0 45%;
-                display: flex;
-            }
-
-            .catalog-featured-card {
-                background: #161616; /* Charcoal Panel Frame */
-                border: 1px solid #262626;
-                border-radius: 8px;
-                padding: 40px;
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                position: relative;
-                overflow: hidden;
-                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-
-            /* Subtle decorative industrial structural element inside card background */
-            .catalog-featured-card::before {
-                content: '\f1c1';
-                font-family: 'Font Awesome 6 Free';
-                font-weight: 900;
-                position: absolute;
-                right: -20px;
-                bottom: -30px;
-                font-size: 200px;
-                color: rgba(255, 255, 255, 0.02);
-                pointer-events: none;
-                transition: color 0.4s ease;
-            }
-
-            .catalog-featured-card:hover::before {
-                color: rgba(200, 35, 44, 0.04); /* Glows faint red on focus */
-            }
-
-            /* SECONDARY PRODUCT RANGE GRID */
-            .catalog-matrix-pillar {
-                flex: 1;
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-
-            .catalog-item-card {
-                background: #ffffff;
-                border: 1px solid #eef0f2;
-                border-radius: 8px;
-                padding: 24px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                            border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                            box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-
-            /* ==========================================================================
-            TYPOGRAPHY AND INTERACTIVE BUTTON ELEMENT ACTIONS
-            ========================================================================== */
-            .catalog-badge {
-                font-size: 10px;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 0.08em;
-                padding: 4px 10px;
-                border-radius: 2px;
-                display: inline-block;
-                margin-bottom: 20px;
-            }
-            
-            .featured-badge { background: #c8232c; color: #ffffff; }
-            .standard-badge { background: #f4f5f7; color: #666666; }
-
-            .catalog-name {
-                font-weight: 700;
-                line-height: 1.4;
-                margin-bottom: 8px;
-                color: #ffffff !important;
-            }
-            .featured-name { font-size: 24px; color: #ffffff; }
-            .standard-name { font-size: 16px; color: #111111; }
-
-            .catalog-meta {
-                font-size: 12px;
-                font-weight: 500;
-                margin-bottom: 30px;
-            }
-            .featured-meta { color: #888888; }
-            .standard-meta { color: #999999; }
-
-            /* Clean Action Icons Buttons Layout */
-            .catalog-download-btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-                font-size: 12px;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: 0.08em;
-                text-decoration: none !important;
-                padding: 14px 24px;
-                border-radius: 4px;
-                transition: all 0.3s ease;
-                cursor: pointer;
-            }
-
-            .btn-premium-red {
-                background: #c8232c;
-                color: #ffffff;
-                border: 1px solid #c8232c;
-            }
-            .btn-premium-red:hover {
-                background: #ffffff;
-                color: #c8232c;
-            }
-
-            .btn-outline-charcoal {
-                background: transparent;
-                color: #111111;
-                border: 1px solid #111111;
-                margin-top: auto;
-            }
-            .btn-outline-charcoal:hover {
-                background: #c8232c;
-                color: #ffffff;
-                border-color: #c8232c;
-            }
-
-            /* CARD HOVER TRIGGER EFFECTS */
-            .catalog-featured-card:hover {
-                transform: translateY(-5px);
-                border-color: #c8232c;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            }
-
-            .catalog-item-card:hover {
-                transform: translateY(-5px);
-                border-color: #c8232c;
-                box-shadow: 0 15px 35px rgba(17, 17, 17, 0.05);
-            }
-
-            /* ==========================================================================
-            RESPONSIVE MATRIX BREAKPOINTS
-            ========================================================================== */
-            @media (max-width: 991.98px) {
-                .catalog-master-grid {
-                    flex-direction: column;
-                }
-                .catalog-featured-pillar {
-                    width: 100%;
-                    flex: 0 0 auto;
-                }
-            }
-
-            @media (max-width: 767.98px) {
-                .catalog-section { padding: 50px 0; }
-                .catalog-title { font-size: 26px; }
-                .catalog-matrix-pillar {
-                    grid-template-columns: 1fr;
-                    gap: 16px;
-                }
-                .catalog-featured-card { padding: 30px; }
-                .featured-name { font-size: 20px; }
-            }
-        </style>
-
         <!-- CATALOG DOWNLOAD SECTION -->
         <div class="catalog-section">
             <div class="container">
@@ -2641,8 +1368,6 @@ $featuredCategories = $pdo->query("
                 </div>
             </div>
         </div>
-
-        
 
         <style>
             /* Premium Orange Accent Modifications over base style */
