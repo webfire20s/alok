@@ -33,6 +33,74 @@ made our plant/group/factories section with their logos
 
 
 
+<!-- MOBILE VERSION -->
+        <!-- <div class="container pt-6 only-mobile animate__animated animate__fadeInUp" style="padding-top: 3.5rem; padding-bottom: 2.5rem; padding-left: 15px; padding-right: 0px; overflow-x: hidden; --animate-duration: 0.8s;"> -->
+
+            <!-- Section Title with Accent Underline -->
+            <!-- <h2 class="text-center text-uppercase org-brd-btm mb-4" style="font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 700; color: #111111; letter-spacing: 0.04em; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 2.5rem; padding-right: 15px;">
+                <img src="assets/themes/storefront/public/images/shop-by-product-icone8da.png?v=2.0.3" class="pr-3 pt-2" style="max-height: 28px; width: auto;" alt="" />
+                <span style="position: relative; padding-bottom: 10px;">
+                    Shop by Product
+                    <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 45px; height: 3px; background-color: #c8232c;"></span>
+                </span>
+            </h2> -->
+
+            <!-- Smooth Horizontal Touch Scroller Container -->
+            <!-- <div class="mobile-product-scroller" style="display: flex; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; gap: 16px; padding-bottom: 15px; padding-right: 15px; scroll-snap-type: x mandatory;">
+
+                <?php foreach($featuredCategories as $index => $category): ?>
+
+                    <?php
+                    // Alternating brand themes for item cards -->
+                    // $bgStyle = ($index % 2 == 0)
+                    //     ? 'background-color: #c8232c; border-top: 2px solid #a11b22;' 
+                    //     : 'background-color: #111111; border-top: 2px solid #222222;';
+                    // ?>
+
+                    <!-- Individual Product Card Item -->
+                    <!-- <div class="scroller-item <?= $index == 0 ? 'active' : '' ?>" style="flex: 0 0 78%; min-width: 260px; max-width: 300px; background-color: #ffffff; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 12px rgba(17, 17, 17, 0.06); border: 1px solid #eef0f2; scroll-snap-align: start; transition: transform 0.2s ease;">
+
+                        <a href="category.php?slug=<?= $category['slug'] ?>" style="display: block; width: 100%; aspect-ratio: 4/3; overflow: hidden;">
+                            <img
+                                src="<?= $category['image'] ?>"
+                                class="d-block w-100"
+                                style="width: 100%; height: 100%; object-fit: cover;"
+                                alt="<?= htmlspecialchars($category['name']) ?>"
+                            >
+                        </a> -->
+
+                        <!-- Styled Text Band Label -->
+                        <!-- <div class="<?= $bgClass ?> sb text-uppercase fs18 text-center p-2" style="<?= $bgStyle ?> padding: 14px 8px;">
+
+                            <a
+                                href="category.php?slug=<?= $category['slug'] ?>"
+                                class="link-block text-white"
+                                style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: #ffffff; text-decoration: none; display: block; letter-spacing: 0.03em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                            >
+                                <?= htmlspecialchars($category['name']) ?>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                <?php endforeach; ?>
+
+            </div>
+
+        </div> -->
+        <!-- Custom Style Component to hide scrollbars elegantly across browsers -->
+        <!-- <style>
+            .mobile-product-scroller::-webkit-scrollbar {
+                display: none;
+            }
+            .mobile-product-scroller {
+                -ms-overflow-style: none;  /* IE and Edge */
+                scrollbar-width: none;  /* Firefox */
+            }
+        </style> -->
+
+
 
 
  <!-- Colour Cosmetics Packaging -->

@@ -18,12 +18,10 @@ $featuredCategories = $pdo->query("
 ?>
 
 
-
 <!-- DEPENDENCIES FOR ICONS AND FONTS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <!-- DEPENDENCIES FOR ICONS ONLY -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <link rel="stylesheet" href="style.css">   
 <main role="main">
     
@@ -948,190 +946,43 @@ $featuredCategories = $pdo->query("
 
 
         <!-- ASSOCIATES MARQUEE STRIP -->
-            <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem;">
-                <span style="position: relative; padding-bottom: 12px;">
-                    Our Group Of Plants
-                    <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 90px; height: 3px; background-color: #c8232c;"></span>
-                </span>
-            </h2>
-            <div class="marquee-section">
-                <div class="marquee-viewport">
-                    
-                    <!-- TRACK SET A: Primary sequence element loop -->
-                    <div class="marquee-track">
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_01.png" alt="Associate Brand One" loading="lazy"></div>
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_02.png" alt="Associate Brand Two" loading="lazy"></div>
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_03.png" alt="Associate Brand Three" loading="lazy"></div>
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_04.png" alt="Associate Brand Four" loading="lazy"></div>
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_05.png" alt="Associate Brand Five" loading="lazy"></div>
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_06.png" alt="Associate Brand Six" loading="lazy"></div>
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_07.png" alt="Associate Brand Seven" loading="lazy"></div>
-                    </div>
-
-                    <!-- TRACK SET B: Exact clone sequence element to prevent visual popping/gaps at loop boundaries -->
-                    <div class="marquee-track" aria-hidden="true">
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_01.png" alt="Associate Brand One" loading="lazy"></div>
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_02.png" alt="Associate Brand Two" loading="lazy"></div>
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_03.png" alt="Associate Brand Three" loading="lazy"></div>
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_04.png" alt="Associate Brand Four" loading="lazy"></div>
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_05.png" alt="Associate Brand Five" loading="lazy"></div>
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_06.png" alt="Associate Brand Six" loading="lazy"></div>
-                        <div class="marquee-logo-item"><img src="assets/images/plants/plant_07.png" alt="Associate Brand Seven" loading="lazy"></div>
-                    </div>
-
+        <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem;">
+            <span style="position: relative; padding-bottom: 12px;">
+                Our Group Of Plants
+                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 90px; height: 3px; background-color: #c8232c;"></span>
+            </span>
+        </h2>
+        <div class="marquee-section">
+            <div class="marquee-viewport">
+                
+                <!-- TRACK SET A: Primary sequence element loop -->
+                <div class="marquee-track">
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_01.png" alt="Associate Brand One" loading="lazy"></div>
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_02.png" alt="Associate Brand Two" loading="lazy"></div>
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_03.png" alt="Associate Brand Three" loading="lazy"></div>
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_04.png" alt="Associate Brand Four" loading="lazy"></div>
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_05.png" alt="Associate Brand Five" loading="lazy"></div>
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_06.png" alt="Associate Brand Six" loading="lazy"></div>
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_07.png" alt="Associate Brand Seven" loading="lazy"></div>
                 </div>
+
+                <!-- TRACK SET B: Exact clone sequence element to prevent visual popping/gaps at loop boundaries -->
+                <div class="marquee-track" aria-hidden="true">
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_01.png" alt="Associate Brand One" loading="lazy"></div>
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_02.png" alt="Associate Brand Two" loading="lazy"></div>
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_03.png" alt="Associate Brand Three" loading="lazy"></div>
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_04.png" alt="Associate Brand Four" loading="lazy"></div>
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_05.png" alt="Associate Brand Five" loading="lazy"></div>
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_06.png" alt="Associate Brand Six" loading="lazy"></div>
+                    <div class="marquee-logo-item"><img src="assets/images/plants/plant_07.png" alt="Associate Brand Seven" loading="lazy"></div>
+                </div>
+
             </div>
+        </div>
 
 
         <!-- Brands Starts -->
         <!-- Brands Section -->
-        <style>
-            /* Section Scoped Styling Variables */
-            :root {
-                --br-bg: #f9f9f9;
-                --br-card-bg: #ffffff;
-                --br-accent: #c8232c;
-                --br-text-dark: #111111;
-                --br-text-muted: #666666;
-                --br-border: rgba(0, 0, 0, 0.04);
-                --br-ease: cubic-bezier(0.16, 1, 0.3, 1);
-            }
-
-            .brands-trusted-wrapper {
-                background-color: var(--br-bg);
-            }
-
-            .brands-title-premium {
-                font-family: 'Montserrat', sans-serif;
-                font-size: 26px;
-                font-weight: 700;
-                color: var(--br-text-dark);
-                letter-spacing: 0.05em;
-                position: relative;
-                padding-bottom: 16px;
-                display: inline-flex;
-                align-items: center;
-                gap: 12px;
-            }
-
-            .brands-title-premium::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 60px;
-                height: 3px;
-                background-color: var(--br-accent);
-            }
-
-            .brands-title-icon {
-                max-height: 32px;
-                width: auto;
-            }
-
-            /* Grid Chassis Config */
-            .brands-premium-flexgrid {
-                display: flex !important;
-                flex-wrap: wrap !important;
-                justify-content: center;
-                gap: 16px;
-            }
-
-            /* Premium Logo Slot Chassis */
-            .brand-asset-chassis {
-                background: var(--br-card-bg);
-                border: 1px solid var(--br-border);
-                border-radius: 6px;
-                padding: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100px;
-                transition: transform 0.4s var(--br-ease), box-shadow 0.4s var(--br-ease), border-color 0.4s var(--br-ease);
-            }
-
-            .brand-asset-chassis:hover {
-                transform: translateY(-3px);
-                border-color: rgba(200, 35, 44, 0.12);
-                box-shadow: 0 10px 25px rgba(200, 35, 44, 0.05);
-            }
-
-            .brand-vector-img {
-                max-height: 55px;
-                width: auto;
-                object-fit: contain;
-                filter: grayscale(20%);
-                transition: filter 0.4s var(--br-ease), transform 0.4s var(--br-ease);
-            }
-
-            .brand-asset-chassis:hover .brand-vector-img {
-                filter: grayscale(0%);
-                transform: scale(1.04);
-            }
-
-            .brands-footer-text {
-                font-family: 'Montserrat', sans-serif;
-                font-size: 14px;
-                font-weight: 600;
-                color: var(--br-text-muted);
-                letter-spacing: 0.05em;
-            }
-
-            /* Custom Flex Items Breakdowns for a Clean 5-Column Desktop Flow */
-            @media (min-width: 992px) {
-                .brands-premium-flexgrid > div {
-                    flex: 0 0 calc(20% - 13px) !important; /* Perfect 5 items row grid flow split */
-                    max-width: calc(20% - 13px) !important;
-                }
-            }
-
-            /* Balanced Responsive Grid Downscaling Breakpoints */
-            @media (max-width: 991.98px) {
-                .brands-title-premium {
-                    font-size: 22px;
-                    padding-bottom: 12px;
-                }
-                .brands-title-premium::after {
-                    width: 50px;
-                }
-                .brands-title-icon {
-                    max-height: 28px;
-                }
-                .brands-premium-flexgrid > div {
-                    flex: 0 0 calc(33.333% - 11px) !important; /* Balanced 3 item grid layout split */
-                    max-width: calc(33.333% - 11px) !important;
-                }
-                .brand-asset-chassis {
-                    padding: 16px;
-                    height: 85px;
-                }
-                .brand-vector-img {
-                    max-height: 44px;
-                }
-            }
-
-            @media (max-width: 575.98px) {
-                .brands-premium-flexgrid {
-                    gap: 10px;
-                }
-                .brands-premium-flexgrid > div {
-                    flex: 0 0 calc(50% - 5px) !important; /* Balanced 2 item square grid mobile split */
-                    max-width: calc(50% - 5px) !important;
-                }
-                .brand-asset-chassis {
-                    padding: 12px;
-                    height: 75px;
-                }
-                .brand-vector-img {
-                    max-height: 38px;
-                }
-                .brands-footer-text {
-                    font-size: 12px;
-                    text-align: center !important;
-                }
-            }
-        </style>
 
         <div class="container-fluid brands-trusted-wrapper py-5 mask-reveal reveal-on-scroll">
             <div class="container py-4">
@@ -1305,7 +1156,7 @@ $featuredCategories = $pdo->query("
                                 <p class="catalog-meta featured-meta"><i class="fa-regular fa-file-pdf"></i> PDF Format &bull; 45 MB &bull; English</p>
                             </div>
                             <div>
-                                <a href="assets/docs/catalogs/master_catalog_2026.pdf" download class="catalog-download-btn btn-premium-red w-100">
+                                <a href="assets/catalogs/master-catalog-2026.pdf" download class="catalog-download-btn btn-premium-red w-100">
                                     <i class="fa-solid fa-arrow-down-to-line"></i> Download Master Catalog
                                 </a>
                             </div>
@@ -1319,10 +1170,10 @@ $featuredCategories = $pdo->query("
                         <div class="catalog-item-card">
                             <div>
                                 <span class="catalog-badge standard-badge">Range 01</span>
-                                <h4 class="catalog-name standard-name">Square & Round Glass Jars</h4>
+                                <h4 class="catalog-name standard-name">Gift Pack Range</h4>
                                 <p class="catalog-meta standard-meta"><i class="fa-regular fa-file-pdf"></i> PDF &bull; 12 MB</p>
                             </div>
-                            <a href="assets/docs/catalogs/glass_jars_brochure.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                            <a href="assets/catalogs/gift-pack.pdf" download class="catalog-download-btn btn-outline-charcoal">
                                 <i class="fa-solid fa-download"></i> Download PDF
                             </a>
                         </div>
@@ -1334,7 +1185,7 @@ $featuredCategories = $pdo->query("
                                 <h4 class="catalog-name standard-name">Premium Beverage Bottles</h4>
                                 <p class="catalog-meta standard-meta"><i class="fa-regular fa-file-pdf"></i> PDF &bull; 8.4 MB</p>
                             </div>
-                            <a href="assets/docs/catalogs/beverage_bottles_brochure.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                            <a href="assets/catalogs/beverage_bottles_brochure.pdf" download class="catalog-download-btn btn-outline-charcoal">
                                 <i class="fa-solid fa-download"></i> Download PDF
                             </a>
                         </div>
@@ -1346,7 +1197,7 @@ $featuredCategories = $pdo->query("
                                 <h4 class="catalog-name standard-name">Specifications & Tolerances</h4>
                                 <p class="catalog-meta standard-meta"><i class="fa-regular fa-file-pdf"></i> PDF &bull; 4.2 MB</p>
                             </div>
-                            <a href="assets/docs/catalogs/technical_specifications.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                            <a href="assets/catalogs/technical_specifications.pdf" download class="catalog-download-btn btn-outline-charcoal">
                                 <i class="fa-solid fa-download"></i> Download PDF
                             </a>
                         </div>
@@ -1358,7 +1209,7 @@ $featuredCategories = $pdo->query("
                                 <h4 class="catalog-name standard-name">Packaging & Shipping Guide</h4>
                                 <p class="catalog-meta standard-meta"><i class="fa-regular fa-file-pdf"></i> PDF &bull; 3.1 MB</p>
                             </div>
-                            <a href="assets/docs/catalogs/shipping_packaging_guide.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                            <a href="assets/catalogs/shipping_packaging_guide.pdf" download class="catalog-download-btn btn-outline-charcoal">
                                 <i class="fa-solid fa-download"></i> Download PDF
                             </a>
                         </div>

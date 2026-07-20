@@ -846,6 +846,156 @@ PRODUCT ITEM CARD ARCHITECTURE (Charcoal and Red Theme)
 
 
 
+ /* Section Scoped Styling Variables */
+    :root {
+        --br-bg: #f9f9f9;
+        --br-card-bg: #ffffff;
+        --br-accent: #c8232c;
+        --br-text-dark: #111111;
+        --br-text-muted: #666666;
+        --br-border: rgba(0, 0, 0, 0.04);
+        --br-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .brands-trusted-wrapper {
+        background-color: var(--br-bg);
+    }
+
+    .brands-title-premium {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--br-text-dark);
+        letter-spacing: 0.05em;
+        position: relative;
+        padding-bottom: 16px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .brands-title-premium::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background-color: var(--br-accent);
+    }
+
+    .brands-title-icon {
+        max-height: 32px;
+        width: auto;
+    }
+
+    /* Grid Chassis Config */
+    .brands-premium-flexgrid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    /* Premium Logo Slot Chassis */
+    .brand-asset-chassis {
+        background: var(--br-card-bg);
+        border: 1px solid var(--br-border);
+        border-radius: 6px;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        transition: transform 0.4s var(--br-ease), box-shadow 0.4s var(--br-ease), border-color 0.4s var(--br-ease);
+    }
+
+    .brand-asset-chassis:hover {
+        transform: translateY(-3px);
+        border-color: rgba(200, 35, 44, 0.12);
+        box-shadow: 0 10px 25px rgba(200, 35, 44, 0.05);
+    }
+
+    .brand-vector-img {
+        max-height: 55px;
+        width: auto;
+        object-fit: contain;
+        filter: grayscale(20%);
+        transition: filter 0.4s var(--br-ease), transform 0.4s var(--br-ease);
+    }
+
+    .brand-asset-chassis:hover .brand-vector-img {
+        filter: grayscale(0%);
+        transform: scale(1.04);
+    }
+
+    .brands-footer-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--br-text-muted);
+        letter-spacing: 0.05em;
+    }
+
+    /* Custom Flex Items Breakdowns for a Clean 5-Column Desktop Flow */
+    @media (min-width: 992px) {
+        .brands-premium-flexgrid > div {
+            flex: 0 0 calc(20% - 13px) !important; /* Perfect 5 items row grid flow split */
+            max-width: calc(20% - 13px) !important;
+        }
+    }
+
+    /* Balanced Responsive Grid Downscaling Breakpoints */
+    @media (max-width: 991.98px) {
+        .brands-title-premium {
+            font-size: 22px;
+            padding-bottom: 12px;
+        }
+        .brands-title-premium::after {
+            width: 50px;
+        }
+        .brands-title-icon {
+            max-height: 28px;
+        }
+        .brands-premium-flexgrid > div {
+            flex: 0 0 calc(33.333% - 11px) !important; /* Balanced 3 item grid layout split */
+            max-width: calc(33.333% - 11px) !important;
+        }
+        .brand-asset-chassis {
+            padding: 16px;
+            height: 85px;
+        }
+        .brand-vector-img {
+            max-height: 44px;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .brands-premium-flexgrid {
+            gap: 10px;
+        }
+        .brands-premium-flexgrid > div {
+            flex: 0 0 calc(50% - 5px) !important; /* Balanced 2 item square grid mobile split */
+            max-width: calc(50% - 5px) !important;
+        }
+        .brand-asset-chassis {
+            padding: 12px;
+            height: 75px;
+        }
+        .brand-vector-img {
+            max-height: 38px;
+        }
+        .brands-footer-text {
+            font-size: 12px;
+            text-align: center !important;
+        }
+    }
+
+
+
+
+
     /* ==========================================================================
 CATALOG SYSTEM BASE ARCHITECTURE
 ========================================================================== */
@@ -971,10 +1121,10 @@ TYPOGRAPHY AND INTERACTIVE BUTTON ELEMENT ACTIONS
     font-weight: 700;
     line-height: 1.4;
     margin-bottom: 8px;
-    color: #ffffff !important;
+    color: #c8232c !important;
 }
-.featured-name { font-size: 24px; color: #ffffff; }
-.standard-name { font-size: 16px; color: #111111; }
+.featured-name { font-size: 24px; color: #ffffff !important; }
+.standard-name { font-size: 16px; color: #c8232c !important;}
 
 .catalog-meta {
     font-size: 12px;
