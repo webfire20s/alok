@@ -14,6 +14,7 @@ $featuredCategories = $pdo->query("
     SELECT *
     FROM categories
     WHERE featured = 1
+    LIMIT 4
 ")->fetchAll();
 ?>
 
@@ -202,6 +203,7 @@ $featuredCategories = $pdo->query("
             WHERE category_id = ?
             AND show_on_home = 1
             ORDER BY id DESC
+            LIMIT 14
             
         ");
 

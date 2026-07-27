@@ -33,6 +33,34 @@ made our plant/group/factories section with their logos
 
 
 
+
+<li class="nav-item dropdown" style="position: relative;">
+    <a class="nav-link dropdown-toggle" href="javascript:void(0);" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+        Shop By Industry
+    </a>
+    
+    <?php
+    $navCategories = $pdo->query("
+        SELECT name, slug
+        FROM categories
+        ORDER BY name ASC
+    ")->fetchAll();
+    ?>
+
+    <div class="dropdown-menu">
+        <?php foreach($navCategories as $cat): ?>
+            <a
+                class="dropdown-item"
+                href="category/<?= urlencode($cat['slug']) ?>"
+                style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500; color: #2c323e; padding: 12px 24px;"
+            >
+                <?= htmlspecialchars($cat['name']) ?>
+            </a>
+        <?php endforeach; ?>
+    </div>
+</li>
+
+
 <!-- MOBILE VERSION -->
         <!-- <div class="container pt-6 only-mobile animate__animated animate__fadeInUp" style="padding-top: 3.5rem; padding-bottom: 2.5rem; padding-left: 15px; padding-right: 0px; overflow-x: hidden; --animate-duration: 0.8s;"> -->
 

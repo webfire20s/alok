@@ -4,9 +4,9 @@ if(session_status() === PHP_SESSION_NONE){
 }
 
 require_once __DIR__ . '/db.php';
-
+/* Optimized query to only fetch required index columns instead of SELECT * */
 $navStmt = $pdo->prepare("
-    SELECT id, name /* Optimized query to only fetch required index columns instead of SELECT * */
+SELECT id, name 
     FROM categories
     ORDER BY name ASC
 ");
@@ -685,7 +685,7 @@ $navCategories = $navStmt->fetchAll();
 
 <!-- Header Ends -->
 
-  <!-- Desktop Navigation Bar -->
+<!-- Desktop Navigation Bar -->
     <nav class="navbar navbar-expand-lg only-desktop" style="background-color: var(--dark-industrial); padding: 0; border-bottom: 3.5px solid var(--primary-accent); box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 999;">
         <div class="container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" style="border: none;">
@@ -696,30 +696,10 @@ $navCategories = $navStmt->fetchAll();
                 <ul class="navbar-nav" style="gap: 4px; padding: 0; margin: 0; align-items: center; width: 100%; justify-content: space-between;">
 
                     <!-- Shop By Industry (Dynamic Dropdown) -->
-                    <li class="nav-item dropdown" style="position: relative;">
-                        <a class="nav-link dropdown-toggle" href="javascript:void(0);" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
-                            Shop By Industry
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+                            Home
                         </a>
-                        
-                        <?php
-                        $navCategories = $pdo->query("
-                            SELECT name, slug
-                            FROM categories
-                            ORDER BY name ASC
-                        ")->fetchAll();
-                        ?>
-
-                        <div class="dropdown-menu">
-                            <?php foreach($navCategories as $cat): ?>
-                                <a
-                                    class="dropdown-item"
-                                    href="category/<?= urlencode($cat['slug']) ?>"
-                                    style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500; color: #2c323e; padding: 12px 24px;"
-                                >
-                                    <?= htmlspecialchars($cat['name']) ?>
-                                </a>
-                            <?php endforeach; ?>
-                        </div>
                     </li>
 
                     <!-- Shop By Product (Dynamic Dropdown) -->
@@ -785,7 +765,7 @@ $navCategories = $navStmt->fetchAll();
             </div>
         </div>
     </nav>
-    <!-- Desktop Navigation Bar Ends -->
+<!-- Desktop Navigation Bar Ends -->
 
 
 
