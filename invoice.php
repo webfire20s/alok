@@ -34,9 +34,13 @@ if(!$order){
 */
 
 $itemStmt = $pdo->prepare("
-    SELECT *
+    SELECT
+        order_items.*,
+        closure_options.name AS closure_option_name
     FROM order_items
-    WHERE order_id = ?
+    LEFT JOIN closure_options
+        ON order_items.closure_option_id = closure_options.id
+    WHERE order_items.order_id = ?
 ");
 
 $itemStmt->execute([$orderId]);
@@ -62,7 +66,7 @@ $pdf->SetAutoPageBreak(true, 20);
 */
 
 $logoPath =
-'assets/themes/storefront/public/images/logoe8da.png';
+'assets/themes/storefront/public/images/logo.jpeg';
 
 if(file_exists($logoPath)){
 
@@ -84,7 +88,7 @@ $pdf->Ln(10);
 
 $pdf->SetFont('Arial', '', 11);
 
-$pdf->Cell(100, 6, 'Ajanta Packaging', 0, 0);
+$pdf->Cell(100, 24, 'Alok Glass Works', 0, 0);
 
 $pdf->Cell(
     90,
@@ -97,7 +101,7 @@ $pdf->Cell(
 
 $pdf->Cell(
     100,
-    6,
+    25,
     'India',
     0,
     0
@@ -218,25 +222,48 @@ $pdf->SetFont('Arial', '', 10);
 
 foreach($items as $item){
 
-    $pdf->Cell(
+    $productPrice = (float)$item['price'];
+
+    $closurePrice = (float)($item['closure_option_price'] ?? 0);
+
+    // Price already includes closure price
+    $effectivePrice = $productPrice;
+
+    $productOnlyPrice = $effectivePrice - $closurePrice;
+
+    $startX = $pdf->GetX();
+    $startY = $pdf->GetY();
+
+    $productText = $item['product_name'];
+
+    if($closurePrice > 0){
+
+        $productText .= "\nClosure : " . $item['closure_option_name'];
+
+        // $productText .= "\nProduct : Rs. " . number_format($productOnlyPrice,2);
+
+        $productText .= "\nClosure : Rs. " . number_format($closurePrice,2);
+
+        $productText .= "\nUnit : Rs. " . number_format($effectivePrice,2);
+
+    }
+
+    $rowHeight = ($closurePrice > 0) ? 24 : 10;
+
+    $pdf->MultiCell(
         60,
-        10,
-        substr($item['product_name'], 0, 30),
+        6,
+        $productText,
         1
     );
 
-    $pdf->Cell(
-        18,
-        10,
-        $item['quantity'],
-        1,
-        0,
-        'C'
-    );
+    $pdf->SetXY($startX + 60, $startY);
+
+    $pdf->Cell(18,$rowHeight,$item['quantity'],1,0,'C');
 
     $pdf->Cell(
         25,
-        10,
+        $rowHeight,
         ucfirst($item['order_unit']),
         1,
         0,
@@ -245,9 +272,8 @@ foreach($items as $item){
 
     $pdf->Cell(
         25,
-        10,
-        'Rs. ' .
-        number_format($item['price'], 2),
+        $rowHeight,
+        'Rs. '.number_format($effectivePrice,2),
         1,
         0,
         'R'
@@ -255,8 +281,8 @@ foreach($items as $item){
 
     $pdf->Cell(
         20,
-        10,
-        $item['gst_percent'] . '%',
+        $rowHeight,
+        $item['gst_percent'].'%',
         1,
         0,
         'C'
@@ -264,16 +290,14 @@ foreach($items as $item){
 
     $pdf->Cell(
         42,
-        10,
-        'Rs. ' .
-        number_format($item['line_total'], 2),
+        $rowHeight,
+        'Rs. '.number_format($item['line_total'],2),
         1,
         1,
         'R'
     );
 
 }
-
 /*
 |--------------------------------------------------------------------------
 | TOTALS

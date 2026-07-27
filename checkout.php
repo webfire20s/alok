@@ -26,10 +26,14 @@ if($userId){
             products.name,
             products.image,
             products.slug,
-            products.price
+            products.price,
+            closure_options.name AS closure_name,
+            closure_options.price AS closure_price
         FROM cart
         JOIN products
         ON cart.product_id = products.id
+        LEFT JOIN closure_options
+        ON cart.closure_option_id = closure_options.id
         WHERE cart.user_id = ?
         ORDER BY cart.id DESC
     ");
@@ -44,10 +48,14 @@ if($userId){
             products.name,
             products.image,
             products.slug,
-            products.price
+            products.price,
+            closure_options.name AS closure_name,
+            closure_options.price AS closure_price
         FROM cart
         JOIN products
         ON cart.product_id = products.id
+        LEFT JOIN closure_options
+        ON cart.closure_option_id = closure_options.id
         WHERE cart.session_id = ?
         ORDER BY cart.id DESC
     ");
@@ -244,7 +252,10 @@ $totalGST = 0;
 
                         <?php
                         $qty = $item['quantity'];
-                        $price = $item['price'];
+                        $productPrice = (float)$item['price'];
+                        $closurePrice = (float)($item['closure_price'] ?? 0);
+
+                        $price = $productPrice + $closurePrice;
                         $gstPercent = $item['gst_percent'];
                         
                         $lineSubtotal = $price * $qty;
@@ -261,6 +272,27 @@ $totalGST = 0;
                                 <span style="color: #111111; font-weight: 600; display: block; margin-bottom: 2px;">
                                     <?= htmlspecialchars($item['name']) ?>
                                 </span>
+                                <?php if(!empty($item['closure_name'])): ?>
+
+                                    <small
+                                        style="
+                                            display:block;
+                                            color:#c8232c;
+                                            font-size:12px;
+                                            margin-top:3px;
+                                            font-weight:600;
+                                        "
+                                    >
+                                        Closure:
+                                        <?= htmlspecialchars($item['closure_name']) ?>
+
+                                        <?php if($item['closure_price'] > 0): ?>
+                                            (+₹<?= number_format($item['closure_price'],2) ?>)
+                                        <?php endif; ?>
+
+                                    </small>
+
+                                <?php endif; ?>
                                 <small style="color: #777777; font-weight: 500; font-size: 12px;">
                                     Qty: <?= $qty ?> (<?= ucfirst($item['order_unit']) ?>)
                                 </small>

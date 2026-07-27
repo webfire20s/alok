@@ -144,8 +144,69 @@ $items = $itemStmt->fetchAll();
                                     >
                                 </td>
                                 
-                                <td style="padding: 14px; border: 1px solid #eeeeee; font-size: 14px; font-weight: 600; color: #111111;">
-                                    <?= htmlspecialchars($item['product_name']) ?>
+                                <td style="padding:14px;border:1px solid #eeeeee;">
+
+                                    <?php
+
+                                    $unitPrice = (float)$item['price']; // Already includes closure
+
+                                    $closurePrice = (float)($item['closure_option_price'] ?? 0);
+
+                                    $basePrice = $unitPrice - $closurePrice;
+
+                                    ?>
+
+                                    <div style="font-size:14px;font-weight:600;color:#111111;">
+                                        <?= htmlspecialchars($item['product_name']) ?>
+                                    </div>
+
+                                    <?php if(!empty($item['closure_option_name'])): ?>
+
+                                        <div style="
+                                            margin-top:6px;
+                                            display:inline-block;
+                                            padding:4px 8px;
+                                            background:#f5fbff;
+                                            border:1px solid #d7eefc;
+                                            border-radius:4px;
+                                            font-size:11px;
+                                            color:#0c7abf;
+                                            font-weight:600;
+                                        ">
+                                            Closure :
+                                            <?= htmlspecialchars($item['closure_option_name']) ?>
+                                        </div>
+
+                                    <?php endif; ?>
+
+                                    <div style="
+                                        margin-top:8px;
+                                        font-size:11px;
+                                        color:#666;
+                                        line-height:1.6;
+                                    ">
+
+                                        Product :
+                                        ₹<?= number_format($basePrice,2) ?>
+
+                                        <?php if($closurePrice > 0): ?>
+
+                                            <br>
+
+                                            Closure :
+                                            ₹<?= number_format($closurePrice,2) ?>
+
+                                        <?php endif; ?>
+
+                                        <br>
+
+                                        <strong style="color:#c8232c;">
+                                            Unit Price :
+                                            ₹<?= number_format($unitPrice,2) ?>
+                                        </strong>
+
+                                    </div>
+
                                 </td>
                                 
                                 <td style="padding: 14px; border: 1px solid #eeeeee; font-size: 14px; font-weight: 500; color: #555555;">
@@ -165,7 +226,17 @@ $items = $itemStmt->fetchAll();
                                 </td>
                                 
                                 <td style="padding: 14px; border: 1px solid #eeeeee; font-size: 14px; font-weight: 700; color: #111111;">
-                                    ₹<?= number_format($item['line_total'], 2) ?>
+                                   <?php
+
+                                    $itemSubtotal = $unitPrice * $item['quantity'];
+
+                                    $itemGST = ($itemSubtotal * $item['gst_percent']) / 100;
+
+                                    $itemTotal = $itemSubtotal + $itemGST;
+
+                                    ?>
+
+                                    ₹<?= number_format($itemTotal,2) ?>
                                 </td>
 
                             </tr>

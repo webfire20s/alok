@@ -16,6 +16,36 @@ $product = $stmt->fetch();
 if(!$product){
     die("Product not found");
 }
+
+/*
+|--------------------------------------------------------------------------
+| PRODUCT CLOSURE OPTIONS
+|--------------------------------------------------------------------------
+*/
+
+$closureOptions = [];
+
+if($product['has_closure_options']){
+
+    $closureStmt = $pdo->prepare("
+        SELECT
+            co.*
+        FROM product_closure_options pco
+        INNER JOIN closure_options co
+            ON co.id = pco.closure_option_id
+        WHERE
+            pco.product_id = ?
+            AND co.status = 1
+        ORDER BY
+            co.sort_order ASC,
+            co.name ASC
+    ");
+
+    $closureStmt->execute([$product['id']]);
+
+    $closureOptions = $closureStmt->fetchAll();
+
+}
 ?>
 
 <div class="container pt-5 pb-5" style="font-family: 'Montserrat', sans-serif;">
@@ -104,12 +134,12 @@ if(!$product){
 
             <div class="d-flex mb-4 gap-4">
                 <div>
-                    <span style="display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #999; margin-bottom: 4px;">SKU</span>
+                    <span style="display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; color: #999; margin-bottom: 4px;">SKU</span>
                     <span style="font-weight: 600; color: #333;"><?= htmlspecialchars($product['sku']) ?></span>
                 </div>
                 <div>
-                    <span style="display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #999; margin-bottom: 4px;">Availability</span>
-                    <span style="font-weight: 600; color: <?= $product['stock'] > 0 ? '#28a745' : '#c8232c' ?>;">
+                    <span style="display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; color: #999; margin-bottom: 4px;">Availability</span>
+                    <span style="font-weight: 600; padding: 0 15px; color: <?= $product['stock'] > 0 ? '#28a745' : '#c8232c' ?>;">
                         <?= $product['stock'] > 0 ? 'In Stock' : 'Out of Stock' ?>
                     </span>
                 </div>
@@ -142,6 +172,55 @@ if(!$product){
                         <div class="purchase-alert">Sold individually per piece.</div>
                     <?php endif; ?>
                 </div>
+
+                <?php if($product['has_closure_options'] && !empty($closureOptions)): ?>
+
+                <div class="mb-4">
+
+                    <label
+                        class="d-block mb-2"
+                        style="
+                            font-size:11px;
+                            font-weight:700;
+                            text-transform:uppercase;
+                            color:#111;
+                            letter-spacing:.05em;
+                        ">
+
+                        Closure Options for this Glass Bottle
+
+                    </label>
+
+                    <select
+                        name="closure_option_id"
+                        class="form-control custom-select-theme"
+                        required>
+
+                        <option value="">
+                            Select Closure Option
+                        </option>
+
+                        <?php foreach($closureOptions as $closure): ?>
+
+                            <option value="<?= $closure['id'] ?>">
+
+                                <?= htmlspecialchars($closure['name']) ?>
+
+                                <?php if($closure['price'] > 0): ?>
+
+                                    (+₹<?= number_format($closure['price'],2) ?>)
+
+                                <?php endif; ?>
+
+                            </option>
+
+                        <?php endforeach; ?>
+
+                    </select>
+
+                </div>
+
+                <?php endif; ?>
 
                 <div class="mb-4">
 

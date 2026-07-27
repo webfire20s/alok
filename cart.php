@@ -26,10 +26,16 @@ if($userId){
             products.name,
             products.image,
             products.slug,
-            products.price
+            products.price,
+            closure_options.name AS closure_name,
+            closure_options.price AS closure_price
         FROM cart
         JOIN products
         ON cart.product_id = products.id
+
+        LEFT JOIN closure_options
+        ON cart.closure_option_id = closure_options.id
+
         WHERE cart.user_id = ?
         ORDER BY cart.id DESC
     ");
@@ -44,10 +50,16 @@ if($userId){
             products.name,
             products.image,
             products.slug,
-            products.price
+            products.price,
+            closure_options.name AS closure_name,
+            closure_options.price AS closure_price
         FROM cart
         JOIN products
         ON cart.product_id = products.id
+
+        LEFT JOIN closure_options
+        ON cart.closure_option_id = closure_options.id
+
         WHERE cart.session_id = ?
         ORDER BY cart.id DESC
     ");
@@ -99,7 +111,11 @@ $totalGST = 0;
                     <?php foreach($cartItems as $item): ?>
                         <?php
                         $qty = (int)$item['quantity'];
-                        $price = (float)$item['price'];
+                        $productPrice = (float)$item['price'];
+
+                        $closurePrice = (float)($item['closure_price'] ?? 0);
+
+                        $price = $productPrice + $closurePrice;
                         $gstPercent = (float)$item['gst_percent'];
                         $piecesPerBox = (int)$item['pieces_per_box'];
                         $orderUnit = $item['order_unit'];
@@ -120,10 +136,38 @@ $totalGST = 0;
                         
                         <tr style="border-bottom: 1px solid #eeeeee;">
                             
-                            <td style="padding: 16px; font-weight: 600;">
-                                <a href="product/<?= $item['slug'] ?>" style="color: #111111; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#c8232c'" onmouseout="this.style.color='#111111'">
+                            <td style="padding:16px;font-weight:600;">
+
+                                <a href="product/<?= $item['slug'] ?>"
+                                style="color:#111;text-decoration:none;">
                                     <?= htmlspecialchars($item['name']) ?>
                                 </a>
+
+                                <?php if(!empty($item['closure_name'])): ?>
+
+                                    <div style="
+                                        margin-top:8px;
+                                        display:inline-block;
+                                        background:#f7f7f7;
+                                        border:1px solid #e5e5e5;
+                                        padding:4px 10px;
+                                        border-radius:30px;
+                                        font-size:12px;
+                                        color:#555;
+                                    ">
+                                        Closure :
+                                        <strong>
+                                            <?= htmlspecialchars($item['closure_name']) ?>
+                                        </strong>
+
+                                        <?php if($closurePrice > 0): ?>
+                                            (+₹<?= number_format($closurePrice,2) ?>)
+                                        <?php endif; ?>
+
+                                    </div>
+
+                                <?php endif; ?>
+
                             </td>
                             
                             <td style="padding: 16px;" width="120">
@@ -165,8 +209,20 @@ $totalGST = 0;
                                 <?= $pieces ?> pcs
                             </td>
                             
-                            <td style="padding: 16px; font-weight: 500; color: #555555;">
-                                ₹<?= number_format($price, 2) ?>
+                            <td style="padding:16px;">
+
+                                ₹<?= number_format($productPrice,2) ?>
+
+                                <?php if($closurePrice>0): ?>
+
+                                    <br>
+
+                                    <small style="color:#888;">
+                                        Closure +₹<?= number_format($closurePrice,2) ?>
+                                    </small>
+
+                                <?php endif; ?>
+
                             </td>
                             
                             <td style="padding: 16px; font-weight: 500; color: #777777;">

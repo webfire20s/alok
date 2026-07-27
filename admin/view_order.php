@@ -289,27 +289,92 @@ include 'includes/admin_sidebar.php';
                                     </td>
                                     
                                     <td>
-                                        <div style="font-weight: 600; color: #ffffff; font-size: 13.5px;">
-                                            <?= htmlspecialchars($item['product_name'] ?? '—') ?>
+                                        <?php
+
+                                        $productPrice = (float)$item['price'];          // Already includes closure
+                                        $closurePrice = (float)($item['closure_option_price'] ?? 0);
+
+                                        $baseProductPrice = $productPrice - $closurePrice;
+
+                                        $effectivePrice = $productPrice;
+
+                                        $itemSubtotal = $effectivePrice * $item['quantity'];
+
+                                        $itemGST = ($itemSubtotal * $item['gst_percent']) / 100;
+
+                                        $itemTotal = $itemSubtotal + $itemGST;
+
+                                        ?>
+
+                                        <div style="font-weight:600;color:#ffffff;font-size:13.5px;">
+                                            <?= htmlspecialchars($item['product_name']) ?>
                                         </div>
+
+                                        <?php if(!empty($item['closure_option_name'])): ?>
+
+                                            <div style="
+                                                margin-top:6px;
+                                                display:inline-block;
+                                                padding:4px 8px;
+                                                border-radius:5px;
+                                                background:rgba(56,189,248,.08);
+                                                border:1px solid rgba(56,189,248,.18);
+                                                color:#7dd3fc;
+                                                font-size:11px;
+                                            ">
+                                                Closure :
+                                                <strong>
+                                                    <?= htmlspecialchars($item['closure_option_name']) ?>
+                                                </strong>
+                                            </div>
+
+                                        <?php endif; ?>
+
+
+                                        <!-- INSERT IT HERE -->
+
+                                        <div style="
+                                            margin-top:6px;
+                                            color:#94a3b8;
+                                            font-size:11px;
+                                            line-height:1.6;
+                                        ">
+
+                                            Product :
+                                            ₹<?= number_format($baseProductPrice,2) ?>
+
+                                            <?php if($closurePrice > 0): ?>
+
+                                            <br>
+
+                                            Closure :
+                                            ₹<?= number_format($closurePrice,2) ?>
+
+                                            <br>
+
+                                            <strong style="color:#38bdf8;">
+                                            Unit Price :
+                                            ₹<?= number_format($effectivePrice,2) ?>
+                                            </strong>
+
+                                            <?php endif; ?>
+
+                                        </div>
+
                                     </td>
                                     
                                     <td><span style="font-weight: 500; color: #f1f5f9;"><?= $item['quantity'] ?></span></td>
                                     
                                     <td>
                                         <span style="font-size: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px; color: #94a3b8;">
-                                            <?= ucfirst($item['purchase_type'] ?? 'Standard') ?>
+                                            <?= ucfirst($item['order_unit']) ?>
                                         </span>
                                     </td>
                                     
                                     <td><span style="color: #94a3b8; font-size: 13px;"><?= $item['gst_percent'] ?>%</span></td>
                                     
                                     <td class="text-end">
-                                        <?php
-                                            $itemSubtotal = $item['price'] * $item['quantity'];
-                                            $itemGST = ($itemSubtotal * $item['gst_percent']) / 100;
-                                            $itemTotal = $itemSubtotal + $itemGST;
-                                        ?>
+                                        
                                         <span style="font-weight: 600; font-family: monospace; color: #ffffff;">
                                             ₹<?= number_format($itemTotal, 2) ?>
                                         </span>

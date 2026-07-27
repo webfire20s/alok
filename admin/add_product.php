@@ -11,6 +11,13 @@ $categories = $pdo->query("
     ORDER BY name ASC
 ")->fetchAll();
 
+$closureOptions = $pdo->query("
+    SELECT *
+    FROM closure_options
+    WHERE status = 1
+    ORDER BY sort_order ASC, name ASC
+")->fetchAll();
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $categoryId = $_POST['category_id'];
@@ -48,6 +55,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $description =
         trim($_POST['description']);
+    
+    $hasClosureOptions =
+        isset($_POST['has_closure_options'])
+            ? 1
+            : 0;
+
+    $selectedClosures =
+        $_POST['closure_options'] ?? [];
 
     /*
     /*
@@ -95,9 +110,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             selling_type,
             pieces_per_box,
             min_order_qty,
-            featured
+            featured,
+            has_closure_options
 
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
 
     $stmt->execute([
@@ -116,9 +132,34 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $sellingType,
         $piecesPerBox,
         $minOrderQty,
-        $featured
+        $featured,
+        $hasClosureOptions
 
     ]);
+
+    $productId = $pdo->lastInsertId();
+
+    if($hasClosureOptions && !empty($selectedClosures)){
+
+        $mapStmt = $pdo->prepare("
+            INSERT INTO product_closure_options
+            (
+                product_id,
+                closure_option_id
+            )
+            VALUES (?,?)
+        ");
+
+        foreach($selectedClosures as $closureId){
+
+            $mapStmt->execute([
+                $productId,
+                $closureId
+            ]);
+
+        }
+
+    }
 
     header("Location: products.php");
     exit;
@@ -404,6 +445,86 @@ include 'includes/admin_sidebar.php';
                                     </label>
                                 </div>
                             </div>
+                            <div class="form-group mb-4 pt-2">
+
+                                <div class="form-check d-flex align-items-center">
+
+                                    <input
+                                        type="checkbox"
+                                        id="closureCheck"
+                                        name="has_closure_options"
+                                        class="form-check-input"
+                                    >
+
+                                    <label
+                                        for="closureCheck"
+                                        class="form-check-label text-white-50 ms-2">
+
+                                        Enable Closure Options
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            <div
+                                id="closureContainer"
+                                class="form-group mb-4"
+                                style="display:none;">
+
+                                <label
+                                    style="
+                                    font-size:12px;
+                                    text-transform:uppercase;
+                                    color:#94a3b8;
+                                    font-weight:600;">
+
+                                    Available Closures
+
+                                </label>
+
+                                <div
+                                    style="
+                                    max-height:220px;
+                                    overflow:auto;
+                                    padding:12px;
+                                    background:rgba(15,17,21,.5);
+                                    border:1px solid rgba(255,255,255,.08);
+                                    border-radius:8px;">
+
+                                    <?php foreach($closureOptions as $closure): ?>
+
+                                        <div class="form-check mb-2">
+
+                                            <input
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                name="closure_options[]"
+                                                value="<?= $closure['id'] ?>"
+                                                id="closure<?= $closure['id'] ?>">
+
+                                            <label
+                                                class="form-check-label text-white"
+                                                for="closure<?= $closure['id'] ?>">
+
+                                                <?= htmlspecialchars($closure['name']) ?>
+
+                                                <?php if($closure['price']>0): ?>
+
+                                                    (+₹<?= number_format($closure['price'],2) ?>)
+
+                                                <?php endif; ?>
+
+                                            </label>
+
+                                        </div>
+
+                                    <?php endforeach; ?>
+
+                                </div>
+
+                            </div>
 
                             <button 
                                 class="btn btn-block py-2.5 mt-2"
@@ -491,6 +612,28 @@ togglePiecesField();
 sellingType.addEventListener(
     "change",
     togglePiecesField
+);
+
+const closureCheck =
+document.getElementById("closureCheck");
+
+const closureContainer =
+document.getElementById("closureContainer");
+
+function toggleClosures(){
+
+    closureContainer.style.display =
+        closureCheck.checked
+            ? "block"
+            : "none";
+
+}
+
+toggleClosures();
+
+closureCheck.addEventListener(
+    "change",
+    toggleClosures
 );
 
 </script>

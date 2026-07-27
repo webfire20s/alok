@@ -29,9 +29,22 @@ if(!$product){
 
 }
 
+
+$stmt = $pdo->prepare("
+    SELECT closure_option_id
+    FROM product_closure_options
+    WHERE product_id = ?
+");
+
+$stmt->execute([$product['id']]);
+
+$selectedClosures = array_column(
+    $stmt->fetchAll(),
+    'closure_option_id'
+);
 /*
 |--------------------------------------------------------------------------
-| FETCH CATEGORIES
+| FETCH CATEGORIES AND CLOSURE OPTIONS
 |--------------------------------------------------------------------------
 */
 
@@ -39,6 +52,13 @@ $categories = $pdo->query("
     SELECT *
     FROM categories
     ORDER BY name ASC
+")->fetchAll();
+
+$closureOptions = $pdo->query("
+    SELECT *
+    FROM closure_options
+    WHERE status = 1
+    ORDER BY sort_order ASC, name ASC
 ")->fetchAll();
 
 /*
@@ -60,6 +80,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $sku =
         trim($_POST['sku']);
+
+    $hasClosureOptions =
+        isset($_POST['has_closure_options']) ? 1 : 0;
 
     $price =
         $_POST['price'];
@@ -128,6 +151,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             name = ?,
             slug = ?,
             sku = ?,
+            has_closure_options = ?,
             short_description = ?,
             description = ?,
             price = ?,
@@ -148,6 +172,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $name,
         $slug,
         $sku,
+        $hasClosureOptions,
         $shortDescription,
         $description,
         $price,
@@ -162,6 +187,42 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $minOrderQty,
         $id
     ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | SAVE CLOSURE OPTIONS
+    |--------------------------------------------------------------------------
+    */
+
+    $pdo->prepare("
+        DELETE FROM product_closure_options
+        WHERE product_id = ?
+    ")->execute([$id]);
+
+    if (
+        $hasClosureOptions == 1 &&
+        !empty($_POST['closure_options'])
+    ) {
+
+        $insert = $pdo->prepare("
+            INSERT INTO product_closure_options
+            (
+                product_id,
+                closure_option_id
+            )
+            VALUES (?, ?)
+        ");
+
+        foreach ($_POST['closure_options'] as $closureId) {
+
+            $insert->execute([
+                $id,
+                $closureId
+            ]);
+
+        }
+
+    }
 
     header("Location: products.php");
     exit;
@@ -230,6 +291,80 @@ include 'includes/admin_sidebar.php';
                     >
                 </div>
             </div>
+        </div>
+        <div class="form-group mt-4">
+
+            <div class="form-check mb-3">
+
+                <input
+                    type="checkbox"
+                    id="hasClosureOptions"
+                    name="has_closure_options"
+                    value="1"
+                    class="form-check-input"
+                    <?= $product['has_closure_options'] ? 'checked' : '' ?>
+                >
+
+                <label
+                    class="form-check-label"
+                    for="hasClosureOptions"
+                >
+                    Enable Closure Options
+                </label>
+
+            </div>
+
+        </div>
+
+        <div
+            id="closureOptionsWrap"
+            style="<?= $product['has_closure_options'] ? '' : 'display:none;' ?>"
+        >
+
+            <label class="mb-3">
+                Available Closure Options
+            </label>
+
+            <?php foreach($closureOptions as $closure): ?>
+
+                <div class="form-check mb-2">
+
+                    <input
+                        type="checkbox"
+                        class="form-check-input"
+                        name="closure_options[]"
+                        value="<?= $closure['id'] ?>"
+                        id="closure<?= $closure['id'] ?>"
+
+                        <?= in_array(
+                                $closure['id'],
+                                $selectedClosures
+                            )
+                            ? 'checked'
+                            : ''
+                        ?>
+
+                    >
+
+                    <label
+                        class="form-check-label"
+                        for="closure<?= $closure['id'] ?>"
+                    >
+
+                        <?= htmlspecialchars($closure['name']) ?>
+
+                        <?php if($closure['price']>0): ?>
+
+                            (+₹<?= number_format($closure['price'],2) ?>)
+
+                        <?php endif; ?>
+
+                    </label>
+
+                </div>
+
+            <?php endforeach; ?>
+
         </div>
 
         <div class="form-group mb-4">
@@ -517,3 +652,20 @@ include 'includes/admin_sidebar.php';
     </form>
 
 </div>
+
+<script>
+    const closureToggle =
+document.getElementById("hasClosureOptions");
+
+const closureWrap =
+document.getElementById("closureOptionsWrap");
+
+closureToggle.addEventListener("change",function(){
+
+    closureWrap.style.display =
+        this.checked
+            ? "block"
+            : "none";
+
+});
+</script>

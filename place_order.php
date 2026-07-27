@@ -30,10 +30,19 @@ if($userId){
             products.name,
             products.image,
             products.slug,
-            products.price
+            products.price,
+
+            closure_options.name AS closure_name,
+            closure_options.price AS closure_price
+
         FROM cart
+
         JOIN products
         ON cart.product_id = products.id
+
+        LEFT JOIN closure_options
+        ON cart.closure_option_id = closure_options.id
+
         WHERE cart.user_id = ?
         ORDER BY cart.id DESC
     ");
@@ -48,10 +57,19 @@ if($userId){
             products.name,
             products.image,
             products.slug,
-            products.price
+            products.price,
+
+            closure_options.name AS closure_name,
+            closure_options.price AS closure_price
+
         FROM cart
+
         JOIN products
         ON cart.product_id = products.id
+
+        LEFT JOIN closure_options
+        ON cart.closure_option_id = closure_options.id
+
         WHERE cart.session_id = ?
         ORDER BY cart.id DESC
     ");
@@ -122,7 +140,11 @@ foreach($cartItems as $item){
 
     $qty = $item['quantity'];
 
-    $price = $item['price'];
+    $productPrice = (float)$item['price'];
+
+    $closurePrice = (float)($item['closure_price'] ?? 0);
+
+    $price = $productPrice + $closurePrice;
 
     $gstPercent = $item['gst_percent'];
 
@@ -221,7 +243,11 @@ foreach($cartItems as $item){
 
     $qty = $item['quantity'];
 
-    $price = $item['price'];
+    $productPrice = (float)$item['price'];
+
+    $closurePrice = (float)($item['closure_price'] ?? 0);
+
+    $price = $productPrice + $closurePrice;
 
     $gstPercent = $item['gst_percent'];
 
@@ -239,9 +265,16 @@ foreach($cartItems as $item){
 
             order_id,
             product_id,
+            closure_option_id,
+
             product_name,
+            closure_option_name,
+
             product_image,
+
             price,
+            closure_option_price,
+
             quantity,
             order_unit,
             pieces_per_box,
@@ -250,7 +283,7 @@ foreach($cartItems as $item){
 
         ) VALUES (
 
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 
         )
     ");
@@ -258,10 +291,18 @@ foreach($cartItems as $item){
     $itemStmt->execute([
 
         $orderId,
+
         $item['product_id'],
+        $item['closure_option_id'],
+
         $item['name'],
+        $item['closure_name'],
+
         $item['image'],
+
         $price,
+        $item['closure_price'] ?? 0,
+
         $qty,
         $item['order_unit'],
         $item['pieces_per_box'],
@@ -277,13 +318,25 @@ foreach($cartItems as $item){
 |--------------------------------------------------------------------------
 */
 
-$clearStmt = $pdo->prepare("
-    DELETE FROM cart
-    WHERE session_id = ?
-");
+if($userId){
 
-$clearStmt->execute([$sessionId]);
+    $clearStmt = $pdo->prepare("
+        DELETE FROM cart
+        WHERE user_id = ?
+    ");
 
+    $clearStmt->execute([$userId]);
+
+}else{
+
+    $clearStmt = $pdo->prepare("
+        DELETE FROM cart
+        WHERE session_id = ?
+    ");
+
+    $clearStmt->execute([$sessionId]);
+
+}
 /*
 |--------------------------------------------------------------------------
 | REDIRECT

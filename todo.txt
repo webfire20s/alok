@@ -1,3 +1,59 @@
+ALTER TABLE products
+ADD has_closure_options TINYINT(1) NOT NULL DEFAULT 0 AFTER featured;
+
+ALTER TABLE cart
+ADD closure_option_id INT NULL AFTER product_id;
+
+
+CREATE TABLE closure_options (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    price DECIMAL(10,2) DEFAULT 0,
+    image VARCHAR(255) NULL,
+    status TINYINT(1) DEFAULT 1,
+    sort_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE product_closure_options (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT NOT NULL,
+    closure_option_id INT NOT NULL,
+    UNIQUE KEY product_closure(product_id,closure_option_id),
+
+    FOREIGN KEY(product_id)
+        REFERENCES products(id)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY(closure_option_id)
+        REFERENCES closure_options(id)
+        ON DELETE CASCADE
+
+);
+
+ALTER TABLE order_items
+ADD closure_option_id INT NULL AFTER product_id,
+
+ADD closure_option_name VARCHAR(150) NULL AFTER product_name,
+
+ADD closure_option_price DECIMAL(10,2) DEFAULT 0 AFTER price;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 TARGET = AAJ ALOK KHATAM KARNA HAI 
 
 sales@alokglass.com, Agarwalp2084!
