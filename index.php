@@ -187,6 +187,7 @@ $featuredCategories = $pdo->query("
         $stmt = $pdo->prepare("
             SELECT *
             FROM categories
+            WHERE section_title IS NOT NULL
         ");
 
         $stmt->execute();
@@ -243,7 +244,12 @@ $featuredCategories = $pdo->query("
                             <?php foreach($products as $product): ?>
                                 <a href="product.php?slug=<?= urlencode($product['slug']) ?>" class="ticker-product-card">
                                     <div class="ticker-media-box">
-                                        <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" loading="lazy">
+                                        <img src="<?= htmlspecialchars($product['image']) ?>" 
+                                            alt="<?= htmlspecialchars($product['name']) ?>" 
+                                            loading="lazy" 
+                                            decoding="async"
+                                            width="240" 
+                                            height="240">
                                     </div>
                                     <div class="ticker-details-box">
                                         <h3 class="ticker-product-title"><?= htmlspecialchars($product['name']) ?></h3>
@@ -258,81 +264,68 @@ $featuredCategories = $pdo->query("
                 </div>
             </div>
 
-        <!-- STABLE MULTI-INTERACTION CONTROLLER SCRIPT -->
+            <!-- HIGH-PERFORMANCE ANIMATION CONTROLLER -->
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
                     const viewport = document.getElementById('scroll-engine-viewport');
                     const nextBtn = document.getElementById('scroller-next-btn');
                     const prevBtn = document.getElementById('scroller-prev-btn');
                     
-                    const scrollAmount = 264; // Distance to scroll on click (240px card width + 24px gap)
-                    const autoScrollSpeed = 1; // Pixels to slide per interval step
-                    const autoScrollInterval = 30; // Milliseconds between steps
+                    if (!viewport) return;
+
+                    const scrollAmount = 264; // Distance to scroll on button click
+                    const autoScrollSpeed = 0.8; // Speed multiplier for smooth rAF loop
                     
-                    let autoPlayActive = true;
+                    let isPlaying = true;
                     let scrollDirection = 1; // 1 = Right, -1 = Left
-                    let autoScrollTimer;
+                    let animationFrameId = null;
 
-                    // Smooth Auto-Scrolling System
-                    function runAutoScroll() {
-                        if (!autoPlayActive) return;
-                        
-                        // Increment container scroll layout
-                        viewport.scrollLeft += (autoScrollSpeed * scrollDirection);
-                        
-                        // Loop scroll direction boundaries smoothly
-                        const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
-                        if (viewport.scrollLeft >= maxScrollLeft - 1) {
-                            scrollDirection = -1; // Reverse to left once the end is reached
-                        } else if (viewport.scrollLeft <= 1) {
-                            scrollDirection = 1; // Slide forward once the beginning is reached
+                    // Hardware-accelerated smooth auto-scrolling
+                    function step() {
+                        if (isPlaying) {
+                            viewport.scrollLeft += autoScrollSpeed * scrollDirection;
+                            
+                            const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
+                            
+                            // Reverse direction smoothly at borders
+                            if (viewport.scrollLeft >= maxScrollLeft - 1) {
+                                scrollDirection = -1;
+                            } else if (viewport.scrollLeft <= 1) {
+                                scrollDirection = 1;
+                            }
                         }
+                        animationFrameId = requestAnimationFrame(step);
                     }
 
-                    // Start running the loop
-                    function startLoop() {
-                        stopLoop();
-                        autoScrollTimer = setInterval(runAutoScroll, autoScrollInterval);
+                    function startScroll() {
+                        isPlaying = true;
                     }
 
-                    function stopLoop() {
-                        if (autoScrollTimer) clearInterval(autoScrollTimer);
+                    function stopScroll() {
+                        isPlaying = false;
                     }
 
-                    // Action Click Events (Standard behavior)
+                    // Manual navigation buttons
                     if (nextBtn && prevBtn) {
-                        nextBtn.addEventListener('click', function() {
-                            autoPlayActive = false;
-                            stopLoop();
-                            viewport.scrollLeft += scrollAmount;
+                        nextBtn.addEventListener('click', () => {
+                            stopScroll();
+                            viewport.scrollBy({ left: scrollAmount, behavior: 'smooth' });
                         });
 
-                        prevBtn.addEventListener('click', function() {
-                            autoPlayActive = false;
-                            stopLoop();
-                            viewport.scrollLeft -= scrollAmount;
+                        prevBtn.addEventListener('click', () => {
+                            stopScroll();
+                            viewport.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
                         });
                     }
 
-                    // Hover Pausing Loops for Mouse Users
-                    viewport.addEventListener('mouseenter', () => {
-                        autoPlayActive = false;
-                        stopLoop();
-                    });
+                    // Hover & Touch Events (Pause on interaction)
+                    viewport.addEventListener('mouseenter', stopScroll, { passive: true });
+                    viewport.addEventListener('mouseleave', startScroll, { passive: true });
+                    viewport.addEventListener('touchstart', stopScroll, { passive: true });
+                    viewport.addEventListener('touchend', startScroll, { passive: true });
 
-                    viewport.addEventListener('mouseleave', () => {
-                        autoPlayActive = true;
-                        startLoop();
-                    });
-
-                    // Touch Interaction Safety Hooks
-                    viewport.addEventListener('touchstart', () => {
-                        autoPlayActive = false;
-                        stopLoop();
-                    });
-
-                    // Start initialization sequence
-                    startLoop();
+                    // Initialize loop
+                    animationFrameId = requestAnimationFrame(step);
                 });
             </script>
             <?php endforeach; ?>
@@ -391,45 +384,45 @@ $featuredCategories = $pdo->query("
         </div>
 
         <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const counterElements = document.querySelectorAll(".live-count");
-            
-            const runCounterAnimation = (element) => {
-                const targetValue = parseInt(element.getAttribute("data-target"), 10);
-                const cycleDuration = 2000; // Total runtime speed in milliseconds
-                const frameRateInterval = 1000 / 60; // 60 FPS Calculations
-                const totalFrames = Math.round(cycleDuration / frameRateInterval);
-                let currentFrame = 0;
-
-                const countingTick = () => {
-                    currentFrame++;
-                    // Smooth progress easing curve
-                    const progressionRatio = currentFrame / totalFrames;
-                    const currentValCalculated = Math.floor(targetValue * progressionRatio);
-
-                    if (currentFrame < totalFrames) {
-                        element.innerText = currentValCalculated;
-                        requestAnimationFrame(countingTick);
-                    } else {
-                        element.innerText = targetValue; // Snap perfectly to absolute target
-                    }
-                };
+            document.addEventListener("DOMContentLoaded", () => {
+                const counterElements = document.querySelectorAll(".live-count");
                 
-                requestAnimationFrame(countingTick);
-            };
+                const runCounterAnimation = (element) => {
+                    const targetValue = parseInt(element.getAttribute("data-target"), 10);
+                    const cycleDuration = 1500; // Total runtime speed in milliseconds
+                    const frameRateInterval = 1000 / 60; // 60 FPS Calculations
+                    const totalFrames = Math.round(cycleDuration / frameRateInterval);
+                    let currentFrame = 0;
 
-            // Intersection Observer Engine triggers animation ONLY when user scrolls to it
-            const moduleScrollObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        runCounterAnimation(entry.target);
-                        observer.unobserve(entry.target); // Prevents re-triggering when scrolling away
-                    }
-                });
-            }, { threshold: 0.15 });
+                    const countingTick = () => {
+                        currentFrame++;
+                        // Smooth progress easing curve
+                        const progressionRatio = currentFrame / totalFrames;
+                        const currentValCalculated = Math.floor(targetValue * progressionRatio);
 
-            counterElements.forEach(element => moduleScrollObserver.observe(element));
-        });
+                        if (currentFrame < totalFrames) {
+                            element.innerText = currentValCalculated;
+                            requestAnimationFrame(countingTick);
+                        } else {
+                            element.innerText = targetValue; // Snap perfectly to absolute target
+                        }
+                    };
+                    
+                    requestAnimationFrame(countingTick);
+                };
+
+                // Intersection Observer Engine triggers animation ONLY when user scrolls to it
+                const moduleScrollObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            runCounterAnimation(entry.target);
+                            observer.unobserve(entry.target); // Prevents re-triggering when scrolling away
+                        }
+                    });
+                }, { threshold: 0.15 });
+
+                counterElements.forEach(element => moduleScrollObserver.observe(element));
+            });
         </script>
         <!-- Stats Starts -->
 
