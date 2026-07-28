@@ -809,8 +809,8 @@ PRODUCT ITEM CARD ARCHITECTURE (Charcoal and Red Theme)
         max-width: 100%;
         max-height: 100%;
         object-fit: contain;
-        filter: grayscale(0%) brightness(0.7) invert(0); /* Forces logos to clean White */
-        opacity: 10;
+        filter: grayscale(0%) brightness(1) invert(0); /* Forces logos to clean White */
+        opacity: 1;
         transition: opacity 0.3s ease, filter 0.3s ease;
     }
 

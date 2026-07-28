@@ -23,6 +23,7 @@ $productStmt = $pdo->prepare("
     SELECT *
     FROM products
     WHERE category_id = ?
+    ORDER BY display_order ASC, id ASC
 ");
 
 $productStmt->execute([$category['id']]);

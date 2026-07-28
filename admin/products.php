@@ -3,16 +3,53 @@
 require 'includes/auth.php';
 require '../includes/db.php';
 
+$categoryFilter = (int)($_GET['category'] ?? 0);
+
+$catStmt = $pdo->query("
+    SELECT id,name
+    FROM categories
+    ORDER BY name
+");
+
+$categories = $catStmt->fetchAll();
+
 include 'includes/admin_header.php';
 include 'includes/admin_sidebar.php';
 
-$stmt = $pdo->query("
-    SELECT products.*, categories.name AS category_name
-    FROM products
-    LEFT JOIN categories
-    ON products.category_id = categories.id
-    ORDER BY products.id DESC
-");
+// $stmt = $pdo->query("
+//     SELECT products.*, categories.name AS category_name
+//     FROM products
+//     LEFT JOIN categories
+//     ON products.category_id = categories.id
+//     ORDER BY products.category_id ASC,
+//          products.display_order ASC
+// ");
+
+$sql = "
+SELECT
+    products.*,
+    categories.name AS category_name
+FROM products
+LEFT JOIN categories
+ON products.category_id = categories.id
+";
+
+$params = [];
+
+if($categoryFilter > 0){
+
+    $sql .= " WHERE products.category_id = ?";
+
+    $params[] = $categoryFilter;
+
+}
+
+$sql .= " ORDER BY products.category_id ASC,
+         products.display_order ASC";
+
+$stmt = $pdo->prepare($sql);
+
+$stmt->execute($params);
 
 $products = $stmt->fetchAll();
 
@@ -107,8 +144,58 @@ $products = $stmt->fetchAll();
                                 Product Specifications
                             </th>
 
-                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
-                                Category
+                            <th class="py-3">
+
+                                <div style="display:flex;flex-direction:ROW;gap:8px;">
+
+                                    <span style="
+                                        font-size:11px;
+                                        text-transform:uppercase;
+                                        letter-spacing:.05em;
+                                        color:#64748b;
+                                        font-weight:600;
+                                    ">
+                                        Category
+                                    </span>
+
+                                    <form method="GET">
+
+                                        <select
+                                            id="categoryFilter"
+                                            name="category"
+                                            onchange="this.form.submit()"
+                                            style="
+                                                background:rgba(0, 0, 0, 0.75);
+                                                color:#fff;
+                                                border:1px solid rgba(255,255,255,.08);
+                                                border-radius:6px;
+                                                padding:6px 10px;
+                                                font-size:12px;
+                                                width:20px;
+                                            "
+                                        >
+
+                                            <option value="0">
+                                                
+                                            </option>
+
+                                            <?php foreach($categories as $cat): ?>
+
+                                                <option
+                                                    value="<?= $cat['id'] ?>"
+                                                    <?= $categoryFilter == $cat['id'] ? 'selected' : '' ?>
+                                                >
+                                                    <?= htmlspecialchars($cat['name']) ?>
+                                                </option>
+
+                                            <?php endforeach; ?>
+
+                                        </select>
+
+                                    </form>
+
+                                </div>
+
                             </th>
 
                             <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
@@ -127,16 +214,23 @@ $products = $stmt->fetchAll();
 
                     </thead>
 
-                    <tbody>
+                    <tbody id="sortableProducts">
 
-                        <?php foreach($products as $product): ?>
+                        <?php 
+                        $sr = 1;
+                        foreach($products as $product): 
+                        ?>
 
-                            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
+                            <tr
+                                data-id="<?= $product['id'] ?>"
+                                data-category="<?= $product['category_id'] ?>"
+                                style="border-bottom: 1px solid rgba(255,255,255,.03);cursor:move;"
+                            >
 
                                 <td class="px-4">
 
                                     <span style="font-size: 13px; font-family: monospace; color: #475569; font-weight: 600;">
-                                        #<?= $product['id'] ?>
+                                        #<?= $sr++ ?>
                                     </span>
 
                                 </td>
@@ -341,5 +435,51 @@ $products = $stmt->fetchAll();
 
 </div>
 
-</div> </div> </body>
+</div> </div> 
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+<script>
+
+const tbody = document.getElementById("sortableProducts");
+
+const sortable = new Sortable(tbody,{
+    animation:200,
+
+    onEnd:function(){
+
+        const selectedCategory =
+            document.getElementById("categoryFilter").value;
+
+        let order=[];
+
+        let index=1;
+
+        tbody.querySelectorAll("tr").forEach(function(row){
+
+            order.push({
+
+                id: row.dataset.id,
+                order: index++
+
+            });
+
+        });
+
+        fetch("update_product_order.php",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify(order)
+
+        });
+
+    }
+
+});
+
+</script>
+</body>
 </html>

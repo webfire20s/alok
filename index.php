@@ -203,7 +203,7 @@ $featuredCategories = $pdo->query("
             FROM products
             WHERE category_id = ?
             AND show_on_home = 1
-            ORDER BY id DESC
+            ORDER BY display_order ASC, id ASC
             LIMIT 14
             
         ");

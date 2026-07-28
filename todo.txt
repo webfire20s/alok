@@ -1,4 +1,15 @@
 ALTER TABLE products
+ADD COLUMN display_order INT NOT NULL DEFAULT 0 AFTER category_id;
+
+SET @i := 0;
+
+UPDATE products
+SET display_order = (@i := @i + 1)
+ORDER BY category_id, id;
+
+
+
+ALTER TABLE products
 ADD has_closure_options TINYINT(1) NOT NULL DEFAULT 0 AFTER featured;
 
 ALTER TABLE cart
