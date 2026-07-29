@@ -100,12 +100,14 @@ $categories = $stmt->fetchAll();
                     </thead>
                     
                     <tbody>
-                        <?php foreach($categories as $category): ?>
+                        <?php 
+                        $sr=1;
+                        foreach($categories as $category): ?>
                             <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
                                 
                                 <td class="px-4">
                                     <span style="font-size: 13px; font-family: monospace; color: #475569; font-weight: 600;">
-                                        #<?= $category['id'] ?>
+                                        #<?= $sr++ ?>
                                     </span>
                                 </td>
 

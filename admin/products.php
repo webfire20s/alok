@@ -25,6 +25,76 @@ include 'includes/admin_sidebar.php';
 //          products.display_order ASC
 // ");
 
+/*----------------------------------------------------------
+| SEARCH + PAGINATION
+----------------------------------------------------------*/
+
+$search = trim($_GET['search'] ?? '');
+
+$page = max(1, (int)($_GET['page'] ?? 1));
+
+$perPage = 25;
+
+$where = [];
+
+$params = [];
+
+if ($categoryFilter > 0) {
+    $where[] = "products.category_id = ?";
+    $params[] = $categoryFilter;
+}
+
+if ($search != '') {
+
+    if (is_numeric($search)) {
+
+        $where[] = "(products.id = ? OR products.name LIKE ? OR products.sku LIKE ? OR products.slug LIKE ?)";
+
+        $params[] = (int)$search;
+        $params[] = "%{$search}%";
+        $params[] = "%{$search}%";
+        $params[] = "%{$search}%";
+
+    } else {
+
+        $where[] = "(products.name LIKE ? OR products.sku LIKE ? OR products.slug LIKE ?)";
+
+        $params[] = "%{$search}%";
+        $params[] = "%{$search}%";
+        $params[] = "%{$search}%";
+    }
+}
+
+$whereSql = '';
+
+if ($where) {
+    $whereSql = ' WHERE ' . implode(' AND ', $where);
+}
+
+/* TOTAL PRODUCTS */
+
+$countSql = "
+SELECT COUNT(*)
+FROM products
+LEFT JOIN categories
+ON products.category_id = categories.id
+{$whereSql}
+";
+
+$countStmt = $pdo->prepare($countSql);
+
+$countStmt->execute($params);
+
+$totalProducts = (int)$countStmt->fetchColumn();
+
+$totalPages = max(1, ceil($totalProducts / $perPage));
+
+$page = min($page, $totalPages);
+
+$offset = ($page - 1) * $perPage;
+
+/* PRODUCTS */
+
 $sql = "
 SELECT
     products.*,
@@ -32,20 +102,12 @@ SELECT
 FROM products
 LEFT JOIN categories
 ON products.category_id = categories.id
+{$whereSql}
+ORDER BY
+products.category_id ASC,
+products.display_order ASC
+LIMIT {$offset}, {$perPage}
 ";
-
-$params = [];
-
-if($categoryFilter > 0){
-
-    $sql .= " WHERE products.category_id = ?";
-
-    $params[] = $categoryFilter;
-
-}
-
-$sql .= " ORDER BY products.category_id ASC,
-         products.display_order ASC";
 
 $stmt = $pdo->prepare($sql);
 
@@ -53,31 +115,21 @@ $stmt->execute($params);
 
 $products = $stmt->fetchAll();
 
+/* SERIAL */
+
+$sr = $offset + 1;
+
 ?>
 
 <div class="container-fluid py-4">
-
-    <div
-        class="d-flex flex-wrap justify-content-between align-items-center mb-5"
-    >
-
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-5">
         <div>
-
-            <h2
-                class="mb-1"
-                style="
-                    font-weight: 700;
-                    letter-spacing: -0.02em;
-                    color: #ffffff;
-                "
-            >
-                Mould Inventory
+            <h2 class="mb-1" style="font-weight: 700; letter-spacing: -0.02em; color: #ffffff;"> 
+                Mould Inventory 
             </h2>
-
             <p style="color: #64748b; font-size: 14px; margin: 0;">
                 Configure, update, and manage all glass bottle manufacturing product lines.
             </p>
-
         </div>
 
         <a
@@ -91,13 +143,97 @@ $products = $stmt->fetchAll();
                 border: none;
                 border-radius: 8px;
                 box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
-                transition: transform 0.2s ease;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
             "
-            onmouseover="this.style.transform='translateY(-1px)'"
-            onmouseout="this.style.transform='translateY(0)'"
+            onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 16px rgba(56, 189, 248, 0.35)';"
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(56, 189, 248, 0.25)';"
         >
             + Add New Design
         </a>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+
+        <form method="GET" class="d-flex align-items-center" style="gap: 10px;">
+
+            <div style="position: relative;">
+                <input
+                    type="text"
+                    name="search"
+                    value="<?= htmlspecialchars($search) ?>"
+                    placeholder="Search name, SKU, slug or ID..."
+                    class="form-control"
+                    style="
+                        width: 320px;
+                        background: rgba(15, 17, 21, 0.6);
+                        border: 1px solid rgba(255, 255, 255, 0.08);
+                        border-radius: 8px;
+                        color: #ffffff;
+                        font-size: 13.5px;
+                        padding: 8px 14px;
+                        outline: none;
+                        transition: all 0.2s ease-in-out;
+                    "
+                    onfocus="this.style.background='rgba(15, 17, 21, 0.8)'; this.style.borderColor='rgba(56, 189, 248, 0.5)'; this.style.boxShadow='0 0 0 3px rgba(56, 189, 248, 0.15)';"
+                    onblur="this.style.background='rgba(15, 17, 21, 0.6)'; this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.boxShadow='none';"
+                >
+            </div>
+
+            <?php if($categoryFilter): ?>
+                <input type="hidden" name="category" value="<?= $categoryFilter ?>">
+            <?php endif; ?>
+
+            <button 
+                type="submit" 
+                class="btn px-3 py-2"
+                style="
+                    background: rgba(56, 189, 248, 0.1);
+                    color: #38bdf8;
+                    border: 1px solid rgba(56, 189, 248, 0.25);
+                    font-weight: 600;
+                    font-size: 13.5px;
+                    border-radius: 8px;
+                    transition: all 0.2s ease;
+                "
+                onmouseover="this.style.background='rgba(56, 189, 248, 0.2)'; this.style.borderColor='rgba(56, 189, 248, 0.4)';"
+                onmouseout="this.style.background='rgba(56, 189, 248, 0.1)'; this.style.borderColor='rgba(56, 189, 248, 0.25)';"
+            >
+                Search
+            </button>
+
+            <?php if($search!=''): ?>
+                <a
+                    href="products.php<?= $categoryFilter ? '?category='.$categoryFilter : '' ?>"
+                    class="btn px-3 py-2"
+                    style="
+                        background: rgba(255, 255, 255, 0.03);
+                        color: #94a3b8;
+                        border: 1px solid rgba(255, 255, 255, 0.08);
+                        font-weight: 500;
+                        font-size: 13.5px;
+                        border-radius: 8px;
+                        transition: all 0.2s ease;
+                    "
+                    onmouseover="this.style.background='rgba(255, 255, 255, 0.08)'; this.style.color='#ffffff';"
+                    onmouseout="this.style.background='rgba(255, 255, 255, 0.03)'; this.style.color='#94a3b8';"
+                >
+                    Clear
+                </a>
+            <?php endif; ?>
+
+        </form>
+
+        <div style="
+            color: #94a3b8;
+            font-size: 13px;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 6px 14px;
+            border-radius: 20px;
+        ">
+            <span style="color: #38bdf8; font-weight: 700;"><?= number_format($totalProducts) ?></span> Products Found
+        </div>
 
     </div>
 
@@ -131,7 +267,6 @@ $products = $stmt->fetchAll();
                     >
 
                         <tr>
-
                             <th class="px-4 py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
                                 ID
                             </th>
@@ -144,58 +279,54 @@ $products = $stmt->fetchAll();
                                 Product Specifications
                             </th>
 
-                            <th class="py-3">
-
-                                <div style="display:flex;flex-direction:ROW;gap:8px;">
-
+                            <th class="py-3" style="min-width: 160px;">
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
                                     <span style="
-                                        font-size:11px;
-                                        text-transform:uppercase;
-                                        letter-spacing:.05em;
-                                        color:#64748b;
-                                        font-weight:600;
+                                        font-size: 11px;
+                                        text-transform: uppercase;
+                                        letter-spacing: .05em;
+                                        color: #64748b;
+                                        font-weight: 600;
                                     ">
                                         Category
                                     </span>
 
-                                    <form method="GET">
-
+                                    <form method="GET" class="mb-0">
                                         <select
                                             id="categoryFilter"
                                             name="category"
                                             onchange="this.form.submit()"
                                             style="
-                                                background:rgba(0, 0, 0, 0.75);
-                                                color:#fff;
-                                                border:1px solid rgba(255,255,255,.08);
-                                                border-radius:6px;
-                                                padding:6px 10px;
-                                                font-size:12px;
-                                                width:20px;
+                                                background: rgba(15, 17, 21, 0.75);
+                                                color: #e2e8f0;
+                                                border: 1px solid rgba(255, 255, 255, 0.08);
+                                                border-radius: 6px;
+                                                padding: 4px 8px;
+                                                font-size: 11px;
+                                                width: 50%;
+                                                outline: none;
+                                                cursor: pointer;
+                                                transition: all 0.2s ease-in-out;
                                             "
+                                            onfocus="this.style.borderColor='rgba(56, 189, 248, 0.5)'; this.style.boxShadow='0 0 0 2px rgba(56, 189, 248, 0.15)';"
+                                            onblur="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.boxShadow='none';"
                                         >
-
-                                            <option value="0">
-                                                
+                                            <option value="0" style="background: #1e293b; color: #ffffff;">
+                                                Categories
                                             </option>
 
                                             <?php foreach($categories as $cat): ?>
-
                                                 <option
                                                     value="<?= $cat['id'] ?>"
                                                     <?= $categoryFilter == $cat['id'] ? 'selected' : '' ?>
+                                                    style="background: #1e293b; color: #ffffff;"
                                                 >
                                                     <?= htmlspecialchars($cat['name']) ?>
                                                 </option>
-
                                             <?php endforeach; ?>
-
                                         </select>
-
                                     </form>
-
                                 </div>
-
                             </th>
 
                             <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
@@ -217,7 +348,6 @@ $products = $stmt->fetchAll();
                     <tbody id="sortableProducts">
 
                         <?php 
-                        $sr = 1;
                         foreach($products as $product): 
                         ?>
 
@@ -371,16 +501,8 @@ $products = $stmt->fetchAll();
 
                                 <td class="text-center">
 
-                                    <div
-                                        class="d-flex justify-content-center align-items-center"
-                                        style="
-                                            gap: 8px;
-                                        "
-                                    >
-
-                                        <a
-                                            href="edit_product.php?id=<?= $product['id'] ?>"
-                                            class="btn btn-sm px-3 py-1.5"
+                                    <div class="d-flex justify-content-center align-items-center" style=" gap: 8px; " >
+                                        <a href="edit_product.php?id=<?= $product['id'] ?>" class="btn btn-sm px-3 py-1.5"
                                             style="
                                                 background: rgba(255,255,255,0.03);
                                                 color: #e2e8f0;
@@ -396,9 +518,7 @@ $products = $stmt->fetchAll();
                                             Edit
                                         </a>
 
-                                        <a
-                                            href="delete_product.php?id=<?= $product['id'] ?>"
-                                            class="btn btn-sm px-3 py-1.5"
+                                        <a href="delete_product.php?id=<?= $product['id'] ?>" class="btn btn-sm px-3 py-1.5"
                                             style="
                                                 background: rgba(239, 68, 68, 0.05);
                                                 color: #f87171;
@@ -424,15 +544,58 @@ $products = $stmt->fetchAll();
                         <?php endforeach; ?>
 
                     </tbody>
-
                 </table>
-
             </div>
+            <?php if($totalPages > 1): ?>
 
+            <div class="d-flex justify-content-between align-items-center p-3">
+                <div style="color:#94a3b8;font-size:13px;">
+                    Showing
+                    <?= $offset + 1 ?>
+                    -
+                    <?= min($offset + $perPage, $totalProducts) ?>
+                    of
+                    <?= number_format($totalProducts) ?>
+                </div>
+                <nav>
+                    <ul class="pagination mb-0">
+                        <?php if($page > 1): ?>
+                        <li class="page-item">
+                            <a
+                                class="page-link"
+                                href="?page=<?= $page-1 ?>&category=<?= $categoryFilter ?>&search=<?= urlencode($search) ?>">
+                                Previous
+                            </a>
+                        </li>
+                        <?php endif; ?>
+                        <?php
+                        for($i=1;$i<=$totalPages;$i++):
+
+                            if( $i==1 || $i==$totalPages || abs($i-$page)<=2 ):
+
+                        ?>
+
+                        <li class="page-item <?= $i==$page?'active':'' ?>">
+                            <a class="page-link" href="?page=<?= $i ?>&category=<?= $categoryFilter ?>&search=<?= urlencode($search) ?>"> <?= $i ?> </a>
+                        </li>
+
+                        <?php endif; endfor; ?>
+
+                        <?php if($page < $totalPages): ?>
+
+                        <li class="page-item">
+
+                            <a class="page-link" href="?page=<?= $page+1 ?>&category=<?= $categoryFilter ?>&search=<?= urlencode($search) ?>"> Next </a>
+
+                        </li>
+
+                        <?php endif; ?>
+                    </ul>
+                </nav>
+            </div>
+            <?php endif; ?>
         </div>
-
     </div>
-
 </div>
 
 </div> </div> 
@@ -450,34 +613,23 @@ const sortable = new Sortable(tbody,{
             document.getElementById("categoryFilter").value;
 
         let order=[];
-
         let index=1;
-
         tbody.querySelectorAll("tr").forEach(function(row){
-
             order.push({
-
                 id: row.dataset.id,
                 order: index++
-
             });
-
         });
 
         fetch("update_product_order.php",{
 
             method:"POST",
-
             headers:{
                 "Content-Type":"application/json"
             },
-
             body:JSON.stringify(order)
-
         });
-
     }
-
 });
 
 </script>

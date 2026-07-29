@@ -5,18 +5,39 @@ if(session_status() === PHP_SESSION_NONE){
 
 require_once __DIR__ . '/db.php';
 /* Optimized query to only fetch required index columns instead of SELECT * */
-$navStmt = $pdo->prepare("
-SELECT id, name 
+$navStmt = $pdo->query("
+    SELECT
+        id,
+        name,
+        slug
     FROM categories
     ORDER BY name ASC
 ");
-$navStmt->execute();
-$navCategories = $navStmt->fetchAll();
+
+$navCategories = $navStmt->fetchAll(PDO::FETCH_ASSOC);
+
+$subNavStmt = $pdo->query("
+    SELECT
+        id,
+        category_id,
+        name
+    FROM subcategories
+    WHERE status = 1
+    ORDER BY display_order ASC, name ASC
+");
+
+$groupedSubcategories = [];
+
+while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
+
+    $groupedSubcategories[$row['category_id']][] = $row;
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="/ajanta-project/">
+    <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
@@ -290,7 +311,7 @@ $navCategories = $navStmt->fetchAll();
             left: 0;
             top: 50%;
             transform: translateY(-50%) scaleX(0);
-            width: 4px;
+            width: 8px;
             height: 60%;
             background-color: var(--primary-accent, #c8232c);
             transform-origin: left;
@@ -350,6 +371,50 @@ $navCategories = $navStmt->fetchAll();
 
         body{
             top:0!important;
+        }
+
+        .dropdown-menu{
+            min-width:260px;
+        }
+
+        .dropdown-submenu{
+            position:relative;
+        }
+
+        .dropdown-submenu>.submenu{
+            position:absolute;
+            left:100%;
+            top:0;
+            display:none;
+            min-width:260px;
+            background:#fff;
+            border-radius:8px;
+            box-shadow:0 10px 30px rgba(0,0,0,.15);
+            padding:8px 0;
+            z-index:9999;
+        }
+
+        .dropdown-submenu:hover>.submenu{
+            display:block;
+        }
+
+        .submenu-toggle::after{
+            content:"›";
+            float:right;
+            color:#999;
+            font-size:18px;
+        }
+
+        .dropdown-item{
+            padding:11px 20px;
+            font-size:13px;
+            font-family:'Montserrat',sans-serif;
+            transition:.2s;
+        }
+
+        .dropdown-item:hover{
+            background:#f8f8f8;
+            color:#c8232c;
         }
     </style>
 
@@ -459,13 +524,6 @@ $navCategories = $navStmt->fetchAll();
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="dropdown08" href="javascript:void(0);" aria-haspopup="true" aria-expanded="false" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;"> Shop By Industry </a>
                                         
-                                    <?php
-                                    $navCategories = $pdo->query("
-                                        SELECT name, slug
-                                        FROM categories
-                                        ORDER BY name ASC
-                                    ")->fetchAll();
-                                    ?>
 
                                     <div class="dropdown-menu" aria-labelledby="dropdown08" style="border: none; background-color: #f8f9fa; border-radius: 6px; padding: 10px 15px;">
                                         <?php foreach($navCategories as $cat): ?>
@@ -697,66 +755,120 @@ $navCategories = $navStmt->fetchAll();
 
                     <!-- Shop By Industry (Dynamic Dropdown) -->
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+                        <a class="nav-link" href="index.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2px 2px; display: inline-block;">
                             Home
                         </a>
                     </li>
 
                     <!-- Shop By Product (Dynamic Dropdown) -->
-                    <li class="nav-item dropdown" style="position: relative;">
-                        <a class="nav-link dropdown-toggle" href="javascript:void(0);" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+                    <li class="nav-item dropdown" style="position:relative;">
+
+                        <a class="nav-link dropdown-toggle"
+                        href="javascript:void(0);"
+                        style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#fff;padding:2px 22px;display:inline-block;">
                             Shop By Product
                         </a>
-                        
+
                         <div class="dropdown-menu">
+
                             <?php foreach($navCategories as $cat): ?>
-                                <a
-                                    class="dropdown-item"
-                                    href="category/<?= urlencode($cat['slug']) ?>"
-                                    style="font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500; color: #2c323e; padding: 12px 24px;"
-                                >
-                                    <?= htmlspecialchars($cat['name']) ?>
-                                </a>
+
+                                <?php $subs = $groupedSubcategories[$cat['id']] ?? []; ?>
+
+                                <?php if($subs): ?>
+
+                                    <div class="dropdown-submenu">
+
+                                        <a class="dropdown-item submenu-toggle"
+                                        href="category/<?= urlencode($cat['slug']) ?>">
+                                            <?= htmlspecialchars($cat['name']) ?>
+                                        </a>
+
+                                        <div class="submenu">
+
+                                            <a class="dropdown-item"
+                                            href="category/<?= urlencode($cat['slug']) ?>">
+                                                All <?= htmlspecialchars($cat['name']) ?>
+                                            </a>
+
+                                            <div class="dropdown-divider"></div>
+
+                                            <?php foreach($subs as $sub): ?>
+
+                                                <a class="dropdown-item"
+                                                href="category/<?= urlencode($cat['slug']) ?>?sub=<?= $sub['id'] ?>">
+                                                    <?= htmlspecialchars($sub['name']) ?>
+                                                </a>
+
+                                            <?php endforeach; ?>
+
+                                        </div>
+
+                                    </div>
+
+                                <?php else: ?>
+
+                                    <a class="dropdown-item"
+                                    href="category/<?= urlencode($cat['slug']) ?>">
+                                        <?= htmlspecialchars($cat['name']) ?>
+                                    </a>
+
+                                <?php endif; ?>
+
                             <?php endforeach; ?>
-                        </div>                
+
+                        </div>
+
                     </li>
 
                     <!-- Decoration Services -->
                     <li class="nav-item">
-                        <a class="nav-link" href="plants.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+                        <a class="nav-link" href="plants.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2px 2px; display: inline-block;">
                             Our Associates
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="decoration-services.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+                        <a class="nav-link" href="decoration-services.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2px 2px; display: inline-block;">
                             Decoration Services
                         </a>
                     </li>
 
                     <!-- Colour Cosmetics Packaging -->
                     <li class="nav-item">
-                        <a class="nav-link" href="about.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+                        <a class="nav-link" href="about.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2 px 2px; display: inline-block;">
                             About Us
+                        </a>
+                    </li>
+                    <!-- Colour Cosmetics Packaging -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="infrastructure.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2 px 2px; display: inline-block;">
+                            Infrastructure
                         </a>
                     </li>
 
                     <!-- Blogs and Videos -->
                     <li class="nav-item">
-                        <a class="nav-link" href="resources.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+                        <a class="nav-link" href="resources.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2px 22px; display: inline-block;">
                             Blogs &amp; Videos
+                        </a>
+                    </li>
+                    <!-- Blogs and Videos -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="tour.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 2px; display: inline-block;">
+                            Factory Tour
                         </a>
                     </li>
 
                     <!-- Contact Us -->
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+                        <a class="nav-link" href="contact.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 2px; display: inline-block;">
                             Contact Us
                         </a>
                     </li>
 
                     <!-- Track Order -->
                     <li class="nav-item">
-                        <a class="nav-link" href="track-order.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 22px; display: inline-block;">
+                        <a class="nav-link" href="track-order.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 2px; display: inline-block;">
                             Track Order
                         </a>
                     </li>

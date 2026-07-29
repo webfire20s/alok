@@ -18,7 +18,46 @@ $category = $stmt->fetch();
 if(!$category){
     die("Category not found");
 }
+/*
+|--------------------------------------------------------------------------
+| SIDEBAR CATEGORIES
+|--------------------------------------------------------------------------
+*/
 
+$sidebarCatStmt = $pdo->query("
+    SELECT
+        id,
+        name,
+        slug
+    FROM categories
+    ORDER BY name ASC
+");
+
+$sidebarCategories = $sidebarCatStmt->fetchAll(PDO::FETCH_ASSOC);
+
+/*
+|--------------------------------------------------------------------------
+| SIDEBAR SUBCATEGORIES
+|--------------------------------------------------------------------------
+*/
+
+$sidebarSubStmt = $pdo->query("
+    SELECT
+        id,
+        category_id,
+        name
+    FROM subcategories
+    WHERE status = 1
+    ORDER BY category_id, display_order, name
+");
+
+$sidebarSubcategories = [];
+
+while($row = $sidebarSubStmt->fetch(PDO::FETCH_ASSOC)){
+
+    $sidebarSubcategories[$row['category_id']][] = $row;
+
+}
 /*
 |--------------------------------------------------------------------------
 | SUBCATEGORIES
@@ -77,9 +116,10 @@ if($selectedSubcategory > 0){
 
 $products = $productStmt->fetchAll();
 
+
 ?>
 
-<div class="container pt-5 pb-5" style="font-family: 'Montserrat', sans-serif;">
+<div class="container pt-5 pb-5" style="font-family:'Montserrat',sans-serif;">
 
     <!-- CSS Theme & Grid Animations Wrapper -->
     <style>
@@ -119,10 +159,11 @@ $products = $productStmt->fetchAll();
         }
         .product-img-wrapper img {
             max-height: 240px; 
-            width: auto; 
+            width: 100%; 
             object-fit: contain; 
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
             vertical-align: middle;
+            horizontal-align: middle;
         }
         .premium-product-card:hover .product-img-wrapper img {
             transform: scale(1.06);
@@ -153,6 +194,77 @@ $products = $productStmt->fetchAll();
         .premium-product-card:hover .price-tag {
             color: #c8232c;
         }
+
+        .category-nav{
+            width:100%;
+            background:#232434;
+            border-radius:10px;
+            display:flex;
+            justify-content:center;
+            margin-bottom:40px;
+            box-shadow:0 8px 20px rgba(0,0,0,.08);
+        }
+
+        .category-nav ul{
+            list-style:none;
+            margin:0;
+            padding:0;
+            display:flex;
+            flex-wrap:wrap;
+            width:100%;
+        }
+
+        .category-nav ul li{
+            position:relative;
+            flex:1;
+            min-width:220px;
+        }
+
+        .category-nav ul li>a{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:18px 22px;
+            color:#fff;
+            text-decoration:none;
+            font-weight:600;
+            transition:.25s;
+        }
+
+        .category-nav ul li:hover>a,
+        .category-nav ul li.active>a{
+            background:#c8232c;
+        }
+
+        .category-dropdown{
+            position:absolute;
+            top:100%;
+            left:0;
+            min-width:260px;
+            background:#fff;
+            border-radius:0 0 10px 10px;
+            box-shadow:0 10px 30px rgba(0,0,0,.12);
+            display:none;
+            z-index:999;
+        }
+
+        .category-nav ul li:hover>.category-dropdown{
+            display:block;
+        }
+
+        .category-dropdown a{
+            display:block;
+            padding:12px 20px;
+            color:#333;
+            text-decoration:none;
+            border-bottom:1px solid #f2f2f2;
+        }
+
+        .category-dropdown a:hover,
+        .category-dropdown a.active{
+            background:#f8f8f8;
+            color:#c8232c;
+        }
     </style>
 
     <!-- Section Heading -->
@@ -160,64 +272,74 @@ $products = $productStmt->fetchAll();
         <?= htmlspecialchars($category['name']) ?>
         <span style="position: absolute; bottom: 0; left: 0; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); animation: lineExpand 1s cubic-bezier(0.25, 1, 0.5, 1) forwards; border-radius: 2px;"></span>
     </h2>
+    
 
-    <?php if(!empty($subcategories)): ?>
+    <div class="row mt-4">
 
-    <div class="mb-5">
+        <div class="col-12">
 
-        <div
-            style="
-                display:flex;
-                flex-wrap:wrap;
-                gap:10px;
-            "
-        >
+            <div class="category-nav">
 
-            <a
-                href="category/<?= urlencode($category['slug']) ?>"
-                class="btn"
-                style="
-                    <?= $selectedSubcategory==0
-                        ? 'background:#c8232c;color:#fff;border:1px solid #c8232c;'
-                        : 'background:#fff;color:#111;border:1px solid #ddd;' ?>
-                    border-radius:30px;
-                    padding:8px 20px;
-                    font-size:13px;
-                    font-weight:600;
-                "
-            >
-                All
-            </a>
+                <ul>
 
-            <?php foreach($subcategories as $sub): ?>
+                    <?php foreach($sidebarCategories as $cat): ?>
 
-                <a
-                    href="category/<?= urlencode($category['slug']) ?>?sub=<?= $sub['id'] ?>"
-                    class="btn"
-                    style="
-                        <?= $selectedSubcategory==$sub['id']
-                            ? 'background:#c8232c;color:#fff;border:1px solid #c8232c;'
-                            : 'background:#fff;color:#111;border:1px solid #ddd;' ?>
-                        border-radius:30px;
-                        padding:8px 20px;
-                        font-size:13px;
-                        font-weight:600;
-                        transition:.25s;
-                    "
-                >
-                    <?= htmlspecialchars($sub['name']) ?>
-                </a>
+                        <?php
+                        $subs = $sidebarSubcategories[$cat['id']] ?? [];
+                        $active = ($category['id'] == $cat['id']);
+                        ?>
 
-            <?php endforeach; ?>
+                        <li class="<?= $active ? 'active' : '' ?>">
+
+                            <a href="category/<?= urlencode($cat['slug']) ?>">
+                                <?= htmlspecialchars($cat['name']) ?>
+
+                                <?php if(!empty($subs)): ?>
+                                    ▼
+                                <?php endif; ?>
+                            </a>
+
+                            <?php if(!empty($subs)): ?>
+
+                                <div class="category-dropdown">
+
+                                    <a
+                                        href="category/<?= urlencode($cat['slug']) ?>"
+                                        class="<?= $active && $selectedSubcategory==0 ? 'active' : '' ?>"
+                                    >
+                                        All Products
+                                    </a>
+
+                                    <?php foreach($subs as $sub): ?>
+
+                                        <a
+                                            href="category/<?= urlencode($cat['slug']) ?>?sub=<?= $sub['id'] ?>"
+                                            class="<?= ($active && $selectedSubcategory==$sub['id']) ? 'active' : '' ?>"
+                                        >
+                                            <?= htmlspecialchars($sub['name']) ?>
+                                        </a>
+
+                                    <?php endforeach; ?>
+
+                                </div>
+
+                            <?php endif; ?>
+
+                        </li>
+
+                    <?php endforeach; ?>
+
+                </ul>
+
+            </div>
 
         </div>
 
     </div>
 
-    <?php endif; ?>
+    <!-- Product Grid -->
 
-    <!-- Grid Layout -->
-    <div class="row">
+    <div class="row mt-5">
 
         <?php if(count($products) > 0): ?>
             <?php $delay = 0.1; ?>
@@ -270,7 +392,7 @@ $products = $productStmt->fetchAll();
         <?php endif; ?>
 
     </div>
-
+        
 </div>
 
 <?php include 'includes/footer.php'; ?>

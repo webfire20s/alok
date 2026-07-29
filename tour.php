@@ -1,7 +1,61 @@
-<?php include 'includes/header.php';?>
+<?php include 'includes/header.php';
+/*
+|--------------------------------------------------------------------------
+| FACTORY TOUR IMAGES
+|--------------------------------------------------------------------------
+*/
+
+$tourStmt = $pdo->query("
+    SELECT *
+    FROM tour_images
+    ORDER BY
+        FIELD(section,'entrance','processing','decoration'),
+        display_order ASC,
+        id ASC
+");
+
+$tourSections = [
+    'entrance'   => [],
+    'processing' => [],
+    'decoration' => []
+];
+
+while($row = $tourStmt->fetch(PDO::FETCH_ASSOC)){
+    $tourSections[$row['section']][] = $row;
+}
+
+$entranceImages   = $tourSections['entrance'];
+$processingImages = $tourSections['processing'];
+$decorationImages = $tourSections['decoration'];
+
+/**
+ * Assigns asymmetric grid layout classes based on image index
+ */
+function getLayoutClass($i, $pattern = 'A') {
+    $mod = $i % 3;
+    
+    if ($pattern === 'A') {
+        // Pattern A: First image is featured (large left), next two are stacked right
+        if ($mod === 1) return 'feat-box';
+        if ($mod === 0) return 'side-box-1';
+        return 'side-box-2';
+    } 
+    elseif ($pattern === 'B') {
+        // Pattern B: Center image is featured
+        if ($mod === 0) return 'side-box-1';
+        if ($mod === 1) return 'feat-box';
+        return 'side-box-2';
+    } 
+    else {
+        // Pattern C: Last image is featured (large right)
+        if ($mod === 0) return 'side-box-1';
+        if ($mod === 1) return 'side-box-2';
+        return 'feat-box';
+    }
+}
+?>
+
 <!-- PERFORMANCE DEPENDENCIES -->
-<!-- Load heavy icon fonts asynchronously so they don't block layout paint -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="tourstyle.css">
 <style>
     /* Content visibility hint prevents browser layout thrashing on long image pages */
@@ -27,30 +81,19 @@
                 <span class="tour-step-num">01</span> Factory Entrance & Corporate Showroom
             </h2>
             <div class="tour-grid grid-pattern-a">
-                <div class="tour-media-frame feat-box">
-                    <img src="assets/images/tour/entrance_main.png" alt="Main Infrastructure Gate Layout" loading="lazy" decoding="async">
+            <?php foreach($entranceImages as $i => $img): ?>
+                <div class="tour-media-frame <?= getLayoutClass($i, 'A') ?>">
+                    <img
+                        src="storage/tour/<?= htmlspecialchars($img['image']) ?>"
+                        alt="<?= htmlspecialchars($img['alt_text']) ?>"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                    <?php if(!empty($img['alt_text'])): ?>
+                        <div class="tour-frame-caption"><?= htmlspecialchars($img['alt_text']) ?></div>
+                    <?php endif; ?>
                 </div>
-                <div class="tour-media-frame side-box-1">
-                    <img src="assets/images/tour/entrance_lobby.jpg" alt="Visitor Reception Lobby" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame feat-box">
-                    <img src="assets/images/tour/entrance_security2.png" alt="Main Infrastructure Gate Layout" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-2">
-                    <img src="assets/images/tour/entrance_security.jpg" alt="Security Logistics Station" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-1">
-                    <img src="assets/images/tour/reception1.jpeg" alt="Visitor Reception Lobby" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-2">
-                    <img src="assets/images/tour/reception2.jpg" alt="Security Logistics Station" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame feat-box">
-                    <img src="assets/images/tour/reception3.jpeg" alt="Main Infrastructure Gate Layout" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-1">
-                    <img src="assets/images/tour/reception4.jpg" alt="Visitor Reception Lobby" loading="lazy" decoding="async">
-                </div>
+            <?php endforeach; ?>
             </div>
         </div>
 
@@ -60,96 +103,41 @@
                 <span class="tour-step-num">02</span> Advanced Processing Yards
             </h2>
             <div class="tour-grid grid-pattern-b">
-                <div class="tour-media-frame side-box-1">
-                    <img src="assets/images/tour/proc1.jpg" alt="Raw Materials Sorting Unit" loading="lazy" decoding="async">
+            <?php foreach($processingImages as $i => $img): ?>
+                <div class="tour-media-frame <?= getLayoutClass($i, 'B') ?>">
+                    <img
+                        src="storage/tour/<?= htmlspecialchars($img['image']) ?>"
+                        alt="<?= htmlspecialchars($img['alt_text']) ?>"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                    <?php if(!empty($img['alt_text'])): ?>
+                        <div class="tour-frame-caption"><?= htmlspecialchars($img['alt_text']) ?></div>
+                    <?php endif; ?>
                 </div>
-                <div class="tour-media-frame feat-box">
-                    <img src="assets/images/tour/proc2.jpg" alt="High Temperature Furnace Line" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-2">
-                    <img src="assets/images/tour/proc3.jpg" alt="CNC Calibration Unit" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-2">
-                    <img src="assets/images/tour/proc6.jpg" alt="CNC Calibration Unit" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame feat-box">
-                    <img src="assets/images/tour/proc4.jpg" alt="High Temperature Furnace Line" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-1">
-                    <img src="assets/images/tour/proc5.jpg" alt="Raw Materials Sorting Unit" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame feat-box">
-                    <img src="assets/images/tour/proc7.jpg" alt="High Temperature Furnace Line" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-1">
-                    <img src="assets/images/tour/proc8.jpg" alt="Raw Materials Sorting Unit" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-2">
-                    <img src="assets/images/tour/proc9.jpg" alt="CNC Calibration Unit" loading="lazy" decoding="async">
-                </div>
+            <?php endforeach; ?>
             </div>
         </div>
 
         <!-- STAGE 3: QUALITY ASSURANCE & PACKAGING (Pattern C Layout) -->
         <div class="tour-section reveal-item">
             <h2 class="tour-section-title">
-                <span class="tour-step-num">03</span> Dcnorations & Packaging
+                <span class="tour-step-num">03</span> Decorations & Packaging
             </h2>
             <div class="tour-grid grid-pattern-c">
-                <div class="tour-media-frame side-box-1">
-                    <img src="assets/images/tour/dec1.png" alt="Testing and Verification Lab" loading="lazy" decoding="async">
+            <?php foreach($decorationImages as $i => $img): ?>
+                <div class="tour-media-frame <?= getLayoutClass($i, 'C') ?>">
+                    <img
+                        src="storage/tour/<?= htmlspecialchars($img['image']) ?>"
+                        alt="<?= htmlspecialchars($img['alt_text']) ?>"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                    <?php if(!empty($img['alt_text'])): ?>
+                        <div class="tour-frame-caption"><?= htmlspecialchars($img['alt_text']) ?></div>
+                    <?php endif; ?>
                 </div>
-                <div class="tour-media-frame side-box-2">
-                    <img src="assets/images/tour/dec2.png" alt="Secure Shucking Containment Pack" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame feat-box">
-                    <img src="assets/images/tour/dec3.png" alt="Heavy Cargo Logistics Bay" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-1">
-                    <img src="assets/images/tour/dec4.jpeg" alt="Testing and Verification Lab" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame feat-box">
-                    <img src="assets/images/tour/dec6.jpeg" alt="Heavy Cargo Logistics Bay" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-2">
-                    <img src="assets/images/tour/dec5.jpg" alt="Secure Shucking Containment Pack" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-1">
-                    <img src="assets/images/tour/dec7.png" alt="Testing and Verification Lab" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-2">
-                    <img src="assets/images/tour/dec8.jpeg" alt="Secure Shucking Containment Pack" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame feat-box">
-                    <img src="assets/images/tour/dec9.jpeg" alt="Heavy Cargo Logistics Bay" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-1">
-                    <img src="assets/images/tour/dec10.jpg" alt="Testing and Verification Lab" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-2">
-                    <img src="assets/images/tour/dec11.jpg" alt="Secure Shucking Containment Pack" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame feat-box">
-                    <img src="assets/images/tour/dec12.png" alt="Heavy Cargo Logistics Bay" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-1">
-                    <img src="assets/images/tour/dec13.png" alt="Testing and Verification Lab" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame feat-box">
-                    <img src="assets/images/tour/dec14.png" alt="Heavy Cargo Logistics Bay" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-2">
-                    <img src="assets/images/tour/dec15.png" alt="Secure Shucking Containment Pack" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-1">
-                    <img src="assets/images/tour/dec16.png" alt="Testing and Verification Lab" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame side-box-2">
-                    <img src="assets/images/tour/dec17.png" alt="Secure Shucking Containment Pack" loading="lazy" decoding="async">
-                </div>
-                <div class="tour-media-frame feat-box">
-                    <img src="assets/images/tour/dec18.png" alt="Heavy Cargo Logistics Bay" loading="lazy" decoding="async">
-                </div>
+            <?php endforeach; ?>
             </div>
         </div>
 
@@ -163,8 +151,8 @@
         
         const revealOptions = {
             root: null,
-            threshold: 0.05, // Dropped to 5% so rendering triggers quickly and smoothly before the user hits the section empty space
-            rootMargin: "0px 0px 100px 0px" // Trigger loading slightly before it scrolls into frame
+            threshold: 0.02,
+            rootMargin: "0px 0px 100px 0px"
         };
 
         const revealObserver = new IntersectionObserver(function (entries, observer) {

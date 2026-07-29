@@ -14,7 +14,6 @@ $featuredCategories = $pdo->query("
     SELECT *
     FROM categories
     WHERE featured = 1
-    LIMIT 4
 ")->fetchAll();
 ?>
 

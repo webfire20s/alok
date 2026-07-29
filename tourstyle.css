@@ -75,160 +75,93 @@
     letter-spacing: 0;
 }
 
-/* Master Layout Framework */
-.tour-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr); /* Fixed math error from 11fr to 1fr */
-    gap: 24px;
-    align-items: stretch;
+/* ==========================================================================
+   MODERN RESPONSIVE MASONRY GRID
+   ========================================================================== */
+
+.tour-grid{
+    column-count:30;
+    column-gap:22px;
 }
 
-/* High-Performance Frame Elements */
-.tour-media-frame {
-    position: relative;
-    overflow: hidden;
-    border-radius: 6px;
-    background-color: #161616; /* Charcoal Base layer */
-    border: 1px solid #eef0f2;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-    /* Performance Optimization: Animate transform/opacity only to prevent browser repaints */
-    will-change: transform, opacity;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+.tour-media-frame{
+    display:inline-block;
+    width:100%;
+    margin:0 0 22px;
+    overflow:hidden;
+    border-radius:14px;
+    background:#fff;
+    border:1px solid #ececec;
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+    break-inside:avoid;
+    transition:.35s;
+}
+.tour-media-frame:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
+}
+.tour-media-frame img{
+    width:100%;
+    height:auto;
+    display:block;
+    transition:.45s;
+}
+.tour-media-frame:hover img{
+    transform:scale(1.05);
 }
 
-.tour-media-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    will-change: transform;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.3s ease;
+/* Caption */
+
+.tour-frame-caption{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:18px;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.7),
+        rgba(0,0,0,0)
+    );
+    color:#fff;
+    opacity:0;
+    transition:.3s;
 }
-
-/* Interactive Overlay Text Info */
-.tour-frame-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 25px;
-    background: linear-gradient(to top, rgba(17, 17, 17, 0.85) 0%, rgba(17, 17, 17, 0) 100%);
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* HOVER INTERACTIVITY TRIGGERS */
-@media (hover: hover) {
-    .tour-media-frame:hover {
-        transform: translateY(-6px);
-        border-color: #c8232c; /* Alok Red Anchor Focus */
-        box-shadow: 0 20px 40px rgba(200, 35, 44, 0.1);
-    }
-
-    .tour-media-frame:hover img {
-        transform: scale(1.04);
-        opacity: 0.85;
-    }
-
-    .tour-media-frame:hover .tour-frame-caption {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.tour-media-frame:hover .tour-frame-caption{
+    opacity:1;
 }
 
 /* ==========================================================================
-   ASYMMETRIC DISTRIBUTION PATTERNS (Fixed for infinite loop wrapping)
+   REVEAL ANIMATION
    ========================================================================== */
-   
-/* Layout Pattern A */
-.grid-pattern-a .feat-box { grid-column: span 6; aspect-ratio: 4 / 3; }
-.grid-pattern-a .side-box-1 { grid-column: span 6; aspect-ratio: 4 / 3; }
-.grid-pattern-a .side-box-2 { grid-column: span 4; aspect-ratio: 4 / 3; }
-
-/* Layout Pattern B */
-.grid-pattern-b .side-box-1 { grid-column: span 4; aspect-ratio: 4 / 3; }
-.grid-pattern-b .feat-box { grid-column: span 4; aspect-ratio: 4 / 3; }
-.grid-pattern-b .side-box-2 { grid-column: span 4; aspect-ratio: 4 / 3; }
-
-/* Layout Pattern C */
-.grid-pattern-c .side-box-1 { grid-column: span 4; aspect-ratio: 4 / 3; }
-.grid-pattern-c .side-box-2 { grid-column: span 4; aspect-ratio: 4 / 3; }
-.grid-pattern-c .feat-box { grid-column: span 4; aspect-ratio: 4 / 3; }
-
-/* ==========================================================================
-   SCROLL-REVEAL HARDWARE ENHANCED ANIMATION STYLES
-   ========================================================================== */
-.reveal-item {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform, opacity;
+.reveal-item{
+    opacity:0;
+    transform:translateY(30px);
+    transition:.7s;
 }
-
-.reveal-item.revealed {
-    opacity: 1;
-    transform: translateY(0);
+.reveal-item.revealed{
+    opacity:1;
+    transform:none;
 }
 
 /* ==========================================================================
-   RESPONSIVE MATRIX MEDIA BREAKPOINTS
+   RESPONSIVE
    ========================================================================== */
-@media (max-width: 1024px) {
-    .tour-grid {
-        gap: 16px;
-    }
-    /* Balanced asymmetrical items gracefully onto clean half-and-half grids for mid-size viewports */
-    .grid-pattern-a .feat-box, .grid-pattern-a .side-box-1, .grid-pattern-a .side-box-2,
-    .grid-pattern-b .side-box-1, .grid-pattern-b .feat-box, .grid-pattern-b .side-box-2,
-    .grid-pattern-c .side-box-1, .grid-pattern-c .side-box-2, .grid-pattern-c .feat-box { 
-        grid-column: span 6; 
-        aspect-ratio: 4 / 3; 
+
+@media(max-width:1200px){
+    .tour-grid{
+        column-count:3;
     }
 }
 
-@media (max-width: 768px) {
-    .tour-hero-header { margin-bottom: 50px; }
-    .tour-hero-header h1 { font-size: 28px; }
-    .tour-section { margin-bottom: 80px; }
-    
-    /* Transition cleanly to 2 columns on small tablets */
-    .tour-grid { 
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px; 
-    }
-    .grid-pattern-a .feat-box, .grid-pattern-a .side-box-1, .grid-pattern-a .side-box-2,
-    .grid-pattern-b .side-box-1, .grid-pattern-b .feat-box, .grid-pattern-b .side-box-2,
-    .grid-pattern-c .side-box-1, .grid-pattern-c .side-box-2, .grid-pattern-c .feat-box { 
-        grid-column: span 2; 
-        aspect-ratio: 4 / 3; 
+@media(max-width:992px){
+    .tour-grid{
+        column-count:2;
     }
 }
 
-@media (max-width: 480px) {
-    .tour-grid { 
-        display: flex; 
-        flex-direction: column; 
-        gap: 16px; 
-    }
-    .tour-media-frame { 
-        aspect-ratio: 4 / 3 !important; 
-    }
-    .tour-section-title { font-size: 18px; }
-    .tour-frame-caption { 
-        opacity: 1; 
-        transform: none; 
-        padding: 15px; 
-        font-size: 11px; 
+@media(max-width:576px){
+    .tour-grid{
+        column-count:1;
     }
 }
