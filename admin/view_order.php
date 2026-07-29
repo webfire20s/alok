@@ -120,7 +120,7 @@ include 'includes/admin_sidebar.php';
 
 <div class="container-fluid py-4">
 
-    <?php if($order['subtotal'] < 15000): ?>
+    <!-- <?php if($order['subtotal'] < 15000): ?>
         <div class="alert border-0 mb-4 d-flex align-items-center" style="
             background: rgba(245, 158, 11, 0.06); 
             border: 1px solid rgba(245, 158, 11, 0.15) !important; 
@@ -142,7 +142,7 @@ include 'includes/admin_sidebar.php';
         ">
             <span class="mr-2" style="font-size: 16px;">✨</span> Order above ₹15,000. Eligible for free shipping if approved.
         </div>
-    <?php endif; ?>
+    <?php endif; ?> -->
 
     <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 mb-md-5">
         <div>
