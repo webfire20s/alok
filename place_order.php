@@ -128,6 +128,22 @@ trim($_POST['payment_method'] ?? 'inquiry');
 
 /*
 |--------------------------------------------------------------------------
+| SHIPPING
+|--------------------------------------------------------------------------
+*/
+
+$shippingMethodId = (int)($_POST['shipping_method_id'] ?? 0);
+
+$shippingMethod = trim($_POST['shipping_method'] ?? '');
+
+$shippingCharge = (float)($_POST['shipping_charge'] ?? 0);
+
+$shippingGSTPercent = (float)($_POST['shipping_gst_percent'] ?? 0);
+
+$shippingGST = (float)($_POST['shipping_gst'] ?? 0);
+
+/*
+|--------------------------------------------------------------------------
 | TOTALS
 |--------------------------------------------------------------------------
 */
@@ -160,7 +176,10 @@ foreach($cartItems as $item){
 }
 
 $grandTotal =
-$subtotal + $totalGST;
+    $subtotal +
+    $totalGST +
+    $shippingCharge +
+    $shippingGST;
 
 /*
 |--------------------------------------------------------------------------
@@ -178,6 +197,7 @@ $orderNumber =
 */
 
 $orderStmt = $pdo->prepare("
+
     INSERT INTO orders (
 
         user_id,
@@ -194,6 +214,13 @@ $orderStmt = $pdo->prepare("
 
         subtotal,
         gst_total,
+
+        shipping_charge,
+        shipping_method_id,
+        shipping_method,
+        shipping_gst_percent,
+        shipping_gst,
+
         grand_total,
 
         payment_method,
@@ -202,14 +229,21 @@ $orderStmt = $pdo->prepare("
     ) VALUES (
 
         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-        ?, ?, ?,
+
+        ?, ?,
+
+        ?, ?, ?, ?, ?,
+
+        ?,
+
         ?, ?
 
     )
+
 ");
 
 $orderStmt->execute([
-    
+
     $_SESSION['user_id'] ?? null,
     $orderNumber,
 
@@ -224,6 +258,13 @@ $orderStmt->execute([
 
     $subtotal,
     $totalGST,
+
+    $shippingCharge,
+    $shippingMethodId,
+    $shippingMethod,
+    $shippingGSTPercent,
+    $shippingGST,
+
     $grandTotal,
 
     $paymentMethod,

@@ -19,14 +19,61 @@ if(!$category){
     die("Category not found");
 }
 
-$productStmt = $pdo->prepare("
+/*
+|--------------------------------------------------------------------------
+| SUBCATEGORIES
+|--------------------------------------------------------------------------
+*/
+
+$selectedSubcategory = (int)($_GET['sub'] ?? 0);
+
+$subStmt = $pdo->prepare("
     SELECT *
-    FROM products
+    FROM subcategories
     WHERE category_id = ?
-    ORDER BY display_order ASC, id ASC
+    AND status = 1
+    ORDER BY display_order ASC, name ASC
 ");
 
-$productStmt->execute([$category['id']]);
+$subStmt->execute([$category['id']]);
+
+$subcategories = $subStmt->fetchAll();
+
+/*
+|--------------------------------------------------------------------------
+| PRODUCTS
+|--------------------------------------------------------------------------
+*/
+
+if($selectedSubcategory > 0){
+
+    $productStmt = $pdo->prepare("
+        SELECT *
+        FROM products
+        WHERE category_id = ?
+        AND subcategory_id = ?
+        ORDER BY display_order ASC, id ASC
+    ");
+
+    $productStmt->execute([
+        $category['id'],
+        $selectedSubcategory
+    ]);
+
+}else{
+
+    $productStmt = $pdo->prepare("
+        SELECT *
+        FROM products
+        WHERE category_id = ?
+        ORDER BY display_order ASC, id ASC
+    ");
+
+    $productStmt->execute([
+        $category['id']
+    ]);
+
+}
 
 $products = $productStmt->fetchAll();
 
@@ -113,6 +160,61 @@ $products = $productStmt->fetchAll();
         <?= htmlspecialchars($category['name']) ?>
         <span style="position: absolute; bottom: 0; left: 0; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); animation: lineExpand 1s cubic-bezier(0.25, 1, 0.5, 1) forwards; border-radius: 2px;"></span>
     </h2>
+
+    <?php if(!empty($subcategories)): ?>
+
+    <div class="mb-5">
+
+        <div
+            style="
+                display:flex;
+                flex-wrap:wrap;
+                gap:10px;
+            "
+        >
+
+            <a
+                href="category/<?= urlencode($category['slug']) ?>"
+                class="btn"
+                style="
+                    <?= $selectedSubcategory==0
+                        ? 'background:#c8232c;color:#fff;border:1px solid #c8232c;'
+                        : 'background:#fff;color:#111;border:1px solid #ddd;' ?>
+                    border-radius:30px;
+                    padding:8px 20px;
+                    font-size:13px;
+                    font-weight:600;
+                "
+            >
+                All
+            </a>
+
+            <?php foreach($subcategories as $sub): ?>
+
+                <a
+                    href="category/<?= urlencode($category['slug']) ?>?sub=<?= $sub['id'] ?>"
+                    class="btn"
+                    style="
+                        <?= $selectedSubcategory==$sub['id']
+                            ? 'background:#c8232c;color:#fff;border:1px solid #c8232c;'
+                            : 'background:#fff;color:#111;border:1px solid #ddd;' ?>
+                        border-radius:30px;
+                        padding:8px 20px;
+                        font-size:13px;
+                        font-weight:600;
+                        transition:.25s;
+                    "
+                >
+                    <?= htmlspecialchars($sub['name']) ?>
+                </a>
+
+            <?php endforeach; ?>
+
+        </div>
+
+    </div>
+
+    <?php endif; ?>
 
     <!-- Grid Layout -->
     <div class="row">

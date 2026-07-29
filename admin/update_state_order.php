@@ -1,0 +1,32 @@
+<?php
+
+require 'includes/auth.php';
+require '../includes/db.php';
+
+$data = json_decode(file_get_contents("php://input"), true);
+
+if(!$data){
+
+    exit;
+
+}
+
+$stmt = $pdo->prepare("
+    UPDATE states
+    SET sort_order = ?
+    WHERE id = ?
+");
+
+foreach($data as $row){
+
+    $stmt->execute([
+
+        $row['order'],
+
+        $row['id']
+
+    ]);
+
+}
+
+echo "success";

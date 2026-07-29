@@ -80,46 +80,6 @@ if(
 |--------------------------------------------------------------------------
 */
 
-if(
-    $_SERVER['REQUEST_METHOD'] === 'POST'
-    &&
-    isset($_POST['update_shipping'])
-){
-
-    $shippingCharge =
-        (float)$_POST['shipping_charge'];
-
-    $shippingNote =
-        trim($_POST['shipping_note']);
-
-    $newGrandTotal =
-        $order['subtotal']
-        +
-        $order['gst_total']
-        +
-        $shippingCharge;
-
-    $updateShipping = $pdo->prepare("
-        UPDATE orders
-        SET
-            shipping_charge = ?,
-            shipping_note = ?,
-            grand_total = ?
-        WHERE id = ?
-    ");
-
-    $updateShipping->execute([
-
-        $shippingCharge,
-        $shippingNote,
-        $newGrandTotal,
-        $orderId
-
-    ]);
-
-    header("Location:view_order.php?id=" . $orderId);
-    exit;
-}
 ?>
 
 <?php 
@@ -402,19 +362,63 @@ include 'includes/admin_sidebar.php';
                     Order Summary
                 </h4>
 
-                <div class="d-flex justify-content-between mb-3" style="font-size: 14px;">
-                    <span style="color: #94a3b8;">Subtotal:</span>
-                    <span style="color: #f8fafc; font-weight: 500; font-family: monospace;">₹<?= number_format($order['subtotal'], 2) ?></span>
+                <div class="d-flex justify-content-between mb-3" style="font-size:14px;">
+                    <span style="color:#94a3b8;">Subtotal</span>
+                    <span style="color:#ffffff;font-family:monospace;">
+                        ₹<?= number_format($order['subtotal'],2) ?>
+                    </span>
                 </div>
 
-                <div class="d-flex justify-content-between mb-3" style="font-size: 14px;">
-                    <span style="color: #94a3b8;">GST Accumulation:</span>
-                    <span style="color: #f8fafc; font-weight: 500; font-family: monospace;">₹<?= number_format($order['gst_total'], 2) ?></span>
+                <div class="d-flex justify-content-between mb-3" style="font-size:14px;">
+                    <span style="color:#94a3b8;">GST</span>
+                    <span style="color:#ffffff;font-family:monospace;">
+                        ₹<?= number_format($order['gst_total'],2) ?>
+                    </span>
                 </div>
 
-                <div class="d-flex justify-content-between align-items-center pt-3 mb-4" style="border-top: 1px solid rgba(255,255,255,0.08);">
-                    <span style="color: #ffffff; font-weight: 600; font-size: 14px;">Grand Total:</span>
-                    <span style="color: #38bdf8; font-weight: 700; font-size: 18px; font-family: monospace;">₹<?= number_format($order['grand_total'], 2) ?></span>
+                <div class="d-flex justify-content-between mb-3" style="font-size:14px;">
+                    <span style="color:#94a3b8;">Shipping Method</span>
+                    <span style="color:#ffffff;text-align:right;">
+                        <?= htmlspecialchars($order['shipping_method']) ?>
+                    </span>
+                </div>
+
+                <div class="d-flex justify-content-between mb-3" style="font-size:14px;">
+                    <span style="color:#94a3b8;">Shipping Charge</span>
+                    <span style="color:#ffffff;font-family:monospace;">
+                        ₹<?= number_format($order['shipping_charge'],2) ?>
+                    </span>
+                </div>
+
+                <div class="d-flex justify-content-between mb-3" style="font-size:14px;">
+                    <span style="color:#94a3b8;">
+                        Shipping GST
+                        (<?= number_format($order['shipping_gst_percent'],0) ?>%)
+                    </span>
+
+                    <span style="color:#ffffff;font-family:monospace;">
+                        ₹<?= number_format($order['shipping_gst'],2) ?>
+                    </span>
+                </div>
+
+                <div class="d-flex justify-content-between mb-4" style="font-size:14px;">
+                    <span style="color:#94a3b8;">Total Shipping</span>
+
+                    <span style="color:#38bdf8;font-family:monospace;font-weight:600;">
+                        ₹<?= number_format($order['shipping_charge']+$order['shipping_gst'],2) ?>
+                    </span>
+                </div>
+
+                <div style=" border-top:1px solid rgba(255,255,255,.08); padding-top:18px; " class="d-flex justify-content-between align-items-center">
+
+                    <span style=" color:#ffffff; font-size:15px; font-weight:700; ">
+                        Grand Total
+                    </span>
+
+                    <span style=" color:#10b981; font-size:22px; font-weight:700; font-family:monospace; ">
+                        ₹<?= number_format($order['grand_total'],2) ?>
+                    </span>
+
                 </div>
 
                 <hr style="border-top: 1px solid rgba(255,255,255,0.08); margin: 24px 0;">
@@ -457,36 +461,59 @@ include 'includes/admin_sidebar.php';
                         Update Status
                     </button>
                 </form>
+                <hr style="border-top:1px solid rgba(255,255,255,.06);margin:22px 0;">
 
-                <hr style="border-top: 1px solid rgba(255,255,255,0.06); margin: 20px 0;">
+                <h5 class="mb-3" style=" font-size:14px; font-weight:600; color:#ffffff; "> Shipping Information </h5>
 
-                <h5 class="mb-3" style="font-size: 14px; font-weight: 600; color: #ffffff;">
-                    Shipping Charges
-                </h5>
+                <div style=" background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.05); border-radius:8px; padding:15px; ">
 
-                <form method="POST">
-                    <input type="hidden" name="update_shipping" value="1">
-                    
-                    <div class="form-group mb-3">
-                        <label style="color: #94a3b8; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; display: block;">
+                    <div class="mb-2">
+
+                        <small style="color:#64748b;">
+                            Shipping Method
+                        </small>
+
+                        <div style=" color:#ffffff; font-weight:600; ">
+                            <?= htmlspecialchars($order['shipping_method']) ?>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-2">
+
+                        <small style="color:#64748b;">
                             Shipping Charge
-                        </label>
-                        <input type="number" step="0.01" name="shipping_charge" class="form-control glass-input-control" value="<?= $order['shipping_charge'] ?>">
+                        </small>
+
+                        <div style="color:#38bdf8;">
+                            ₹<?= number_format($order['shipping_charge'],2) ?>
+                        </div>
+
                     </div>
 
-                    <div class="form-group mb-4">
-                        <label style="color: #94a3b8; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; display: block;">
-                            Shipping Note
-                        </label>
-                        <input type="text" name="shipping_note" class="form-control glass-input-control" value="<?= htmlspecialchars($order['shipping_note']) ?>" placeholder="e.g. Fragile glass logistics line">
+                    <div class="mb-2">
+
+                        <small style="color:#64748b;">
+                            Shipping GST
+                        </small>
+
+                        <div style="color:#38bdf8;">
+                            ₹<?= number_format($order['shipping_gst'],2) ?>
+                        </div>
+
                     </div>
 
-                    <button class="btn btn-block py-2" style="background: linear-gradient(135deg, #38bdf8, #0284c7); border: none; color: #ffffff; font-size: 13.5px; font-weight: 600; border-radius: 6px; box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15); transition: transform 0.2s, box-shadow 0.2s;"
-                        onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 16px rgba(56, 189, 248, 0.3)';"
-                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(56, 189, 248, 0.15)';">
-                        Update Shipping
-                    </button>
-                </form>
+                    <div>
+
+                        <small style="color:#64748b;">
+                            Total Shipping
+                        </small>
+
+                        <div style=" color:#10b981; font-weight:700; ">
+                            ₹<?= number_format($order['shipping_charge']+$order['shipping_gst'],2) ?>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 

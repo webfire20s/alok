@@ -11,6 +11,18 @@ $categories = $pdo->query("
     ORDER BY name ASC
 ")->fetchAll();
 
+$subCategoryStmt = $pdo->query("
+    SELECT
+        id,
+        category_id,
+        name
+    FROM subcategories
+    WHERE status = 1
+    ORDER BY display_order ASC, name ASC
+");
+
+$subcategories = $subCategoryStmt->fetchAll();
+
 $closureOptions = $pdo->query("
     SELECT *
     FROM closure_options
@@ -97,6 +109,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         INSERT INTO products (
 
             category_id,
+            subcategory_id,
             name,
             slug,
             sku,
@@ -113,12 +126,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             featured,
             has_closure_options
 
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
 
     $stmt->execute([
 
         $categoryId,
+        $_POST['subcategory_id'] ?: null,
         $name,
         $slug,
         $sku,
@@ -215,6 +229,54 @@ include 'includes/admin_sidebar.php';
                                     </option>
                                 <?php endforeach; ?>
                             </select>
+                        </div>
+
+                        <div class="form-group mb-4">
+
+                            <label
+                                style="
+                                    font-size:12px;
+                                    text-transform:uppercase;
+                                    letter-spacing:.05em;
+                                    color:#94a3b8;
+                                    font-weight:600;
+                                    margin-bottom:8px;
+                                "
+                            >
+                                Sub Category
+                            </label>
+
+                            <select
+                                name="subcategory_id"
+                                id="subcategory_id"
+                                class="form-control text-white"
+                                style="
+                                    background:rgba(15,17,21,.5);
+                                    border:1px solid rgba(255,255,255,.08);
+                                    border-radius:8px;
+                                    height:45px;
+                                    font-size:14px;
+                                "
+                            >
+
+                                <option value="">
+                                    Select Sub Category
+                                </option>
+
+                                <?php foreach($subcategories as $sub): ?>
+
+                                    <option
+                                        value="<?= $sub['id'] ?>"
+                                        data-category="<?= $sub['category_id'] ?>"
+                                        style="display:none;background:#151922;color:#fff;"
+                                    >
+                                        <?= htmlspecialchars($sub['name']) ?>
+                                    </option>
+
+                                <?php endforeach; ?>
+
+                            </select>
+
                         </div>
 
                         <div class="form-group mb-4">
@@ -637,7 +699,45 @@ closureCheck.addEventListener(
 );
 
 </script>
+<script>
 
+const categorySelect = document.querySelector('[name="category_id"]');
+const subSelect = document.getElementById("subcategory_id");
+
+function loadSubCategories(){
+
+    const cat = categorySelect.value;
+
+    subSelect.value = "";
+
+    Array.from(subSelect.options).forEach(function(opt){
+
+        if(opt.value===""){
+
+            opt.style.display="block";
+            return;
+
+        }
+
+        if(opt.dataset.category===cat){
+
+            opt.style.display="block";
+
+        }else{
+
+            opt.style.display="none";
+
+        }
+
+    });
+
+}
+
+categorySelect.addEventListener("change",loadSubCategories);
+
+loadSubCategories();
+
+</script>
 </div>
 
 </body>

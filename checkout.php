@@ -77,6 +77,49 @@ $subtotal = 0;
 
 $totalGST = 0;
 
+/*
+|--------------------------------------------------------------------------
+| SHIPPING
+|--------------------------------------------------------------------------
+*/
+
+$shippingCharge = 0;
+$shippingGST = 0;
+$shippingGSTPercent = 0;
+$shippingMethod = '';
+$shippingMethodId = '';
+$selectedState = '';
+
+/*
+|--------------------------------------------------------------------------
+| GET STATES
+|--------------------------------------------------------------------------
+*/
+
+$stateStmt = $pdo->query("
+    SELECT *
+    FROM states
+    WHERE status = 1
+    ORDER BY sort_order ASC, name ASC
+");
+
+$states = $stateStmt->fetchAll();
+
+/*
+|--------------------------------------------------------------------------
+| GET SHIPPING METHODS
+|--------------------------------------------------------------------------
+*/
+
+$methodStmt = $pdo->query("
+    SELECT *
+    FROM shipping_methods
+    WHERE status = 1
+    ORDER BY sort_order ASC, name ASC
+");
+
+$shippingMethods = $methodStmt->fetchAll();
+
 ?>
 
 <div class="container pt-5 pb-5" style="font-family: 'Montserrat', sans-serif;">
@@ -190,17 +233,85 @@ $totalGST = 0;
                             <label style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #111111; letter-spacing: 0.05em; margin-bottom: 8px; display: block;">
                                 State <span style="color: #c8232c;">*</span>
                             </label>
-                            <input
-                                type="text"
+                            <select
                                 name="customer_state"
+                                id="customer_state"
                                 class="form-control"
                                 required
-                                style="background-color: #ffffff; border: 1px solid #cccccc; border-radius: 4px; color: #111111; font-size: 14px; font-weight: 500; padding: 10px 14px; height: 44px; box-shadow: none; transition: border-color 0.2s;"
-                                onfocus="this.style.borderColor='#111111';"
-                                onblur="this.style.borderColor='#cccccc';"
+                                style="
+                                    background:#fff;
+                                    border:1px solid #cccccc;
+                                    border-radius:4px;
+                                    height:44px;
+                                "
                             >
+
+                            <option value="">
+                                Select State
+                            </option>
+
+                            <?php foreach($states as $state): ?>
+
+                            <option
+                                value="<?= $state['id'] ?>"
+                            >
+
+                                <?= htmlspecialchars($state['name']) ?>
+
+                            </option>
+
+                            <?php endforeach; ?>
+
+                            </select>
                         </div>
                     </div>
+                    <div class="form-group mb-4">
+
+                        <label
+                        style="
+                        font-size:11px;
+                        font-weight:700;
+                        text-transform:uppercase;
+                        color:#111111;
+                        letter-spacing:.05em;
+                        margin-bottom:8px;
+                        display:block;
+                        ">
+
+                        Shipping Method
+                        <span style="color:#c8232c">*</span>
+
+                        </label>
+
+                        <select
+                        name="shipping_method_id"
+                        id="shipping_method_id"
+                        class="form-control"
+                        required
+                        style="
+                        background:#fff;
+                        border:1px solid #cccccc;
+                        border-radius:4px;
+                        height:44px;
+                        ">
+
+                        <option value="">
+                        Select Shipping Method
+                        </option>
+
+                        <?php foreach($shippingMethods as $method): ?>
+
+                        <option value="<?= $method['id'] ?>">
+
+                        <?= htmlspecialchars($method['name']) ?>
+
+                        </option>
+
+                        <?php endforeach; ?>
+
+                        </select>
+
+                        </div>
 
                     <div class="col-md-4">
                         <div class="form-group mb-4">
@@ -307,7 +418,13 @@ $totalGST = 0;
                     <?php endforeach; ?>
 
                     <?php
+
+                    $shippingCharge = 0;
+                    $shippingGST = 0;
+                    $totalShipping = 0;
+
                     $grandTotal = $subtotal + $totalGST;
+
                     ?>
 
                     <div class="pt-2" style="font-size: 14px;">
@@ -321,13 +438,45 @@ $totalGST = 0;
                             <span style="color: #777777; font-weight: 500;">GST</span>
                             <span style="color: #111111; font-weight: 600;">₹<?= number_format($totalGST, 2) ?></span>
                         </div>
+                        <!-- Shipping Method -->
 
-                        <div class="d-flex justify-content-between pt-3 mb-4" style="border-top: 1px solid #eeeeee;">
-                            <h5 class="text-uppercase" style="font-size: 14px; font-weight: 700; color: #111111; letter-spacing: 0.03em; margin: 0;">Grand Total</h5>
-                            <h5 style="font-size: 16px; font-weight: 700; color: #c8232c; margin: 0;">₹<?= number_format($grandTotal, 2) ?></h5>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span style=" color:#777; font-weight:500; "> Shipping Method </span>
+                            <span id="shippingMethodText" style=" font-weight:600; color:#111; "> -- </span>
+                        </div>
+
+                        <!-- Shipping Charge -->
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span style=" color:#777; font-weight:500; "> Shipping Charge </span>
+                            <span id="shippingChargeText" style=" font-weight:600; color:#111; "> ₹0.00 </span>
+                        </div>
+
+                        <!-- Shipping GST -->
+
+                        <div
+                        class="d-flex justify-content-between mb-4">
+                            <span style=" color:#777; font-weight:500; "> Shipping GST </span>
+                            <span id="shippingGSTText" style=" font-weight:600; color:#111; "> ₹0.00 </span>
+                        </div>
+
+                        <div class="d-flex justify-content-between pt-3 mb-4" style=" border-top:1px solid #eeeeee; ">
+
+                            <h5 class="text-uppercase" style=" font-size:14px; font-weight:700; color:#111; margin:0; "> Grand Total </h5>
+
+                            <h5 id="grandTotalText" style=" font-size:16px; font-weight:700; color:#c8232c; margin:0; "> ₹<?= number_format($grandTotal,2) ?> </h5>
+
                         </div>
 
                     </div>
+
+                    <input type="hidden" name="shipping_charge" id="shipping_charge" value="0">
+
+                    <input type="hidden" name="shipping_gst" id="shipping_gst" value="0">
+
+                    <input type="hidden" name="shipping_gst_percent" id="shipping_gst_percent" value="0">
+
+                    <input type="hidden" name="shipping_method" id="shipping_method" value="">
 
                     <button
                         type="submit"
@@ -348,5 +497,105 @@ $totalGST = 0;
     </form>
 
 </div>
+<script>
 
+const subtotal =
+<?= round($subtotal,2) ?>;
+
+const gst =
+<?= round($totalGST,2) ?>;
+
+function updateShipping(){
+
+    let state =
+    document.getElementById('customer_state').value;
+
+    let method =
+    document.getElementById('shipping_method_id').value;
+
+    if(state=='' || method==''){
+
+        return;
+    }
+
+    fetch(
+        'get_shipping_rate.php?state_id='
+        + state +
+        '&shipping_method_id='
+        + method
+    )
+
+    .then(response=>response.json())
+
+    .then(data=>{
+
+        if(!data.success){
+
+            alert(
+                'Shipping is not configured for this combination.'
+            );
+
+            return;
+        }
+
+        document.getElementById(
+            'shippingMethodText'
+        ).innerHTML=data.method;
+
+        document.getElementById(
+            'shippingChargeText'
+        ).innerHTML='₹'+
+        parseFloat(data.charge).toFixed(2);
+
+        document.getElementById(
+            'shippingGSTText'
+        ).innerHTML='₹'+
+        parseFloat(data.gst).toFixed(2);
+
+        document.getElementById(
+            'shipping_charge'
+        ).value=data.charge;
+
+        document.getElementById(
+            'shipping_gst'
+        ).value=data.gst;
+
+        document.getElementById(
+            'shipping_gst_percent'
+        ).value=data.gst_percent;
+
+        document.getElementById(
+            'shipping_method'
+        ).value=data.method;
+
+        let grandTotal =
+            subtotal +
+            gst +
+            parseFloat(data.charge) +
+            parseFloat(data.gst);
+
+        document.getElementById(
+            'grandTotalText'
+        ).innerHTML='₹'+
+        grandTotal.toFixed(2);
+
+    });
+
+}
+
+document.getElementById(
+'customer_state'
+).addEventListener(
+'change',
+updateShipping
+);
+
+document.getElementById(
+'shipping_method_id'
+).addEventListener(
+'change',
+updateShipping
+);
+
+</script>
 <?php include 'includes/footer.php'; ?>

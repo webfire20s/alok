@@ -1,56 +1,236 @@
-ALTER TABLE products
-ADD COLUMN display_order INT NOT NULL DEFAULT 0 AFTER category_id;
+ALTER TABLE orders
+ADD razorpay_order_id VARCHAR(100) NULL,
+ADD razorpay_payment_id VARCHAR(100) NULL,
+ADD razorpay_signature VARCHAR(255) NULL,
+ADD payment_status ENUM('pending','paid','failed','refunded') DEFAULT 'pending',
+ADD payment_date DATETIME NULL;
 
-SET @i := 0;
+
+INSERT INTO shipping_methods
+(
+    name,
+    description,
+    gst_percent,
+    status,
+    sort_order
+)
+VALUES
+
+(
+    'Door Delivery',
+    'Goods delivered directly to buyer address.',
+    18.00,
+    1,
+    1
+),
+
+(
+    'Transporter Warehouse Delivery',
+    'Goods delivered to transporter warehouse in buyer city. Customer will collect goods from transporter warehouse.',
+    18.00,
+    1,
+    2
+),
+
+(
+    'Self Pickup - Firozabad Warehouse',
+    'Customer will collect goods directly from our Firozabad warehouse.',
+    0.00,
+    1,
+    3
+);
+
+CREATE TABLE states (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    name VARCHAR(100) NOT NULL,
+
+    code VARCHAR(10) NOT NULL,
+
+    status TINYINT(1) NOT NULL DEFAULT 1,
+
+    sort_order INT NOT NULL DEFAULT 0
+
+);
+
+CREATE TABLE shipping_methods (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    name VARCHAR(100) NOT NULL,
+
+    description TEXT,
+
+    gst_percent DECIMAL(5,2) NOT NULL DEFAULT 18.00,
+
+    status TINYINT(1) NOT NULL DEFAULT 1,
+
+    sort_order INT NOT NULL DEFAULT 0
+
+);
+
+CREATE TABLE shipping_rates (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    state_id INT NOT NULL,
+
+    shipping_method_id INT NOT NULL,
+
+    charge DECIMAL(10,2) NOT NULL,
+
+    status TINYINT(1) DEFAULT 1,
+
+    UNIQUE KEY state_method(state_id,shipping_method_id),
+
+    FOREIGN KEY(state_id)
+    REFERENCES states(id)
+    ON DELETE CASCADE,
+
+    FOREIGN KEY(shipping_method_id)
+    REFERENCES shipping_methods(id)
+    ON DELETE CASCADE
+
+);
+
+ALTER TABLE orders
+ADD shipping_method_id INT NULL AFTER shipping_charge,
+
+ADD shipping_method VARCHAR(100) NULL AFTER shipping_method_id,
+
+ADD shipping_gst_percent DECIMAL(5,2) DEFAULT 0 AFTER shipping_method,
+
+ADD shipping_gst DECIMAL(10,2) DEFAULT 0 AFTER shipping_gst_percent;
+
+
+
+The easiest way (one-time migration)
+
+You don't need a bulk move UI.
+
+Just run one SQL statement for each old category.
+
+Example
+
+Suppose:
+
+Food Jars          = Category ID 10
+
+Honey Jars         = Old Category ID 15
+Honey Jars         = New Subcategory ID 3
+
+Run:
 
 UPDATE products
-SET display_order = (@i := @i + 1)
-ORDER BY category_id, id;
+SET
+    category_id = 10,
+    subcategory_id = 3
+WHERE category_id = 15;
 
+Done.
+
+Every Honey Jar product is now:
+
+Category → Food Jars
+Subcategory → Honey Jars
+
+No product editing required.
+
+
+
+CREATE TABLE subcategories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    image VARCHAR(255) DEFAULT NULL,
+    display_order INT NOT NULL DEFAULT 0,
+    status TINYINT(1) NOT NULL DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    INDEX(category_id),
+
+    CONSTRAINT fk_subcategory_category
+    FOREIGN KEY(category_id)
+    REFERENCES categories(id)
+    ON DELETE CASCADE
+);
+
+ALTER TABLE products
+ADD COLUMN subcategory_id INT NULL
+AFTER category_id;
 
 
 ALTER TABLE products
-ADD has_closure_options TINYINT(1) NOT NULL DEFAULT 0 AFTER featured;
+ADD CONSTRAINT fk_products_subcategory
+FOREIGN KEY (subcategory_id)
+REFERENCES subcategories(id)
+ON DELETE SET NULL;
 
-ALTER TABLE cart
-ADD closure_option_id INT NULL AFTER product_id;
+SET @i:=0;
 
-
-CREATE TABLE closure_options (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(150) NOT NULL,
-    price DECIMAL(10,2) DEFAULT 0,
-    image VARCHAR(255) NULL,
-    status TINYINT(1) DEFAULT 1,
-    sort_order INT DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+UPDATE subcategories
+SET display_order=(@i:=@i+1);
 
 
-CREATE TABLE product_closure_options (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    product_id INT NOT NULL,
-    closure_option_id INT NOT NULL,
-    UNIQUE KEY product_closure(product_id,closure_option_id),
+============================================================================================================
+DONE LIVE KARNA ----  MEANS YE STATEMNTS LIVE HO CHUKE HAIN
+============================================================================================================
 
-    FOREIGN KEY(product_id)
-        REFERENCES products(id)
-        ON DELETE CASCADE,
+    ALTER TABLE products
+    ADD COLUMN display_order INT NOT NULL DEFAULT 0 AFTER category_id;
 
-    FOREIGN KEY(closure_option_id)
-        REFERENCES closure_options(id)
-        ON DELETE CASCADE
+    SET @i := 0;
 
-);
-
-ALTER TABLE order_items
-ADD closure_option_id INT NULL AFTER product_id,
-
-ADD closure_option_name VARCHAR(150) NULL AFTER product_name,
-
-ADD closure_option_price DECIMAL(10,2) DEFAULT 0 AFTER price;
+    UPDATE products
+    SET display_order = (@i := @i + 1)
+    ORDER BY category_id, id;
 
 
+
+    ALTER TABLE products
+    ADD has_closure_options TINYINT(1) NOT NULL DEFAULT 0 AFTER featured;
+
+    ALTER TABLE cart
+    ADD closure_option_id INT NULL AFTER product_id;
+
+
+    CREATE TABLE closure_options (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(150) NOT NULL,
+        price DECIMAL(10,2) DEFAULT 0,
+        image VARCHAR(255) NULL,
+        status TINYINT(1) DEFAULT 1,
+        sort_order INT DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+
+    CREATE TABLE product_closure_options (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        product_id INT NOT NULL,
+        closure_option_id INT NOT NULL,
+        UNIQUE KEY product_closure(product_id,closure_option_id),
+
+        FOREIGN KEY(product_id)
+            REFERENCES products(id)
+            ON DELETE CASCADE,
+
+        FOREIGN KEY(closure_option_id)
+            REFERENCES closure_options(id)
+            ON DELETE CASCADE
+
+    );
+
+    ALTER TABLE order_items
+    ADD closure_option_id INT NULL AFTER product_id,
+
+    ADD closure_option_name VARCHAR(150) NULL AFTER product_name,
+
+    ADD closure_option_price DECIMAL(10,2) DEFAULT 0 AFTER price;
+
+========================================================================================================================================================================================================================
 
 
 

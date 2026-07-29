@@ -44,7 +44,7 @@ $selectedClosures = array_column(
 );
 /*
 |--------------------------------------------------------------------------
-| FETCH CATEGORIES AND CLOSURE OPTIONS
+| FETCH CATEGORIES AND SUB CATEGORIES ANDCLOSURE OPTIONS
 |--------------------------------------------------------------------------
 */
 
@@ -53,6 +53,18 @@ $categories = $pdo->query("
     FROM categories
     ORDER BY name ASC
 ")->fetchAll();
+
+$subCategoryStmt = $pdo->query("
+    SELECT
+        id,
+        category_id,
+        name
+    FROM subcategories
+    WHERE status = 1
+    ORDER BY display_order ASC, name ASC
+");
+
+$subcategories = $subCategoryStmt->fetchAll();
 
 $closureOptions = $pdo->query("
     SELECT *
@@ -148,6 +160,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         UPDATE products
         SET
             category_id = ?,
+            subcategory_id=?,
             name = ?,
             slug = ?,
             sku = ?,
@@ -169,6 +182,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $updateStmt->execute([
         $categoryId,
+        $_POST['subcategory_id'] ?: null,
         $name,
         $slug,
         $sku,
@@ -273,6 +287,54 @@ include 'includes/admin_sidebar.php';
                         <?php endforeach; ?>
                     </select>
                 </div>
+            </div>
+
+            <div class="form-group mb-4">
+
+                <label
+                    style="
+                        font-size:12px;
+                        text-transform:uppercase;
+                        letter-spacing:.05em;
+                        color:#94a3b8;
+                        font-weight:600;
+                        margin-bottom:8px;
+                    "
+                >
+                    Sub Category
+                </label>
+
+                <select
+                    name="subcategory_id"
+                    id="subcategory_id"
+                    class="form-control text-white"
+                    style="
+                        background:rgba(15,17,21,.5);
+                        border:1px solid rgba(255,255,255,.08);
+                        border-radius:8px;
+                        height:45px;
+                    "
+                >
+
+                    <option value="">
+                        Select Sub Category
+                    </option>
+
+                    <?php foreach($subcategories as $sub): ?>
+
+                        <option
+                            value="<?= $sub['id'] ?>"
+                            data-category="<?= $sub['category_id'] ?>"
+                            <?= $product['subcategory_id']==$sub['id'] ? 'selected' : '' ?>
+                            style="display:none;background:#151922;color:#fff;"
+                        >
+                            <?= htmlspecialchars($sub['name']) ?>
+                        </option>
+
+                    <?php endforeach; ?>
+
+                </select>
+
             </div>
 
             <div class="col-12 col-md-6">
@@ -668,4 +730,41 @@ closureToggle.addEventListener("change",function(){
             : "none";
 
 });
+</script>
+<script>
+
+const categorySelect=document.querySelector('[name="category_id"]');
+const subSelect=document.getElementById("subcategory_id");
+
+function loadSubCategories(){
+
+    let cat=categorySelect.value;
+
+    Array.from(subSelect.options).forEach(function(option){
+
+        if(option.value===""){
+
+            option.style.display="block";
+            return;
+
+        }
+
+        option.style.display=
+            option.dataset.category===cat
+            ? "block"
+            : "none";
+
+    });
+
+}
+
+categorySelect.addEventListener("change",function(){
+
+    subSelect.value="";
+    loadSubCategories();
+
+});
+
+loadSubCategories();
+
 </script>
