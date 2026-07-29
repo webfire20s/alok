@@ -345,6 +345,9 @@ $shippingMethods = $methodStmt->fetchAll();
                     >
                         <option value="inquiry">Inquiry / Manual Payment</option>
                         <option value="cod">Cash on Delivery</option>
+                        <option value="razorpay">
+                            Razorpay (UPI / Cards / Net Banking / Wallets)
+                        </option>
                     </select>
                 </div>
 

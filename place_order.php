@@ -3,7 +3,7 @@
 session_start();
 
 require 'includes/db.php';
-
+require 'includes/payment_config.php';
 /*
 |--------------------------------------------------------------------------
 | SESSION
@@ -189,6 +189,46 @@ $grandTotal =
 
 $orderNumber =
 'ORD' . date('YmdHis') . rand(100,999);
+
+
+/*
+|--------------------------------------------------------------------------
+| RAZORPAY PAYMENT
+|--------------------------------------------------------------------------
+*/
+
+if ($paymentMethod === 'razorpay') {
+
+    $_SESSION['pending_order'] = [
+
+        'order_number' => $orderNumber,
+
+        'customer_name' => $customerName,
+        'customer_email' => $customerEmail,
+        'customer_phone' => $customerPhone,
+        'customer_company' => $customerCompany,
+        'customer_address' => $customerAddress,
+        'customer_city' => $customerCity,
+        'customer_state' => $customerState,
+        'customer_pincode' => $customerPincode,
+
+        'payment_method' => $paymentMethod,
+
+        'shipping_method_id' => $shippingMethodId,
+        'shipping_method' => $shippingMethod,
+        'shipping_charge' => $shippingCharge,
+        'shipping_gst_percent' => $shippingGSTPercent,
+        'shipping_gst' => $shippingGST,
+
+        'subtotal' => $subtotal,
+        'gst_total' => $totalGST,
+        'grand_total' => $grandTotal
+
+    ];
+
+    header("Location: razorpay_checkout.php");
+    exit;
+}
 
 /*
 |--------------------------------------------------------------------------

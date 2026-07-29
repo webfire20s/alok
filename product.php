@@ -194,7 +194,7 @@ if($product['has_closure_options']){
                     <select
                         name="closure_option_id"
                         class="form-control custom-select-theme"
-                        required>
+                        >
 
                         <option value="">
                             Select Closure Option
