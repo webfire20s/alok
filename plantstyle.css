@@ -1,256 +1,238 @@
-    /* ==========================================================================
-       PLANTS SECTION DESIGN SYSTEM BASE
-       ========================================================================== */
-    .plants-wrapper {
-        font-family: 'Montserrat', sans-serif;
-        background-color: #ffffff;
-        padding: 80px 0;
-    }
+/* ==========================================================================
+   INFINITE ASSOCIATE MARQUEE STRIP
+   ========================================================================== */
+.marquee-section {
+    background-color: #111111; /* Charcoal Black Base */
+    padding: 30px 0;
+    overflow: hidden;
+    border-top: 1px solid #222222;
+    border-bottom: 1px solid #222222;
+    position: relative;
+}
 
-    /* Core Intro Section Block */
-    .plants-intro-panel {
-        max-width: 800px;
-        margin: 0 auto 70px auto;
+.marquee-section::before,
+.marquee-section::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 120px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+.marquee-section::before {
+    left: 0;
+    background: linear-gradient(to right, #111111 0%, rgba(17, 17, 17, 0) 100%);
+}
+.marquee-section::after {
+    right: 0;
+    background: linear-gradient(to left, #111111 0%, rgba(17, 17, 17, 0) 100%);
+}
+
+.marquee-viewport {
+    display: flex;
+    width: 100%;
+}
+
+.marquee-track {
+    display: flex;
+    gap: 50px;
+    padding-right: 50px;
+    animation: marqueeLoop 25s linear infinite;
+    will-change: transform;
+}
+
+.marquee-viewport:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+.marquee-logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 160px;
+    flex-shrink: 0;
+}
+
+.marquee-logo-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.85;
+}
+
+.marquee-logo-item img:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+@keyframes marqueeLoop {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* ==========================================================================
+   PLANTS SHOWCASE LAYOUT (SIDE-BY-SIDE ALTERNATING GRID)
+   ========================================================================== */
+.plants-wrapper {
+    background-color: #f7f5ed; /* Light cream warm background matching live site */
+    padding: 70px 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.plants-wrapper .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.plants-intro-panel {
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    text-align: center;
+}
+
+.plants-pretitle {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #c8232c; /* Alok Red */
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
+}
+
+.plants-main-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #111111;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 16px;
+}
+
+.plants-lead-text {
+    font-size: 15px;
+    color: #555555;
+    line-height: 1.7;
+}
+
+/* 2-Column Flex Row Engine */
+.plant-row-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    margin-bottom: 70px;
+    padding-bottom: 70px;
+    border-bottom: 2px solid #e2ded5; /* Gold/cream divider line */
+}
+
+/* Automatic Alternating Direction: Even rows flip image to the right */
+.plant-row-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.plant-row-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+/* Side Image Container */
+.plant-media-frame {
+    flex: 0 0 42%; /* Image takes ~42% width */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plant-media-frame img {
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 6px;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.plant-row-item:hover .plant-media-frame img {
+    transform: translateY(-4px);
+}
+
+/* Side Info Block */
+.plant-info-block {
+    flex: 0 0 53%; /* Text takes ~53% width */
+    text-align: left; /* Left aligned typography */
+}
+
+.plant-name {
+    font-size: 24px;
+    font-weight: 800;
+    color: #111111;
+    line-height: 1.35;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+}
+
+.plant-desc-text {
+    font-size: 15px;
+    color: #333333;
+    line-height: 1.75;
+    margin: 0;
+    text-align: left;
+}
+
+/* ==========================================================================
+   SCROLL ANIMATIONS
+   ========================================================================== */
+.plant-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.plant-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   RESPONSIVE MOBILE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 991.98px) {
+    .plant-row-item,
+    .plant-row-item:nth-child(even) {
+        flex-direction: column; /* Stacks vertically on mobile/tablet */
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .plant-media-frame, 
+    .plant-info-block {
+        flex: 0 0 100%;
         text-align: center;
     }
 
-    .plants-pretitle {
-        display: inline-block;
-        font-size: 11px;
-        font-weight: 700;
-        color: #c8232c; /* Alok Red */
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        margin-bottom: 12px;
-    }
-
-    .plants-main-title {
-        font-size: 32px;
-        font-weight: 800;
-        color: #111111; /* Charcoal Main */
-        text-transform: uppercase;
-        letter-spacing: 0.03em;
-        margin-bottom: 20px;
-    }
-
-    .plants-lead-text {
-        font-size: 15px;
-        color: #555555;
-        line-height: 1.7;
-        font-weight: 500;
-    }
-
-    /* ==========================================================================
-       ALTERNATING INFRASTRUCTURE ROW BLOCKS
-       ========================================================================== */
-    .plant-row-item {
-        margin-bottom: 90px;
-    }
-    .plant-row-item:last-child {
-        margin-bottom: 0;
-    }
-
-    /* Media Box Canvas Container */
-    .plant-media-frame {
-        width: 50%;
-        aspect-ratio: 16 / 7; /* Elegant widescreen format matching the screenshot structure */
-        background-color: #161616; /* Charcoal Black background mask */
-        border-radius: 8px;
-        overflow: hidden;
-        border: 1px solid #eef0f2;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-        margin-bottom: 24px;
-        position: relative;
-    }
-
-    .plant-media-frame img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        display: block;
-        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Interactive focal hover effect on images */
-    .plant-row-item:hover .plant-media-frame img {
-        transform: scale(1.03);
-    }
-
-    /* Typographic Content Container Block */
-    .plant-info-block {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 0 15px;
-    }
-
-    .plant-heading-group {
-        border-bottom: 2px solid #eef0f2;
-        padding-bottom: 12px;
-        margin-bottom: 20px;
-        position: relative;
-    }
-
-    .plant-heading-group::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 80px;
-        height: 2px;
-        background-color: #c8232c; /* Red structural accent accentuator */
+    .plant-desc-text {
+        text-align: left;
     }
 
     .plant-name {
-        font-size: 24px;
-        font-weight: 800;
-        color: #161616;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        margin: 0;
+        font-size: 20px;
     }
+}
 
-    /* Body Text Layout Grid Column Splitter */
-    .plant-description-grid {
-        display: flex;
-        /* grid-template-columns: repeat(2, 1fr); */
-        gap: 40px;
-    }
-
-    .plant-desc-text {
-        font-size: 14.5px;
-        color: #444444;
-        line-height: 1.65;
-        font-weight: 500;
-        text-align: justify;
-        margin: 0;
-    }
-
-    /* ==========================================================================
-       HARDWARE-ACCELERATED TRANSITION TIMINGS
-       ========================================================================== */
-    .plant-reveal {
-        opacity: 0;
-        transform: translateY(35px);
-        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: transform, opacity;
-    }
-
-    .plant-reveal.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* ==========================================================================
-       RESPONSIVE MATRIX BREAKPOINTS
-       ========================================================================== */
-    @media (max-width: 991.98px) {
-        .plants-main-title { font-size: 26px; }
-        .plant-media-frame { aspect-ratio: 16 / 9; } /* Gives better framing depth on medium viewports */
-        .plant-description-grid { grid-template-columns: 1fr; gap: 20px; }
-        .plant-name { font-size: 20px; }
-    }
-
-    @media (max-width: 575.98px) {
-        .plants-wrapper { padding: 50px 0; }
-        .plants-main-title { font-size: 22px; }
-        .plant-row-item { margin-bottom: 60px; }
-        .plant-media-frame { margin-bottom: 16px; }
-        .plant-desc-text { font-size: 13.5px; text-align: left; }
-    }
-    /* ==========================================================================
-    INFINITE ASSOCIATE MARQUEE SYSTEM
-    ========================================================================== */
-    .marquee-section {
-        background-color: #161616; /* Premium Charcoal Black Base */
-        padding: 40px 0;
-        overflow: hidden;
-        border-top: 1px solid #262626;
-        border-bottom: 1px solid #262626;
-        position: relative;
-    }
-
-    /* Subtle industrial framing gradient overlays to fade logos at edges */
-    .marquee-section::before,
-    .marquee-section::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        width: 150px;
-        height: 100%;
-        z-index: 2;
-        pointer-events: none;
-    }
-    .marquee-section::before {
-        left: 0;
-        background: linear-gradient(to right, #161616 0%, rgba(22, 22, 22, 0) 100%);
-    }
-    .marquee-section::after {
-        right: 0;
-        background: linear-gradient(to left, #161616 0%, rgba(22, 22, 22, 0) 100%);
-    }
-
-    /* Flex container housing the track wrapper */
-    .marquee-viewport {
-        display: flex;
-        width: 100%;
-    }
-
-    /* The moving track containing duplicated lists for a perfect infinite loop */
-    .marquee-track {
-        display: flex;
-        gap: 60px; /* Uniform spatial distancing between logos */
-        padding-right: 60px;
-        animation: premiumMarqueeLoop 25s linear infinite;
-        will-change: transform;
-    }
-
-    /* Pause on hover mechanism for premium interactive control */
-    .marquee-viewport:hover .marquee-track {
-        animation-play-state: paused;
-    }
-
-    /* Individual Logo Item Architecture */
-    .marquee-logo-item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 50px;
-        width: 140px;
-        flex-shrink: 0;
-    }
-
-    .marquee-logo-item img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-        filter: grayscale(0%) brightness(1) invert(0); /* Forces logos to clean White */
-        opacity: 1;
-        transition: opacity 0.3s ease, filter 0.3s ease;
-    }
-
-    /* Interactive logo activation highlights on individual focus */
-    .marquee-logo-item img:hover {
-        opacity: 1;
-        filter: grayscale(0%) brightness(1) invert(0); /* Restores brand color or fully pops image */
-    }
-
-    /* ==========================================================================
-    HARDWARE-ACCELERATED CSS TRACK TRANSLATION KEYFRAMES
-    ========================================================================== */
-    @keyframes premiumMarqueeLoop {
-        0% {
-            transform: translate3d(0, 0, 0);
-        }
-        100% {
-            transform: translate3d(-100%, 0, 0);
-        }
-    }
-
-    /* RESPONSIVE CONTROL MATRIX */
-    @media (max-width: 767.98px) {
-        .marquee-section { padding: 30px 0; }
-        .marquee-track { gap: 40px; padding-right: 40px; animation-duration: 18s; } /* Slightly faster speed adjustment on small viewports */
-        .marquee-logo-item { width: 110px; height: 40px; }
-        .marquee-section::before, .marquee-section::after { width: 60px; }
-    }
+@media (max-width: 575.98px) {
+    .plants-wrapper { padding: 40px 0; }
+    .plants-main-title { font-size: 22px; }
+    .plant-row-item { margin-bottom: 40px; padding-bottom: 40px; }
+    .marquee-track { gap: 30px; padding-right: 30px; }
+    .marquee-logo-item { width: 120px; height: 45px; }
+}

@@ -423,6 +423,8 @@ $videos = $videosStmt->fetchAll();
             <?php foreach($videos as $video): ?>
             <div class="col-12 col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-duration="700">
                 <div class="video-card">
+
+                <a href="https://www.youtube.com/watch?v=<?= urlencode($video['youtube_id']) ?>" target="_blank" rel="noopener noreferrer" class="video-thumb-link text-decoration-none">
                     
                     <!-- Thumbnail Media Module Canvas Base -->
                     <div class="video-thumb watch-video" data-id="<?= htmlspecialchars($video['youtube_id']) ?>" data-title="<?= htmlspecialchars($video['title']) ?>">
@@ -435,6 +437,7 @@ $videos = $videosStmt->fetchAll();
                             <i class="fa fa-play"></i>
                         </div>
                     </div>
+                </a>
 
                     <!-- Meta text container framework box -->
                     <div class="video-card-body">
@@ -452,12 +455,13 @@ $videos = $videosStmt->fetchAll();
                             <?= substr(strip_tags($video['description']), 0, 120) ?>...
                         </p>
 
-                        <button 
-                            class="btn btn-watch-action watch-video w-100" 
-                            data-id="<?= htmlspecialchars($video['youtube_id']) ?>" 
-                            data-title="<?= htmlspecialchars($video['title']) ?>">
+                        <a 
+                            href="https://www.youtube.com/watch?v=<?= urlencode($video['youtube_id']) ?>" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            class="btn btn-watch-action w-100 text-decoration-none">
                             Watch Video
-                        </button>
+                        </a>
                     </div>
 
                 </div>

@@ -623,24 +623,21 @@ include 'includes/header.php';
 
 
 <!-- RESPONSIVE ANIMATED CERTIFICATIONS SECTION -->
-<section class="py-5 certificates-section reveal-on-scroll">
+<!-- <section class="py-5 certificates-section reveal-on-scroll">
     <div class="container py-4">
         
-        <!-- Section Title Area -->
+    
         <div class="text-center mb-5 pb-2">
             <h2 class="text-uppercase cert-main-title">
                 Our Certifications
             </h2>
         </div>
 
-        <!-- 3-Column Certificate Display Layout Model Grid -->
         <div class="row g-4 justify-content-center">
             
-            <!-- Certificate 01 -->
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="certificate-premium-card">
                     <div class="certificate-media-wrapper">
-                        <!-- Update image path below -->
                         <img src="assets/themes/storefront/public/images/reg1.jpg" alt="ISO Certification Quality Management" />
                     </div>
                     <h3 class="certificate-title-label">ISO 9001:2015 Certification</h3>
@@ -648,11 +645,9 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Certificate 02 -->
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="certificate-premium-card">
                     <div class="certificate-media-wrapper">
-                        <!-- Update image path below -->
                         <img src="assets/themes/storefront/public/images/reg2.jpg" alt="Safety Standard Certification" />
                     </div>
                     <h3 class="certificate-title-label">Operational Safety Compliance</h3>
@@ -660,11 +655,9 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Certificate 03 -->
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="certificate-premium-card">
                     <div class="certificate-media-wrapper">
-                        <!-- Update image path below -->
                         <img src="assets/themes/storefront/public/images/reg3.jpg" alt="Manufacturing Excellence Award" />
                     </div>
                     <h3 class="certificate-title-label">Premium Manufacturing Excellence</h3>
@@ -675,11 +668,11 @@ include 'includes/header.php';
         </div>
 
     </div>
-</section>
+</section> -->
 
 
 <!-- VALUES & OPERATIONAL PILLARS SEGMENT -->
-<section class="py-5" style="background-color: #ffffff; font-family: 'Montserrat', sans-serif;">
+<!-- <section class="py-5" style="background-color: #ffffff; font-family: 'Montserrat', sans-serif;">
     <div class="container py-3">
 
         <div class="text-center mb-5">
@@ -691,7 +684,6 @@ include 'includes/header.php';
 
         <div class="row g-4">
             
-            <!-- Pillar 1 -->
             <div class="col-md-4">
                 <div class="pillar-card">
                     <div class="pillar-icon-box">
@@ -702,7 +694,6 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Pillar 2 -->
             <div class="col-md-4">
                 <div class="pillar-card">
                     <div class="pillar-icon-box">
@@ -713,7 +704,6 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Pillar 3 -->
             <div class="col-md-4">
                 <div class="pillar-card">
                     <div class="pillar-icon-box">
@@ -727,7 +717,7 @@ include 'includes/header.php';
         </div>
 
     </div>
-</section>
+</section> -->
 
 <!-- CONVERSION-FOCUSED CLOSING CTA SEGMENT -->
 <section class="py-5 text-center cta-premium-bg" style="font-family: 'Montserrat', sans-serif;">
@@ -743,7 +733,7 @@ include 'includes/header.php';
         
         <div class="mt-4 pt-2">
             <a href="bulk_inquiry.php" class="btn cta-btn-action text-uppercase" >
-                Request Bulk Quote
+                Request a Custom Quote
             </a>
         </div>
 

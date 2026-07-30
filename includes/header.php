@@ -473,10 +473,10 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
                         <!-- Fine divider to separate the structural logos professionally with custom background flow -->
                         <div class="header-logo-divider"></div>
 
-                        <a href="index.php" class="header-logo-link" style="display: inline-block; filter: grayscale(1) contrast(1.15); opacity: 0.8;">
+                        <a href="index.php" class="header-logo-link" style="display: inline-block; filter: grayscale(0) contrast(1.15); opacity: 1.0;">
                             <img
-                                src="assets/themes/storefront/public/images/40-years-trust2e8da.png?v=2.0.3"
-                                alt="40 Years Trust"
+                                src="assets/themes/storefront/public/images/50yrstrust.png?v=2.0.3"
+                                alt="50 Years Trust"
                                 style="
                                     height: 60px;
                                     width: auto;
@@ -824,7 +824,7 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
                     <!-- Decoration Services -->
                     <li class="nav-item">
                         <a class="nav-link" href="plants.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2px 2px; display: inline-block;">
-                            Our Associates
+                            Our Group Of Companies
                         </a>
                     </li>
                     <li class="nav-item">
@@ -841,8 +841,8 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
                     </li>
                     <!-- Colour Cosmetics Packaging -->
                     <li class="nav-item">
-                        <a class="nav-link" href="infrastructure.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2 px 2px; display: inline-block;">
-                            Infrastructure
+                        <a class="nav-link" href="gallery.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2 px 2px; display: inline-block;">
+                            Gallery
                         </a>
                     </li>
 

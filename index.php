@@ -22,6 +22,8 @@ $featuredCategories = $pdo->query("
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <!-- DEPENDENCIES FOR ICONS ONLY -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <link rel="stylesheet" href="style.css">   
 <main role="main">
     
@@ -334,48 +336,77 @@ $featuredCategories = $pdo->query("
         <!-- Stats Starts -->
         
 
+        <!-- DEPENDENCIES FOR VECTOR STAT ICONS -->
+
         <div class="container-fluid counter-scaffolding mask-reveal">
             <div class="container">
-                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 justify-content-center g-2 g-md-4">
+                <!-- Grid set to 2 columns on mobile, 3 on tablet, and 6 on desktop -->
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 justify-content-center g-2 g-md-4">
                     
+                    <!-- METRIC 1: BOTTLES -->
                     <div class="col stat-metric-node">
-                        <img src="assets/themes/storefront/public/images/stats-satisfied-customer-icone8da.png?v=2.0.3" class="stat-node-icon" alt="Customers" />
+                        <div class="stat-icon-wrapper">
+                            <i class="fa-solid fa-wine-bottle stat-node-icon"></i>
+                        </div>
                         <h3 class="stat-node-number">
-                            <span class="live-count" data-target="7379">0</span>+
+                            <span class="live-count" data-target="70000">0</span>+
                         </h3>
-                        <p class="stat-node-label">Satisfied Customers</p>
+                        <p class="stat-node-label">Bottles Manufactured</p>
                     </div>
                     
+                    <!-- METRIC 2: TUMBLERS -->
                     <div class="col stat-metric-node">
-                        <img src="assets/themes/storefront/public/images/stats-bottle-choose-icone8da.png?v=2.0.3" class="stat-node-icon" alt="Selection" />
+                        <div class="stat-icon-wrapper">
+                            <i class="fa-solid fa-glass-water stat-node-icon"></i>
+                        </div>
                         <h3 class="stat-node-number">
-                            <span class="live-count" data-target="157">0</span>+ Bottles
+                            <span class="live-count" data-target="100000">0</span>+
                         </h3>
-                        <p class="stat-node-label">To Choose From</p>
+                        <p class="stat-node-label">Tumblers Manufactured</p>
                     </div>
                     
+                    <!-- METRIC 3: PERFUME BOTTLES -->
                     <div class="col stat-metric-node">
-                        <img src="assets/themes/storefront/public/images/stats-bottle-sold-icone8da.png?v=2.0.3" class="stat-node-icon" alt="Volume" />
+                        <div class="stat-icon-wrapper">
+                            <i class="fa-solid fa-spray-can-sparkles stat-node-icon"></i>
+                        </div>
                         <h3 class="stat-node-number">
-                            <span class="live-count" data-target="3">0</span>Billion+
+                            <span class="live-count" data-target="500000">0</span>+
                         </h3>
-                        <p class="stat-node-label">Bottles Sold</p>
+                        <p class="stat-node-label">Perfume Bottles Manufactured</p>
                     </div>
                     
+                    <!-- METRIC 4: JARS -->
                     <div class="col stat-metric-node">
-                        <img src="assets/themes/storefront/public/images/stats-experience-icone8da.png?v=2.0.3" class="stat-node-icon" alt="History" />
+                        <div class="stat-icon-wrapper">
+                            <i class="fa-solid fa-jar stat-node-icon"></i>
+                        </div>
                         <h3 class="stat-node-number">
-                            <span class="live-count" data-target="40">0</span>+
+                            <span class="live-count" data-target="125000">0</span>+
                         </h3>
-                        <p class="stat-node-label">Years Experience</p>
+                        <p class="stat-node-label">Jars Manufactured</p>
                     </div>
                     
-                    <div class="col col-12 col-md-4 col-lg stat-metric-node">
-                        <img src="assets/themes/storefront/public/images/stats-revenue-icone8da.png?v=2.0.3" class="stat-node-icon" alt="Retention" />
+                    <!-- METRIC 5: EXPERIENCE -->
+                    <div class="col stat-metric-node">
+                        <div class="stat-icon-wrapper">
+                            <i class="fa-solid fa-award stat-node-icon"></i>
+                        </div>
                         <h3 class="stat-node-number">
-                            <span class="live-count" data-target="96">0</span>%
+                            <span class="live-count" data-target="53">0</span>+
                         </h3>
-                        <p class="stat-node-label">Repeat Revenue</p>
+                        <p class="stat-node-label">Years of Experience</p>
+                    </div>
+
+                    <!-- METRIC 6: SKUS -->
+                    <div class="col stat-metric-node">
+                        <div class="stat-icon-wrapper">
+                            <i class="fa-solid fa-boxes-stacked stat-node-icon"></i>
+                        </div>
+                        <h3 class="stat-node-number">
+                            <span class="live-count" data-target="800">0</span>+
+                        </h3>
+                        <p class="stat-node-label">SKUs to Choose From</p>
                     </div>
                     
                 </div>
@@ -388,34 +419,35 @@ $featuredCategories = $pdo->query("
                 
                 const runCounterAnimation = (element) => {
                     const targetValue = parseInt(element.getAttribute("data-target"), 10);
-                    const cycleDuration = 1500; // Total runtime speed in milliseconds
-                    const frameRateInterval = 1000 / 60; // 60 FPS Calculations
+                    const cycleDuration = 1800; // Animation duration in ms
+                    const frameRateInterval = 1000 / 60; // 60 FPS target
                     const totalFrames = Math.round(cycleDuration / frameRateInterval);
                     let currentFrame = 0;
 
                     const countingTick = () => {
                         currentFrame++;
-                        // Smooth progress easing curve
                         const progressionRatio = currentFrame / totalFrames;
-                        const currentValCalculated = Math.floor(targetValue * progressionRatio);
+                        
+                        // Easing curve (Ease-Out Quad)
+                        const easedProgress = 1 - Math.pow(1 - progressionRatio, 2);
+                        const currentValCalculated = Math.floor(targetValue * easedProgress);
 
                         if (currentFrame < totalFrames) {
-                            element.innerText = currentValCalculated;
+                            element.innerText = currentValCalculated.toLocaleString('en-US');
                             requestAnimationFrame(countingTick);
                         } else {
-                            element.innerText = targetValue; // Snap perfectly to absolute target
+                            element.innerText = targetValue.toLocaleString('en-US'); // Snap to exact formatted value
                         }
                     };
                     
                     requestAnimationFrame(countingTick);
                 };
 
-                // Intersection Observer Engine triggers animation ONLY when user scrolls to it
                 const moduleScrollObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             runCounterAnimation(entry.target);
-                            observer.unobserve(entry.target); // Prevents re-triggering when scrolling away
+                            observer.unobserve(entry.target);
                         }
                     });
                 }, { threshold: 0.15 });
@@ -532,7 +564,8 @@ $featuredCategories = $pdo->query("
                     id,
                     title,
                     slug,
-                    image
+                    image,
+                    short_description
                 FROM blogs
                 WHERE status = 1
                 ORDER BY id DESC
@@ -542,7 +575,7 @@ $featuredCategories = $pdo->query("
             $homeBlogs = $homeBlogsStmt->fetchAll(PDO::FETCH_ASSOC);
 
             ?>
-         
+
             <div class="container pt-6 mask-reveal reveal-on-scroll" style="padding-top: 4rem; padding-bottom: 4rem;">
 
                 <!-- Section Title with Accent Underline -->
@@ -557,7 +590,6 @@ $featuredCategories = $pdo->query("
 
                         <div class="row" style="display: flex; flex-wrap: wrap;">
 
-                            <!-- Blog Item 1 -->
                             <?php
                             $delay = 100;
                             foreach($homeBlogs as $blog):
@@ -591,6 +623,18 @@ $featuredCategories = $pdo->query("
                                             <?= htmlspecialchars($blog['title']) ?>
 
                                         </a>
+
+                                        <?php if (!empty($blog['short_description'])): ?>
+                                            <p class="blog-short-desc">
+                                                <?= htmlspecialchars($blog['short_description']) ?>
+                                            </p>
+                                        <?php endif; ?>
+
+                                        <div class="blog-action-footer">
+                                            <a href="blog.php?slug=<?= urlencode($blog['slug']) ?>" class="blog-read-more">
+                                                Read More <span class="arrow">&rsaquo;</span>
+                                            </a>
+                                        </div>
 
                                     </div>
 
@@ -637,42 +681,27 @@ $featuredCategories = $pdo->query("
                     </h2>
                 </div>
 
-                <!-- 3-Column Certificate Display Layout Model Grid -->
-                <div class="row g-4 justify-content-center">
+                <!-- 3 Certificates Side-By-Side In 1 Single Row -->
+                <div class="row g-4 align-items-center justify-content-center">
                     
                     <!-- Certificate 01 -->
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="certificate-premium-card">
-                            <div class="certificate-media-wrapper">
-                                <!-- Update image path below -->
-                                <img src="assets/themes/storefront/public/images/reg1.jpg" alt="ISO Certification Quality Management" />
-                            </div>
-                            <h3 class="certificate-title-label">ISO 9001:2015 Certification</h3>
-                            <p class="certificate-sub-label">Quality Management Standard</p>
+                    <div class="col-4">
+                        <div class="certificate-pure-item">
+                            <img src="assets/themes/storefront/public/images/reg1.jpg" alt="ISO Certification Quality Management" />
                         </div>
                     </div>
 
                     <!-- Certificate 02 -->
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="certificate-premium-card">
-                            <div class="certificate-media-wrapper">
-                                <!-- Update image path below -->
-                                <img src="assets/themes/storefront/public/images/reg2.jpg" alt="Safety Standard Certification" />
-                            </div>
-                            <h3 class="certificate-title-label">Operational Safety Compliance</h3>
-                            <p class="certificate-sub-label">Industrial Standards Certified</p>
+                    <div class="col-4">
+                        <div class="certificate-pure-item">
+                            <img src="assets/themes/storefront/public/images/reg2.jpg" alt="Safety Standard Certification" />
                         </div>
                     </div>
 
                     <!-- Certificate 03 -->
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="certificate-premium-card">
-                            <div class="certificate-media-wrapper">
-                                <!-- Update image path below -->
-                                <img src="assets/themes/storefront/public/images/reg3.jpg" alt="Manufacturing Excellence Award" />
-                            </div>
-                            <h3 class="certificate-title-label">Premium Manufacturing Excellence</h3>
-                            <p class="certificate-sub-label">Verified Glass Decorator</p>
+                    <div class="col-4">
+                        <div class="certificate-pure-item">
+                            <img src="assets/themes/storefront/public/images/reg3.jpg" alt="Manufacturing Excellence Award" />
                         </div>
                     </div>
 

@@ -158,7 +158,7 @@
     .alok-copyright-bar {
         font-family: 'Montserrat', sans-serif !important;
         background: #000000 !important;
-        color: #c8232c !important;
+        color: #ffffff !important;
         font-size: 13px;
         font-weight: 400;
         border-top: 1px solid #161a22;
@@ -179,7 +179,7 @@
     }
 
     .alok-copyright-bar li:hover {
-        color: #a3aab5;
+        color: #c8232c;
     }
 
     /* Responsive Mobile Overrides for fluid presentation */

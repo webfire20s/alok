@@ -3,8 +3,7 @@
 require 'includes/auth.php';
 require '../includes/db.php';
 
-include 'includes/admin_header.php';
-include 'includes/admin_sidebar.php';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -94,7 +93,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     header("Location: blogs.php");
     exit;
 }
-
+include 'includes/admin_header.php';
+include 'includes/admin_sidebar.php';
 ?>
 
 <style>
