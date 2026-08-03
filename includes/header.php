@@ -37,7 +37,7 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="/">
+    <base href="/ajanta-project/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
@@ -754,7 +754,7 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
                                 </li>
                                 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="decoration-services.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
+                                    <a class="nav-link" href="plants.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
                                         Our Group Of Companies
                                     </a>
                                 </li>
@@ -1032,30 +1032,31 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
 
                     </li>
 
-                    <!-- Decoration Services -->
+                    <!-- Our Group Of Companies -->
                     <li class="nav-item">
                         <a class="nav-link" href="plants.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2px 2px; display: inline-block;">
                             Our Group Of Companies
                         </a>
                     </li>
+                    <!-- Decoration Services -->
                     <li class="nav-item">
                         <a class="nav-link" href="decoration-services.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2px 2px; display: inline-block;">
                             Decoration Services
                         </a>
                     </li>
-
+                    
                     <!-- Colour Cosmetics Packaging -->
                     <li class="nav-item">
                         <a class="nav-link" href="about.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2 px 2px; display: inline-block;">
                             About Us
                         </a>
                     </li>
-                    <!-- Colour Cosmetics Packaging -->
-                    <li class="nav-item">
+                    <!-- Gallery -->
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="gallery.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2 px 2px; display: inline-block;">
                             Gallery
                         </a>
-                    </li>
+                    </li> -->
 
                     <!-- Blogs and Videos -->
                     <li class="nav-item">

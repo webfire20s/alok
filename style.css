@@ -935,7 +935,7 @@ PRODUCT ITEM CARD ARCHITECTURE (Charcoal and Red Theme)
     }
 
     .brand-vector-img {
-        max-height: 55px;
+        max-height: 70px;
         width: auto;
         object-fit: contain;
         filter: grayscale(20%);
@@ -944,7 +944,7 @@ PRODUCT ITEM CARD ARCHITECTURE (Charcoal and Red Theme)
 
     .brand-asset-chassis:hover .brand-vector-img {
         filter: grayscale(0%);
-        transform: scale(1.04);
+        transform: scale(1.4);
     }
 
     .brands-footer-text {

@@ -269,6 +269,159 @@ include 'includes/header.php';
             margin-left: 40px;
         }
     }
+
+    /* SECTION STYLING */
+    ./* SECTION STYLING */
+    /* SECTION STYLING */
+    /* SECTION STYLING */
+    .directors-section {
+        background-color: #fcfcfc;
+    }
+
+    .directors-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 26px;
+        font-weight: 700;
+        color: #111111;
+        letter-spacing: 0.05em;
+        position: relative;
+    }
+
+    .title-underline {
+        width: 60px;
+        height: 3px;
+        background-color: #c8232c;
+        margin: 12px auto 0 auto;
+        border-radius: 2px;
+    }
+
+    .directors-subtitle {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 13px;
+        color: #666666;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* CARD CONTAINER */
+    .director-card {
+        background: #ffffff;
+        border: 1px solid #eef0f2;
+        border-radius: 8px;
+        padding: 28px 20px 20px 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .director-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 24px rgba(17, 17, 17, 0.08);
+    }
+
+    /* CIRCULAR AVATAR FRAME - FITS PORTRAIT PHOTOS NATURALLY */
+    .director-avatar-wrapper {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .director-avatar-box {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid #ffffff;
+        outline: 2px solid #eef0f2;
+        background-color: #f7f7f7;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+        transition: outline-color 0.35s ease, transform 0.35s ease;
+    }
+
+    .director-card:hover .director-avatar-box {
+        outline-color: #c8232c;
+        transform: scale(1.03);
+    }
+
+    .director-avatar-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        object-position: top center; /* Focuses on headshots cleanly */
+    }
+
+    /* PILL BADGE OVERLAY */
+    .badge-role-pill {
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f3d8d8;
+        color: #c8232c;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        padding: 3px 12px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    /* MESSAGE & TEXT AREA */
+    .director-content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        width: 100%;
+    }
+
+    .director-name {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        color: #111111;
+        margin-bottom: 2px;
+    }
+
+    .director-designation {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        color: #c8232c;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 16px;
+        display: block;
+    }
+
+    .message-quote {
+        position: relative;
+        border-top: 1px dashed #eef0f2;
+        padding-top: 14px;
+    }
+
+    .quote-icon {
+        font-size: 14px;
+        color: #c8232c;
+        margin-bottom: 8px;
+        opacity: 0.85;
+        display: block;
+    }
+
+    .director-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12.5px;
+        color: #444444;
+        line-height: 1.6;
+        margin-bottom: 0;
+        font-style: italic;
+        text-align: center;
+    }
 </style>
 
 <!-- HEADER HERO BANNER SEGMENT -->
@@ -467,12 +620,14 @@ include 'includes/header.php';
             <!-- RIGHT COLUMN: HIGH-VISIBILITY NATIVE AUTOMATED TIMELINE SLIDER -->
             <div class="journey-right-canvas" id="native-journey-container">
                 
-                <!-- Slide Item: 1972 (Set active-slide here by default) -->
+                <!-- Slide Item: 1973 (Set active-slide here by default) -->
                 <div class="journey-slide-item-native active-slide" style="background-image: url('images/1972.png');">
                     <div class="journey-sliding-card">
-                        <h3 class="journey-meta-year">1972</h3>
+                        <h3 class="journey-meta-year">1973</h3>
                         <p class="journey-slide-desc">
-                            The journey began when Shri Harendra Gupta arrived in Mumbai, starting a venture from a modest 100 sq. ft. rented storefront on V.V Chandan Street, Masjid Bunder.
+                            <b>From a Pot Furnace to Mathur Glass Industries </b><br>
+                            The journey began with Shri Nannumal Agarwal Ji, working with a modest 500 kg pot furnace and an enduring belief in craftsmanship. In 1985, this foundation took form as Mathur Glass Industries, which later grew under Mr. Mohit Mohan Agarwal Ji into a modern 20-tonne glass-bangle manufacturing unit.
+
                         </p>
                     </div>
                 </div>
@@ -482,7 +637,9 @@ include 'includes/header.php';
                     <div class="journey-sliding-card">
                         <h3 class="journey-meta-year">1974</h3>
                         <p class="journey-slide-desc">
-                            Operations advanced as grandfather Shri Ratiram Gupta managed bulk glass transport logistics via freight rails, laying the foundation for our packaging networks.
+                            <b>Enterprise Built Through Partnership</b><br>
+                            Mr. Mohit Mohan Agarwal Ji combined industrial vision with a remarkable instinct for recognising potential in people—building ventures through trust, shared responsibility and room to lead. This philosophy strengthened GM Glass Works in liquor-bottle manufacturing and Crystal Glass Industries in mouth-blown and pressed glassware.
+
                         </p>
                     </div>
                 </div>
@@ -492,7 +649,9 @@ include 'includes/header.php';
                     <div class="journey-sliding-card">
                         <h3 class="journey-meta-year">2016</h3>
                         <p class="journey-slide-desc">
-                            Glass Ideas achieved registered vendor compliance status for top-tier multinational corporations including Unilever, Coca-Cola, ITC, Diageo, Sula Wines, and Ipca.
+                            <b>Reinvention Across Categories</b><br>
+                            Firozabad Block Glass Enterprises evolved from bangles and marbles to mouth-blown products and scientific glassware. Pioneer Glass Industries complemented this journey with expertise in press-glass tumblers, bowls and vacuum thermos manufacturing—reflecting a culture of adaptation while preserving specialist craftsmanship.
+
                         </p>
                     </div>
                 </div>
@@ -502,7 +661,21 @@ include 'includes/header.php';
                     <div class="journey-sliding-card">
                         <h3 class="journey-meta-year">2018</h3>
                         <p class="journey-slide-desc">
-                            Strategic expansion brought our total core distributor hubs to six, creating dedicated regional operational pipelines across Kerala, Navi Mumbai, Hyderabad, and Pune.
+                           <b> A Connected Glass Ecosystem</b><br>
+                            Alok Glass Works was named in honour of a newborn cousin in the family—“Alok,” meaning light—making it a symbol of hope and a new beginning. Emaar Glass Industries added trading and lug-cap capabilities, while Neon Business India brought printing, coating, frosting, hot stamping and decal application under an advanced glass-decoration facility.
+
+                        </p>
+                    </div>
+                </div>
+                <!-- Slide Item: last slide -->
+                <div class="journey-slide-item-native" style="background-image: url('images/2018image.png');">
+                    <div class="journey-sliding-card">
+                        <h3 class="journey-meta-year">2020</h3>
+                        <p class="journey-slide-desc">
+                            <b>Carrying the Legacy Forward </b><br>
+                            With Mr. Mohit Mohan Agarwal Ji’s two sons joining the business, the third generation is bringing a contemporary perspective to its established foundations. AI-enabled workflows, digital production systems, e-commerce, modern marketing and global customer development are carrying the journey forward with purpose and continuity.
+
+
                         </p>
                     </div>
                 </div>
@@ -621,6 +794,95 @@ include 'includes/header.php';
     </div>
 </section>
 
+
+<!-- DIRECTORS MESSAGE SECTION -->
+<section class="directors-section py-5">
+    <div class="container-fluid container-xl py-4">
+
+        <!-- Section Header -->
+        <div class="text-center mb-5">
+            <h2 class="directors-title text-uppercase">
+                Leadership Insights
+            </h2>
+            <div class="title-underline"></div>
+            <p class="directors-subtitle mt-3">
+                Messages from our Board of Directors guiding our vision, innovation, and commitment to excellence.
+            </p>
+        </div>
+
+        <!-- Directors Grid - Single Row Layout -->
+        <div class="row g-3 g-lg-4 justify-content-center">
+
+            <!-- Director 1 -->
+            <div class="col-lg-4 col-md-4 col-12 d-flex align-items-stretch" data-aos="fade-up" data-aos-duration="700">
+                <div class="director-card text-center">
+                    <div class="director-avatar-wrapper">
+                        <div class="director-avatar-box">
+                            <img src="assets/images/directors/director1.png" alt="Mohit Mohan Agarwal" class="img-fluid" loading="lazy">
+                        </div>
+                        <span class="badge-role-pill">Chairman</span>
+                    </div>
+                    <div class="director-content">
+                        <h4 class="director-name">Mohit Mohan Agarwal</h4>
+                        <span class="director-designation">Chairman</span>
+                        <div class="message-quote">
+                            <i class="fa fa-quote-left quote-icon"></i>
+                            <p class="director-text">
+                                I started this journey at the age of 16, packing just 500 kg of glass daily with my own hands. Today, we pack 500 metric tonnes every day—a testament to decades of hard work, resilience, and an unwavering commitment to quality. Alok Glass has grown from a small operation to a global name, but our values remain the same: integrity, innovation, and excellence. As we continue to expand, I take pride in seeing the next generation carry this legacy forward, pushing boundaries and setting new benchmarks in the glass industry.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Director 2 -->
+            <div class="col-lg-4 col-md-4 col-12 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="150" data-aos-duration="700">
+                <div class="director-card text-center">
+                    <div class="director-avatar-wrapper">
+                        <div class="director-avatar-box">
+                            <img src="assets/images/directors/director2.png" alt="Pranjal Agarwal" class="img-fluid" loading="lazy">
+                        </div>
+                        <span class="badge-role-pill">Director</span>
+                    </div>
+                    <div class="director-content">
+                        <h4 class="director-name">Pranjal Agarwal</h4>
+                        <span class="director-designation">Director</span>
+                        <div class="message-quote">
+                            <i class="fa fa-quote-left quote-icon"></i>
+                            <p class="director-text">
+                                At Alok Glass, we are committed to innovation, sustainability, and excellence in glass manufacturing. As a third-generation leader, my focus has been on modernizing operations, expanding our global reach, and ensuring we remain at the forefront of premium glass packaging. From automation to renewable energy, every step we take is aimed at delivering superior quality and efficiency to our clients. Our journey is driven by a passion for craftsmanship and a vision to make Alok Glass a trusted name worldwide.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Director 3 -->
+            <div class="col-lg-4 col-md-4 col-12 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300" data-aos-duration="700">
+                <div class="director-card text-center">
+                    <div class="director-avatar-wrapper">
+                        <div class="director-avatar-box">
+                            <img src="assets/images/directors/director3.png" alt="Ujjwal Agarwal" class="img-fluid" loading="lazy">
+                        </div>
+                        <span class="badge-role-pill">Director</span>
+                    </div>
+                    <div class="director-content">
+                        <h4 class="director-name">Ujjwal Agarwal</h4>
+                        <span class="director-designation">Director</span>
+                        <div class="message-quote">
+                            <i class="fa fa-quote-left quote-icon"></i>
+                            <p class="director-text">
+                                I began my journey at 20, working hands-on in our factory—never imagining I’d one day lead international operations. After a knee fracture redirected me to sales, I discovered a deep passion for connecting our products with the world. Today, I oversee Alok Glass’ U.S. operations, driving global partnerships and market expansion with a vision to make Alok Glass a truly global brand built on innovation, integrity, and trust.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
 
 <!-- RESPONSIVE ANIMATED CERTIFICATIONS SECTION -->
 <!-- <section class="py-5 certificates-section reveal-on-scroll">

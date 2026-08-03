@@ -186,14 +186,13 @@ $featuredCategories = $pdo->query("
         require 'includes/db.php';
 
         $stmt = $pdo->prepare("
-            SELECT *
-            FROM categories
-            WHERE section_title IS NOT NULL
+            SELECT * FROM categories 
+            WHERE section_title IS NOT NULL 
+            ORDER BY FIELD(id, 6, 10, 9) DESC, id ASC
         ");
-
         $stmt->execute();
-
         $homeCategories = $stmt->fetchAll();
+
         ?>
 
         <?php foreach($homeCategories as $category): ?>
@@ -336,221 +335,221 @@ $featuredCategories = $pdo->query("
         <!-- Stats Starts -->
         
 
-        <!-- DEPENDENCIES FOR VECTOR STAT ICONS -->
+            <!-- DEPENDENCIES FOR VECTOR STAT ICONS -->
 
-        <div class="container-fluid counter-scaffolding mask-reveal">
-            <div class="container">
-                <!-- Grid set to 2 columns on mobile, 3 on tablet, and 6 on desktop -->
-                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 justify-content-center g-2 g-md-4">
-                    
-                    <!-- METRIC 1: BOTTLES -->
-                    <div class="col stat-metric-node">
-                        <div class="stat-icon-wrapper">
-                            <i class="fa-solid fa-wine-bottle stat-node-icon"></i>
+            <div class="container-fluid counter-scaffolding mask-reveal">
+                <div class="container">
+                    <!-- Grid set to 2 columns on mobile, 3 on tablet, and 6 on desktop -->
+                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 justify-content-center g-2 g-md-4">
+                        
+                        <!-- METRIC 1: BOTTLES -->
+                        <div class="col stat-metric-node">
+                            <div class="stat-icon-wrapper">
+                                <i class="fa-solid fa-wine-bottle stat-node-icon"></i>
+                            </div>
+                            <h3 class="stat-node-number">
+                                <span class="live-count" data-target="70000">0</span>+
+                            </h3>
+                            <p class="stat-node-label">Bottles Manufactured</p>
                         </div>
-                        <h3 class="stat-node-number">
-                            <span class="live-count" data-target="70000">0</span>+
-                        </h3>
-                        <p class="stat-node-label">Bottles Manufactured</p>
-                    </div>
-                    
-                    <!-- METRIC 2: TUMBLERS -->
-                    <div class="col stat-metric-node">
-                        <div class="stat-icon-wrapper">
-                            <i class="fa-solid fa-glass-water stat-node-icon"></i>
+                        
+                        <!-- METRIC 2: TUMBLERS -->
+                        <div class="col stat-metric-node">
+                            <div class="stat-icon-wrapper">
+                                <i class="fa-solid fa-glass-water stat-node-icon"></i>
+                            </div>
+                            <h3 class="stat-node-number">
+                                <span class="live-count" data-target="100000">0</span>+
+                            </h3>
+                            <p class="stat-node-label">Tumblers Manufactured</p>
                         </div>
-                        <h3 class="stat-node-number">
-                            <span class="live-count" data-target="100000">0</span>+
-                        </h3>
-                        <p class="stat-node-label">Tumblers Manufactured</p>
-                    </div>
-                    
-                    <!-- METRIC 3: PERFUME BOTTLES -->
-                    <div class="col stat-metric-node">
-                        <div class="stat-icon-wrapper">
-                            <i class="fa-solid fa-spray-can-sparkles stat-node-icon"></i>
+                        
+                        <!-- METRIC 3: PERFUME BOTTLES -->
+                        <div class="col stat-metric-node">
+                            <div class="stat-icon-wrapper">
+                                <i class="fa-solid fa-spray-can-sparkles stat-node-icon"></i>
+                            </div>
+                            <h3 class="stat-node-number">
+                                <span class="live-count" data-target="500000">0</span>+
+                            </h3>
+                            <p class="stat-node-label">Perfume Bottles Manufactured</p>
                         </div>
-                        <h3 class="stat-node-number">
-                            <span class="live-count" data-target="500000">0</span>+
-                        </h3>
-                        <p class="stat-node-label">Perfume Bottles Manufactured</p>
-                    </div>
-                    
-                    <!-- METRIC 4: JARS -->
-                    <div class="col stat-metric-node">
-                        <div class="stat-icon-wrapper">
-                            <i class="fa-solid fa-jar stat-node-icon"></i>
+                        
+                        <!-- METRIC 4: JARS -->
+                        <div class="col stat-metric-node">
+                            <div class="stat-icon-wrapper">
+                                <i class="fa-solid fa-jar stat-node-icon"></i>
+                            </div>
+                            <h3 class="stat-node-number">
+                                <span class="live-count" data-target="125000">0</span>+
+                            </h3>
+                            <p class="stat-node-label">Jars Manufactured</p>
                         </div>
-                        <h3 class="stat-node-number">
-                            <span class="live-count" data-target="125000">0</span>+
-                        </h3>
-                        <p class="stat-node-label">Jars Manufactured</p>
-                    </div>
-                    
-                    <!-- METRIC 5: EXPERIENCE -->
-                    <div class="col stat-metric-node">
-                        <div class="stat-icon-wrapper">
-                            <i class="fa-solid fa-award stat-node-icon"></i>
+                        
+                        <!-- METRIC 5: EXPERIENCE -->
+                        <div class="col stat-metric-node">
+                            <div class="stat-icon-wrapper">
+                                <i class="fa-solid fa-award stat-node-icon"></i>
+                            </div>
+                            <h3 class="stat-node-number">
+                                <span class="live-count" data-target="53">0</span>+
+                            </h3>
+                            <p class="stat-node-label">Years of Experience</p>
                         </div>
-                        <h3 class="stat-node-number">
-                            <span class="live-count" data-target="53">0</span>+
-                        </h3>
-                        <p class="stat-node-label">Years of Experience</p>
-                    </div>
 
-                    <!-- METRIC 6: SKUS -->
-                    <div class="col stat-metric-node">
-                        <div class="stat-icon-wrapper">
-                            <i class="fa-solid fa-boxes-stacked stat-node-icon"></i>
+                        <!-- METRIC 6: SKUS -->
+                        <div class="col stat-metric-node">
+                            <div class="stat-icon-wrapper">
+                                <i class="fa-solid fa-boxes-stacked stat-node-icon"></i>
+                            </div>
+                            <h3 class="stat-node-number">
+                                <span class="live-count" data-target="800">0</span>+
+                            </h3>
+                            <p class="stat-node-label">SKUs to Choose From</p>
                         </div>
-                        <h3 class="stat-node-number">
-                            <span class="live-count" data-target="800">0</span>+
-                        </h3>
-                        <p class="stat-node-label">SKUs to Choose From</p>
+                        
                     </div>
-                    
                 </div>
             </div>
-        </div>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                const counterElements = document.querySelectorAll(".live-count");
-                
-                const runCounterAnimation = (element) => {
-                    const targetValue = parseInt(element.getAttribute("data-target"), 10);
-                    const cycleDuration = 1800; // Animation duration in ms
-                    const frameRateInterval = 1000 / 60; // 60 FPS target
-                    const totalFrames = Math.round(cycleDuration / frameRateInterval);
-                    let currentFrame = 0;
-
-                    const countingTick = () => {
-                        currentFrame++;
-                        const progressionRatio = currentFrame / totalFrames;
-                        
-                        // Easing curve (Ease-Out Quad)
-                        const easedProgress = 1 - Math.pow(1 - progressionRatio, 2);
-                        const currentValCalculated = Math.floor(targetValue * easedProgress);
-
-                        if (currentFrame < totalFrames) {
-                            element.innerText = currentValCalculated.toLocaleString('en-US');
-                            requestAnimationFrame(countingTick);
-                        } else {
-                            element.innerText = targetValue.toLocaleString('en-US'); // Snap to exact formatted value
-                        }
-                    };
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const counterElements = document.querySelectorAll(".live-count");
                     
-                    requestAnimationFrame(countingTick);
-                };
+                    const runCounterAnimation = (element) => {
+                        const targetValue = parseInt(element.getAttribute("data-target"), 10);
+                        const cycleDuration = 1800; // Animation duration in ms
+                        const frameRateInterval = 1000 / 60; // 60 FPS target
+                        const totalFrames = Math.round(cycleDuration / frameRateInterval);
+                        let currentFrame = 0;
 
-                const moduleScrollObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            runCounterAnimation(entry.target);
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.15 });
+                        const countingTick = () => {
+                            currentFrame++;
+                            const progressionRatio = currentFrame / totalFrames;
+                            
+                            // Easing curve (Ease-Out Quad)
+                            const easedProgress = 1 - Math.pow(1 - progressionRatio, 2);
+                            const currentValCalculated = Math.floor(targetValue * easedProgress);
 
-                counterElements.forEach(element => moduleScrollObserver.observe(element));
-            });
-        </script>
+                            if (currentFrame < totalFrames) {
+                                element.innerText = currentValCalculated.toLocaleString('en-US');
+                                requestAnimationFrame(countingTick);
+                            } else {
+                                element.innerText = targetValue.toLocaleString('en-US'); // Snap to exact formatted value
+                            }
+                        };
+                        
+                        requestAnimationFrame(countingTick);
+                    };
+
+                    const moduleScrollObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                runCounterAnimation(entry.target);
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.15 });
+
+                    counterElements.forEach(element => moduleScrollObserver.observe(element));
+                });
+            </script>
         <!-- Stats Starts -->
 
     
         <!-- International Coverage Starts -->
         <!-- International Coverage Starts -->
-        <div class="container pt-6 reveal-on-scroll" style="padding-top: 4rem; padding-bottom: 4rem;">
-            
-            <!-- Section Title with Accent Underline -->
-            <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem;">
-                <img src="assets/themes/storefront/public/images/international-coverage-icone8da.png?v=2.0.3" class="pr-3" style="max-height: 32px; width: auto;" alt="" />
-                <span style="position: relative; padding-bottom: 12px;">
-                    International coverage on Alok Glass Works Bottle
-                    <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #c8232c;"></span>
-                </span>
-            </h2>
-
-            <div class="row" style="display: flex; flex-wrap: wrap; gap: 0;">
+            <!-- <div class="container pt-6 reveal-on-scroll" style="padding-top: 4rem; padding-bottom: 4rem;">
                 
-                <!-- First Card Segment -->
-                <div class="col-md-6 pb-4" style="margin-bottom: 1.5rem;">
-                    <div class="shadow-post lt-blue-bg bor-radius-25" style="background-color: #fdfdfd; border: 1px solid #eef0f2; border-radius: 8px; overflow: hidden; height: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 24px rgba(17,17,17,0.06)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.04)';">
-                        
-                        <!-- Header Flex Splitter -->
-                        <div style="display: flex; width: 100%; align-items: stretch; border-bottom: 1px solid #eef0f2;">
-                            <div style="flex: 1; background-color: #ffffff; display: flex; align-items: center; justify-content: center; padding: 15px;">
-                                <a href="#" style="display: block; width: 100%; max-width: 140px;">
-                                    <img src="assets/themes/storefront/public/images/harward-logoe8da.jpg?v=2.0.3" class="img-fluid d-block m-auto" style="max-height: 50px; width: auto;" alt="Harvard" />
-                                </a>
-                            </div>
-                            <div style="flex: 1; background-color: #111111; display: flex; align-items: center; justify-content: center; padding: 15px; border-left: 1px solid #eef0f2;">
-                                <h3 class="text-white font-weight-bold text-uppercase" style="font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; letter-spacing: 0.08em; margin: 0;">Case Study</h3>
-                            </div>
-                        </div>
+                
+                <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem;">
+                    <img src="assets/themes/storefront/public/images/international-coverage-icone8da.png?v=2.0.3" class="pr-3" style="max-height: 32px; width: auto;" alt="" />
+                    <span style="position: relative; padding-bottom: 12px;">
+                        International coverage on Alok Glass Works Bottle
+                        <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #c8232c;"></span>
+                    </span>
+                </h2>
 
-                        <!-- Card Body Elements -->
-                        <div class="pt-4 pr-4 pb-4 pl-4" style="padding: 2rem 1.5rem;">
-                            <p class="text-center fs18" style="margin-bottom: 1rem;">
-                                <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111; text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='#c8232c'" onmouseout="this.style.color='#111111'">
-                                    <strong>Alok Glass Works PACKAGING:</strong> Key Account Management
-                                </a>
-                            </p>
-                            <p class="pb-4" style="font-family: 'Montserrat', sans-serif; font-size: 13.5px; line-height: 1.6; color: #555555; text-align: justify; margin-bottom: 1.5rem;">
-                                In the fall of 2017, Alok Glass Works Packaging (Alok Glass Works) was among the fastest growing glass bottle-packaging companies in India. Although the company had a large buyer base of 1,700 customers, buyer, S.F. Foods (SF) which accounted for 15 per cent of Alok Glass Works's revenue.
-                            </p>
-                            <div class="text-center">
-                                <a href="https://hbsp.harvard.edu/product/W18241-PDF-ENG" style="text-decoration: none;">
-                                    <button type="button" class="btn btn-org-1" style="background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; border: none; padding: 10px 24px; border-radius: 4px; box-shadow: 0 4px 12px rgba(200, 35, 44, 0.2); transition: all 0.2s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='#111111'" onmouseout="this.style.backgroundColor='#c8232c'">
-                                        View More &rsaquo;
-                                    </button>
-                                </a>
+                <div class="row" style="display: flex; flex-wrap: wrap; gap: 0;">
+                    
+                    
+                    <div class="col-md-6 pb-4" style="margin-bottom: 1.5rem;">
+                        <div class="shadow-post lt-blue-bg bor-radius-25" style="background-color: #fdfdfd; border: 1px solid #eef0f2; border-radius: 8px; overflow: hidden; height: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 24px rgba(17,17,17,0.06)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.04)';">
+                            
+                            
+                            <div style="display: flex; width: 100%; align-items: stretch; border-bottom: 1px solid #eef0f2;">
+                                <div style="flex: 1; background-color: #ffffff; display: flex; align-items: center; justify-content: center; padding: 15px;">
+                                    <a href="#" style="display: block; width: 100%; max-width: 140px;">
+                                        <img src="assets/themes/storefront/public/images/harward-logoe8da.jpg?v=2.0.3" class="img-fluid d-block m-auto" style="max-height: 50px; width: auto;" alt="Harvard" />
+                                    </a>
+                                </div>
+                                <div style="flex: 1; background-color: #111111; display: flex; align-items: center; justify-content: center; padding: 15px; border-left: 1px solid #eef0f2;">
+                                    <h3 class="text-white font-weight-bold text-uppercase" style="font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; letter-spacing: 0.08em; margin: 0;">Case Study</h3>
+                                </div>
                             </div>
-                        </div>
 
+                            
+                            <div class="pt-4 pr-4 pb-4 pl-4" style="padding: 2rem 1.5rem;">
+                                <p class="text-center fs18" style="margin-bottom: 1rem;">
+                                    <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111; text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='#c8232c'" onmouseout="this.style.color='#111111'">
+                                        <strong>Alok Glass Works PACKAGING:</strong> Key Account Management
+                                    </a>
+                                </p>
+                                <p class="pb-4" style="font-family: 'Montserrat', sans-serif; font-size: 13.5px; line-height: 1.6; color: #555555; text-align: justify; margin-bottom: 1.5rem;">
+                                    In the fall of 2017, Alok Glass Works Packaging (Alok Glass Works) was among the fastest growing glass bottle-packaging companies in India. Although the company had a large buyer base of 1,700 customers, buyer, S.F. Foods (SF) which accounted for 15 per cent of Alok Glass Works's revenue.
+                                </p>
+                                <div class="text-center">
+                                    <a href="https://hbsp.harvard.edu/product/W18241-PDF-ENG" style="text-decoration: none;">
+                                        <button type="button" class="btn btn-org-1" style="background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; border: none; padding: 10px 24px; border-radius: 4px; box-shadow: 0 4px 12px rgba(200, 35, 44, 0.2); transition: all 0.2s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='#111111'" onmouseout="this.style.backgroundColor='#c8232c'">
+                                            View More &rsaquo;
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
 
-                <!-- Second Card Segment -->
-                <div class="col-md-6 pb-4" style="margin-bottom: 1.5rem;">
-                    <div class="shadow-post lt-blue-bg bor-radius-25" style="background-color: #fdfdfd; border: 1px solid #eef0f2; border-radius: 8px; overflow: hidden; height: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 24px rgba(17,17,17,0.06)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.04)';">
-                        
-                        <!-- Header Flex Splitter -->
-                        <div style="display: flex; width: 100%; align-items: stretch; border-bottom: 1px solid #eef0f2;">
-                            <div style="flex: 1; background-color: #ffffff; display: flex; align-items: center; justify-content: center; padding: 15px;">
-                                <a href="#" style="display: block; width: 100%; max-width: 140px;">
-                                    <img src="assets/themes/storefront/public/images/harward-logoe8da.jpg?v=2.0.3" class="img-fluid d-block m-auto" style="max-height: 50px; width: auto;" alt="Harvard" />
-                                </a>
+                    
+                    <div class="col-md-6 pb-4" style="margin-bottom: 1.5rem;">
+                        <div class="shadow-post lt-blue-bg bor-radius-25" style="background-color: #fdfdfd; border: 1px solid #eef0f2; border-radius: 8px; overflow: hidden; height: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 24px rgba(17,17,17,0.06)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.04)';">
+                            
+                            
+                            <div style="display: flex; width: 100%; align-items: stretch; border-bottom: 1px solid #eef0f2;">
+                                <div style="flex: 1; background-color: #ffffff; display: flex; align-items: center; justify-content: center; padding: 15px;">
+                                    <a href="#" style="display: block; width: 100%; max-width: 140px;">
+                                        <img src="assets/themes/storefront/public/images/harward-logoe8da.jpg?v=2.0.3" class="img-fluid d-block m-auto" style="max-height: 50px; width: auto;" alt="Harvard" />
+                                    </a>
+                                </div>
+                                <div style="flex: 1; background-color: #111111; display: flex; align-items: center; justify-content: center; padding: 15px; border-left: 1px solid #eef0f2;">
+                                    <h3 class="text-white font-weight-bold text-uppercase" style="font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; letter-spacing: 0.08em; margin: 0;">Case Study</h3>
+                                </div>
                             </div>
-                            <div style="flex: 1; background-color: #111111; display: flex; align-items: center; justify-content: center; padding: 15px; border-left: 1px solid #eef0f2;">
-                                <h3 class="text-white font-weight-bold text-uppercase" style="font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; letter-spacing: 0.08em; margin: 0;">Case Study</h3>
+
+                            
+                            <div class="pt-4 pr-4 pb-4 pl-4" style="padding: 2rem 1.5rem;">
+                                <p class="text-center fs18" style="margin-bottom: 1rem;">
+                                    <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111; text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='#c8232c'" onmouseout="this.style.color='#111111'">
+                                        <strong>Alok Glass Works PACKAGING</strong>
+                                    </a>
+                                </p>
+                                <p class="pb-4" style="font-family: 'Montserrat', sans-serif; font-size: 13.5px; line-height: 1.6; color: #555555; text-align: justify; margin-bottom: 1.5rem;">
+                                    The Indian packaging industry - represented by a mix of paperboard, plastics, metals and glass - had seen great change leading up to 2013. In 2012, Suppliers of glass bottles in India with an employee base of more than 50 and net revenues of US$100 million.
+                                </p>
+                                <div class="text-center">
+                                    <a href="https://hbsp.harvard.edu/product/W13599-PDF-ENG" style="text-decoration: none;">
+                                        <button type="button" class="btn btn-org-1" style="background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; border: none; padding: 10px 24px; border-radius: 4px; box-shadow: 0 4px 12px rgba(200, 35, 44, 0.2); transition: all 0.2s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='#111111'" onmouseout="this.style.backgroundColor='#c8232c'">
+                                            View More &rsaquo;
+                                        </button>
+                                    </a>
+                                </div>
                             </div>
+
                         </div>
-
-                        <!-- Card Body Elements -->
-                        <div class="pt-4 pr-4 pb-4 pl-4" style="padding: 2rem 1.5rem;">
-                            <p class="text-center fs18" style="margin-bottom: 1rem;">
-                                <a href="#" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111; text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='#c8232c'" onmouseout="this.style.color='#111111'">
-                                    <strong>Alok Glass Works PACKAGING</strong>
-                                </a>
-                            </p>
-                            <p class="pb-4" style="font-family: 'Montserrat', sans-serif; font-size: 13.5px; line-height: 1.6; color: #555555; text-align: justify; margin-bottom: 1.5rem;">
-                                The Indian packaging industry - represented by a mix of paperboard, plastics, metals and glass - had seen great change leading up to 2013. In 2012, Suppliers of glass bottles in India with an employee base of more than 50 and net revenues of US$100 million.
-                            </p>
-                            <div class="text-center">
-                                <a href="https://hbsp.harvard.edu/product/W13599-PDF-ENG" style="text-decoration: none;">
-                                    <button type="button" class="btn btn-org-1" style="background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; border: none; padding: 10px 24px; border-radius: 4px; box-shadow: 0 4px 12px rgba(200, 35, 44, 0.2); transition: all 0.2s ease; cursor: pointer;" onmouseover="this.style.backgroundColor='#111111'" onmouseout="this.style.backgroundColor='#c8232c'">
-                                        View More &rsaquo;
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-
                     </div>
-                </div>
 
-            </div>
-        </div>
+                </div>
+            </div> -->
         <!-- International Coverage Ends -->
         <!-- International Coverage Ends -->
         
@@ -671,301 +670,46 @@ $featuredCategories = $pdo->query("
         
         
         <!-- OUR  CERTIFICATES STARTS -->
-        <section class="py-5 certificates-section reveal-on-scroll">
-            <div class="container py-4">
-                
-                <!-- Section Title Area -->
-                <div class="text-center mb-5 pb-2">
-                    <h2 class="text-uppercase cert-main-title">
-                        Our Certifications
-                    </h2>
-                </div>
-
-                <!-- 3 Certificates Side-By-Side In 1 Single Row -->
-                <div class="row g-4 align-items-center justify-content-center">
+            <section class="py-5 certificates-section reveal-on-scroll">
+                <div class="container py-4">
                     
-                    <!-- Certificate 01 -->
-                    <div class="col-4">
-                        <div class="certificate-pure-item">
-                            <img src="assets/themes/storefront/public/images/reg1.jpg" alt="ISO Certification Quality Management" />
-                        </div>
+                    <!-- Section Title Area -->
+                    <div class="text-center mb-5 pb-2">
+                        <h2 class="text-uppercase cert-main-title">
+                            Our Certifications
+                        </h2>
                     </div>
 
-                    <!-- Certificate 02 -->
-                    <div class="col-4">
-                        <div class="certificate-pure-item">
-                            <img src="assets/themes/storefront/public/images/reg2.jpg" alt="Safety Standard Certification" />
+                    <!-- 3 Certificates Side-By-Side In 1 Single Row -->
+                    <div class="row g-4 align-items-center justify-content-center">
+                        
+                        <!-- Certificate 01 -->
+                        <div class="col-4">
+                            <div class="certificate-pure-item">
+                                <img src="assets/themes/storefront/public/images/reg1.jpg" alt="ISO Certification Quality Management" />
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Certificate 03 -->
-                    <div class="col-4">
-                        <div class="certificate-pure-item">
-                            <img src="assets/themes/storefront/public/images/reg3.jpg" alt="Manufacturing Excellence Award" />
+                        <!-- Certificate 02 -->
+                        <div class="col-4">
+                            <div class="certificate-pure-item">
+                                <img src="assets/themes/storefront/public/images/reg2.jpg" alt="Safety Standard Certification" />
+                            </div>
                         </div>
+
+                        <!-- Certificate 03 -->
+                        <div class="col-4">
+                            <div class="certificate-pure-item">
+                                <img src="assets/themes/storefront/public/images/reg3.jpg" alt="Manufacturing Excellence Award" />
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
-
-            </div>
-        </section>
+            </section>
         <!-- OUR CERTIFICATES ENDS -->
 
-        <!-- Google Review Starts -->
-        <!-- Google Reviews Section Starts -->
-        <div class="container pt-6 reveal-on-scroll" style="padding-top: 4rem; padding-bottom: 4rem;">
-
-            
-            <!-- Heading Container with Red Accent Underline -->
-            <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem; position: relative; padding-bottom: 14px;">
-                <img src="assets/themes/storefront/public/images/google-reviews-icone8da.png?v=2.0.3" class="pr-3" style="max-height: 32px; width: auto;" alt="" />
-                <span>
-                    GOOGLE REVIEWS BY REAL CUSTOMERS
-                    <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #c8232c;"></span>
-                </span>
-            </h2>
-
-            <div class="row" style="display: flex; flex-wrap: wrap; align-items: stretch;">
-                
-                <!-- Left Column: Company Rating Summary Panel -->
-                <div class="col-md-4 pb-5 text-center google-company-details" style="margin-bottom: 1.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #fdfdfd; border: 1px solid #eef0f2; border-radius: 8px; padding: 2.5rem 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
-                    <h3 class="txt-333" style="font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 1rem;">Alok Glass Works Bottle Pvt Ltd</h3>
-                    
-                    <ul class="pb-4" style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; display: flex; align-items: center; justify-content: center; gap: 4px; flex-wrap: wrap;">
-                        <li class="txt-gray fs32 pr-2 align-middle" style="font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 700; color: #111111; margin-right: 8px;">4.8</li>
-                        <li><img src="assets/themes/storefront/public/images/google-star-bige8da.jpg?v=2.0.3" style="height: 22px; width: auto;" alt="Star" /></li>
-                        <li><img src="assets/themes/storefront/public/images/google-star-bige8da.jpg?v=2.0.3" style="height: 22px; width: auto;" alt="Star" /></li>
-                        <li><img src="assets/themes/storefront/public/images/google-star-bige8da.jpg?v=2.0.3" style="height: 22px; width: auto;" alt="Star" /></li>
-                        <li><img src="assets/themes/storefront/public/images/google-star-bige8da.jpg?v=2.0.3" style="height: 22px; width: auto;" alt="Star" /></li>
-                        <li><img src="assets/themes/storefront/public/images/google-star-bige8da.jpg?v=2.0.3" style="height: 22px; width: auto;" alt="Star" /></li>
-                        <li class="txt-gray align-content-center" style="font-family: 'Montserrat', sans-serif; font-size: 13.5px; color: #666666; width: 100%; margin-top: 6px;">815 reviews</li>
-                    </ul>
-
-                    <button type="button" class="btn btn-org-1" style="background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; border: none; padding: 12px 24px; border-radius: 4px; box-shadow: 0 4px 12px rgba(200, 35, 44, 0.2); transition: all 0.2s ease; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;" onmouseover="this.style.backgroundColor='#111111'" onmouseout="this.style.backgroundColor='#c8232c'">
-                        <img src="assets/themes/storefront/public/images/vision-icone8da.png?v=2.0.3" style="height: 16px; width: auto; filter: brightness(0) invert(1);" alt="" />
-                        See More Reviews
-                    </button> 
-                </div>
-
-                <!-- Right Column: Carousel Track Box -->
-                <div class="col-md-8 pb-5 google-reviews" style="margin-bottom: 1.5rem; display: flex; flex-direction: column; justify-content: center;">
-                    <div class="row" style="margin: 0; position: relative;">
-
-                        <div id="demo" class="carousel slide" data-ride="carousel" style="width: 100%; padding: 0 15px;">
-                            <div class="carousel-inner">
-                                
-                                <!-- Review Item 1 -->
-                                <div class="carousel-item active">
-                                    <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                        <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
-                                            <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Pallavi Khemka</span>
-                                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">( March 2022)</li>
-                                            </ul>
-                                        </div>
-                                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
-                                        <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
-                                            Good collection and reasonable rates. Looking forward to getting more variety and awesome service as always.
-                                        </div>
-                                    </div>
-                                </div> 
-
-                                <!-- Review Item 2 -->
-                                <div class="carousel-item">
-                                    <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                        <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
-                                            <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Prithipal Singh</span>
-                                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">( March 2022)</li>
-                                            </ul>
-                                        </div>
-                                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> Gurgaon</p>
-                                        <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
-                                            It was a very warm experience while visiting your office. Everything was explained in detail and the quotation was provided immediately. Thanks for the courtesy extended during our visit. Overall good experience.<br>Thanks
-                                        </div>
-                                    </div>    
-                                </div>
-
-                                <!-- Review Item 3 -->
-                                <div class="carousel-item">
-                                    <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                        <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
-                                            <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Anchal Srivastava</span>
-                                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(March 2022)</li>
-                                            </ul>
-                                        </div>
-                                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
-                                        <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
-                                            It was excellent professional process of order and delivery of high quality Glass Jar at very reasonable price. which we ordered for using in pur processed food packing. And to Mention every query and request was handled by Mr Rahul Kashyap in a very professional approach. Thanks .. Would surely recommend to others and for sure going to continue for long term business.
-                                        </div>
-                                    </div>   
-                                </div>
-
-                                <!-- Review Item 4 -->
-                                <div class="carousel-item">
-                                    <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                        <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
-                                            <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Charu Mehta</span>
-                                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(March 2022)</li>
-                                            </ul>
-                                        </div>
-                                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
-                                        <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
-                                            Very Good product, prompt delivery, good response by salers we got all d feedback about products delivery status etc.by Rahul
-                                        </div>
-                                    </div>   
-                                </div>
-
-                                <!-- Review Item 5 -->
-                                <div class="carousel-item">
-                                    <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                        <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
-                                            <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Asif Dar</span>
-                                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(FEBRUARY 2022)</li>
-                                            </ul>
-                                        </div>
-                                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
-                                        <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
-                                            Best & authentic place to find any kind of glass bottles. Highly recommended.
-                                        </div>
-                                    </div>   
-                                </div>
-
-                                <!-- Review Item 6 -->
-                                <div class="carousel-item">
-                                    <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                        <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
-                                            <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">veluri neelima</span>
-                                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(FEBRUARY 2022)</li>
-                                            </ul>
-                                        </div>
-                                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
-                                        <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
-                                            The team is really very polite. Excellent response. Their service is very commendable. I would recommend for the wide varieties available and also giving the exact timely delivery.
-                                        </div>
-                                    </div>   
-                                </div>
-
-                                <!-- Review Item 7 -->
-                                <div class="carousel-item">
-                                    <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                        <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
-                                            <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Javed Sabunwala</span>
-                                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(FEBRUARY 2022)</li>
-                                            </ul>
-                                        </div>
-                                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
-                                        <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
-                                            It was good experience with Alok Glass Works, Bhawna, she really helped me related to there products and send me the samples which I had demanded for, Thanks
-                                        </div>
-                                    </div>   
-                                </div>
-
-                                <!-- Review Item 8 -->
-                                <div class="carousel-item">
-                                    <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                        <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
-                                            <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Sinish Dominic</span>
-                                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(FEBRUARY 2022)</li>
-                                            </ul>
-                                        </div>
-                                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
-                                        <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
-                                            Very good, awesome experience Appreciated to to the quick response
-                                        </div>
-                                    </div>   
-                                </div>
-
-                                <!-- Review Item 9 -->
-                                <div class="carousel-item">
-                                    <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                                        <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
-                                            <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Sahil Sharma</span>
-                                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
-                                                <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(JAN 2022)</li>
-                                            </ul>
-                                        </div>
-                                        <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
-                                        <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify; max-height: 150px; overflow-y: auto; padding-right: 5px;">
-                                            My self Ved.Sahil Sharma (Ayurvedacharya) my feedback regards ur product your service is awesome and quality is 100 out of 100 ● I personally satisfied with price, special quality,air tight keep shinning keep growing Near 1 month ago our college National college of ayurveda ,barwala,hisar. we had already purchased 12,00 jars of around ₹22k around stay blessed ur product rocks # I always suggest all my known doctors or frnds to use this rating full out of full in every aspect... By heart really ur company hard works is valuable and a great value of Money......Thanku so much again....Jai bharat I heartly support made in bharat all hard working souls for our country for our earth....i had use First time this company a month ago and now always every time I will definitely use Alok Glass Works products in future from my experience and Strongly Recommend to all spcl to those who want premium quality and satisfaction anywhere they sell their product packed in Alok Glass Works jars/bottles who receives it will definitely satisfied.....
-                                        </div>
-                                    </div>   
-                                </div>
-
-                            </div>
-                            
-                            <!-- Custom Circular Carousel Controls -->
-                            <a class="carousel-control-prev" href="#demo" data-slide="prev" style="width: 40px; height: 40px; background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 50%; top: 50%; transform: translateY(-50%); left: -10px; opacity: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center;">
-                                <span class="carousel-control-prev-icon" style="background-image: none; display: flex; align-items: center; justify-content: center; width: auto; height: auto;">
-                                    <img src="assets/themes/storefront/public/images/google-review-left-icone8da.gif?v=2.0.3" style="height: 14px; width: auto;" alt="Prev" />
-                                </span>
-                            </a>
-                            <a class="carousel-control-next" href="#demo" data-slide="next" style="width: 40px; height: 40px; background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 50%; top: 50%; transform: translateY(-50%); right: -10px; opacity: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center;">
-                                <span class="carousel-control-next-icon" style="background-image: none; display: flex; align-items: center; justify-content: center; width: auto; height: auto;">
-                                    <img src="assets/themes/storefront/public/images/google-review-right-icone8da.gif?v=2.0.3" style="height: 14px; width: auto;" alt="Next" />
-                                </span>
-                            </a>
-
-                        </div>
-                        
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!-- Google Reviews Section Ends -->
-        <!-- Google Review Ends -->
 
 
         <!-- ASSOCIATES MARQUEE STRIP -->
@@ -1023,127 +767,170 @@ $featuredCategories = $pdo->query("
                     
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-1e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 1" />
+                            <img src="assets/themes/storefront/public/images/brand1.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 1" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-2e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 2" />
+                            <img src="assets/themes/storefront/public/images/brand2.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 2" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-3e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 3" />
+                            <img src="assets/themes/storefront/public/images/brand3.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 4" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-4e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 4" />
+                            <img src="assets/themes/storefront/public/images/brand4.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 5" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-5e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 5" />
+                            <img src="assets/themes/storefront/public/images/brand5.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 6" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-6e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 6" />
+                            <img src="assets/themes/storefront/public/images/brand6.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 7" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-7e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 7" />
+                            <img src="assets/themes/storefront/public/images/brand7.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 8" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-8e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 8" />
+                            <img src="assets/themes/storefront/public/images/brand8.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 9" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-9e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 9" />
+                            <img src="assets/themes/storefront/public/images/brand9.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 10" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-10e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 10" />
+                            <img src="assets/themes/storefront/public/images/brand10.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 11" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-11e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 11" />
+                            <img src="assets/themes/storefront/public/images/brand11.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 12" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-12e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 12" />
+                            <img src="assets/themes/storefront/public/images/brand12.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 13" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-13e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 13" />
+                            <img src="assets/themes/storefront/public/images/brand13.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 14" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-14e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 14" />
+                            <img src="assets/themes/storefront/public/images/brand14.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 15" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-15e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 15" />
+                            <img src="assets/themes/storefront/public/images/brand15.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 17" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-16e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 16" />
+                            <img src="assets/themes/storefront/public/images/brand16.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 18" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-17e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 17" />
+                            <img src="assets/themes/storefront/public/images/brand17.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 19" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-18e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 18" />
+                            <img src="assets/themes/storefront/public/images/brand18.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Keventers Logo" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brands-icon-19e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 19" />
+                            <img src="assets/themes/storefront/public/images/brand19.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
                         </div>
                     </div>
-
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/Keventers-13e8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Keventers Logo" />
+                            <img src="assets/themes/storefront/public/images/brand20.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
                         </div>
                     </div>
-
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/TRUEOILe8da.png?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand21.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                        </div>
+                    </div>
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brand22.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                        </div>
+                    </div>
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brand23.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                        </div>
+                    </div>
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brand24.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                        </div>
+                    </div>
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brand25.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                        </div>
+                    </div>
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brand26.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                        </div>
+                    </div>
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brand27.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                        </div>
+                    </div>
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brand28.png?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                        </div>
+                    </div>
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brand29.jpg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                        </div>
+                    </div>
+                    <div class="p-0">
+                        <div class="brand-asset-chassis">
+                            <img src="assets/themes/storefront/public/images/brand30.jpg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
                         </div>
                     </div>
 
@@ -1156,6 +943,264 @@ $featuredCategories = $pdo->query("
 
             </div>
         </div>
+        <!-- Brands Ends -->
+
+
+        <!-- Google Review Starts -->
+        <!-- Google Reviews Section Starts -->
+            <div class="container pt-6 reveal-on-scroll" style="padding-top: 4rem; padding-bottom: 4rem;">
+
+                
+                <!-- Heading Container with Red Accent Underline -->
+                <h2 class="text-center text-uppercase org-brd-btm mb-5" style="font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: #111111; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 3.5rem; position: relative; padding-bottom: 14px;">
+                    <img src="assets/themes/storefront/public/images/google-reviews-icone8da.png?v=2.0.3" class="pr-3" style="max-height: 32px; width: auto;" alt="" />
+                    <span>
+                        GOOGLE REVIEWS BY REAL CUSTOMERS
+                        <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #c8232c;"></span>
+                    </span>
+                </h2>
+
+                <div class="row" style="display: flex; flex-wrap: wrap; align-items: stretch;">
+                    
+                    <!-- Left Column: Company Rating Summary Panel -->
+                    <div class="col-md-4 pb-5 text-center google-company-details" style="margin-bottom: 1.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #fdfdfd; border: 1px solid #eef0f2; border-radius: 8px; padding: 2.5rem 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                        <h3 class="txt-333" style="font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; color: #111111; margin-bottom: 1rem;">Alok Glass Works Bottle Pvt Ltd</h3>
+                        
+                        <ul class="pb-4" style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; display: flex; align-items: center; justify-content: center; gap: 4px; flex-wrap: wrap;">
+                            <li class="txt-gray fs32 pr-2 align-middle" style="font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 700; color: #111111; margin-right: 8px;">4.8</li>
+                            <li><img src="assets/themes/storefront/public/images/google-star-bige8da.jpg?v=2.0.3" style="height: 22px; width: auto;" alt="Star" /></li>
+                            <li><img src="assets/themes/storefront/public/images/google-star-bige8da.jpg?v=2.0.3" style="height: 22px; width: auto;" alt="Star" /></li>
+                            <li><img src="assets/themes/storefront/public/images/google-star-bige8da.jpg?v=2.0.3" style="height: 22px; width: auto;" alt="Star" /></li>
+                            <li><img src="assets/themes/storefront/public/images/google-star-bige8da.jpg?v=2.0.3" style="height: 22px; width: auto;" alt="Star" /></li>
+                            <li><img src="assets/themes/storefront/public/images/google-star-bige8da.jpg?v=2.0.3" style="height: 22px; width: auto;" alt="Star" /></li>
+                            <li class="txt-gray align-content-center" style="font-family: 'Montserrat', sans-serif; font-size: 13.5px; color: #666666; width: 100%; margin-top: 6px;">815 reviews</li>
+                        </ul>
+
+                        <button type="button" class="btn btn-org-1" style="background-color: #c8232c; color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; border: none; padding: 12px 24px; border-radius: 4px; box-shadow: 0 4px 12px rgba(200, 35, 44, 0.2); transition: all 0.2s ease; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;" onmouseover="this.style.backgroundColor='#111111'" onmouseout="this.style.backgroundColor='#c8232c'">
+                            <img src="assets/themes/storefront/public/images/vision-icone8da.png?v=2.0.3" style="height: 16px; width: auto; filter: brightness(0) invert(1);" alt="" />
+                            See More Reviews
+                        </button> 
+                    </div>
+
+                    <!-- Right Column: Carousel Track Box -->
+                    <div class="col-md-8 pb-5 google-reviews" style="margin-bottom: 1.5rem; display: flex; flex-direction: column; justify-content: center;">
+                        <div class="row" style="margin: 0; position: relative;">
+
+                            <div id="demo" class="carousel slide" data-ride="carousel" style="width: 100%; padding: 0 15px;">
+                                <div class="carousel-inner">
+                                    
+                                    <!-- Review Item 1 -->
+                                    <div class="carousel-item active">
+                                        <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+                                                <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Pallavi Khemka</span>
+                                                <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">( March 2022)</li>
+                                                </ul>
+                                            </div>
+                                            <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
+                                            <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
+                                                Good collection and reasonable rates. Looking forward to getting more variety and awesome service as always.
+                                            </div>
+                                        </div>
+                                    </div> 
+
+                                    <!-- Review Item 2 -->
+                                    <div class="carousel-item">
+                                        <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+                                                <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Prithipal Singh</span>
+                                                <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">( March 2022)</li>
+                                                </ul>
+                                            </div>
+                                            <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> Gurgaon</p>
+                                            <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
+                                                It was a very warm experience while visiting your office. Everything was explained in detail and the quotation was provided immediately. Thanks for the courtesy extended during our visit. Overall good experience.<br>Thanks
+                                            </div>
+                                        </div>    
+                                    </div>
+
+                                    <!-- Review Item 3 -->
+                                    <div class="carousel-item">
+                                        <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+                                                <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Anchal Srivastava</span>
+                                                <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(March 2022)</li>
+                                                </ul>
+                                            </div>
+                                            <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
+                                            <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
+                                                It was excellent professional process of order and delivery of high quality Glass Jar at very reasonable price. which we ordered for using in pur processed food packing. And to Mention every query and request was handled by Mr Rahul Kashyap in a very professional approach. Thanks .. Would surely recommend to others and for sure going to continue for long term business.
+                                            </div>
+                                        </div>   
+                                    </div>
+
+                                    <!-- Review Item 4 -->
+                                    <div class="carousel-item">
+                                        <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+                                                <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Charu Mehta</span>
+                                                <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(March 2022)</li>
+                                                </ul>
+                                            </div>
+                                            <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
+                                            <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
+                                                Very Good product, prompt delivery, good response by salers we got all d feedback about products delivery status etc.by Rahul
+                                            </div>
+                                        </div>   
+                                    </div>
+
+                                    <!-- Review Item 5 -->
+                                    <div class="carousel-item">
+                                        <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+                                                <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Asif Dar</span>
+                                                <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(FEBRUARY 2022)</li>
+                                                </ul>
+                                            </div>
+                                            <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
+                                            <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
+                                                Best & authentic place to find any kind of glass bottles. Highly recommended.
+                                            </div>
+                                        </div>   
+                                    </div>
+
+                                    <!-- Review Item 6 -->
+                                    <div class="carousel-item">
+                                        <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+                                                <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">veluri neelima</span>
+                                                <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(FEBRUARY 2022)</li>
+                                                </ul>
+                                            </div>
+                                            <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
+                                            <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
+                                                The team is really very polite. Excellent response. Their service is very commendable. I would recommend for the wide varieties available and also giving the exact timely delivery.
+                                            </div>
+                                        </div>   
+                                    </div>
+
+                                    <!-- Review Item 7 -->
+                                    <div class="carousel-item">
+                                        <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+                                                <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Javed Sabunwala</span>
+                                                <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(FEBRUARY 2022)</li>
+                                                </ul>
+                                            </div>
+                                            <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
+                                            <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
+                                                It was good experience with Alok Glass Works, Bhawna, she really helped me related to there products and send me the samples which I had demanded for, Thanks
+                                            </div>
+                                        </div>   
+                                    </div>
+
+                                    <!-- Review Item 8 -->
+                                    <div class="carousel-item">
+                                        <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+                                                <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Sinish Dominic</span>
+                                                <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(FEBRUARY 2022)</li>
+                                                </ul>
+                                            </div>
+                                            <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
+                                            <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify;">
+                                                Very good, awesome experience Appreciated to to the quick response
+                                            </div>
+                                        </div>   
+                                    </div>
+
+                                    <!-- Review Item 9 -->
+                                    <div class="carousel-item">
+                                        <div class="border-review p-3 m-ml-12px" style="background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 6px; padding: 2rem !important; min-height: 250px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+                                            <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px;">
+                                                <span class="font-weight-bold txt-black pb-2" style="font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: #111111;">Sahil Sharma</span>
+                                                <ul style="list-style: none; padding: 0; margin: 0; display: flex; align-items: center; gap: 3px;">
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li><img src="assets/themes/storefront/public/images/google-star-smalle8da.jpg?v=2.0.3" style="height: 14px; width: auto;" alt="Star" /></li>
+                                                    <li style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: #888888; margin-left: 6px;">(JAN 2022)</li>
+                                                </ul>
+                                            </div>
+                                            <p style="font-family: 'Montserrat', sans-serif; font-size: 13px; margin-bottom: 10px; color: #666666;"><b style="font-weight: 600; color: #111111;">Address:</b> New Delhi</p>
+                                            <div style="font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6; color: #444444; text-align: justify; max-height: 150px; overflow-y: auto; padding-right: 5px;">
+                                                My self Ved.Sahil Sharma (Ayurvedacharya) my feedback regards ur product your service is awesome and quality is 100 out of 100 ● I personally satisfied with price, special quality,air tight keep shinning keep growing Near 1 month ago our college National college of ayurveda ,barwala,hisar. we had already purchased 12,00 jars of around ₹22k around stay blessed ur product rocks # I always suggest all my known doctors or frnds to use this rating full out of full in every aspect... By heart really ur company hard works is valuable and a great value of Money......Thanku so much again....Jai bharat I heartly support made in bharat all hard working souls for our country for our earth....i had use First time this company a month ago and now always every time I will definitely use Alok Glass Works products in future from my experience and Strongly Recommend to all spcl to those who want premium quality and satisfaction anywhere they sell their product packed in Alok Glass Works jars/bottles who receives it will definitely satisfied.....
+                                            </div>
+                                        </div>   
+                                    </div>
+
+                                </div>
+                                
+                                <!-- Custom Circular Carousel Controls -->
+                                <a class="carousel-control-prev" href="#demo" data-slide="prev" style="width: 40px; height: 40px; background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 50%; top: 50%; transform: translateY(-50%); left: -10px; opacity: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center;">
+                                    <span class="carousel-control-prev-icon" style="background-image: none; display: flex; align-items: center; justify-content: center; width: auto; height: auto;">
+                                        <img src="assets/themes/storefront/public/images/google-review-left-icone8da.gif?v=2.0.3" style="height: 14px; width: auto;" alt="Prev" />
+                                    </span>
+                                </a>
+                                <a class="carousel-control-next" href="#demo" data-slide="next" style="width: 40px; height: 40px; background-color: #ffffff; border: 1px solid #eef0f2; border-radius: 50%; top: 50%; transform: translateY(-50%); right: -10px; opacity: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center;">
+                                    <span class="carousel-control-next-icon" style="background-image: none; display: flex; align-items: center; justify-content: center; width: auto; height: auto;">
+                                        <img src="assets/themes/storefront/public/images/google-review-right-icone8da.gif?v=2.0.3" style="height: 14px; width: auto;" alt="Next" />
+                                    </span>
+                                </a>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <!-- Google Reviews Section Ends -->
+        <!-- Google Review Ends -->
 
         <!-- CATALOG DOWNLOAD SECTION -->
         <div class="catalog-section">
@@ -1167,76 +1212,98 @@ $featuredCategories = $pdo->query("
                     <h2 class="catalog-title">Product Catalogs & Technical Media</h2>
                 </div>
 
-                <!-- Master Asymmetric Grid Layout -->
-                <div class="catalog-master-grid">
+                <!-- Uniform Grid Layout -->
+                <div class="catalog-matrix-pillar">
                     
-                    <!-- MASTER/MAIN CATALOG FLANK -->
-                    <div class="catalog-featured-pillar">
-                        <div class="catalog-featured-card">
-                            <div>
-                                <span class="catalog-badge featured-badge">Complete Collection</span>
-                                <h3 class="catalog-name featured-name">2026 Master Product Catalog</h3>
-                                <p class="catalog-meta featured-meta"><i class="fa-regular fa-file-pdf"></i> PDF Format &bull; 45 MB &bull; English</p>
-                            </div>
-                            <div>
-                                <a href="assets/catalogs/master-catalog-2026.pdf" download class="catalog-download-btn btn-premium-red w-100">
-                                    <i class="fa-solid fa-arrow-down-to-line"></i> Download Master Catalog
-                                </a>
-                            </div>
+                    <!-- Item Card 1 -->
+                    <div class="catalog-item-card">
+                        <div>
+                            <span class="catalog-badge standard-badge">Range 01</span>
+                            <h4 class="catalog-name standard-name">Gift Pack Range</h4>
                         </div>
+                        <a href="assets/catalogs/gift_pack.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                            <i class="fa-solid fa-download"></i> Download PDF
+                        </a>
                     </div>
 
-                    <!-- SPECIALIZED SUB-CATALOGS GRID FLANK -->
-                    <div class="catalog-matrix-pillar">
-                        
-                        <!-- Item Card 1 -->
-                        <div class="catalog-item-card">
-                            <div>
-                                <span class="catalog-badge standard-badge">Range 01</span>
-                                <h4 class="catalog-name standard-name">Gift Pack Range</h4>
-                                <p class="catalog-meta standard-meta"><i class="fa-regular fa-file-pdf"></i> PDF &bull; 12 MB</p>
-                            </div>
-                            <a href="assets/catalogs/gift-pack.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                                <i class="fa-solid fa-download"></i> Download PDF
-                            </a>
+                    <!-- Item Card 2 -->
+                    <div class="catalog-item-card">
+                        <div>
+                            <span class="catalog-badge standard-badge">Range 02</span>
+                            <h4 class="catalog-name standard-name">Bowl Set Range</h4>
                         </div>
+                        <a href="assets/catalogs/bowl_set.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                            <i class="fa-solid fa-download"></i> Download PDF
+                        </a>
+                    </div>
 
-                        <!-- Item Card 2 -->
-                        <div class="catalog-item-card">
-                            <div>
-                                <span class="catalog-badge standard-badge">Range 02</span>
-                                <h4 class="catalog-name standard-name">Premium Beverage Bottles</h4>
-                                <p class="catalog-meta standard-meta"><i class="fa-regular fa-file-pdf"></i> PDF &bull; 8.4 MB</p>
-                            </div>
-                            <a href="assets/catalogs/beverage_bottles_brochure.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                                <i class="fa-solid fa-download"></i> Download PDF
-                            </a>
+
+                    <!-- Item Card 3 -->
+                    <div class="catalog-item-card">
+                        <div>
+                            <span class="catalog-badge standard-badge">Range 03</span>
+                            <h4 class="catalog-name standard-name">Food & Jars Collection</h4>
                         </div>
+                        <a href="assets/catalogs/food_jar.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                            <i class="fa-solid fa-download"></i> Download PDF
+                        </a>
+                    </div>
 
-                        <!-- Item Card 3 -->
-                        <div class="catalog-item-card">
-                            <div>
-                                <span class="catalog-badge standard-badge">Technical</span>
-                                <h4 class="catalog-name standard-name">Specifications & Tolerances</h4>
-                                <p class="catalog-meta standard-meta"><i class="fa-regular fa-file-pdf"></i> PDF &bull; 4.2 MB</p>
-                            </div>
-                            <a href="assets/catalogs/technical_specifications.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                                <i class="fa-solid fa-download"></i> Download PDF
-                            </a>
+
+                    <!-- Item Card 4 -->
+                    <div class="catalog-item-card">
+                        <div>
+                            <span class="catalog-badge standard-badge">Range 04</span>
+                            <h4 class="catalog-name standard-name">Home Decor Range</h4>
                         </div>
+                        <a href="assets/catalogs/home_decor.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                            <i class="fa-solid fa-download"></i> Download PDF
+                        </a>
+                    </div>
 
-                        <!-- Item Card 4 -->
-                        <div class="catalog-item-card">
-                            <div>
-                                <span class="catalog-badge standard-badge">Logistics</span>
-                                <h4 class="catalog-name standard-name">Packaging & Shipping Guide</h4>
-                                <p class="catalog-meta standard-meta"><i class="fa-regular fa-file-pdf"></i> PDF &bull; 3.1 MB</p>
-                            </div>
-                            <a href="assets/catalogs/shipping_packaging_guide.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                                <i class="fa-solid fa-download"></i> Download PDF
-                            </a>
+                    <!-- Item Card 5 -->
+                    <div class="catalog-item-card">
+                        <div>
+                            <span class="catalog-badge standard-badge">Portfolio</span>
+                            <h4 class="catalog-name standard-name">Client Portfolio</h4>
                         </div>
+                        <a href="assets/catalogs/client_portfolio.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                            <i class="fa-solid fa-download"></i> Download PDF
+                        </a>
+                    </div>
 
+                    <!-- Item Card 6 -->
+                    <div class="catalog-item-card">
+                        <div>
+                            <span class="catalog-badge standard-badge">Profile</span>
+                            <h4 class="catalog-name standard-name">Company Profile</h4>
+                        </div>
+                        <a href="assets/catalogs/company_profile.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                            <i class="fa-solid fa-download"></i> Download PDF
+                        </a>
+                    </div>
+
+
+                    <!-- Item Card 7 -->
+                    <div class="catalog-item-card">
+                        <div>
+                            <span class="catalog-badge standard-badge">Customization</span>
+                            <h4 class="catalog-name standard-name">Decoration & Printing Guide</h4>
+                        </div>
+                        <a href="assets/catalogs/neon_printing.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                            <i class="fa-solid fa-download"></i> Download PDF
+                        </a>
+                    </div>
+
+                    <!-- Item Card 8 -->
+                    <div class="catalog-item-card">
+                        <div>
+                            <span class="catalog-badge standard-badge">Bottles</span>
+                            <h4 class="catalog-name standard-name">Bottles Range</h4>
+                        </div>
+                        <a href="assets/catalogs/bottles.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                            <i class="fa-solid fa-download"></i> Download PDF
+                        </a>
                     </div>
 
                 </div>

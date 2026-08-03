@@ -345,7 +345,7 @@ $products = $productStmt->fetchAll();
             <?php $delay = 0.1; ?>
             <?php foreach($products as $product): ?>
 
-                <div class="col-6 col-md-3 mb-4 d-flex align-items-stretch animate-grid-in" style="animation-delay: <?= $delay; ?>s;">
+                <div class="col-6 col-md-4 mb-4 d-flex align-items-stretch animate-grid-in" style="animation-delay: <?= $delay; ?>s;">
 
                     <div class="premium-product-card w-100">
 
