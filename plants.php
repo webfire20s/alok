@@ -38,9 +38,11 @@
         <!-- Introductory Header Unit -->
         <div class="plants-intro-panel plant-reveal">
             <span class="plants-pretitle">Infrastructure</span>
-            <h1 class="plants-main-title">Crafting Excellence Across Our Plants</h1>
+            <h1 class="plants-main-title">One Group. Generations of Glassmaking Excellence</h1>
             <p class="plants-lead-text">
-                The precision of our glassmaking begins with the power of our plants, combining heavy industrial execution with automated calculation lines to deliver top-tier container production capacity.
+                From traditional craftsmanship to modern glass manufacturing, decoration and trading, our
+                group brings together decades of expertise—united by a shared commitment to quality,
+                innovation and excellence
             </p>
         </div>
 

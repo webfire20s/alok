@@ -62,7 +62,9 @@ $featuredCategories = $pdo->query("
                     </h2>
                     
                     <p class="mb-5" style="font-size: 16px; color: #dddddd; line-height: 1.7; max-width: 580px; font-weight: 400;">
-                        Over 40 years of precision engineering excellence. Discover standard wholesale distribution lines and automated custom decoration systems built for international brands.
+                        Over 50 years of precision engineering excellence. Discover
+                        wholesale-ready glass packaging and advanced custom decoration
+                        solutions built for international brands..
                     </p>
 
                     <div>
@@ -91,7 +93,7 @@ $featuredCategories = $pdo->query("
                 <!-- Metric Card 1 -->
                 <div class="col-6 col-md-3 value-item">
                     <span class="value-metric">Trusted For</span>
-                    <span class="value-title" style="color: #c8232c;">4 Decades</span>
+                    <span class="value-title" style="color: #c8232c;">5 Decades</span>
                 </div>
 
                 <!-- Metric Card 2 -->
@@ -350,7 +352,7 @@ $featuredCategories = $pdo->query("
                             <h3 class="stat-node-number">
                                 <span class="live-count" data-target="70000">0</span>+
                             </h3>
-                            <p class="stat-node-label">Bottles Manufactured</p>
+                            <p class="stat-node-label">Bottles Manufacturing Daily</p>
                         </div>
                         
                         <!-- METRIC 2: TUMBLERS -->
@@ -361,7 +363,7 @@ $featuredCategories = $pdo->query("
                             <h3 class="stat-node-number">
                                 <span class="live-count" data-target="100000">0</span>+
                             </h3>
-                            <p class="stat-node-label">Tumblers Manufactured</p>
+                            <p class="stat-node-label">Tumblers Manufacturing Daily</p>
                         </div>
                         
                         <!-- METRIC 3: PERFUME BOTTLES -->
@@ -372,7 +374,7 @@ $featuredCategories = $pdo->query("
                             <h3 class="stat-node-number">
                                 <span class="live-count" data-target="500000">0</span>+
                             </h3>
-                            <p class="stat-node-label">Perfume Bottles Manufactured</p>
+                            <p class="stat-node-label">Perfume Bottles Manufacturing Daily</p>
                         </div>
                         
                         <!-- METRIC 4: JARS -->
@@ -383,7 +385,7 @@ $featuredCategories = $pdo->query("
                             <h3 class="stat-node-number">
                                 <span class="live-count" data-target="125000">0</span>+
                             </h3>
-                            <p class="stat-node-label">Jars Manufactured</p>
+                            <p class="stat-node-label">Jars Manufacturing Daily</p>
                         </div>
                         
                         <!-- METRIC 5: EXPERIENCE -->
@@ -779,158 +781,158 @@ $featuredCategories = $pdo->query("
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand3.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 4" />
+                            <img src="assets/themes/storefront/public/images/brand3.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 3" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand4.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 5" />
+                            <img src="assets/themes/storefront/public/images/brand4.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 4" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand5.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 6" />
+                            <img src="assets/themes/storefront/public/images/brand5.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 5" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand6.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 7" />
+                            <img src="assets/themes/storefront/public/images/brand6.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 6" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand7.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 8" />
+                            <img src="assets/themes/storefront/public/images/brand7.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 7" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand8.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 9" />
+                            <img src="assets/themes/storefront/public/images/brand8.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 8" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand9.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 10" />
+                            <img src="assets/themes/storefront/public/images/brand9.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 9" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand10.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 11" />
+                            <img src="assets/themes/storefront/public/images/brand10.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 10" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand11.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 12" />
+                            <img src="assets/themes/storefront/public/images/brand11.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 11" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand12.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 13" />
+                            <img src="assets/themes/storefront/public/images/brand12.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 12" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand13.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 14" />
+                            <img src="assets/themes/storefront/public/images/brand13.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 13" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand14.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 15" />
+                            <img src="assets/themes/storefront/public/images/brand14.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 14" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand15.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 17" />
+                            <img src="assets/themes/storefront/public/images/brand15.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 15" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand16.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 18" />
+                            <img src="assets/themes/storefront/public/images/brand16.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 16" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand17.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 19" />
+                            <img src="assets/themes/storefront/public/images/brand17.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 17" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand18.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Keventers Logo" />
+                            <img src="assets/themes/storefront/public/images/brand18.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 18" />
                         </div>
                     </div>
 
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand19.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand19.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 19" />
                         </div>
                     </div>
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand20.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand20.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 20" />
                         </div>
                     </div>
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand21.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand21.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 21" />
                         </div>
                     </div>
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand22.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand22.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 22" />
                         </div>
                     </div>
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand23.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand23.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 23" />
                         </div>
                     </div>
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand24.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand24.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 24" />
                         </div>
                     </div>
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand25.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand25.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 25" />
                         </div>
                     </div>
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand26.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand26.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 26" />
                         </div>
                     </div>
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand27.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand27.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 27" />
                         </div>
                     </div>
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand28.png?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand28.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 28" />
                         </div>
                     </div>
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand29.jpg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand29.jpg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 29" />
                         </div>
                     </div>
                     <div class="p-0">
                         <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand30.jpg?v=2.0.3" class="brand-vector-img img-fluid" alt="True Oil Logo" />
+                            <img src="assets/themes/storefront/public/images/brand30.jpg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 30" />
                         </div>
                     </div>
 
@@ -1324,5 +1326,23 @@ $featuredCategories = $pdo->query("
             div.show-buy-now-btn:hover button { display: block; }
         </style>
 </main>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/917037677289"
+   class="whatsapp-float"
+   target="_blank"
+   aria-label="Chat on WhatsApp">
+
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="32"
+         height="32"
+         viewBox="0 0 32 32"
+         fill="white">
+
+        <path d="M19.11 17.31c-.29-.15-1.72-.85-1.99-.95-.27-.1-.47-.15-.67.15-.2.29-.77.95-.94 1.14-.17.2-.35.22-.64.07-.29-.15-1.23-.45-2.34-1.43-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.44.13-.59.13-.13.29-.35.44-.52.15-.17.2-.29.3-.49.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.29-1.03 1.01-1.03 2.46 0 1.45 1.05 2.86 1.2 3.05.15.2 2.07 3.17 5.02 4.45.7.3 1.25.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.72-.7 1.96-1.37.24-.67.24-1.25.17-1.37-.07-.12-.27-.2-.56-.35z"/>
+        <path d="M16 3C8.82 3 3 8.82 3 16c0 2.54.75 5.01 2.16 7.12L3.5 28.5l5.52-1.62A12.92 12.92 0 0016 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm0 23.6c-2.06 0-4.08-.56-5.84-1.63l-.42-.25-3.27.96.97-3.19-.28-.44A10.55 10.55 0 015.4 16C5.4 10.15 10.15 5.4 16 5.4S26.6 10.15 26.6 16 21.85 26.6 16 26.6z"/>
+    </svg>
+
+</a>
 
 <?php include 'includes/footer.php'; ?>
