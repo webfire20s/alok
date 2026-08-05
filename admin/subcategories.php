@@ -3,25 +3,101 @@
 require 'includes/auth.php';
 require '../includes/db.php';
 
+$search = trim($_GET['search'] ?? '');
+
+$page = max(1, (int)($_GET['page'] ?? 1));
+
+$perPage = 25;
+
+$where = [];
+$params = [];
+
+if($search != ''){
+
+    if(is_numeric($search)){
+
+        $where[] = "(
+            sc.id = ?
+            OR sc.name LIKE ?
+            OR sc.slug LIKE ?
+            OR c.name LIKE ?
+        )";
+
+        $params[] = (int)$search;
+        $params[] = "%{$search}%";
+        $params[] = "%{$search}%";
+        $params[] = "%{$search}%";
+
+    }else{
+
+        $where[] = "(
+            sc.name LIKE ?
+            OR sc.slug LIKE ?
+            OR c.name LIKE ?
+        )";
+
+        $params[] = "%{$search}%";
+        $params[] = "%{$search}%";
+        $params[] = "%{$search}%";
+
+    }
+
+}
+
+$whereSql = '';
+
+if($where){
+
+    $whereSql = ' WHERE '.implode(' AND ',$where);
+
+}
+
+/* TOTAL */
+
+$countSql = "
+SELECT COUNT(*)
+FROM subcategories sc
+LEFT JOIN categories c
+ON sc.category_id=c.id
+{$whereSql}
+";
+
+$countStmt = $pdo->prepare($countSql);
+$countStmt->execute($params);
+
+$totalRows = $countStmt->fetchColumn();
+
+$totalPages = max(1,ceil($totalRows/$perPage));
+
+$page=min($page,$totalPages);
+
+$offset=($page-1)*$perPage;
+
+/* DATA */
+
+$sql="
+SELECT
+sc.*,
+c.name AS category_name
+FROM subcategories sc
+LEFT JOIN categories c
+ON sc.category_id=c.id
+{$whereSql}
+ORDER BY
+sc.display_order ASC,
+sc.id ASC
+LIMIT {$offset},{$perPage}
+";
+
+$stmt=$pdo->prepare($sql);
+$stmt->execute($params);
+
+$subcategories=$stmt->fetchAll();
+
+$sr=$offset+1;
+
 include 'includes/admin_header.php';
 include 'includes/admin_sidebar.php';
-
-$stmt = $pdo->query("
-    SELECT
-        sc.*,
-        c.name AS category_name
-    FROM subcategories sc
-    LEFT JOIN categories c
-        ON sc.category_id = c.id
-    ORDER BY
-        c.name ASC,
-        sc.display_order ASC,
-        sc.name ASC
-");
-
-$subcategories = $stmt->fetchAll();
-$sr = 1;
-
 ?>
 
 <style>
@@ -60,12 +136,19 @@ $sr = 1;
 </style>
 
 <div class="container-fluid py-4">
-    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+
         <div>
-            <h2 class="mb-1" style=" font-weight:700; letter-spacing:-.02em; color:#fff;"> Sub Categories </h2>
-            <p style=" color:#64748b; font-size:14px; margin:0; "> Manage product subcategories. </p>
+            <h2 class="mb-1" style="font-weight:700;color:#fff;"> Sub Categories </h2>
+            <p style="color:#64748b;margin:0;"> Manage product subcategories. </p>
         </div>
-        <a href="add_subcategory.php" class="btn px-4 py-2 btn-glow-transition" style=" background:linear-gradient(135deg,#38bdf8,#0284c7); color:#fff; font-weight:600; border:none; border-radius:8px; box-shadow:0 4px 12px rgba(56,189,248,.25); "> Add Subcategory </a>
+
+        <div class="d-flex gap-2">
+            <form method="GET">
+                <input type="text" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search..." class="form-control" style=" width:250px; background:#111827; color:#fff; border:1px solid #374151;">
+            </form>
+            <a href="add_subcategory.php" class="btn btn-info" > Add Subcategory </a>
+        </div>
     </div>
 
     <div class="card border-0" style=" border-radius:14px; background:rgba(21,25,34,.60); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.05); box-shadow:0 20px 40px rgba(0,0,0,.25); overflow:hidden; ">
@@ -75,7 +158,7 @@ $sr = 1;
             <table class="table premium-table align-middle mb-0" style=" color:#e2e8f0; border-color:rgba(255,255,255,.03); ">
                 <thead style=" background:rgba(255,255,255,.02); border-bottom:2px solid rgba(255,255,255,.05); ">
 
-                    <tr>
+                    <tr data-id="<?= $subcategory['id'] ?>">
                         <th class="px-4 py-3" style=" font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:#64748b; "> ID </th>
                         <th class="py-3" style=" font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:#64748b; "> Image </th>
                         <th class="py-3" style=" font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:#64748b; "> Sub Category </th>
@@ -87,11 +170,11 @@ $sr = 1;
 
                 </thead>
 
-                <tbody>
+                <tbody id="sortableSubcategories">
 
                     <?php foreach($subcategories as $subcategory): ?>
 
-                    <tr style=" border-bottom:1px solid rgba(255,255,255,.03); ">
+                    <tr data-id="<?= $subcategory['id'] ?>" style=" border-bottom:1px solid rgba(255,255,255,.03); ">
 
                         <td class="px-4">
                             <span style=" font-size:13px; font-family:monospace; color:#475569; font-weight:600; ">
@@ -162,11 +245,71 @@ $sr = 1;
 
                 </tbody>
             </table>
+            <?php if($totalPages>1): ?>
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+                    <?php for($i=1;$i<=$totalPages;$i++): ?>
+                    <li class="page-item <?= $page==$i?'active':'' ?>">
+                        <a class="page-link" href="?page=<?= $i ?>&search=<?= urlencode($search) ?>" >
+                            <?= $i ?>
+                        </a>
+                    </li>
+                    <?php endfor; ?>
+                </ul>
+            </nav>
+            <?php endif; ?>
+
         </div>
     </div>
 </div>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+
+<script>
+
+new Sortable(document.getElementById('sortableSubcategories'),{
+
+    animation:150,
+
+    ghostClass:'table-warning',
+
+    onEnd:function(){
+
+        let order=[];
+
+        document.querySelectorAll('#sortableSubcategories tr').forEach(function(row,index){
+
+            order.push({
+
+                id:row.dataset.id,
+
+                order:index+1
+
+            });
+
+        });
+
+        fetch('update_subcategory_order.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        })
+        .then(res => res.text())
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+    }
+
+});
+
+</script>
 
 </body>
 </html>

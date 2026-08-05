@@ -4,6 +4,7 @@ require 'includes/auth.php';
 require '../includes/db.php';
 
 $categoryFilter = (int)($_GET['category'] ?? 0);
+$subcategoryFilter = (int)($_GET['subcategory'] ?? 0);
 
 $catStmt = $pdo->query("
     SELECT id,name
@@ -12,6 +13,15 @@ $catStmt = $pdo->query("
 ");
 
 $categories = $catStmt->fetchAll();
+
+$subStmt = $pdo->query("
+    SELECT id, category_id, name
+    FROM subcategories
+    WHERE status = 1
+    ORDER BY name
+");
+
+$subcategories = $subStmt->fetchAll();
 
 include 'includes/admin_header.php';
 include 'includes/admin_sidebar.php';
@@ -42,6 +52,10 @@ $params = [];
 if ($categoryFilter > 0) {
     $where[] = "products.category_id = ?";
     $params[] = $categoryFilter;
+}
+if ($subcategoryFilter > 0) {
+    $where[] = "products.subcategory_id = ?";
+    $params[] = $subcategoryFilter;
 }
 
 if ($search != '') {
@@ -154,6 +168,7 @@ $sr = $offset + 1;
 
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
 
+        <!-- SEARCH FORM -->
         <form method="GET" class="d-flex align-items-center" style="gap: 10px;">
 
             <div style="position: relative;">
@@ -164,7 +179,7 @@ $sr = $offset + 1;
                     placeholder="Search name, SKU, slug or ID..."
                     class="form-control"
                     style="
-                        width: 320px;
+                        width: 300px;
                         background: rgba(15, 17, 21, 0.6);
                         border: 1px solid rgba(255, 255, 255, 0.08);
                         border-radius: 8px;
@@ -223,6 +238,118 @@ $sr = $offset + 1;
 
         </form>
 
+        <!-- CATEGORY & SUBCATEGORY DROPDOWNS -->
+        <div class="d-flex align-items-center" style="gap: 10px;">
+
+            <!-- CATEGORY SELECT -->
+            <form method="GET" class="mb-0">
+
+                <?php if($search!=''): ?>
+                    <input
+                        type="hidden"
+                        name="search"
+                        value="<?= htmlspecialchars($search) ?>"
+                    >
+                <?php endif; ?>
+
+                <select
+                    name="category"
+                    onchange="this.form.submit()"
+                    style="
+                        background: rgba(15, 17, 21, 0.6);
+                        color: #e2e8f0;
+                        border: 1px solid rgba(255, 255, 255, 0.08);
+                        border-radius: 8px;
+                        padding: 8px 12px;
+                        font-size: 13px;
+                        width: 180px;
+                        outline: none;
+                        cursor: pointer;
+                        transition: all 0.2s ease-in-out;
+                    "
+                    onfocus="this.style.borderColor='rgba(56, 189, 248, 0.5)'; this.style.boxShadow='0 0 0 3px rgba(56, 189, 248, 0.15)';"
+                    onblur="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.boxShadow='none';"
+                >
+
+                    <option value="0" style="background: #1e293b; color: #ffffff;">All Categories</option>
+
+                    <?php foreach($categories as $cat): ?>
+                        <option
+                            value="<?= $cat['id'] ?>"
+                            <?= $categoryFilter==$cat['id']?'selected':'' ?>
+                            style="background: #1e293b; color: #ffffff;"
+                        >
+                            <?= htmlspecialchars($cat['name']) ?>
+                        </option>
+                    <?php endforeach; ?>
+
+                </select>
+
+            </form>
+
+            <?php if($categoryFilter>0): ?>
+
+                <!-- SUBCATEGORY SELECT -->
+                <form method="GET" class="mb-0">
+
+                    <input
+                        type="hidden"
+                        name="category"
+                        value="<?= $categoryFilter ?>"
+                    >
+
+                    <?php if($search!=''): ?>
+                        <input
+                            type="hidden"
+                            name="search"
+                            value="<?= htmlspecialchars($search) ?>"
+                        >
+                    <?php endif; ?>
+
+                    <select
+                        name="subcategory"
+                        onchange="this.form.submit()"
+                        style="
+                            background: rgba(15, 17, 21, 0.6);
+                            color: #e2e8f0;
+                            border: 1px solid rgba(255, 255, 255, 0.08);
+                            border-radius: 8px;
+                            padding: 8px 12px;
+                            font-size: 13px;
+                            width: 200px;
+                            outline: none;
+                            cursor: pointer;
+                            transition: all 0.2s ease-in-out;
+                        "
+                        onfocus="this.style.borderColor='rgba(56, 189, 248, 0.5)'; this.style.boxShadow='0 0 0 3px rgba(56, 189, 248, 0.15)';"
+                        onblur="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.boxShadow='none';"
+                    >
+
+                        <option value="0" style="background: #1e293b; color: #ffffff;">All Subcategories</option>
+
+                        <?php foreach($subcategories as $sub): ?>
+
+                            <?php if($sub['category_id'] != $categoryFilter) continue; ?>
+
+                            <option
+                                value="<?= $sub['id'] ?>"
+                                <?= $subcategoryFilter==$sub['id']?'selected':'' ?>
+                                style="background: #1e293b; color: #ffffff;"
+                            >
+                                <?= htmlspecialchars($sub['name']) ?>
+                            </option>
+
+                        <?php endforeach; ?>
+
+                    </select>
+
+                </form>
+
+            <?php endif; ?>
+
+        </div>
+
+        <!-- PRODUCT COUNT BADGE -->
         <div style="
             color: #94a3b8;
             font-size: 13px;
@@ -267,7 +394,7 @@ $sr = $offset + 1;
                     >
 
                         <tr>
-                            <th class="px-4 py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
                                 ID
                             </th>
 
@@ -279,54 +406,8 @@ $sr = $offset + 1;
                                 Product Specifications
                             </th>
 
-                            <th class="py-3" style="min-width: 160px;">
-                                <div style="display: flex; flex-direction: column; gap: 4px;">
-                                    <span style="
-                                        font-size: 11px;
-                                        text-transform: uppercase;
-                                        letter-spacing: .05em;
-                                        color: #64748b;
-                                        font-weight: 600;
-                                    ">
-                                        Category
-                                    </span>
-
-                                    <form method="GET" class="mb-0">
-                                        <select
-                                            id="categoryFilter"
-                                            name="category"
-                                            onchange="this.form.submit()"
-                                            style="
-                                                background: rgba(15, 17, 21, 0.75);
-                                                color: #e2e8f0;
-                                                border: 1px solid rgba(255, 255, 255, 0.08);
-                                                border-radius: 6px;
-                                                padding: 4px 8px;
-                                                font-size: 11px;
-                                                width: 50%;
-                                                outline: none;
-                                                cursor: pointer;
-                                                transition: all 0.2s ease-in-out;
-                                            "
-                                            onfocus="this.style.borderColor='rgba(56, 189, 248, 0.5)'; this.style.boxShadow='0 0 0 2px rgba(56, 189, 248, 0.15)';"
-                                            onblur="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.boxShadow='none';"
-                                        >
-                                            <option value="0" style="background: #1e293b; color: #ffffff;">
-                                                Categories
-                                            </option>
-
-                                            <?php foreach($categories as $cat): ?>
-                                                <option
-                                                    value="<?= $cat['id'] ?>"
-                                                    <?= $categoryFilter == $cat['id'] ? 'selected' : '' ?>
-                                                    style="background: #1e293b; color: #ffffff;"
-                                                >
-                                                    <?= htmlspecialchars($cat['name']) ?>
-                                                </option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </form>
-                                </div>
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">                            
+                                Category
                             </th>
 
                             <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">

@@ -9,6 +9,7 @@ $stmt = $pdo->prepare("
     SELECT *
     FROM categories
     WHERE slug = ?
+    
 ");
 
 $stmt->execute([$slug]);
@@ -30,7 +31,7 @@ $sidebarCatStmt = $pdo->query("
         name,
         slug
     FROM categories
-    ORDER BY name ASC
+    ORDER BY display_order ASC, id ASC
 ");
 
 $sidebarCategories = $sidebarCatStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -48,7 +49,7 @@ $sidebarSubStmt = $pdo->query("
         name
     FROM subcategories
     WHERE status = 1
-    ORDER BY category_id, display_order, name
+    ORDER BY category_id, display_order ASC, id ASC
 ");
 
 $sidebarSubcategories = [];
@@ -71,7 +72,7 @@ $subStmt = $pdo->prepare("
     FROM subcategories
     WHERE category_id = ?
     AND status = 1
-    ORDER BY display_order ASC, name ASC
+    ORDER BY display_order ASC, id ASC
 ");
 
 $subStmt->execute([$category['id']]);

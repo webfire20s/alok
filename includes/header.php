@@ -11,7 +11,7 @@ $navStmt = $pdo->query("
         name,
         slug
     FROM categories
-    ORDER BY name ASC
+    ORDER BY display_order ASC, id ASC
 ");
 
 $navCategories = $navStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -37,7 +37,7 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="/ajanta-project/">
+    <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 

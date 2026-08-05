@@ -14,6 +14,7 @@ $featuredCategories = $pdo->query("
     SELECT *
     FROM categories
     WHERE featured = 1
+    ORDER BY display_order ASC, id ASC
 ")->fetchAll();
 ?>
 
@@ -190,7 +191,7 @@ $featuredCategories = $pdo->query("
         $stmt = $pdo->prepare("
             SELECT * FROM categories 
             WHERE section_title IS NOT NULL 
-            ORDER BY FIELD(id, 6, 10, 9) DESC, id ASC
+            ORDER BY FIELD(id, 6, 10, 9) ASC, id ASC
         ");
         $stmt->execute();
         $homeCategories = $stmt->fetchAll();

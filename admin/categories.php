@@ -9,7 +9,7 @@ include 'includes/admin_sidebar.php';
 $stmt = $pdo->query("
     SELECT *
     FROM categories
-    ORDER BY id DESC
+    ORDER BY display_order ASC, id ASC
 ");
 
 $categories = $stmt->fetchAll();
@@ -45,6 +45,28 @@ $categories = $stmt->fetchAll();
     /* Force the table to keep its complete structure without compressing columns */
     .premium-table {
         min-width: 750px !important;
+    }
+    .dragHandle:hover{
+        color:#7dd3fc !important;
+    }
+
+    #sortableCategories tr{
+        transition:background .2s;
+    }
+
+    #sortableCategories tr:hover{
+        background:rgba(255,255,255,.02);
+    }
+
+    .ui-sortable-helper{
+        background:#1e293b !important;
+        box-shadow:0 12px 35px rgba(0,0,0,.35);
+    }
+
+    .ui-sortable-placeholder{
+        visibility:visible !important;
+        background:rgba(56,189,248,.08);
+        border:2px dashed #38bdf8;
     }
 </style>
 
@@ -90,6 +112,7 @@ $categories = $stmt->fetchAll();
                     
                     <thead style="background: rgba(255, 255, 255, 0.02); border-bottom: 2px solid rgba(255, 255, 255, 0.05);">
                         <tr>
+                            <th width="45"></th>
                             <th class="px-4 py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">ID</th>
                             <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">Image</th>
                             <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">Name</th>
@@ -99,11 +122,15 @@ $categories = $stmt->fetchAll();
                         </tr>
                     </thead>
                     
-                    <tbody>
+                    <tbody id="sortableCategories">
                         <?php 
                         $sr=1;
                         foreach($categories as $category): ?>
-                            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
+                            <tr data-id="<?= $category['id'] ?>" style="border-bottom:1px solid rgba(255,255,255,.03);" >
+
+                                <td class="dragHandle text-center" style=" cursor:move; color:#38bdf8; font-size:18px; width:45px; user-select:none; " >
+                                    ☰
+                                </td>
                                 
                                 <td class="px-4">
                                     <span style="font-size: 13px; font-family: monospace; color: #475569; font-weight: 600;">
@@ -227,6 +254,45 @@ $categories = $stmt->fetchAll();
     </div>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 
+<script>
+new Sortable(document.getElementById('sortableCategories'), {
+
+    animation: 150,
+
+    ghostClass: 'table-warning',
+
+    onEnd: function () {
+
+        let order = [];
+
+        document.querySelectorAll('#sortableCategories tr').forEach(function(row, index){
+
+            order.push({
+                id: row.dataset.id,
+                order: index + 1
+            });
+
+        });
+
+        fetch('update_category_order.php', {
+
+            method: 'POST',
+
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify(order)
+
+        })
+        .then(r => r.text())
+        .then(console.log);
+
+    }
+
+});
+</script>
 </body>
 </html>

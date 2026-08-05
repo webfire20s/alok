@@ -3,11 +3,82 @@
 require 'includes/auth.php';
 require '../includes/db.php';
 
-$stmt = $pdo->query("
-    SELECT *
-    FROM closure_options
-    ORDER BY sort_order ASC, id DESC
-");
+/*
+|--------------------------------------------------------------------------
+| SEARCH + PAGINATION
+|--------------------------------------------------------------------------
+*/
+
+$search = trim($_GET['search'] ?? '');
+
+$page = max(1, (int)($_GET['page'] ?? 1));
+
+$perPage = 20;
+
+$where = [];
+$params = [];
+
+if($search != ''){
+
+    if(is_numeric($search)){
+
+        $where[] = "(id = ? OR name LIKE ?)";
+
+        $params[] = (int)$search;
+        $params[] = "%{$search}%";
+
+    }else{
+
+        $where[] = "name LIKE ?";
+
+        $params[] = "%{$search}%";
+
+    }
+
+}
+
+$whereSql = '';
+
+if($where){
+
+    $whereSql = ' WHERE '.implode(' AND ', $where);
+
+}
+
+/* TOTAL */
+
+$countSql = "
+SELECT COUNT(*)
+FROM closure_options
+{$whereSql}
+";
+
+$countStmt = $pdo->prepare($countSql);
+$countStmt->execute($params);
+
+$totalRecords = (int)$countStmt->fetchColumn();
+
+$totalPages = max(1, ceil($totalRecords / $perPage));
+
+$page = min($page, $totalPages);
+
+$offset = ($page - 1) * $perPage;
+
+/* DATA */
+
+$sql = "
+SELECT *
+FROM closure_options
+{$whereSql}
+ORDER BY
+sort_order ASC,
+id DESC
+LIMIT {$offset}, {$perPage}
+";
+
+$stmt = $pdo->prepare($sql);
+
+$stmt->execute($params);
 
 $closureOptions = $stmt->fetchAll();
 
@@ -44,6 +115,32 @@ include 'includes/admin_sidebar.php';
             + Add Closure Option
         </a>
 
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <form method="GET">
+                <div class="input-group">
+                    <input
+                        type="text"
+                        name="search"
+                        class="form-control"
+                        placeholder="Search by ID or Name..."
+                        value="<?= htmlspecialchars($search) ?>"
+                    >
+                    <button class="btn btn-primary">
+                        Search
+                    </button>
+                    <?php if($search!=''): ?>
+                        <a
+                            href="closure_options.php"
+                            class="btn btn-secondary"
+                        >
+                            Clear
+                        </a>
+                    <?php endif; ?>
+                </div>
+            </form>
+        </div>
     </div>
 
     <div
@@ -212,12 +309,54 @@ include 'includes/admin_sidebar.php';
                     </tbody>
 
                 </table>
+                <?php if($totalPages > 1): ?>
 
+                <div class="d-flex justify-content-between align-items-center p-3">
+                    <small style="color:#94a3b8;">
+                        Showing page <?= $page ?> of <?= $totalPages ?>
+                    </small>
+                    <nav>
+                        <ul class="pagination pagination-sm mb-0">
+                            <?php if($page > 1): ?>
+                                <li class="page-item">
+                                    <a
+                                        class="page-link"
+                                        href="?page=<?= $page-1 ?>&search=<?= urlencode($search) ?>"
+                                    >
+                                        Previous
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            <?php
+                            for($i=1;$i<=$totalPages;$i++):
+                            ?>
+                                <li class="page-item <?= $page==$i?'active':'' ?>">
+                                    <a
+                                        class="page-link"
+                                        href="?page=<?= $i ?>&search=<?= urlencode($search) ?>"
+                                    >
+                                        <?= $i ?>
+                                    </a>
+                                </li>
+                            <?php endfor; ?>
+                            <?php if($page < $totalPages): ?>
+                                <li class="page-item">
+                                    <a
+                                        class="page-link"
+                                        href="?page=<?= $page+1 ?>&search=<?= urlencode($search) ?>"
+                                    >
+                                        Next
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
+                    </nav>
+                </div>
+                <?php endif; ?>
             </div>
-
         </div>
-
     </div>
+
 
 </div>
 

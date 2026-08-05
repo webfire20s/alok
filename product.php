@@ -191,32 +191,58 @@ if($product['has_closure_options']){
 
                     </label>
 
-                    <select
-                        name="closure_option_id"
-                        class="form-control custom-select-theme"
+                    <div class="d-flex align-items-start" style="gap:18px;">
+                        <div style="flex:1;">
+                            <select
+                                id="closureSelect"
+                                name="closure_option_id"
+                                class="form-control custom-select-theme"
+                            >
+                                <option value="" data-image="">
+                                    Select Closure Option
+                                </option>
+
+                                <?php foreach($closureOptions as $closure): ?>
+
+                                    <option
+                                        value="<?= $closure['id'] ?>"
+                                        data-image="<?= !empty($closure['image']) ? htmlspecialchars($closure['image']) : '' ?>"
+                                    >
+
+                                        <?= htmlspecialchars($closure['name']) ?>
+                                        <?php if($closure['price'] > 0): ?>
+                                            (+₹<?= number_format($closure['price'],2) ?>)
+                                        <?php endif; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div
+                            id="closurePreview"
+                            style="
+                                width:90px;
+                                height:90px;
+                                display:none;
+                                border:1px solid #e5e5e5;
+                                border-radius:10px;
+                                background:#fff;
+                                overflow:hidden;
+                                flex-shrink:0;
+                            "
                         >
+                            <img
+                                id="closurePreviewImg"
+                                src=""
+                                style="
+                                    width:100%;
+                                    height:100%;
+                                    object-fit:contain;
+                                    padding:6px;
+                                "
+                            >
+                        </div>
 
-                        <option value="">
-                            Select Closure Option
-                        </option>
-
-                        <?php foreach($closureOptions as $closure): ?>
-
-                            <option value="<?= $closure['id'] ?>">
-
-                                <?= htmlspecialchars($closure['name']) ?>
-
-                                <?php if($closure['price'] > 0): ?>
-
-                                    (+₹<?= number_format($closure['price'],2) ?>)
-
-                                <?php endif; ?>
-
-                            </option>
-
-                        <?php endforeach; ?>
-
-                    </select>
+                    </div>
 
                 </div>
 
@@ -294,6 +320,28 @@ if($product['has_closure_options']){
                         if(orderSelect){
                             orderSelect.addEventListener("change", updateLabel);
                         }
+                    });
+                </script>
+                <script>
+                    document.addEventListener("DOMContentLoaded",function(){
+
+                        const select=document.getElementById("closureSelect");
+                        const preview=document.getElementById("closurePreview");
+                        const img=document.getElementById("closurePreviewImg");
+                        if(!select) return;
+                        function updateClosureImage(){
+                            const option=select.options[select.selectedIndex];
+                            const image=option.dataset.image;
+                            if(image){
+                                img.src=image;
+                                preview.style.display="block";
+                            }else{
+                                preview.style.display="none";
+                                img.src="";
+                            }
+                        }
+                        select.addEventListener("change",updateClosureImage);
+                        updateClosureImage();
                     });
                 </script>
 
