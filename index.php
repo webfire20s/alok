@@ -191,7 +191,7 @@ $featuredCategories = $pdo->query("
         $stmt = $pdo->prepare("
             SELECT * FROM categories 
             WHERE section_title IS NOT NULL 
-            ORDER BY FIELD(id, 6, 10, 9) ASC, id ASC
+            ORDER BY FIELD(id, 6, 10, 25, 9) ASC, id ASC
         ");
         $stmt->execute();
         $homeCategories = $stmt->fetchAll();
