@@ -137,7 +137,7 @@ $featuredCategories = $pdo->query("
             </div>
 
             <!-- Active Responsive Column Grid Matrix -->
-            <div class="row g-4">
+            <div class="row">
 
                 <?php foreach($featuredCategories as $index => $category): ?>
 
@@ -151,8 +151,9 @@ $featuredCategories = $pdo->query("
                         col-12 = Full stack on mobile
                         col-sm-6 = 2 cards side-by-side on tablets
                         col-lg-4 = 3 cards clean row on wide desktop displays
+                        <div class="col-6 col-md-6 col-lg-4 mb-4">
                     -->
-                    <div class="col-16 col-sm-6 col-lg-6 mb-2">
+                    <div class="col-16 col-sm-3 col-lg-6 mb-2">
 
                         <!-- Product Category Card Frame with modern lifting effect -->
                         <div class="product-category-card">
