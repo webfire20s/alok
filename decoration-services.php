@@ -6,6 +6,49 @@ include 'includes/header.php';
 
 <!-- INTEGRATED DECORATION & BRANDING SYSTEM STYLES -->
 <style>
+    /* Hero Banner Architecture */
+    .about-hero {
+        background: linear-gradient(135deg, #8d8c8c 0%, #5a5a5a 100%);
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+    }
+    .about-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; width: 50%; height: 100%;
+        background: radial-gradient(circle, rgba(252, 252, 252, 0.12) 0%, rgba(236, 225, 225, 0) 80%);
+        pointer-events: none;
+    }
+    /* Scoping and Base Typography Configuration */
+    .about-hero, .certificates-section {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Modern Hero Image Engine with Deep Readable Vignette Overlay */
+    .about-hero {
+        /* Replace 'path/to/your-hero-image.jpg' with your active image asset file path */
+        background-image: linear-gradient(to right, rgba(49, 48, 48, 0.95) 30%, rgba(0, 0, 0, 0.6) 100%), 
+                          url('assets/themes/storefront/public/images/aboutherobanner.jpg');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Ambient Subtle Identity Glow Grid Overlay */
+    .about-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; 
+        right: 0; 
+        width: 50%; 
+        height: 100%;
+        background: radial-gradient(circle, rgba(200, 35, 44, 0.2) 0%, rgba(0, 0, 0, 0) 80%);
+        pointer-events: none;
+    }
     @keyframes srvFadeInUp {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
@@ -122,12 +165,31 @@ include 'includes/header.php';
     }
 </style>
 
+<!-- HEADER HERO BANNER SEGMENT -->
+<section class="py-5 about-hero">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <span class="text-uppercase d-block mb-2" style="color: #c8232c; font-size: 13px; font-weight: 700; letter-spacing: 0.1em;">
+                    Crafting Visual Identities Since 1998
+                </span>
+                <h1 class="text-uppercase mb-4" style=" color: #cccccc; font-size: 42px; font-weight: 800; letter-spacing: 0.02em; line-height: 1.2;">
+                    Pioneers in Premium Glass Decoration
+                </h1>
+                <p class="mb-0" style="color: #cccccc; font-size: 16px; line-height: 1.8; max-width: 620px;">
+                    At Alok Glass, we combine state-of-the-art automation printing with master craftsmanship to transform standard glass bottles and jars into iconic, shelf-ready brand experiences.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- HERO INTRODUCTORY SEGMENT -->
 <section class="py-5" style="background-color: #fafafa; font-family: 'Montserrat', sans-serif;">
     <div class="container py-4">
         <div class="row align-items-center">
 
-            <!-- Core Typography Text Column -->
+            
             <div class="col-lg-6 mb-5 mb-lg-0 pe-lg-5 srv-animate-fade" style="animation-delay: 0.05s;">
                 <h1 class="text-uppercase mb-4" style="font-size: 38px; font-weight: 800; color: #111111; letter-spacing: -0.01em; line-height: 1.25; position: relative; padding-bottom: 18px;">
                     Decoration & Branding Services
@@ -146,7 +208,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Visual Asset Column Wrapper -->
+            
             <div class="col-lg-6 srv-animate-fade" style="animation-delay: 0.15s;">
                 <div class="srv-hero-banner-frame">
                     <img src="storage/media/decoration-banner.jpg" class="img-fluid srv-hero-img" alt="Decoration Services">
@@ -343,7 +405,7 @@ include 'includes/header.php';
     }
 </style>
 
-<!-- WATCH OUR DECORATION PROCESS VIDEO SEGMENT -->
+<!-- WATCH OUR DECORATION PROCESS VIDEO SEGMENT --
 <section class="py-5" style="background-color: #fafafa; font-family: 'Montserrat', sans-serif;">
     <div class="container py-3">
 
@@ -369,7 +431,7 @@ include 'includes/header.php';
     </div>
 </section>
 
-<!-- INDUSTRIES WE SERVE MATRIX SEGMENT -->
+<!-- INDUSTRIES WE SERVE MATRIX SEGMENT --
 <section class="py-5" style="background-color: #ffffff; font-family: 'Montserrat', sans-serif;">
     <div class="container py-3">
 
@@ -382,7 +444,7 @@ include 'includes/header.php';
 
         <div class="row text-center justify-content-center g-4">
 
-            <!-- Food & Beverage -->
+            <!-- Food & Beverage --
             <div class="col-6 col-lg-2 col-md-4">
                 <div class="ind-card">
                     <span class="ind-card-text">
@@ -391,7 +453,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Cosmetics -->
+            <!-- Cosmetics --
             <div class="col-6 col-lg-2 col-md-4">
                 <div class="ind-card">
                     <span class="ind-card-text">
@@ -400,7 +462,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Perfumes -->
+            <!-- Perfumes --
             <div class="col-6 col-lg-2 col-md-4">
                 <div class="ind-card">
                     <span class="ind-card-text">
@@ -409,7 +471,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Pharmaceuticals -->
+            <!-- Pharmaceuticals --
             <div class="col-6 col-lg-2 col-md-4">
                 <div class="ind-card">
                     <span class="ind-card-text">
@@ -418,7 +480,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Chemicals -->
+            <!-- Chemicals --
             <div class="col-6 col-lg-2 col-md-4">
                 <div class="ind-card">
                     <span class="ind-card-text">
@@ -427,7 +489,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Hospitality -->
+            <!-- Hospitality --
             <div class="col-6 col-lg-2 col-md-4">
                 <div class="ind-card">
                     <span class="ind-card-text">
@@ -443,7 +505,7 @@ include 'includes/header.php';
 
 <!-- WHY CHOOSE -->
 
-<!-- INTEGRATED VALUE PROPOSITION & CTA SYSTEM STYLES -->
+<!-- INTEGRATED VALUE PROPOSITION & CTA SYSTEM STYLES --
 <style>
     /* Value Badge Feature Block Matrix */
     .val-badge {
@@ -531,7 +593,7 @@ include 'includes/header.php';
     }
 </style>
 
-<!-- VALUE PROPOSITION GRID BLOCK -->
+<!-- VALUE PROPOSITION GRID BLOCK --
 <section class="py-5" style="background-color: #fafafa; font-family: 'Montserrat', sans-serif;">
     <div class="container py-3">
 
@@ -544,7 +606,7 @@ include 'includes/header.php';
 
         <div class="row g-4">
 
-            <!-- Core Value 1 -->
+            <!-- Core Value 1 --
             <div class="col-xl-3 col-md-4 col-sm-6">
                 <div class="val-badge">
                     <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -552,7 +614,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Core Value 2 -->
+            <!-- Core Value 2 --
             <div class="col-xl-3 col-md-4 col-sm-6">
                 <div class="val-badge">
                     <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -560,7 +622,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Core Value 3 -->
+            <!-- Core Value 3 --
             <div class="col-xl-3 col-md-4 col-sm-6">
                 <div class="val-badge">
                     <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -568,7 +630,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Core Value 4 -->
+            <!-- Core Value 4 --
             <div class="col-xl-3 col-md-4 col-sm-6">
                 <div class="val-badge">
                     <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -576,7 +638,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Core Value 5 -->
+            <!-- Core Value 5 --
             <div class="col-xl-3 col-md-4 col-sm-6">
                 <div class="val-badge">
                     <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -584,7 +646,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Core Value 6 -->
+            <!-- Core Value 6 --
             <div class="col-xl-3 col-md-4 col-sm-6">
                 <div class="val-badge">
                     <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -592,7 +654,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Core Value 7 -->
+            <!-- Core Value 7 --
             <div class="col-xl-3 col-md-4 col-sm-6">
                 <div class="val-badge">
                     <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -600,7 +662,7 @@ include 'includes/header.php';
                 </div>
             </div>
 
-            <!-- Core Value 8 -->
+            <!-- Core Value 8 --
             <div class="col-xl-3 col-md-4 col-sm-6">
                 <div class="val-badge">
                     <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>

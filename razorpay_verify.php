@@ -207,7 +207,8 @@ try {
                 products.image,
                 products.price,
                 closure_options.name AS closure_name,
-                closure_options.price AS closure_price
+                closure_options.price AS closure_price,
+                closure_options.image AS closure_image
             FROM cart
             JOIN products ON cart.product_id=products.id
             LEFT JOIN closure_options ON cart.closure_option_id=closure_options.id
@@ -225,7 +226,8 @@ try {
                 products.image,
                 products.price,
                 closure_options.name AS closure_name,
-                closure_options.price AS closure_price
+                closure_options.price AS closure_price,
+                closure_options.image AS closure_image
             FROM cart
             JOIN products ON cart.product_id=products.id
             LEFT JOIN closure_options ON cart.closure_option_id=closure_options.id
@@ -244,72 +246,183 @@ try {
     |--------------------------------------------------------------------------
     */
 
-    foreach ($items as $item) {
+    /*
+|--------------------------------------------------------------------------
+| INSERT ITEMS
+|--------------------------------------------------------------------------
+*/
 
-        $price = $item['price'] + ($item['closure_price'] ?? 0);
+foreach ($items as $item) {
 
-        $subtotal = $price * $item['quantity'];
 
-        $gst = ($subtotal * $item['gst_percent']) / 100;
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCT DATA
+    |--------------------------------------------------------------------------
+    */
 
-        $lineTotal = $subtotal + $gst;
+    $qty =
+        (int)$item['quantity'];
 
-        $itemStmt = $pdo->prepare("
-            INSERT INTO order_items(
+    $productPrice =
+        (float)$item['price'];
 
+    $gstPercent =
+        (float)$item['gst_percent'];
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCT CALCULATION
+    |--------------------------------------------------------------------------
+    */
+
+    $productSubtotal =
+        $productPrice * $qty;
+
+    $productGST =
+        ($productSubtotal * $gstPercent) / 100;
+
+    $productTotal =
+        $productSubtotal + $productGST;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | INSERT PRODUCT
+    |--------------------------------------------------------------------------
+    */
+
+    $itemStmt = $pdo->prepare("
+        INSERT INTO order_items (
+            order_id,
+            product_id,
+            closure_option_id,
+            product_name,
+            closure_option_name,
+            product_image,
+            price,
+            closure_option_price,
+            quantity,
+            order_unit,
+            pieces_per_box,
+            gst_percent,
+            line_total
+
+        ) VALUES (
+            ?, ?, NULL,
+            ?, NULL,
+            ?,
+            ?, 0,
+            ?, ?, ?,
+            ?,
+            ?
+        )
+    ");
+
+    $itemStmt->execute([
+        $orderId,
+        $item['product_id'],
+        $item['name'],
+        $item['image'],
+        $productPrice,
+        $qty,
+        $item['order_unit'],
+        $item['pieces_per_box'],
+        $gstPercent,
+        $productTotal
+    ]);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CLOSURE DATA
+    |--------------------------------------------------------------------------
+    */
+
+    $closureOptionId =
+        !empty($item['closure_option_id'])
+            ? (int)$item['closure_option_id']
+            : null;
+
+    $closureName =
+        $item['closure_name'] ?? null;
+
+    $closureImage =
+        $item['closure_image'] ?? null;
+
+    $closurePrice =
+        (float)($item['closure_price'] ?? 0);
+
+    $closureQty =
+        max(
+            0,
+            (int)($item['closure_quantity'] ?? 0)
+        );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | INSERT CLOSURE AS SEPARATE LINE
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+        $closureOptionId &&
+        $closurePrice > 0 &&
+        $closureQty > 0
+    ) {
+
+        $closureSubtotal =
+            $closurePrice * $closureQty;
+
+        $closureGST =
+            ($closureSubtotal * $gstPercent) / 100;
+
+        $closureTotal =
+            $closureSubtotal + $closureGST;
+
+
+        $closureStmt = $pdo->prepare("
+            INSERT INTO order_items (
                 order_id,
                 product_id,
                 closure_option_id,
-
                 product_name,
                 closure_option_name,
-
                 product_image,
-
                 price,
                 closure_option_price,
-
                 quantity,
                 order_unit,
                 pieces_per_box,
-
                 gst_percent,
-
                 line_total
 
-            ) VALUES(
-
-                ?,?,?,?,?,?,?,?,?,?,?,?,?
-
+            ) VALUES (
+                ?, NULL, ?,
+                NULL, ?,
+                ?,
+                ?, ?,
+                ?, 'piece', 1,
+                ?,
+                ?
             )
         ");
 
-        $itemStmt->execute([
-
+        $closureStmt->execute([
             $orderId,
-
-            $item['product_id'],
-            $item['closure_option_id'],
-
-            $item['name'],
-            $item['closure_name'],
-
-            $item['image'],
-
-            $price,
-            $item['closure_price'] ?? 0,
-
-            $item['quantity'],
-            $item['order_unit'],
-            $item['pieces_per_box'],
-
-            $item['gst_percent'],
-
-            $lineTotal
-
+            $closureOptionId,
+            $closureName,
+            $closureImage,
+            $closurePrice,
+            $closurePrice,
+            $closureQty,
+            $gstPercent,
+            $closureTotal
         ]);
-
     }
+}
 
     /*
     |--------------------------------------------------------------------------

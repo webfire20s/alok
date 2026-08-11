@@ -162,7 +162,7 @@ include 'includes/header.php';
                     <strong style="color: #c8232c; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.08em; display: block;">Email</strong>
                 </div>
                 <div style="font-weight: 600; color: #333333; font-size: 14px;">
-                    pranjal@alokglass.com <span style="color: #b3b3b3; margin: 0 6px; font-weight: 300;">|</span> sales@alokglass.com
+                    alokglassworksfzd@gmail.com
                 </div>
             </div>
 

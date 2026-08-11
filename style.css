@@ -552,17 +552,15 @@ PRODUCT ITEM CARD ARCHITECTURE (Charcoal and Red Theme)
     transform: translateY(-5px);
 }
 
+/* Base Circle Background for Icons */
 .stat-icon-wrapper {
-    height: 44px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
-}
-
-.stat-node-icon {
-    font-size: 32px;
-    color: #c8232c; /* Alok Red accent color */
+    margin: 0 auto 12px auto;
     transition: transform 0.3s ease;
 }
 
@@ -570,6 +568,17 @@ PRODUCT ITEM CARD ARCHITECTURE (Charcoal and Red Theme)
     transform: scale(1.15);
 }
 
+/* Base Gradient Icon Config */
+.stat-node-icon {
+    font-size: 30px;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Typography */
 .stat-node-number {
     font-size: 28px; 
     font-weight: 800; 
@@ -589,6 +598,37 @@ PRODUCT ITEM CARD ARCHITECTURE (Charcoal and Red Theme)
     line-height: 1.4;
 }
 
+/* -------------------------------------------------------------
+   UNIQUE CIRCLE BACKGROUNDS & GRADIENTS FOR ALL 7 METRICS
+------------------------------------------------------------- */
+/* 1: Bottles */
+.stat-metric-node:nth-child(1) .stat-icon-wrapper { background: rgba(200, 35, 44, 0.1); }
+.stat-metric-node:nth-child(1) .stat-node-icon { background-image: linear-gradient(135deg, #ff416c, #ff4b2b); }
+
+/* 2: Tumblers */
+.stat-metric-node:nth-child(2) .stat-icon-wrapper { background: rgba(0, 122, 255, 0.1); }
+.stat-metric-node:nth-child(2) .stat-node-icon { background-image: linear-gradient(135deg, #2193b0, #6dd5ed); }
+
+/* 3: Perfumes */
+.stat-metric-node:nth-child(3) .stat-icon-wrapper { background: rgba(175, 82, 222, 0.1); }
+.stat-metric-node:nth-child(3) .stat-node-icon { background-image: linear-gradient(135deg, #b92b27, #1565c0); }
+
+/* 4: Jars */
+.stat-metric-node:nth-child(4) .stat-icon-wrapper { background: rgba(255, 149, 0, 0.1); }
+.stat-metric-node:nth-child(4) .stat-node-icon { background-image: linear-gradient(135deg, #f857a6, #ff5858); }
+
+/* 5: Capacity */
+.stat-metric-node:nth-child(5) .stat-icon-wrapper { background: rgba(52, 199, 89, 0.1); }
+.stat-metric-node:nth-child(5) .stat-node-icon { background-image: linear-gradient(135deg, #11998e, #38ef7d); }
+
+/* 6: Experience */
+.stat-metric-node:nth-child(6) .stat-icon-wrapper { background: rgba(88, 86, 214, 0.1); }
+.stat-metric-node:nth-child(6) .stat-node-icon { background-image: linear-gradient(135deg, #8a2387, #e94057); }
+
+/* 7: SKUs (FIXED MISSING ICON) */
+.stat-metric-node:nth-child(7) .stat-icon-wrapper { background: rgba(255, 45, 85, 0.1); }
+.stat-metric-node:nth-child(7) .stat-node-icon { background-image: linear-gradient(135deg, #f12711, #f5af19); }
+
 /* Mobile & Tablet Fine-Tuning Overrides */
 @media (max-width: 991.98px) {
     .stat-metric-node {
@@ -598,61 +638,13 @@ PRODUCT ITEM CARD ARCHITECTURE (Charcoal and Red Theme)
         font-size: 22px;
     }
     .stat-node-icon {
-        font-size: 26px;
+        font-size: 24px;
+    }
+    .stat-icon-wrapper {
+        width: 50px;
+        height: 50px;
     }
 }
-
-/* Base Circle Background for Icons */
-.stat-icon-wrapper {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 12px auto;
-    transition: transform 0.3s ease;
-}
-
-/* Unique Colors Per Node */
-.stat-metric-node:nth-child(1) .stat-icon-wrapper { background: rgba(200, 35, 44, 0.1); }
-.stat-metric-node:nth-child(1) .stat-node-icon { color: #c8232c; } /* Alok Red - Bottles */
-
-.stat-metric-node:nth-child(2) .stat-icon-wrapper { background: rgba(0, 122, 255, 0.1); }
-.stat-metric-node:nth-child(2) .stat-node-icon { color: #007aff; } /* Ocean Blue - Tumblers */
-
-.stat-metric-node:nth-child(3) .stat-icon-wrapper { background: rgba(175, 82, 222, 0.1); }
-.stat-metric-node:nth-child(3) .stat-node-icon { color: #af52de; } /* Purple - Perfumes */
-
-.stat-metric-node:nth-child(4) .stat-icon-wrapper { background: rgba(255, 149, 0, 0.1); }
-.stat-metric-node:nth-child(4) .stat-node-icon { color: #ff9500; } /* Amber - Jars */
-
-.stat-metric-node:nth-child(5) .stat-icon-wrapper { background: rgba(52, 199, 89, 0.1); }
-.stat-metric-node:nth-child(5) .stat-node-icon { color: #34c759; } /* Emerald Green - Experience */
-
-.stat-metric-node:nth-child(6) .stat-icon-wrapper { background: rgba(88, 86, 214, 0.1); }
-.stat-metric-node:nth-child(6) .stat-node-icon { color: #5856d6; } /* Indigo - SKUs */
-
-.stat-node-icon {
-    font-size: 26px;
-}
-
-.stat-node-icon {
-    font-size: 32px;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
-}
-
-/* Gradients per item */
-.stat-metric-node:nth-child(1) .stat-node-icon { background-image: linear-gradient(135deg, #ff416c, #ff4b2b); }
-.stat-metric-node:nth-child(2) .stat-node-icon { background-image: linear-gradient(135deg, #2193b0, #6dd5ed); }
-.stat-metric-node:nth-child(3) .stat-node-icon { background-image: linear-gradient(135deg, #b92b27, #1565c0); }
-.stat-metric-node:nth-child(4) .stat-node-icon { background-image: linear-gradient(135deg, #f857a6, #ff5858); }
-.stat-metric-node:nth-child(5) .stat-node-icon { background-image: linear-gradient(135deg, #11998e, #38ef7d); }
-.stat-metric-node:nth-child(6) .stat-node-icon { background-image: linear-gradient(135deg, #8a2387, #e94057); }
-
 .latest-image-box {
     background: #ffffff;
     border: 1px solid #eef0f2;
@@ -1227,6 +1219,109 @@ RESPONSIVE MATRIX BREAKPOINTS
     .featured-name { font-size: 20px; }
 }
 
+/* COMPANY CREDENTIALS SECTION */
+.company-credentials-section {
+    background-color: #fafafa;
+    border-top: 1px solid #eef0f2;
+}
+
+.title-underline {
+    width: 50px;
+    height: 3px;
+    background-color: #c8232c;
+    margin: 10px auto 0 auto;
+    border-radius: 2px;
+}
+
+.credential-card {
+    background: #ffffff;
+    border: 1px solid #eef0f2;
+    border-radius: 8px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.credential-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.07);
+    border-color: rgba(200, 35, 44, 0.2);
+}
+
+.credential-icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    background-color: rgba(200, 35, 44, 0.08);
+    color: #c8232c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 18px;
+}
+
+.badge-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #c8232c;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.credential-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 8px;
+}
+
+.credential-text {
+    font-size: 13px;
+    color: #555555;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.btn-red-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #111111;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 12px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.25s ease;
+}
+
+.btn-red-accent:hover {
+    background-color: #c8232c;
+    color: #ffffff;
+}
+/* Align 2-card corporate section cleanly */
+.company-credentials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 767.98px) {
+    .company-credentials-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 
 .whatsapp-float{
@@ -1235,6 +1330,7 @@ RESPONSIVE MATRIX BREAKPOINTS
     bottom:25px;
     width:65px;
     height:65px;
+    color: white;
     background:#25D366;
     border-radius:50%;
     display:flex;

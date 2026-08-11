@@ -342,29 +342,61 @@ $videos = $videoStmt->fetchAll(PDO::FETCH_ASSOC);
                     <h2 class="resource-heading">Latest Videos</h2>
 
                     <div class="resource-feed-list mb-4">
+
                         <?php foreach($videos as $video): ?>
-                        <div class="video-item">
-                            <div class="video-thumb-small watch-video" data-id="<?= htmlspecialchars($video['youtube_id']) ?>" data-title="<?= htmlspecialchars($video['title']) ?>">
-                                <img src="https://img.youtube.com/vi/<?= htmlspecialchars($video['youtube_id']) ?>/hqdefault.jpg" alt="<?= htmlspecialchars($video['title']) ?>">
+
+                        <a
+                            href="https://www.youtube.com/watch?v=<?= htmlspecialchars($video['youtube_id']) ?>"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="video-item"
+                            style="
+                                display:flex;
+                                text-decoration:none;
+                                color:inherit;
+                                cursor:pointer;
+                            "
+                        >
+
+                            <div
+                                class="video-thumb-small"
+                                data-id="<?= htmlspecialchars($video['youtube_id']) ?>"
+                                data-title="<?= htmlspecialchars($video['title']) ?>"
+                            >
+                                <img
+                                    src="https://img.youtube.com/vi/<?= htmlspecialchars($video['youtube_id']) ?>/hqdefault.jpg"
+                                    alt="<?= htmlspecialchars($video['title']) ?>"
+                                >
                             </div>
 
                             <div class="resource-content-box">
+
                                 <?php if(!empty($video['category'])): ?>
-                                <span class="badge-video">
+                                <!-- <span class="badge-video">
                                     <?= htmlspecialchars($video['category']) ?>
-                                </span>
+                                </span> -->
                                 <?php endif; ?>
 
-                                <h5 class="resource-title watch-video" style="cursor:pointer;" data-id="<?= htmlspecialchars($video['youtube_id']) ?>" data-title="<?= htmlspecialchars($video['title']) ?>">
+                                <h5 class="resource-title">
                                     <?= htmlspecialchars($video['title']) ?>
                                 </h5>
 
                                 <p class="resource-desc">
-                                    <?= htmlspecialchars(substr(strip_tags($video['description']), 0, 100)) ?>...
+                                    <?= htmlspecialchars(
+                                        substr(
+                                            strip_tags($video['description']),
+                                            0,
+                                            100
+                                        )
+                                    ) ?>
                                 </p>
+
                             </div>
-                        </div>
+
+                        </a>
+
                         <?php endforeach; ?>
+
                     </div>
 
                     <a href="video.php" class="view-all-btn">View All Videos</a>

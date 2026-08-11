@@ -22,6 +22,7 @@ $featuredCategories = $pdo->query("
 <!-- DEPENDENCIES FOR ICONS AND FONTS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <!-- DEPENDENCIES FOR ICONS ONLY -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -65,7 +66,7 @@ $featuredCategories = $pdo->query("
                     <p class="mb-5" style="font-size: 16px; color: #dddddd; line-height: 1.7; max-width: 580px; font-weight: 400;">
                         Over 50 years of precision engineering excellence. Discover
                         wholesale-ready glass packaging and advanced custom decoration
-                        solutions built for international brands..
+                        solutions built for international brands.
                     </p>
 
                     <div>
@@ -196,35 +197,29 @@ $featuredCategories = $pdo->query("
         ");
         $stmt->execute();
         $homeCategories = $stmt->fetchAll();
-
         ?>
 
         <?php foreach($homeCategories as $category): ?>
 
-        <?php
-        $productStmt = $pdo->prepare("
-            SELECT *
-            FROM products
-            WHERE category_id = ?
-            AND show_on_home = 1
-            ORDER BY display_order ASC, id ASC
-            LIMIT 14
-            
-        ");
+            <?php
+            $productStmt = $pdo->prepare("
+                SELECT *
+                FROM products
+                WHERE category_id = ?
+                AND show_on_home = 1
+                ORDER BY display_order ASC, id ASC
+                
+            ");
 
-        $productStmt->execute([$category['id']]);
+            $productStmt->execute([$category['id']]);
+            $products = $productStmt->fetchAll();
 
-        $products = $productStmt->fetchAll();
+            if(count($products) === 0){
+                continue;
+            }
+            ?>
 
-        if(count($products) === 0){
-            continue;
-        }
-        ?>
-
-        <!-- B2B HIGH-END PRODUCT GRID SYSTEM STYLES -->
-        
-
-        <!-- PRODUCT SHOWCASE SECTION -->
+            <!-- PRODUCT SHOWCASE SECTION -->
             <div class="ticker-showcase-wrapper">
                 <div class="container">
                     
@@ -236,13 +231,13 @@ $featuredCategories = $pdo->query("
                         
                         <!-- Sleek Control Pillar -->
                         <div class="ticker-control-btns">
-                            <button id="scroller-prev-btn" aria-label="Scroll Left"><i class="fa-solid fa-chevron-left"></i></button>
-                            <button id="scroller-next-btn" aria-label="Scroll Right"><i class="fa-solid fa-chevron-right"></i></button>
+                            <button class="scroller-prev-btn" aria-label="Scroll Left"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="scroller-next-btn" aria-label="Scroll Right"><i class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
 
                     <!-- Scrollable Window Area -->
-                    <div class="ticker-viewport" id="scroll-engine-viewport">
+                    <div class="ticker-viewport">
                         <div class="ticker-track">
                             
                             <?php foreach($products as $product): ?>
@@ -268,12 +263,18 @@ $featuredCategories = $pdo->query("
                 </div>
             </div>
 
-            <!-- HIGH-PERFORMANCE ANIMATION CONTROLLER -->
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    const viewport = document.getElementById('scroll-engine-viewport');
-                    const nextBtn = document.getElementById('scroller-next-btn');
-                    const prevBtn = document.getElementById('scroller-prev-btn');
+        <?php endforeach; ?>
+
+        <!-- HIGH-PERFORMANCE MULTI-SECTION ANIMATION CONTROLLER -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Select all rendered category ticker wrappers on the page
+                const showcaseWrappers = document.querySelectorAll('.ticker-showcase-wrapper');
+
+                showcaseWrappers.forEach(wrapper => {
+                    const viewport = wrapper.querySelector('.ticker-viewport');
+                    const nextBtn = wrapper.querySelector('.scroller-next-btn');
+                    const prevBtn = wrapper.querySelector('.scroller-prev-btn');
                     
                     if (!viewport) return;
 
@@ -309,7 +310,7 @@ $featuredCategories = $pdo->query("
                         isPlaying = false;
                     }
 
-                    // Manual navigation buttons
+                    // Manual navigation buttons scoped specifically to this wrapper
                     if (nextBtn && prevBtn) {
                         nextBtn.addEventListener('click', () => {
                             stopScroll();
@@ -328,11 +329,11 @@ $featuredCategories = $pdo->query("
                     viewport.addEventListener('touchstart', stopScroll, { passive: true });
                     viewport.addEventListener('touchend', startScroll, { passive: true });
 
-                    // Initialize loop
+                    // Initialize auto-scroll loop for this individual category showcase
                     animationFrameId = requestAnimationFrame(step);
                 });
-            </script>
-            <?php endforeach; ?>
+            });
+        </script>
     <!-- Popular bottle Ends -->
         
         
@@ -343,8 +344,8 @@ $featuredCategories = $pdo->query("
 
             <div class="container-fluid counter-scaffolding mask-reveal">
                 <div class="container">
-                    <!-- Grid set to 2 columns on mobile, 3 on tablet, and 6 on desktop -->
-                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 justify-content-center g-2 g-md-4">
+                    <!-- Grid updated to accommodate 7 columns on desktop -->
+                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-7 justify-content-center g-2 g-md-4">
                         
                         <!-- METRIC 1: BOTTLES -->
                         <div class="col stat-metric-node">
@@ -354,7 +355,7 @@ $featuredCategories = $pdo->query("
                             <h3 class="stat-node-number">
                                 <span class="live-count" data-target="70000">0</span>+
                             </h3>
-                            <p class="stat-node-label">Bottles Manufacturing Daily</p>
+                            <p class="stat-node-label">Bottles Manufactured Daily</p>
                         </div>
                         
                         <!-- METRIC 2: TUMBLERS -->
@@ -365,7 +366,7 @@ $featuredCategories = $pdo->query("
                             <h3 class="stat-node-number">
                                 <span class="live-count" data-target="100000">0</span>+
                             </h3>
-                            <p class="stat-node-label">Tumblers Manufacturing Daily</p>
+                            <p class="stat-node-label">Tumblers Manufactured Daily</p>
                         </div>
                         
                         <!-- METRIC 3: PERFUME BOTTLES -->
@@ -376,7 +377,7 @@ $featuredCategories = $pdo->query("
                             <h3 class="stat-node-number">
                                 <span class="live-count" data-target="500000">0</span>+
                             </h3>
-                            <p class="stat-node-label">Perfume Bottles Manufacturing Daily</p>
+                            <p class="stat-node-label">Perfume Bottles Manufactured Daily</p>
                         </div>
                         
                         <!-- METRIC 4: JARS -->
@@ -387,10 +388,21 @@ $featuredCategories = $pdo->query("
                             <h3 class="stat-node-number">
                                 <span class="live-count" data-target="125000">0</span>+
                             </h3>
-                            <p class="stat-node-label">Jars Manufacturing Daily</p>
+                            <p class="stat-node-label">Jars Manufactured Daily</p>
                         </div>
                         
-                        <!-- METRIC 5: EXPERIENCE -->
+                        <!-- METRIC 5: PRODUCTION CAPACITY -->
+                        <div class="col stat-metric-node">
+                            <div class="stat-icon-wrapper">
+                                <i class="fa-solid fa-industry stat-node-icon"></i>
+                            </div>
+                            <h3 class="stat-node-number">
+                                <span class="live-count" data-target="400">0</span>+ Tonnes
+                            </h3>
+                            <p class="stat-node-label">Daily Production Capacity</p>
+                        </div>
+            
+                        <!-- METRIC 6: EXPERIENCE -->
                         <div class="col stat-metric-node">
                             <div class="stat-icon-wrapper">
                                 <i class="fa-solid fa-award stat-node-icon"></i>
@@ -400,14 +412,14 @@ $featuredCategories = $pdo->query("
                             </h3>
                             <p class="stat-node-label">Years of Experience</p>
                         </div>
-
-                        <!-- METRIC 6: SKUS -->
+            
+                        <!-- METRIC 7: SKUS -->
                         <div class="col stat-metric-node">
                             <div class="stat-icon-wrapper">
-                                <i class="fa-solid fa-boxes-stacked stat-node-icon"></i>
+                                <i class="fa-solid fa-boxes stat-node-icon"></i>
                             </div>
                             <h3 class="stat-node-number">
-                                <span class="live-count" data-target="800">0</span>+
+                                <span class="live-count" data-target="2000">0</span>+
                             </h3>
                             <p class="stat-node-label">SKUs to Choose From</p>
                         </div>
@@ -755,198 +767,198 @@ $featuredCategories = $pdo->query("
         <!-- Brands Starts -->
         <!-- Brands Section -->
 
-        <div class="container-fluid brands-trusted-wrapper py-5 mask-reveal reveal-on-scroll">
-            <div class="container py-4">
-                
-                <!-- Premium Section Header -->
-                <div class="text-center mb-5">
-                    <h2 class="brands-title-premium text-uppercase">
-                        <img src="assets/themes/storefront/public/images/brands-icone8da.png?v=2.0.3" class="brands-title-icon" alt="Trust Icon" />
-                        <span>BRANDS WHO TRUST US</span>
-                    </h2>
-                </div>
-
-                <!-- Premium Clean Layout Unified Brand Asset Grid Flow -->
-                <div class="row brands-premium-flexgrid mb-4">
+            <div class="container-fluid brands-trusted-wrapper py-5 mask-reveal reveal-on-scroll">
+                <div class="container py-4">
                     
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand1.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 1" />
-                        </div>
+                    <!-- Premium Section Header -->
+                    <div class="text-center mb-5">
+                        <h2 class="brands-title-premium text-uppercase">
+                            <img src="assets/themes/storefront/public/images/brands-icone8da.png?v=2.0.3" class="brands-title-icon" alt="Trust Icon" />
+                            <span>BRANDS WHO TRUST US</span>
+                        </h2>
                     </div>
 
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand2.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 2" />
+                    <!-- Premium Clean Layout Unified Brand Asset Grid Flow -->
+                    <div class="row brands-premium-flexgrid mb-4">
+                        
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand1.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 1" />
+                            </div>
                         </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/image.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 2" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand3.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 3" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand4.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 4" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand5.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 5" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand6.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 6" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand7.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 7" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand8.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 8" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand9.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 9" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand10.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 10" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand11.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 11" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand12.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 12" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand13.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 13" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand14.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 14" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand15.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 15" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand16.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 16" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand17.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 17" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand18.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 18" />
+                            </div>
+                        </div>
+
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand19.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 19" />
+                            </div>
+                        </div>
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand20.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 20" />
+                            </div>
+                        </div>
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand21.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 21" />
+                            </div>
+                        </div>
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand22.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 22" />
+                            </div>
+                        </div>
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand23.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 23" />
+                            </div>
+                        </div>
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand24.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 24" />
+                            </div>
+                        </div>
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand25.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 25" />
+                            </div>
+                        </div>
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand26.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 26" />
+                            </div>
+                        </div>
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand27.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 27" />
+                            </div>
+                        </div>
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand28.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 28" />
+                            </div>
+                        </div>
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand29.jpg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 29" />
+                            </div>
+                        </div>
+                        <div class="p-0">
+                            <div class="brand-asset-chassis">
+                                <img src="assets/themes/storefront/public/images/brand30.jpg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 30" />
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand3.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 3" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand4.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 4" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand5.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 5" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand6.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 6" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand7.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 7" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand8.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 8" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand9.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 9" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand10.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 10" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand11.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 11" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand12.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 12" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand13.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 13" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand14.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 14" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand15.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 15" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand16.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 16" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand17.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 17" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand18.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 18" />
-                        </div>
-                    </div>
-
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand19.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 19" />
-                        </div>
-                    </div>
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand20.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 20" />
-                        </div>
-                    </div>
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand21.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 21" />
-                        </div>
-                    </div>
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand22.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 22" />
-                        </div>
-                    </div>
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand23.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 23" />
-                        </div>
-                    </div>
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand24.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 24" />
-                        </div>
-                    </div>
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand25.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 25" />
-                        </div>
-                    </div>
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand26.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 26" />
-                        </div>
-                    </div>
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand27.jpeg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 27" />
-                        </div>
-                    </div>
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand28.png?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 28" />
-                        </div>
-                    </div>
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand29.jpg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 29" />
-                        </div>
-                    </div>
-                    <div class="p-0">
-                        <div class="brand-asset-chassis">
-                            <img src="assets/themes/storefront/public/images/brand30.jpg?v=2.0.3" class="brand-vector-img img-fluid" alt="Brand Logo 30" />
-                        </div>
+                    <!-- Section Accent Footer -->
+                    <div class="pt-2">
+                        <h3 class="text-md-right text-center text-uppercase brands-footer-text pr-md-2">And many more</h3>
                     </div>
 
                 </div>
-
-                <!-- Section Accent Footer -->
-                <div class="pt-2">
-                    <h3 class="text-md-right text-center text-uppercase brands-footer-text pr-md-2">And many more</h3>
-                </div>
-
             </div>
-        </div>
         <!-- Brands Ends -->
 
 
@@ -1207,112 +1219,120 @@ $featuredCategories = $pdo->query("
         <!-- Google Review Ends -->
 
         <!-- CATALOG DOWNLOAD SECTION -->
-        <div class="catalog-section">
-            <div class="container">
-                
-                <!-- Premium Section Header Box -->
-                <div class="catalog-header">
-                    <span class="catalog-pretitle">Resources</span>
-                    <h2 class="catalog-title">Product Catalogs & Technical Media</h2>
-                </div>
-
-                <!-- Uniform Grid Layout -->
-                <div class="catalog-matrix-pillar">
+        <!-- MAIN PRODUCT CATALOGS SECTION -->
+            <div class="catalog-section py-5">
+                <div class="container">
                     
-                    <!-- Item Card 1 -->
-                    <div class="catalog-item-card">
-                        <div>
-                            <span class="catalog-badge standard-badge">Range 01</span>
-                            <h4 class="catalog-name standard-name">Gift Pack Range</h4>
-                        </div>
-                        <a href="assets/catalogs/gift_pack.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                            <i class="fa-solid fa-download"></i> Download PDF
-                        </a>
+                    <!-- Premium Section Header Box -->
+                    <div class="catalog-header mb-4">
+                        <span class="catalog-pretitle">Resources</span>
+                        <h2 class="catalog-title">Product Catalogs & Technical Media</h2>
                     </div>
 
-                    <!-- Item Card 2 -->
-                    <div class="catalog-item-card">
-                        <div>
-                            <span class="catalog-badge standard-badge">Range 02</span>
-                            <h4 class="catalog-name standard-name">Bowl Set Range</h4>
+                    <!-- Uniform Grid Layout (Product Range) -->
+                    <div class="catalog-matrix-pillar">
+                        
+                        <!-- Item Card 1 -->
+                        <div class="catalog-item-card">
+                            <div>
+                                <h4 class="catalog-name standard-name">Gift Pack Collection</h4>
+                            </div>
+                            <a href="assets/catalogs/gift_pack.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </a>
                         </div>
-                        <a href="assets/catalogs/bowl_set.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                            <i class="fa-solid fa-download"></i> Download PDF
-                        </a>
-                    </div>
 
-
-                    <!-- Item Card 3 -->
-                    <div class="catalog-item-card">
-                        <div>
-                            <span class="catalog-badge standard-badge">Range 03</span>
-                            <h4 class="catalog-name standard-name">Food & Jars Collection</h4>
+                        <!-- Item Card 2 -->
+                        <div class="catalog-item-card">
+                            <div>
+                                <h4 class="catalog-name standard-name">Bowl Set Collection</h4>
+                            </div>
+                            <a href="assets/catalogs/bowl_set.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </a>
                         </div>
-                        <a href="assets/catalogs/food_jar.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                            <i class="fa-solid fa-download"></i> Download PDF
-                        </a>
-                    </div>
 
-
-                    <!-- Item Card 4 -->
-                    <div class="catalog-item-card">
-                        <div>
-                            <span class="catalog-badge standard-badge">Range 04</span>
-                            <h4 class="catalog-name standard-name">Home Decor Range</h4>
+                        <!-- Item Card 3 -->
+                        <div class="catalog-item-card">
+                            <div>
+                                <h4 class="catalog-name standard-name">Food Jar Collection</h4>
+                            </div>
+                            <a href="assets/catalogs/food_jar.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </a>
                         </div>
-                        <a href="assets/catalogs/home_decor.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                            <i class="fa-solid fa-download"></i> Download PDF
-                        </a>
-                    </div>
 
-                    <!-- Item Card 5 -->
-                    <div class="catalog-item-card">
-                        <div>
-                            <span class="catalog-badge standard-badge">Portfolio</span>
-                            <h4 class="catalog-name standard-name">Client Portfolio</h4>
+                        <!-- Item Card 4 -->
+                        <div class="catalog-item-card">
+                            <div>
+                                <h4 class="catalog-name standard-name">Home Decor Collection</h4>
+                            </div>
+                            <a href="assets/catalogs/home_decor.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </a>
                         </div>
-                        <a href="assets/catalogs/client_portfolio.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                            <i class="fa-solid fa-download"></i> Download PDF
-                        </a>
-                    </div>
 
-                    <!-- Item Card 6 -->
-                    <div class="catalog-item-card">
-                        <div>
-                            <span class="catalog-badge standard-badge">Profile</span>
-                            <h4 class="catalog-name standard-name">Company Profile</h4>
+                        <!-- Item Card 5 -->
+                        <div class="catalog-item-card">
+                            <div>
+                                <h4 class="catalog-name standard-name">Decoration & Printing Guide</h4>
+                            </div>
+                            <a href="assets/catalogs/neon_printing.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </a>
                         </div>
-                        <a href="assets/catalogs/company_profile.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                            <i class="fa-solid fa-download"></i> Download PDF
-                        </a>
-                    </div>
 
-
-                    <!-- Item Card 7 -->
-                    <div class="catalog-item-card">
-                        <div>
-                            <span class="catalog-badge standard-badge">Customization</span>
-                            <h4 class="catalog-name standard-name">Decoration & Printing Guide</h4>
+                        <!-- Item Card 6 -->
+                        <div class="catalog-item-card">
+                            <div>
+                                <h4 class="catalog-name standard-name">Bottles Range</h4>
+                            </div>
+                            <a href="assets/catalogs/bottles.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </a>
                         </div>
-                        <a href="assets/catalogs/neon_printing.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                            <i class="fa-solid fa-download"></i> Download PDF
-                        </a>
-                    </div>
 
-                    <!-- Item Card 8 -->
-                    <div class="catalog-item-card">
-                        <div>
-                            <span class="catalog-badge standard-badge">Bottles</span>
-                            <h4 class="catalog-name standard-name">Bottles Range</h4>
-                        </div>
-                        <a href="assets/catalogs/bottles.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                            <i class="fa-solid fa-download"></i> Download PDF
-                        </a>
                     </div>
-
                 </div>
             </div>
-        </div>
+
+            <!-- DEDICATED COMPANY PROFILE & CREDENTIALS SECTION -->
+            <!-- COMPANY PROFILE & CLIENT PORTFOLIO SECTION -->
+            <div class="catalog-section">
+                <div class="container">
+                    
+                    <!-- Section Header -->
+                    <div class="catalog-header">
+                        <span class="catalog-pretitle">Corporate Dossier</span>
+                        <h2 class="catalog-title">Company Profile & Client Credentials</h2>
+                    </div>
+
+                    <!-- Matching Matrix Grid -->
+                    <div class="catalog-matrix-pillar company-credentials-grid">
+                        
+                        <!-- Item Card 1: Company Profile -->
+                        <div class="catalog-item-card">
+                            <div>
+                                <h4 class="catalog-name standard-name">Company Profile</h4>
+                            </div>
+                            <a href="assets/catalogs/company_profile.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </a>
+                        </div>
+
+                        <!-- Item Card 2: Client Portfolio -->
+                        <div class="catalog-item-card">
+                            <div>
+                                <h4 class="catalog-name standard-name">Client Portfolio</h4>
+                            </div>
+                            <a href="assets/catalogs/client_portfolio.pdf" download class="catalog-download-btn btn-outline-charcoal">
+                                <i class="fa-solid fa-download"></i> Download PDF
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
 
         <style>
             /* Premium Orange Accent Modifications over base style */
@@ -1339,10 +1359,13 @@ $featuredCategories = $pdo->query("
          width="32"
          height="32"
          viewBox="0 0 32 32"
-         fill="white">
+         fill="white">  
 
-        <path d="M19.11 17.31c-.29-.15-1.72-.85-1.99-.95-.27-.1-.47-.15-.67.15-.2.29-.77.95-.94 1.14-.17.2-.35.22-.64.07-.29-.15-1.23-.45-2.34-1.43-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.44.13-.59.13-.13.29-.35.44-.52.15-.17.2-.29.3-.49.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.29-1.03 1.01-1.03 2.46 0 1.45 1.05 2.86 1.2 3.05.15.2 2.07 3.17 5.02 4.45.7.3 1.25.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.72-.7 1.96-1.37.24-.67.24-1.25.17-1.37-.07-.12-.27-.2-.56-.35z"/>
-        <path d="M16 3C8.82 3 3 8.82 3 16c0 2.54.75 5.01 2.16 7.12L3.5 28.5l5.52-1.62A12.92 12.92 0 0016 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm0 23.6c-2.06 0-4.08-.56-5.84-1.63l-.42-.25-3.27.96.97-3.19-.28-.44A10.55 10.55 0 015.4 16C5.4 10.15 10.15 5.4 16 5.4S26.6 10.15 26.6 16 21.85 26.6 16 26.6z"/>
+        <!-- Centered Inner Phone Handle -->
+        <path d="M20.96 17.71c-.29-.15-1.72-.85-1.99-.95-.27-.1-.47-.15-.67.15-.2.29-.77.95-.94 1.14-.17.2-.35.22-.64.07-.29-.15-1.23-.45-2.34-1.43-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.44.13-.59.13-.13.29-.35.44-.52.15-.17.2-.29.3-.49.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.29-1.03 1.01-1.03 2.46 0 1.45 1.05 2.86 1.2 3.05.15.2 2.07 3.17 5.02 4.45.7.3 1.25.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.72-.7 1.96-1.37.24-.67.24-1.25.17-1.37-.07-.12-.27-.2-.56-.35z"/>
+        
+        <!-- Outer Speech Bubble Chassis -->
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 3C8.82 3 3 8.82 3 16c0 2.54.75 5.01 2.16 7.12L3.5 28.5l5.52-1.62A12.92 12.92 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm0 23.6c-2.06 0-4.08-.56-5.84-1.63l-.42-.25-3.27.96.97-3.19-.28-.44A10.55 10.55 0 0 1 5.4 16C5.4 10.15 10.15 5.4 16 5.4S26.6 10.15 26.6 16 21.85 26.6 16 26.6z"/>
     </svg>
 
 </a>

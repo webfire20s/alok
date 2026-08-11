@@ -228,7 +228,7 @@
 
                     <li class="email">
                         <i class="fa-solid fa-envelope"></i>
-                        <div style="color: #dddddd;">Email: pranjal@alokglass.com | sales@alokglass.com</div>
+                        <div style="color: #dddddd;">Email: alokglassworksfzd@gmail.com</div>
                     </li>
 
                     <li class="phone">
@@ -244,9 +244,9 @@
                 <ul>
                     <li><a href="about.php" target="_blank">About Us</a></li>
                     <li><a href="infrastructure" target="_blank">Infrastructure</a></li> 
-                    <!-- <li><a href="gallery" target="_blank">Gallery</a></li>  -->
                     <li><a href="blogs" target="_blank">Blog</a></li>
                     <li><a href="video.php" target="_blank">Videos</a></li>
+                    <li><a href="catalog.php" target="_blank">Catalogs</a></li> 
                 </ul>
 
                 <div class="alok-social-wrapper">

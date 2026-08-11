@@ -238,6 +238,51 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
     </style>
 
     <style>
+        /* NAVBAR CONTAINER FIX */
+        .only-desktop .navbar-nav {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            height:55px !important;
+        }
+
+        /* Let items take natural content width */
+        .only-desktop .nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto; /* Keeps natural item proportions */
+            position: relative;
+        }
+
+        /* Uniform link padding & alignment */
+        .custom-desktop-link {
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 600 !important;
+            font-size: 12px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.04em !important;
+            color: #ffffff !important;
+            padding: 12px 10px !important; /* Balanced vertical & horizontal padding */
+            display: flex !important;
+            align-items: center;
+            white-space: nowrap !important;
+            text-decoration: none !important;
+            transition: color 0.2s ease;
+        }
+
+        .custom-desktop-link:hover {
+            color: var(--primary-accent, #c8232c) !important;
+        }
+
+        /* Ensure container doesn't overflow */
+        .only-desktop .container-fluid {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
         /* Interactive Brand Accents & Mobile Toggle Animations */
         .announcement-text {
             animation: textPulse 3s infinite ease-in-out;
@@ -311,7 +356,7 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
             left: 0;
             top: 50%;
             transform: translateY(-50%) scaleX(0);
-            width: 8px;
+            width: 12px;
             height: 60%;
             background-color: var(--primary-accent, #c8232c);
             transform-origin: left;
@@ -859,7 +904,7 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
                             <select
                                 name="category"
                                 class="form-control"
-                                style="max-width: 160px; border: none; font-size: 13px; font-weight: 500; color: #c8232c; padding: 10px 12px; height: auto; box-shadow: none; background: transparent; cursor: pointer; -webkit-appearance: none; -moz-appearance: none;"
+                                style="max-width: 160px; border: none; font-size: 12px; font-weight: 370; color: #c8232c; padding: 10px 12px; height: auto; box-shadow: none; background: transparent; cursor: pointer; -webkit-appearance: none; -moz-appearance: none;"
                             >
                                 <option value="">
                                     All Categories
@@ -975,39 +1020,35 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
 
                 </div>
                 
-
             </div>
-            
-
+        
         </div>
-
     </header>
 
 <!-- Header Ends -->
 
 <!-- Desktop Navigation Bar -->
+    <!-- Desktop Navigation Bar -->
     <nav class="navbar navbar-expand-lg only-desktop" style="background-color: var(--dark-industrial); padding: 0; border-bottom: 3.5px solid var(--primary-accent); box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 999;">
-        <div class="container">
+        <div class="container-fluid px-lg-4">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" style="border: none;">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse justify-content-md-center ss2" id="navbarsExample08">
-                <ul class="navbar-nav" style="gap: 4px; padding: 0; margin: 0; align-items: center; width: 100%; justify-content: space-between;">
+            <div class="collapse navbar-collapse justify-content-center ss2" id="navbarsExample08">
+                <ul class="navbar-nav">
 
-                    <!-- Shop By Industry (Dynamic Dropdown) -->
+                    <!-- Home -->
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2px 2px; display: inline-block;">
+                        <a class="nav-link custom-desktop-link" href="index.php">
                             Home
                         </a>
                     </li>
 
                     <!-- Shop By Product (Dynamic Dropdown) -->
-                    <li class="nav-item dropdown" style="position:relative;">
+                    <li class="nav-item dropdown">
 
-                        <a class="nav-link dropdown-toggle"
-                        href="javascript:void(0);"
-                        style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#fff;padding:2px 22px;display:inline-block;">
+                        <a class="nav-link dropdown-toggle custom-desktop-link" href="javascript:void(0);">
                             Shop By Product
                         </a>
 
@@ -1021,15 +1062,13 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
 
                                     <div class="dropdown-submenu">
 
-                                        <a class="dropdown-item submenu-toggle"
-                                        href="category/<?= urlencode($cat['slug']) ?>">
+                                        <a class="dropdown-item submenu-toggle" href="category/<?= urlencode($cat['slug']) ?>">
                                             <?= htmlspecialchars($cat['name']) ?>
                                         </a>
 
                                         <div class="submenu">
 
-                                            <a class="dropdown-item"
-                                            href="category/<?= urlencode($cat['slug']) ?>">
+                                            <a class="dropdown-item" href="category/<?= urlencode($cat['slug']) ?>">
                                                 All <?= htmlspecialchars($cat['name']) ?>
                                             </a>
 
@@ -1037,8 +1076,7 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
 
                                             <?php foreach($subs as $sub): ?>
 
-                                                <a class="dropdown-item"
-                                                href="category/<?= urlencode($cat['slug']) ?>?sub=<?= $sub['id'] ?>">
+                                                <a class="dropdown-item" href="category/<?= urlencode($cat['slug']) ?>?sub=<?= $sub['id'] ?>">
                                                     <?= htmlspecialchars($sub['name']) ?>
                                                 </a>
 
@@ -1050,8 +1088,7 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
 
                                 <?php else: ?>
 
-                                    <a class="dropdown-item"
-                                    href="category/<?= urlencode($cat['slug']) ?>">
+                                    <a class="dropdown-item" href="category/<?= urlencode($cat['slug']) ?>">
                                         <?= htmlspecialchars($cat['name']) ?>
                                     </a>
 
@@ -1062,56 +1099,53 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
                         </div>
 
                     </li>
+                    
+                    <!-- About Us -->
+                    <li class="nav-item">
+                        <a class="nav-link custom-desktop-link" href="about.php">
+                            About Us
+                        </a>
+                    </li>
 
                     <!-- Our Group Of Companies -->
                     <li class="nav-item">
-                        <a class="nav-link" href="plants.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2px 2px; display: inline-block;">
+                        <a class="nav-link custom-desktop-link" href="plants.php">
                             Our Group Of Companies
                         </a>
                     </li>
+
                     <!-- Decoration Services -->
                     <li class="nav-item">
-                        <a class="nav-link" href="decoration-services.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2px 2px; display: inline-block;">
+                        <a class="nav-link custom-desktop-link" href="decoration-services.php">
                             Decoration Services
                         </a>
                     </li>
                     
-                    <!-- Colour Cosmetics Packaging -->
+                    <!-- Factory Tour -->
                     <li class="nav-item">
-                        <a class="nav-link" href="about.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2 px 2px; display: inline-block;">
-                            About Us
-                        </a>
-                    </li>
-                    <!-- Gallery -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="gallery.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2 px 2px; display: inline-block;">
-                            Gallery
-                        </a>
-                    </li> -->
-
-                    <!-- Blogs and Videos -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="resources.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 2px 22px; display: inline-block;">
-                            Blogs &amp; Videos
-                        </a>
-                    </li>
-                    <!-- Blogs and Videos -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="tour.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 2px; display: inline-block;">
+                        <a class="nav-link custom-desktop-link" href="tour.php">
                             Factory Tour
                         </a>
                     </li>
 
+                    <!-- Blogs and Videos -->
+                    <li class="nav-item">
+                        <a class="nav-link custom-desktop-link" href="resources.php">
+                            Blogs &amp; Videos
+                        </a>
+                    </li>
+
+
                     <!-- Contact Us -->
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 2px; display: inline-block;">
+                        <a class="nav-link custom-desktop-link" href="contact.php">
                             Contact Us
                         </a>
                     </li>
 
                     <!-- Track Order -->
                     <li class="nav-item">
-                        <a class="nav-link" href="track-order.php" style="font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #ffffff; padding: 20px 2px; display: inline-block;">
+                        <a class="nav-link custom-desktop-link" href="track-order.php">
                             Track Order
                         </a>
                     </li>

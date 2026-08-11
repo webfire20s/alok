@@ -1,3 +1,56 @@
+for home page
+header drop down , double dots , stats , catalogs name changed and separate section for company profile and client protfolio , search bar me spacing theek kardi , category sidebar category space thek krdi , sku availability theek krdi ,products drag sorting fixed , navbar spacing and sequence done , weight show done , decoration-services me watch se leke sab commented out ,  resources ke changes done , email id changed , 
+slide effect on all home page categorised products , show on home or not selection done , separate page for catalogs done with admin control , CLOSURE BE TREATED AS SEPARATE AND CAN BE QUANTITY UPDATED DONE , 
+
+<td style="width: 70px; padding: 12px 0;">
+    <?php
+        $imagePath = $item['product_image'] ?? '';
+        if($imagePath && !str_contains($imagePath, 'storage/')){
+            $imagePath = 'storage/media/' . $imagePath;
+        }
+    ?>
+    <div style="width: 54px; height: 54px; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.2);">
+        <?php if(!empty($imagePath)): ?>
+            <img src="../<?= htmlspecialchars($imagePath) ?>" style="width: 100%; height: 100%; object-fit: cover;">
+        <?php endif; ?>
+    </div>
+</td>
+
+
+ALTER TABLE cart
+ADD closure_quantity INT NOT NULL DEFAULT 1
+AFTER closure_option_id;
+
+ALTER TABLE order_items
+ADD closure_quantity INT NOT NULL DEFAULT 0
+AFTER closure_option_id;
+
+CREATE TABLE catalogs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NULL,
+    thumbnail VARCHAR(500) NOT NULL,
+    file_path VARCHAR(500) NOT NULL,
+    file_name VARCHAR(255) NOT NULL,
+    file_type VARCHAR(50) NULL,
+    file_size BIGINT UNSIGNED DEFAULT 0,
+    status TINYINT(1) NOT NULL DEFAULT 1,
+    display_order INT NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+
+
+
+
+
+
+
+
+
 PRODUCTS MOVE TO SUBCATEGORIES  DONE
 ALL PRODUCTS WILL SHOW CLOSURE DROPDOWN  DONE 
 

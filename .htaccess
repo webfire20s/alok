@@ -1,6 +1,6 @@
 RewriteEngine On
 
-RewriteBase /ajanta-project/
+RewriteBase /
 
 # CATEGORY
 

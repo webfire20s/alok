@@ -93,6 +93,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $sku =
         trim($_POST['sku']);
 
+    $showOnHome = 
+        isset($_POST['show_on_home']) ? 1 : 0;
+
     $hasClosureOptions =
         isset($_POST['has_closure_options']) ? 1 : 0;
 
@@ -164,6 +167,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             name = ?,
             slug = ?,
             sku = ?,
+            show_on_home = ?,
             has_closure_options = ?,
             short_description = ?,
             description = ?,
@@ -186,6 +190,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $name,
         $slug,
         $sku,
+        $showOnHome,
         $hasClosureOptions,
         $shortDescription,
         $description,
@@ -352,6 +357,42 @@ include 'includes/admin_sidebar.php';
                         onblur="this.style.borderColor='rgba(255,255,255,0.08)'; this.style.boxShadow='none';"
                     >
                 </div>
+            </div>
+            <div class="mb-4">
+
+                <label style=" display:block; font-size:11px; font-weight:700; text-transform:uppercase; color:#94a3b8; letter-spacing:.05em; margin-bottom:10px; " >
+                    Homepage Display
+                </label>
+
+                <label style=" display:flex; align-items:center; gap:10px; cursor:pointer; color:#e2e8f0; font-size:14px; " >
+
+                    <input
+                        type="checkbox"
+                        name="show_on_home"
+                        value="1"
+                        <?= !empty($product['show_on_home']) ? 'checked' : '' ?>
+                        style="
+                            width:18px;
+                            height:18px;
+                            cursor:pointer;
+                        "
+                    >
+
+                    Show this product on homepage
+
+                </label>
+
+                <small
+                    style="
+                        display:block;
+                        margin-top:6px;
+                        color:#64748b;
+                        font-size:12px;
+                    "
+                >
+                    Selected products can appear in their category's homepage showcase.
+                </small>
+
             </div>
         </div>
         <div class="form-group mt-4">

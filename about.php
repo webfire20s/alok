@@ -295,21 +295,12 @@ include 'includes/header.php';
         border-radius: 2px;
     }
 
-    .directors-subtitle {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 13px;
-        color: #666666;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
     /* CARD CONTAINER */
     .director-card {
         background: #ffffff;
         border: 1px solid #eef0f2;
-        border-radius: 8px;
-        padding: 28px 20px 20px 20px;
+        border-radius: 12px;
+        padding: 20px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -323,61 +314,67 @@ include 'includes/header.php';
         box-shadow: 0 12px 24px rgba(17, 17, 17, 0.08);
     }
 
-    /* CIRCULAR AVATAR FRAME - FITS PORTRAIT PHOTOS NATURALLY */
+    /* PORTRAIT AVATAR FRAME - FITS ENTIRE PORTRAIT PHOTO WITHOUT STRETCHING OR SIDE GAPS */
     .director-avatar-wrapper {
         position: relative;
-        margin-bottom: 20px;
+        width: 100%;
+        margin-bottom: 18px;
     }
 
     .director-avatar-box {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
+        width: 100%;
+        aspect-ratio: 3 / 4; /* Perfect standard portrait ratio for executive photos */
+        border-radius: 8px;
         overflow: hidden;
-        border: 3px solid #ffffff;
-        outline: 2px solid #eef0f2;
+        border: 1px solid #eef0f2;
         background-color: #f7f7f7;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-        transition: outline-color 0.35s ease, transform 0.35s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+        transition: border-color 0.35s ease;
     }
 
     .director-card:hover .director-avatar-box {
-        outline-color: #c8232c;
-        transform: scale(1.03);
+        border-color: #c8232c;
     }
 
     .director-avatar-box img {
         width: 100%;
         height: 100%;
-        object-fit: fill;
-        object-position: top center; /* Focuses on headshots cleanly */
+        object-fit: cover; /* Fills container completely without distortion */
+        object-position: top center; /* Focuses cleanly on the face */
+        display: block;
     }
 
     /* PILL BADGE OVERLAY */
     .badge-role-pill {
         position: absolute;
-        bottom: -8px;
+        bottom: -10px;
         left: 50%;
         transform: translateX(-50%);
-        background-color: #f3d8d8;
-        color: #c8232c;
+        background-color: #111111;
+        color: #ffffff;
         font-family: 'Montserrat', sans-serif;
         font-size: 10px;
         font-weight: 600;
-        padding: 3px 12px;
+        padding: 4px 14px;
         border-radius: 20px;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         white-space: nowrap;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        transition: background-color 0.35s ease;
     }
 
-    /* MESSAGE & TEXT AREA */
+    .director-card:hover .badge-role-pill {
+        background-color: #c8232c;
+    }
+
+    /* NAME & DESIGNATION AREA */
     .director-content {
         display: flex;
         flex-direction: column;
-        flex-grow: 1;
+        align-items: center;
         width: 100%;
+        padding-top: 6px;
     }
 
     .director-name {
@@ -395,32 +392,227 @@ include 'includes/header.php';
         color: #c8232c;
         text-transform: uppercase;
         letter-spacing: 0.04em;
-        margin-bottom: 16px;
+        margin-bottom: 0;
         display: block;
     }
-
-    .message-quote {
-        position: relative;
-        border-top: 1px dashed #eef0f2;
-        padding-top: 14px;
-    }
-
-    .quote-icon {
-        font-size: 14px;
-        color: #c8232c;
-        margin-bottom: 8px;
-        opacity: 0.85;
-        display: block;
-    }
-
-    .director-text {
+    /* MANUFACTURING ECOSYSTEM SECTION */
+    .ecosystem-section {
+        background-color: #ffffff;
         font-family: 'Montserrat', sans-serif;
-        font-size: 12.5px;
-        color: #444444;
+    }
+
+    .ecosystem-pretitle {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #c8232c;
+        display: block;
+    }
+
+    .ecosystem-main-title {
+        font-size: 28px;
+        font-weight: 800;
+        color: #111111;
+        letter-spacing: 0.03em;
+    }
+
+    .ecosystem-title-underline {
+        width: 50px;
+        height: 3px;
+        background-color: #c8232c;
+        margin: 10px auto 0 auto;
+        border-radius: 2px;
+    }
+
+    .ecosystem-lead-box {
+        max-width: 820px;
+    }
+
+    .ecosystem-tagline {
+        font-size: 18px;
+        font-weight: 700;
+        color: #111111;
+        margin-bottom: 10px;
+    }
+
+    .ecosystem-lead-desc {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #555555;
+        font-weight: 400;
+    }
+
+    /* CARDS ARCHITECTURE */
+    .ecosystem-card {
+        background-color: #fcfbfa;
+        border: 1px solid #eef0f2;
+        border-radius: 10px;
+        padding: 30px 24px;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .ecosystem-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+        border-color: rgba(200, 35, 44, 0.3);
+    }
+
+    .ecosystem-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .ecosystem-icon-box {
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+        background-color: rgba(200, 35, 44, 0.08);
+        color: #c8232c;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+    }
+
+    .ecosystem-badge {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background-color: #111111;
+        color: #ffffff;
+        padding: 5px 10px;
+        border-radius: 4px;
+    }
+
+    .ecosystem-card-title {
+        font-size: 20px;
+        font-weight: 800;
+        color: #111111;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+    }
+
+    .ecosystem-card-subtitle {
+        font-size: 14px;
+        font-weight: 700;
+        color: #c8232c;
+        margin-bottom: 14px;
+        line-height: 1.4;
+    }
+
+    .ecosystem-card-text {
+        font-size: 13.5px;
+        color: #555555;
         line-height: 1.6;
         margin-bottom: 0;
-        font-style: italic;
-        text-align: center;
+    }
+
+    /* SPEC LIST FOR IS MACHINES */
+    .ecosystem-spec-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 14px 0;
+    }
+
+    .ecosystem-spec-list li {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #222222;
+        padding: 6px 0;
+        border-bottom: 1px dashed #e2e4e8;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .ecosystem-spec-list li i {
+        color: #c8232c;
+        font-size: 11px;
+    }
+
+    /* TAGS FOR DECORATION */
+    .ecosystem-tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .eco-tag {
+        font-size: 11px;
+        font-weight: 600;
+        background-color: #ffffff;
+        border: 1px solid #e2e4e8;
+        color: #333333;
+        padding: 4px 10px;
+        border-radius: 20px;
+        transition: background-color 0.2s ease;
+    }
+
+    .eco-tag:hover {
+        border-color: #c8232c;
+        color: #c8232c;
+    }
+
+    /* HIGHLIGHT STRIP */
+    .ecosystem-highlight-strip {
+        background-color: #111111;
+        border-radius: 10px;
+        padding: 24px 20px;
+        color: #ffffff;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .highlight-item {
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .highlight-item:last-child {
+        border-right: none;
+    }
+
+    .highlight-value {
+        font-size: 22px;
+        font-weight: 800;
+        color: #c8232c;
+        letter-spacing: 0.03em;
+        margin-bottom: 2px;
+    }
+
+    .highlight-label {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #cccccc;
+    }
+
+    /* RESPONSIVE FINE-TUNING */
+    @media (max-width: 767.98px) {
+        .highlight-item {
+            border-right: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
+        }
+        
+        .highlight-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .highlight-value {
+            font-size: 18px;
+        }
+        
+        .highlight-label {
+            font-size: 10px;
+        }
     }
 </style>
 
@@ -428,7 +620,7 @@ include 'includes/header.php';
 <!-- HERO & CERTIFICATE COMPONENT ENGINE STYLES -->
 
 <!-- HEADER HERO BANNER SEGMENT -->
-<section class="py-5 about-hero">
+<!-- <section class="py-5 about-hero">
     <div class="container py-5">
         <div class="row align-items-center">
             <div class="col-lg-7">
@@ -444,7 +636,7 @@ include 'includes/header.php';
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- RESPONSIVE ANIMATED OUR JOURNEY SECTION -->
 <style>
@@ -623,10 +815,10 @@ include 'includes/header.php';
                 <!-- Slide Item: 1973 (Set active-slide here by default) -->
                 <div class="journey-slide-item-native active-slide" style="background-image: url('images/1972.png');">
                     <div class="journey-sliding-card">
-                        <h3 class="journey-meta-year">1973</h3>
+                        <h3 class="journey-meta-year">From a Pot Furnace to Mathur Glass Industries</h3>
                         <p class="journey-slide-desc">
-                            <b>From a Pot Furnace to Mathur Glass Industries </b><br>
-                            The journey began with Shri Nannumal Agarwal Ji, working with a modest 500 kg pot furnace and an enduring belief in craftsmanship. In 1985, this foundation took form as Mathur Glass Industries, which later grew under Mr. Mohit Mohan Agarwal Ji into a modern 20-tonne glass-bangle manufacturing unit.
+                            <!-- <b>From a Pot Furnace to Mathur Glass Industries </b><br> -->
+                           <br> The journey began with Shri Nannumal Agarwal Ji, working with a modest 500 kg pot furnace and an enduring belief in craftsmanship. In 1985, this foundation took form as Mathur Glass Industries, which later grew under Mr. Mohit Mohan Agarwal Ji into a modern 20-tonne glass-bangle manufacturing unit.
 
                         </p>
                     </div>
@@ -635,10 +827,10 @@ include 'includes/header.php';
                 <!-- Slide Item: 1974 -->
                 <div class="journey-slide-item-native" style="background-image: url('images/1974.png');">
                     <div class="journey-sliding-card">
-                        <h3 class="journey-meta-year">1974</h3>
+                        <h3 class="journey-meta-year">Enterprise Built Through Partnership</h3>
                         <p class="journey-slide-desc">
-                            <b>Enterprise Built Through Partnership</b><br>
-                            Mr. Mohit Mohan Agarwal Ji combined industrial vision with a remarkable instinct for recognising potential in people—building ventures through trust, shared responsibility and room to lead. This philosophy strengthened GM Glass Works in liquor-bottle manufacturing and Crystal Glass Industries in mouth-blown and pressed glassware.
+                            <!-- <b>Enterprise Built Through Partnership</b><br> -->
+                           <br> Mr. Mohit Mohan Agarwal Ji combined industrial vision with a remarkable instinct for recognising potential in people—building ventures through trust, shared responsibility and room to lead. This philosophy strengthened GM Glass Works in liquor-bottle manufacturing and Crystal Glass Industries in mouth-blown and pressed glassware.
 
                         </p>
                     </div>
@@ -647,10 +839,10 @@ include 'includes/header.php';
                 <!-- Slide Item: 2016 -->
                 <div class="journey-slide-item-native" style="background-image: url('images/2016image.png');">
                     <div class="journey-sliding-card">
-                        <h3 class="journey-meta-year">2016</h3>
+                        <h3 class="journey-meta-year">Reinvention Across Categories</h3>
                         <p class="journey-slide-desc">
-                            <b>Reinvention Across Categories</b><br>
-                            Firozabad Block Glass Enterprises evolved from bangles and marbles to mouth-blown products and scientific glassware. Pioneer Glass Industries complemented this journey with expertise in press-glass tumblers, bowls and vacuum thermos manufacturing—reflecting a culture of adaptation while preserving specialist craftsmanship.
+                            <!-- <b>Reinvention Across Categories</b><br> -->
+                           <br> Firozabad Block Glass Enterprises evolved from bangles and marbles to mouth-blown products and scientific glassware. Pioneer Glass Industries complemented this journey with expertise in press-glass tumblers, bowls and vacuum thermos manufacturing—reflecting a culture of adaptation while preserving specialist craftsmanship.
 
                         </p>
                     </div>
@@ -659,10 +851,10 @@ include 'includes/header.php';
                 <!-- Slide Item: 2018 -->
                 <div class="journey-slide-item-native" style="background-image: url('images/2018image.png');">
                     <div class="journey-sliding-card">
-                        <h3 class="journey-meta-year">2018</h3>
+                        <h3 class="journey-meta-year">A Connected Glass Ecosystem</h3>
                         <p class="journey-slide-desc">
-                           <b> A Connected Glass Ecosystem</b><br>
-                            Alok Glass Works was named in honour of a newborn cousin in the family—“Alok,” meaning light—making it a symbol of hope and a new beginning. Emaar Glass Industries added trading and lug-cap capabilities, while Neon Business India brought printing, coating, frosting, hot stamping and decal application under an advanced glass-decoration facility.
+                           <!-- <b> A Connected Glass Ecosystem</b><br> -->
+                          <br>  Alok Glass Works was named in honour of a newborn cousin in the family—“Alok,” meaning light—making it a symbol of hope and a new beginning. Emaar Glass Industries added trading and lug-cap capabilities, while Neon Business India brought printing, coating, frosting, hot stamping and decal application under an advanced glass-decoration facility.
 
                         </p>
                     </div>
@@ -670,10 +862,10 @@ include 'includes/header.php';
                 <!-- Slide Item: last slide -->
                 <div class="journey-slide-item-native" style="background-image: url('images/2018image.png');">
                     <div class="journey-sliding-card">
-                        <h3 class="journey-meta-year">2020</h3>
+                        <h3 class="journey-meta-year">Carrying the Legacy Forward</h3>
                         <p class="journey-slide-desc">
-                            <b>Carrying the Legacy Forward </b><br>
-                            With Mr. Mohit Mohan Agarwal Ji’s two sons joining the business, the third generation is bringing a contemporary perspective to its established foundations. AI-enabled workflows, digital production systems, e-commerce, modern marketing and global customer development are carrying the journey forward with purpose and continuity.
+                            <!-- <b>Carrying the Legacy Forward </b><br> -->
+                          <br>  With Mr. Mohit Mohan Agarwal Ji’s two sons joining the business, the third generation is bringing a contemporary perspective to its established foundations. AI-enabled workflows, digital production systems, e-commerce, modern marketing and global customer development are carrying the journey forward with purpose and continuity.
 
 
                         </p>
@@ -688,54 +880,129 @@ include 'includes/header.php';
 </section>
 
 <!-- BRAND STORY & METRICS INFOGRAPHIC SEGMENT -->
-<section class="py-5" style="background-color: #ffffff; font-family: 'Montserrat', sans-serif;">
+<!-- OUR MANUFACTURING ECOSYSTEM SECTION -->
+<section class="ecosystem-section py-5">
     <div class="container py-4">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-6">
-                <h2 class="text-uppercase mb-4" style="font-size: 28px; font-weight: 800; color: #111111; letter-spacing: 0.02em; position: relative; display: inline-block; padding-bottom: 14px;">
-                    Our Narrative
-                    <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px;"></span>
-                </h2>
-                <p class="text-muted mb-3" style="font-size: 15px; line-height: 1.8; font-weight: 400;">
-                    Founded with a vision to redefine value-added glass packaging, Alok Glass has evolved from a boutique processing facility into an industrial scale decoration hub. We cater to global supply chains across premium cosmetics, food & beverage, spirits, and pharmaceutical sectors.
-                </p>
-                <p class="text-muted mb-0" style="font-size: 15px; line-height: 1.8; font-weight: 400;">
-                    We realize that packaging is the ultimate sensory touchpoint for your end-consumers. By introducing specialized low-MOQ capabilities alongside our automated high-throughput lines, we empower emerging independent brands and established market enterprises to bring custom packaging strategies to reality smoothly.
-                </p>
-            </div>
+
+        <!-- Section Header -->
+        <div class="text-center mb-5">
+            <span class="ecosystem-pretitle">Infrastructure &amp; Capabilities</span>
+            <h2 class="ecosystem-main-title text-uppercase mt-1">
+                Our Manufacturing Ecosystem
+            </h2>
+            <div class="ecosystem-title-underline"></div>
             
-            <div class="col-lg-6">
-                <div class="row g-4">
-                    <div class="col-sm-6">
-                        <div class="metric-card">
-                            <div class="metric-number">25M+</div>
-                            <div class="metric-label">Units Labeled Annually</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="metric-card">
-                            <div class="metric-number">100%</div>
-                            <div class="metric-label">Food-Grade Certified</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="metric-card">
-                            <div class="metric-number">15+</div>
-                            <div class="metric-label">Global Export Markets</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="metric-card">
-                            <div class="metric-number">24/7</div>
-                            <div class="metric-label">Technical Support Line</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="ecosystem-lead-box mt-4 mx-auto">
+                <h3 class="ecosystem-tagline">Precision at the Hot End. Possibility at the Finish.</h3>
+                <p class="ecosystem-lead-desc mb-0">
+                    Alok Glass combines advanced forming technology with comprehensive in-house decoration—creating one connected journey from molten glass to market-ready packaging.
+                </p>
             </div>
         </div>
+
+        <!-- 3 Feature Pillars Grid -->
+        <div class="row g-4 mb-5">
+
+            <!-- Box 1: Precision Press Technology -->
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                <div class="ecosystem-card w-100">
+                    <div class="ecosystem-card-header">
+                        <div class="ecosystem-icon-box">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <span class="ecosystem-badge">Waltec Engineering</span>
+                    </div>
+                    <h3 class="ecosystem-card-title">Precision Press Technology</h3>
+                    <h4 class="ecosystem-card-subtitle">German Waltec Triple-Gob Press Machine</h4>
+                    <p class="ecosystem-card-text">
+                        India’s only installation of its kind, engineered for precision, consistency and high-volume press-glass production.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Box 2: IS Forming Technology -->
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                <div class="ecosystem-card w-100">
+                    <div class="ecosystem-card-header">
+                        <div class="ecosystem-icon-box">
+                            <i class="fa-solid fa-industry"></i>
+                        </div>
+                        <span class="ecosystem-badge">Multi-Section Lines</span>
+                    </div>
+                    <h3 class="ecosystem-card-title">IS Forming Technology</h3>
+                    
+                    <ul class="ecosystem-spec-list">
+                        <li><i class="fa-solid fa-check-double"></i> Triple-Gob &bull; 8-Section IS Machine</li>
+                        <li><i class="fa-solid fa-check-double"></i> Double-Gob &bull; 6-Section IS Machine</li>
+                        <li><i class="fa-solid fa-check-double"></i> Single-Gob &bull; 10-Section IS Machine</li>
+                        <li><i class="fa-solid fa-check-double"></i> Double-Gob &bull; 8-Section IS Machine</li>
+                    </ul>
+
+                    <p class="ecosystem-card-text mt-auto pt-2">
+                        Versatile machine configurations enable us to manufacture a broad spectrum of bottles, containers and specialist glass designs.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Box 3: Decoration & Value Addition -->
+            <div class="col-lg-4 col-md-12 d-flex align-items-stretch py-4">
+                <div class="ecosystem-card w-100">
+                    <div class="ecosystem-card-header">
+                        <div class="ecosystem-icon-box">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <span class="ecosystem-badge">Complete Finishing</span>
+                    </div>
+                    <h3 class="ecosystem-card-title">Decoration &amp; Value Addition</h3>
+                    
+                    <div class="ecosystem-tags-container mb-3">
+                        <span class="eco-tag">Automated Coating Plants</span>
+                        <span class="eco-tag">Frosting</span>
+                        <span class="eco-tag">Screen Printing</span>
+                        <span class="eco-tag">UV Screen Printing</span>
+                        <span class="eco-tag">Decal Application</span>
+                        <span class="eco-tag">Multi-Colour Printing</span>
+                        <span class="eco-tag">Hot Stamping</span>
+                        <span class="eco-tag">Gold Foiling</span>
+                    </div>
+
+                    <p class="ecosystem-card-text mt-auto">
+                        Complete in-house finishing capabilities allow us to create everything from understated functional finishes to distinctive premium packaging.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- HIGHLIGHT STRIP -->
+        <div class="ecosystem-highlight-strip">
+            <div class="row g-3 text-center align-items-center">
+                
+                <div class="col-6 col-md-3 highlight-item">
+                    <div class="highlight-value">GERMAN</div>
+                    <div class="highlight-label">Triple-Gob Press Tech</div>
+                </div>
+
+                <div class="col-6 col-md-3 highlight-item">
+                    <div class="highlight-value">4</div>
+                    <div class="highlight-label">IS Machine Lines</div>
+                </div>
+
+                <div class="col-6 col-md-3 highlight-item">
+                    <div class="highlight-value">8+</div>
+                    <div class="highlight-label">In-House Finishing Tech</div>
+                </div>
+
+                <div class="col-6 col-md-3 highlight-item">
+                    <div class="highlight-value">END-TO-END</div>
+                    <div class="highlight-label">Forming To Finishing</div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </section>
-
 <!-- BRAND MILESTONES CHRONOLOGICAL TIMELINE SEGMENT -->
 <section class="py-5" style="background-color: #fafafa; font-family: 'Montserrat', sans-serif;">
     <div class="container py-3">
@@ -753,9 +1020,9 @@ include 'includes/header.php';
             <div class="timeline-node">
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
-                    <div class="timeline-year">1998</div>
-                    <h5 style="font-weight: 700; font-size: 16px; color: #111111; margin-bottom: 8px;">The Inception</h5>
-                    <p class="text-muted mb-0" style="font-size: 13.5px; line-height: 1.6;">Established as a localized precision screen printing facility handling foundational configurations for regional cosmetic containers.</p>
+                    <div class="timeline-year">1973</div>
+                    <h5 style="font-weight: 700; font-size: 16px; color: #111111; margin-bottom: 8px;">WHERE IT BEGAN</h5>
+                    <p class="text-muted mb-0" style="font-size: 13.5px; line-height: 1.6;">Alok Glass was established with semi-automatic press machines and mouth-blown production, creating tumblers and everyday glassware through skilled hands and enduring craftsmanship.</p>
                 </div>
             </div>
 
@@ -763,9 +1030,9 @@ include 'includes/header.php';
             <div class="timeline-node">
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
-                    <div class="timeline-year">2008</div>
-                    <h5 style="font-weight: 700; font-size: 16px; color: #111111; margin-bottom: 8px;">Automation Integration</h5>
-                    <p class="text-muted mb-0" style="font-size: 13.5px; line-height: 1.6;">Commissioned multi-color automated rotary lines, dramatically multiplying production scale while lowering tolerances.</p>
+                    <div class="timeline-year">2024</div>
+                    <h5 style="font-weight: 700; font-size: 16px; color: #111111; margin-bottom: 8px;">A NEW SCALE</h5>
+                    <p class="text-muted mb-0" style="font-size: 13.5px; line-height: 1.6;">A 100-tonne cosmetic-flint furnace with a German Waltec triple-gob press machine marked our transition towards greater precision, consistency and production scale</p>
                 </div>
             </div>
 
@@ -773,9 +1040,9 @@ include 'includes/header.php';
             <div class="timeline-node">
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
-                    <div class="timeline-year">2018</div>
-                    <h5 style="font-weight: 700; font-size: 16px; color: #111111; margin-bottom: 8px;">Global Compliance</h5>
-                    <p class="text-muted mb-0" style="font-size: 13.5px; line-height: 1.6;">Acquired heavy toxic metal-free formulation lines and international food-safe operation accreditations for direct export lines.</p>
+                    <div class="timeline-year">2026</div>
+                    <h5 style="font-weight: 700; font-size: 16px; color: #111111; margin-bottom: 8px;">ENGINEERED FOR PERFUMERY</h5>
+                    <p class="text-muted mb-0" style="font-size: 13.5px; line-height: 1.6;">A Sanjin triple-gob IS machine, purpose-installed for perfume bottles, expanded our capabilities in refined, design-led packaging for the fragrance and cosmetics sectors.</p>
                 </div>
             </div>
 
@@ -783,9 +1050,9 @@ include 'includes/header.php';
             <div class="timeline-node">
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
-                    <div class="timeline-year">2026</div>
-                    <h5 style="font-weight: 700; font-size: 16px; color: #111111; margin-bottom: 8px;">Next-Gen Finishes</h5>
-                    <p class="text-muted mb-0" style="font-size: 13.5px; line-height: 1.6;">Expanding into ultra-low MOQ digital glass printing and premium eco-friendly organic ink methodologies.</p>
+                    <div class="timeline-year">THE NEXT CHAPTER</div>
+                    <h5 style="font-weight: 700; font-size: 16px; color: #111111; margin-bottom: 8px;">INFRASTRUCTURE FOR TOMORROW</h5>
+                    <p class="text-muted mb-0" style="font-size: 13.5px; line-height: 1.6;">Our next investment is a 200,000 sq. ft. dust-controlled, palletized warehouse with modern racking, supported by expanded coating, printing and value-addition lines.</p>
                 </div>
             </div>
 
@@ -802,12 +1069,9 @@ include 'includes/header.php';
         <!-- Section Header -->
         <div class="text-center mb-5">
             <h2 class="directors-title text-uppercase">
-                Leadership Insights
+                Leadership
             </h2>
             <div class="title-underline"></div>
-            <p class="directors-subtitle mt-3">
-                Messages from our Board of Directors guiding our vision, innovation, and commitment to excellence.
-            </p>
         </div>
 
         <!-- Directors Grid - Single Row Layout -->
@@ -820,17 +1084,11 @@ include 'includes/header.php';
                         <div class="director-avatar-box">
                             <img src="assets/images/directors/director1.png" alt="Mohit Mohan Agarwal" class="img-fluid" loading="lazy">
                         </div>
-                        <span class="badge-role-pill">Chairman</span>
+                        <!-- <span class="badge-role-pill">Chairman</span> -->
                     </div>
                     <div class="director-content">
                         <h4 class="director-name">Mohit Mohan Agarwal</h4>
                         <span class="director-designation">Chairman</span>
-                        <div class="message-quote">
-                            <i class="fa fa-quote-left quote-icon"></i>
-                            <p class="director-text">
-                                I started this journey at the age of 16, packing just 500 kg of glass daily with my own hands. Today, we pack 500 metric tonnes every day—a testament to decades of hard work, resilience, and an unwavering commitment to quality. Alok Glass has grown from a small operation to a global name, but our values remain the same: integrity, innovation, and excellence. As we continue to expand, I take pride in seeing the next generation carry this legacy forward, pushing boundaries and setting new benchmarks in the glass industry.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -842,17 +1100,11 @@ include 'includes/header.php';
                         <div class="director-avatar-box">
                             <img src="assets/images/directors/director2.png" alt="Pranjal Agarwal" class="img-fluid" loading="lazy">
                         </div>
-                        <span class="badge-role-pill">Director</span>
+                        <!-- <span class="badge-role-pill">Director</span> -->
                     </div>
                     <div class="director-content">
                         <h4 class="director-name">Pranjal Agarwal</h4>
                         <span class="director-designation">Director</span>
-                        <div class="message-quote">
-                            <i class="fa fa-quote-left quote-icon"></i>
-                            <p class="director-text">
-                                At Alok Glass, we are committed to innovation, sustainability, and excellence in glass manufacturing. As a third-generation leader, my focus has been on modernizing operations, expanding our global reach, and ensuring we remain at the forefront of premium glass packaging. From automation to renewable energy, every step we take is aimed at delivering superior quality and efficiency to our clients. Our journey is driven by a passion for craftsmanship and a vision to make Alok Glass a trusted name worldwide.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -864,17 +1116,11 @@ include 'includes/header.php';
                         <div class="director-avatar-box">
                             <img src="assets/images/directors/director3.png" alt="Ujjwal Agarwal" class="img-fluid" loading="lazy">
                         </div>
-                        <span class="badge-role-pill">Director</span>
+                        <!-- <span class="badge-role-pill">Director</span> -->
                     </div>
                     <div class="director-content">
                         <h4 class="director-name">Ujjwal Agarwal</h4>
                         <span class="director-designation">Director</span>
-                        <div class="message-quote">
-                            <i class="fa fa-quote-left quote-icon"></i>
-                            <p class="director-text">
-                                I began my journey at 20, working hands-on in our factory—never imagining I’d one day lead international operations. After a knee fracture redirected me to sales, I discovered a deep passion for connecting our products with the world. Today, I oversee Alok Glass’ U.S. operations, driving global partnerships and market expansion with a vision to make Alok Glass a truly global brand built on innovation, integrity, and trust.
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>

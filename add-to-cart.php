@@ -166,20 +166,45 @@ $existing = $cartStmt->fetch();
 
 if($existing){
 
+    /*
+    |--------------------------------------------------------------------------
+    | UPDATE EXISTING
+    |--------------------------------------------------------------------------
+    |
+    | Product quantity and closure quantity increase together.
+    | pieces_per_box does NOT affect closure quantity.
+    |
+    */
+
     $updateStmt = $pdo->prepare("
         UPDATE cart
-        SET quantity = quantity + ?
+        SET
+            quantity = quantity + ?,
+            closure_quantity =
+                CASE
+                    WHEN closure_option_id IS NOT NULL
+                    THEN closure_quantity + ?
+                    ELSE closure_quantity
+                END
         WHERE id = ?
     ");
 
     $updateStmt->execute([
+
+        $quantity,
         $quantity,
         $existing['id']
+
     ]);
 
 }else{
-
     /*
+    |--------------------------------------------------------------------------
+    | INSERT NEW
+    |--------------------------------------------------------------------------
+    */
+
+        /*
     |--------------------------------------------------------------------------
     | INSERT NEW
     |--------------------------------------------------------------------------
@@ -191,22 +216,29 @@ if($existing){
             user_id,
             product_id,
             closure_option_id,
+            closure_quantity,
             quantity,
             order_unit,
             pieces_per_box,
             gst_percent
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
 
     $insertStmt->execute([
+
         $sessionId,
         $userId,
         $productId,
         $closureOptionId,
+
+        // Closure quantity starts equal to product quantity
+        $closureOptionId ? $quantity : 0,
+
         $quantity,
         $orderUnit,
         $piecesPerBox,
         $gstPercent
+
     ]);
 }
 

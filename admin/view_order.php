@@ -232,115 +232,390 @@ include 'includes/admin_sidebar.php';
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($items as $item): ?>
-                                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.02);">
-                                    <td style="width: 70px; padding: 12px 0;">
-                                        <?php
-                                            $imagePath = $item['product_image'] ?? '';
-                                            if($imagePath && !str_contains($imagePath, 'storage/')){
-                                                $imagePath = 'storage/media/' . $imagePath;
-                                            }
-                                        ?>
-                                        <div style="width: 54px; height: 54px; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.2);">
-                                            <?php if(!empty($imagePath)): ?>
-                                                <img src="../<?= htmlspecialchars($imagePath) ?>" style="width: 100%; height: 100%; object-fit: cover;">
-                                            <?php endif; ?>
+
+                        <?php foreach($items as $item): ?>
+
+                            <?php
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | IDENTIFY ITEM TYPE
+                            |--------------------------------------------------------------------------
+                            |
+                            | Normal product:
+                            | product_id exists
+                            |
+                            | Separate closure:
+                            | product_id is NULL
+                            | closure_option_id exists
+                            |
+                            */
+
+                            $isClosureItem =
+                                empty($item['product_id']) &&
+                                !empty($item['closure_option_id']);
+
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | IMAGE
+                            |--------------------------------------------------------------------------
+                            */
+
+                            if($isClosureItem){
+
+                                $imagePath = $item['closure_image'] ?? '';
+
+                            }else{
+
+                                $imagePath = $item['product_image'] ?? '';
+
+                            }
+
+
+                            if(
+                                $imagePath &&
+                                !str_contains($imagePath, 'storage/')
+                            ){
+
+                                $imagePath = 'storage/media/' . $imagePath;
+
+                            }
+
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | QUANTITY
+                            |--------------------------------------------------------------------------
+                            */
+
+                            $quantity = (int)$item['quantity'];
+
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | GST
+                            |--------------------------------------------------------------------------
+                            */
+
+                            $gstPercent = (float)$item['gst_percent'];
+
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | PRICE
+                            |--------------------------------------------------------------------------
+                            */
+
+                            if($isClosureItem){
+
+                                /*
+                                | Closure is already a separate line item.
+                                | Therefore its own price is used.
+                                */
+
+                                $unitPrice = (float)(
+                                    $item['closure_option_price']
+                                    ?? $item['price']
+                                    ?? 0
+                                );
+
+                            }else{
+
+                                /*
+                                | Normal product price.
+                                |
+                                | This also keeps compatibility with older
+                                | order records where closure was attached
+                                | to the product item.
+                                */
+
+                                $unitPrice = (float)$item['price'];
+
+                            }
+
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | LINE CALCULATION
+                            |--------------------------------------------------------------------------
+                            */
+
+                            $itemSubtotal =
+                                $unitPrice * $quantity;
+
+
+                            $itemGST =
+                                ($itemSubtotal * $gstPercent) / 100;
+
+
+                            $itemTotal =
+                                $itemSubtotal + $itemGST;
+
+
+                            /*
+                            |--------------------------------------------------------------------------
+                            | DISPLAY NAME
+                            |--------------------------------------------------------------------------
+                            */
+
+                            if($isClosureItem){
+
+                                $displayName =
+                                    $item['closure_option_name']
+                                    ?: 'Closure';
+
+                            }else{
+
+                                $displayName =
+                                    $item['product_name']
+                                    ?: 'Product';
+
+                            }
+
+                            ?>
+
+                            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.02);">
+
+                                <!-- ==========================================================
+                                    IMAGE
+                                =========================================================== -->
+
+                                <td style="width: 70px; padding: 12px 0;">
+                                    <?php
+                                        $imagePath = $item['product_image'] ?? '';
+                                        if($imagePath && !str_contains($imagePath, 'storage/')){
+                                            $imagePath = 'storage/media/' . $imagePath;
+                                        }
+                                    ?>
+                                    <div style="width: 54px; height: 54px; border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.2);">
+                                        <?php if(!empty($imagePath)): ?>
+                                            <img src="../<?= htmlspecialchars($imagePath) ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                                        <?php endif; ?>
+                                    </div>
+                                </td>
+
+
+                                <!-- ==========================================================
+                                    PRODUCT / CLOSURE
+                                =========================================================== -->
+
+                                <td>
+
+                                    <?php if($isClosureItem): ?>
+
+                                        <!-- ==================================================
+                                            SEPARATE CLOSURE ITEM
+                                        =================================================== -->
+
+                                        <div style="
+                                            font-weight:600;
+                                            color:#ffffff;
+                                            font-size:13.5px;
+                                        ">
+
+                                            <?= htmlspecialchars($displayName) ?>
+
                                         </div>
-                                    </td>
-                                    
-                                    <td>
+
+
+                                        <div style=" margin-top:6px; display:inline-block; padding:4px 8px; border-radius:5px; background:rgba(56,189,248,.08); border:1px solid rgba(56,189,248,.18); color:#7dd3fc; font-size:10px; text-transform:uppercase; letter-spacing:.04em; ">
+
+                                            Closure
+
+                                        </div>
+
+
+                                        <div style=" margin-top:6px; color:#94a3b8; font-size:11px; line-height:1.6; ">
+
+                                            Unit Price :
+                                            ₹<?= number_format($unitPrice,2) ?>
+
+                                        </div>
+
+
+                                    <?php else: ?>
+
+                                        <!-- ==================================================
+                                            NORMAL PRODUCT
+                                        =================================================== -->
+
+                                        <div style=" font-weight:600; color:#ffffff; font-size:13.5px; ">
+
+                                            <?= htmlspecialchars($displayName) ?>
+
+                                        </div>
+
+
                                         <?php
+                                        /*
+                                        |--------------------------------------------------------------------------
+                                        | LEGACY / COMPATIBILITY
+                                        |--------------------------------------------------------------------------
+                                        |
+                                        | If an older order has the closure attached directly
+                                        | to the product item, continue showing it correctly.
+                                        |
+                                        */
 
-                                        $productPrice = (float)$item['price'];          // Already includes closure
-                                        $closurePrice = (float)($item['closure_option_price'] ?? 0);
-
-                                        $baseProductPrice = $productPrice - $closurePrice;
-
-                                        $effectivePrice = $productPrice;
-
-                                        $itemSubtotal = $effectivePrice * $item['quantity'];
-
-                                        $itemGST = ($itemSubtotal * $item['gst_percent']) / 100;
-
-                                        $itemTotal = $itemSubtotal + $itemGST;
+                                        $attachedClosurePrice =
+                                            (float)($item['closure_option_price'] ?? 0);
 
                                         ?>
 
-                                        <div style="font-weight:600;color:#ffffff;font-size:13.5px;">
-                                            <?= htmlspecialchars($item['product_name']) ?>
-                                        </div>
 
                                         <?php if(!empty($item['closure_option_name'])): ?>
 
-                                            <div style="
-                                                margin-top:6px;
-                                                display:inline-block;
-                                                padding:4px 8px;
-                                                border-radius:5px;
-                                                background:rgba(56,189,248,.08);
-                                                border:1px solid rgba(56,189,248,.18);
-                                                color:#7dd3fc;
-                                                font-size:11px;
-                                            ">
+                                            <div style=" margin-top:6px; display:inline-block; padding:4px 8px; border-radius:5px; background:rgba(56,189,248,.08); border:1px solid rgba(56,189,248,.18); color:#7dd3fc; font-size:11px; ">
+
                                                 Closure :
                                                 <strong>
-                                                    <?= htmlspecialchars($item['closure_option_name']) ?>
+                                                    <?= htmlspecialchars(
+                                                        $item['closure_option_name']
+                                                    ) ?>
                                                 </strong>
+
                                             </div>
 
                                         <?php endif; ?>
 
 
-                                        <!-- INSERT IT HERE -->
-
-                                        <div style="
-                                            margin-top:6px;
-                                            color:#94a3b8;
-                                            font-size:11px;
-                                            line-height:1.6;
-                                        ">
+                                        <div style=" margin-top:6px; color:#94a3b8; font-size:11px; line-height:1.6; ">
 
                                             Product :
-                                            ₹<?= number_format($baseProductPrice,2) ?>
+                                            ₹<?= number_format(
+                                                $unitPrice - $attachedClosurePrice,
+                                                2
+                                            ) ?>
 
-                                            <?php if($closurePrice > 0): ?>
 
-                                            <br>
+                                            <?php if($attachedClosurePrice > 0): ?>
 
-                                            Closure :
-                                            ₹<?= number_format($closurePrice,2) ?>
+                                                <br>
 
-                                            <br>
+                                                Closure :
+                                                ₹<?= number_format(
+                                                    $attachedClosurePrice,
+                                                    2
+                                                ) ?>
 
-                                            <strong style="color:#38bdf8;">
-                                            Unit Price :
-                                            ₹<?= number_format($effectivePrice,2) ?>
-                                            </strong>
+
+                                                <br>
+
+                                                <strong style="color:#38bdf8;">
+
+                                                    Unit Price :
+                                                    ₹<?= number_format(
+                                                        $unitPrice,
+                                                        2
+                                                    ) ?>
+
+                                                </strong>
+
+                                            <?php else: ?>
+
+                                                <br>
+
+                                                Unit Price :
+                                                ₹<?= number_format(
+                                                    $unitPrice,
+                                                    2
+                                                ) ?>
 
                                             <?php endif; ?>
 
                                         </div>
 
-                                    </td>
-                                    
-                                    <td><span style="font-weight: 500; color: #f1f5f9;"><?= $item['quantity'] ?></span></td>
-                                    
-                                    <td>
-                                        <span style="font-size: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px; color: #94a3b8;">
-                                            <?= ucfirst($item['order_unit']) ?>
-                                        </span>
-                                    </td>
-                                    
-                                    <td><span style="color: #94a3b8; font-size: 13px;"><?= $item['gst_percent'] ?>%</span></td>
-                                    
-                                    <td class="text-end">
-                                        
-                                        <span style="font-weight: 600; font-family: monospace; color: #ffffff;">
-                                            ₹<?= number_format($itemTotal, 2) ?>
-                                        </span>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
+                                    <?php endif; ?>
+
+                                </td>
+
+
+                                <!-- ==========================================================
+                                    QUANTITY
+                                =========================================================== -->
+
+                                <td>
+
+                                    <span style="
+                                        font-weight:500;
+                                        color:#f1f5f9;
+                                    ">
+
+                                        <?= $quantity ?>
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- ==========================================================
+                                    TYPE
+                                =========================================================== -->
+
+                                <td>
+
+                                    <span style="
+                                        font-size:12px;
+                                        background:rgba(255,255,255,0.03);
+                                        border:1px solid rgba(255,255,255,0.06);
+                                        padding:2px 6px;
+                                        border-radius:4px;
+                                        color:#94a3b8;
+                                    ">
+
+                                        <?= ucfirst(
+                                            $item['order_unit'] ?: 'piece'
+                                        ) ?>
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- ==========================================================
+                                    GST
+                                =========================================================== -->
+
+                                <td>
+
+                                    <span style="
+                                        color:#94a3b8;
+                                        font-size:13px;
+                                    ">
+
+                                        <?= $gstPercent ?>%
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- ==========================================================
+                                    TOTAL
+                                =========================================================== -->
+
+                                <td class="text-end">
+
+                                    <span style="
+                                        font-weight:600;
+                                        font-family:monospace;
+                                        color:#ffffff;
+                                    ">
+
+                                        ₹<?= number_format(
+                                            $itemTotal,
+                                            2
+                                        ) ?>
+
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                        <?php endforeach; ?>
+
                         </tbody>
                     </table>
                 </div>

@@ -22,7 +22,7 @@ try {
 
         echo json_encode([
             'success' => false,
-            'message' => 'Invalid request.'
+            'message' => 'Invalid request data.'
         ]);
 
         exit;
@@ -31,7 +31,7 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | REQUEST VALUES
+    | EXTRACT DATA
     |--------------------------------------------------------------------------
     */
 
@@ -43,19 +43,6 @@ try {
 
     $search = trim($data['search'] ?? '');
 
-    $page = max(
-        1,
-        (int)($data['page'] ?? 1)
-    );
-
-    $perPage = 25;
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | VALIDATE PRODUCTS
-    |--------------------------------------------------------------------------
-    */
 
     if (empty($products)) {
 
@@ -70,7 +57,7 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | BUILD SAME FILTERS USED BY products.php
+    | GET THE CURRENT FILTERED PRODUCT SET
     |--------------------------------------------------------------------------
     */
 
@@ -79,27 +66,39 @@ try {
     $params = [];
 
 
-    /* CATEGORY */
+    /*
+    |--------------------------------------------------------------------------
+    | CATEGORY FILTER
+    |--------------------------------------------------------------------------
+    */
 
     if ($category > 0) {
 
-        $where[] = "products.category_id = ?";
+        $where[] = "category_id = ?";
 
         $params[] = $category;
     }
 
 
-    /* SUBCATEGORY */
+    /*
+    |--------------------------------------------------------------------------
+    | SUBCATEGORY FILTER
+    |--------------------------------------------------------------------------
+    */
 
     if ($subcategory > 0) {
 
-        $where[] = "products.subcategory_id = ?";
+        $where[] = "subcategory_id = ?";
 
         $params[] = $subcategory;
     }
 
 
-    /* SEARCH */
+    /*
+    |--------------------------------------------------------------------------
+    | SEARCH FILTER
+    |--------------------------------------------------------------------------
+    */
 
     if ($search !== '') {
 
@@ -107,10 +106,10 @@ try {
 
             $where[] = "
                 (
-                    products.id = ?
-                    OR products.name LIKE ?
-                    OR products.sku LIKE ?
-                    OR products.slug LIKE ?
+                    id = ?
+                    OR name LIKE ?
+                    OR sku LIKE ?
+                    OR slug LIKE ?
                 )
             ";
 
@@ -123,9 +122,9 @@ try {
 
             $where[] = "
                 (
-                    products.name LIKE ?
-                    OR products.sku LIKE ?
-                    OR products.slug LIKE ?
+                    name LIKE ?
+                    OR sku LIKE ?
+                    OR slug LIKE ?
                 )
             ";
 
@@ -135,6 +134,12 @@ try {
         }
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | BUILD WHERE
+    |--------------------------------------------------------------------------
+    */
 
     $whereSql = '';
 
@@ -147,27 +152,21 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | GET COMPLETE FILTERED PRODUCT LIST
+    | FETCH ALL PRODUCTS MATCHING CURRENT FILTER
     |--------------------------------------------------------------------------
     |
-    | IMPORTANT:
-    | We do NOT use LIMIT here.
+    | We intentionally do NOT use the current page here.
     |
-    | We need the complete filtered list so we know the exact database
-    | positions occupied by the products on the current page.
+    | The database needs the complete filtered set so that products
+    | outside the current pagination page keep their relative order.
     |
     */
 
     $stmt = $pdo->prepare("
-        SELECT
-            products.id,
-            products.display_order
+        SELECT id, display_order
         FROM products
         {$whereSql}
-        ORDER BY
-            products.category_id ASC,
-            products.display_order ASC,
-            products.id ASC
+        ORDER BY display_order ASC, id ASC
     ");
 
     $stmt->execute($params);
@@ -177,68 +176,7 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | CHECK TOTAL PRODUCTS
-    |--------------------------------------------------------------------------
-    */
-
-    $totalProducts = count($allProducts);
-
-    $totalPages = max(
-        1,
-        (int)ceil($totalProducts / $perPage)
-    );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | PREVENT INVALID PAGE
-    |--------------------------------------------------------------------------
-    */
-
-    if ($page > $totalPages) {
-
-        echo json_encode([
-            'success' => false,
-            'message' => 'Invalid page.'
-        ]);
-
-        exit;
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | DETERMINE CURRENT PAGE POSITIONS
-    |--------------------------------------------------------------------------
-    */
-
-    $pageOffset = ($page - 1) * $perPage;
-
-    $currentPageProducts = array_slice(
-        $allProducts,
-        $pageOffset,
-        $perPage
-    );
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | CREATE CURRENT PAGE ID LIST
-    |--------------------------------------------------------------------------
-    */
-
-    $currentPageIds = [];
-
-    foreach ($currentPageProducts as $product) {
-
-        $currentPageIds[] = (int)$product['id'];
-
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | READ DRAGGED ORDER
+    | CURRENT DRAGGED ORDER
     |--------------------------------------------------------------------------
     */
 
@@ -259,41 +197,93 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | VALIDATE THAT DRAGGED PRODUCTS BELONG TO CURRENT PAGE
+    | VALIDATE DRAGGED PRODUCTS
     |--------------------------------------------------------------------------
     */
 
-    $currentPageLookup = array_flip(
-        $currentPageIds
-    );
+    if (empty($draggedIds)) {
 
-    $validDraggedIds = [];
+        echo json_encode([
+            'success' => false,
+            'message' => 'Invalid product IDs.'
+        ]);
 
-    foreach ($draggedIds as $id) {
+        exit;
+    }
 
-        if (isset($currentPageLookup[$id])) {
 
-            $validDraggedIds[] = $id;
+    /*
+    |--------------------------------------------------------------------------
+    | CREATE ORDER MAP
+    |--------------------------------------------------------------------------
+    */
 
-        }
+    $existingIds = [];
+
+    foreach ($allProducts as $product) {
+
+        $existingIds[] = (int)$product['id'];
 
     }
 
 
     /*
     |--------------------------------------------------------------------------
-    | MAKE SURE WE RECEIVED THE EXPECTED PAGE
+    | ONLY ALLOW PRODUCTS FROM CURRENT FILTER
     |--------------------------------------------------------------------------
     */
 
-    if (count($validDraggedIds) !== count($currentPageIds)) {
+    $draggedIds = array_values(
+        array_intersect(
+            $draggedIds,
+            $existingIds
+        )
+    );
+
+
+    if (empty($draggedIds)) {
 
         echo json_encode([
             'success' => false,
-            'message' => 'The displayed product list has changed. Please refresh the page and try again.'
+            'message' => 'Products do not match the current filter.'
         ]);
 
         exit;
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | REBUILD ORDER
+    |--------------------------------------------------------------------------
+    |
+    | Start with the products in their existing database order.
+    |
+    | Then replace their positions with the new dragged order.
+    |
+    */
+
+    $finalOrder = [];
+
+    $draggedLookup = array_flip($draggedIds);
+
+    $dragIndex = 0;
+
+
+    foreach ($existingIds as $id) {
+
+        if (isset($draggedLookup[$id])) {
+
+            $finalOrder[] = $draggedIds[$dragIndex];
+
+            $dragIndex++;
+
+        } else {
+
+            $finalOrder[] = $id;
+
+        }
+
     }
 
 
@@ -306,28 +296,6 @@ try {
     $pdo->beginTransaction();
 
 
-    /*
-    | Get the exact display-order values occupied by the current page.
-    |
-    | We reuse these values rather than generating new global values.
-    |
-    */
-
-    $pageOrders = [];
-
-    foreach ($currentPageProducts as $product) {
-
-        $pageOrders[] = (int)$product['display_order'];
-
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | UPDATE ONLY CURRENT PAGE
-    |--------------------------------------------------------------------------
-    */
-
     $updateStmt = $pdo->prepare("
         UPDATE products
         SET display_order = ?
@@ -335,10 +303,10 @@ try {
     ");
 
 
-    foreach ($validDraggedIds as $index => $productId) {
+    foreach ($finalOrder as $index => $productId) {
 
         $updateStmt->execute([
-            $pageOrders[$index],
+            $index + 1,
             $productId
         ]);
 
@@ -356,8 +324,7 @@ try {
 
     echo json_encode([
         'success' => true,
-        'message' => 'Product order saved successfully.',
-        'page' => $page
+        'message' => 'Product order saved successfully.'
     ]);
 
 } catch (Throwable $e) {
@@ -368,10 +335,12 @@ try {
 
     }
 
+
     http_response_code(500);
 
     echo json_encode([
         'success' => false,
         'message' => 'Unable to save product order.'
     ]);
+
 }

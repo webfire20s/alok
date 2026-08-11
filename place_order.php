@@ -33,7 +33,8 @@ if($userId){
             products.price,
 
             closure_options.name AS closure_name,
-            closure_options.price AS closure_price
+            closure_options.price AS closure_price,
+            closure_options.image AS closure_image
 
         FROM cart
 
@@ -60,7 +61,8 @@ if($userId){
             products.price,
 
             closure_options.name AS closure_name,
-            closure_options.price AS closure_price
+            closure_options.price AS closure_price,
+            closure_options.image AS closure_image
 
         FROM cart
 
@@ -154,25 +156,60 @@ $totalGST = 0;
 
 foreach($cartItems as $item){
 
-    $qty = $item['quantity'];
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCT
+    |--------------------------------------------------------------------------
+    */
+
+    $qty = (int)$item['quantity'];
 
     $productPrice = (float)$item['price'];
 
-    $closurePrice = (float)($item['closure_price'] ?? 0);
+    $gstPercent = (float)$item['gst_percent'];
 
-    $price = $productPrice + $closurePrice;
+    $productSubtotal =
+        $productPrice * $qty;
 
-    $gstPercent = $item['gst_percent'];
+    $productGST =
+        ($productSubtotal * $gstPercent) / 100;
 
-    $lineSubtotal =
-    $price * $qty;
 
-    $gstAmount =
-    ($lineSubtotal * $gstPercent) / 100;
+    /*
+    |--------------------------------------------------------------------------
+    | CLOSURE
+    |--------------------------------------------------------------------------
+    */
 
-    $subtotal += $lineSubtotal;
+    $closurePrice =
+        (float)($item['closure_price'] ?? 0);
 
-    $totalGST += $gstAmount;
+    $closureQty =
+        max(
+            0,
+            (int)($item['closure_quantity'] ?? 0)
+        );
+
+    $closureSubtotal =
+        $closurePrice * $closureQty;
+
+    $closureGST =
+        ($closureSubtotal * $gstPercent) / 100;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | TOTALS
+    |--------------------------------------------------------------------------
+    */
+
+    $subtotal +=
+        $productSubtotal +
+        $closureSubtotal;
+
+    $totalGST +=
+        $productGST +
+        $closureGST;
 }
 
 $grandTotal =
@@ -319,43 +356,55 @@ $orderId = $pdo->lastInsertId();
 | INSERT ORDER ITEMS
 |--------------------------------------------------------------------------
 */
+/*
+|--------------------------------------------------------------------------
+| INSERT ORDER ITEMS
+|--------------------------------------------------------------------------
+*/
 
 foreach($cartItems as $item){
 
-    $qty = $item['quantity'];
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCT
+    |--------------------------------------------------------------------------
+    */
 
-    $productPrice = (float)$item['price'];
+    $qty =
+        (int)$item['quantity'];
 
-    $closurePrice = (float)($item['closure_price'] ?? 0);
+    $productPrice =
+        (float)$item['price'];
 
-    $price = $productPrice + $closurePrice;
+    $gstPercent =
+        (float)$item['gst_percent'];
 
-    $gstPercent = $item['gst_percent'];
+    $productSubtotal =
+        $productPrice * $qty;
 
-    $lineSubtotal =
-    $price * $qty;
+    $productGST =
+        ($productSubtotal * $gstPercent) / 100;
 
-    $gstAmount =
-    ($lineSubtotal * $gstPercent) / 100;
+    $productTotal =
+        $productSubtotal + $productGST;
 
-    $lineTotal =
-    $lineSubtotal + $gstAmount;
+
+    /*
+    |--------------------------------------------------------------------------
+    | INSERT PRODUCT
+    |--------------------------------------------------------------------------
+    */
 
     $itemStmt = $pdo->prepare("
         INSERT INTO order_items (
-
             order_id,
             product_id,
             closure_option_id,
-
             product_name,
             closure_option_name,
-
             product_image,
-
             price,
             closure_option_price,
-
             quantity,
             order_unit,
             pieces_per_box,
@@ -363,36 +412,113 @@ foreach($cartItems as $item){
             line_total
 
         ) VALUES (
-
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
-
+            ?, ?, NULL,
+            ?, NULL,
+            ?,
+            ?, 0,
+            ?, ?, ?,
+            ?,
+            ?
         )
     ");
 
     $itemStmt->execute([
-
         $orderId,
-
         $item['product_id'],
-        $item['closure_option_id'],
-
         $item['name'],
-        $item['closure_name'],
-
         $item['image'],
-
-        $price,
-        $item['closure_price'] ?? 0,
-
+        $productPrice,
         $qty,
         $item['order_unit'],
         $item['pieces_per_box'],
         $gstPercent,
-        $lineTotal
-
+        $productTotal
     ]);
-}
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | INSERT CLOSURE AS SEPARATE LINE ITEM
+    |--------------------------------------------------------------------------
+    */
+
+    $closureOptionId =
+        !empty($item['closure_option_id'])
+            ? (int)$item['closure_option_id']
+            : null;
+
+    $closureName =
+        $item['closure_name'] ?? null;
+
+    $closureImage =
+        $item['closure_image'] ?? null;
+
+    $closurePrice =
+        (float)($item['closure_price'] ?? 0);
+
+    $closureQty =
+        max(
+            0,
+            (int)($item['closure_quantity'] ?? 0)
+        );
+
+
+    if(
+        $closureOptionId &&
+        $closurePrice > 0 &&
+        $closureQty > 0
+    ){
+
+        $closureSubtotal =
+            $closurePrice * $closureQty;
+
+        $closureGST =
+            ($closureSubtotal * $gstPercent) / 100;
+
+        $closureTotal =
+            $closureSubtotal + $closureGST;
+
+        $closureStmt = $pdo->prepare("
+            INSERT INTO order_items (
+
+                order_id,
+                product_id,
+                closure_option_id,
+                product_name,
+                closure_option_name,
+                product_image,
+                price,
+                closure_option_price,
+                quantity,
+                order_unit,
+                pieces_per_box,
+                gst_percent,
+                line_total
+
+            ) VALUES (
+                ?, NULL, ?,
+                NULL, ?,
+                ?,
+                ?, ?,
+                ?, 'piece', 1,
+                ?,
+                ?
+            )
+        ");
+
+        $closureStmt->execute([
+            $orderId,
+            $closureOptionId,
+            $closureName,
+            $closureImage,
+            $closurePrice,
+            $closurePrice,
+            $closureQty,
+            $gstPercent,
+            $closureTotal
+        ]);
+    }
+}
 /*
 |--------------------------------------------------------------------------
 | CLEAR CART

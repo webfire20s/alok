@@ -28,7 +28,8 @@ if($userId){
             products.slug,
             products.price,
             closure_options.name AS closure_name,
-            closure_options.price AS closure_price
+            closure_options.price AS closure_price,
+            closure_options.image AS closure_image
         FROM cart
         JOIN products
         ON cart.product_id = products.id
@@ -50,7 +51,8 @@ if($userId){
             products.slug,
             products.price,
             closure_options.name AS closure_name,
-            closure_options.price AS closure_price
+            closure_options.price AS closure_price,
+            closure_options.image AS closure_image
         FROM cart
         JOIN products
         ON cart.product_id = products.id
@@ -365,18 +367,88 @@ $shippingMethods = $methodStmt->fetchAll();
                     <?php foreach($cartItems as $item): ?>
 
                         <?php
-                        $qty = $item['quantity'];
+                        $qty = (int)$item['quantity'];
+
                         $productPrice = (float)$item['price'];
+
                         $closurePrice = (float)($item['closure_price'] ?? 0);
 
-                        $price = $productPrice + $closurePrice;
-                        $gstPercent = $item['gst_percent'];
-                        
-                        $lineSubtotal = $price * $qty;
-                        $gstAmount = ($lineSubtotal * $gstPercent) / 100;
-                        $lineTotal = $lineSubtotal + $gstAmount;
-                        
+                        $closureQty = max(
+                            1,
+                            (int)($item['closure_quantity'] ?? $qty)
+                        );
+
+                        $gstPercent = (float)$item['gst_percent'];
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | PRODUCT CALCULATION
+                        |--------------------------------------------------------------------------
+                        */
+
+                        $productSubtotal =
+                            $productPrice * $qty;
+
+                        $productGST =
+                            ($productSubtotal * $gstPercent) / 100;
+
+                        $productTotal =
+                            $productSubtotal + $productGST;
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | CLOSURE CALCULATION
+                        |--------------------------------------------------------------------------
+                        */
+
+                        $closureSubtotal = 0;
+
+                        $closureGST = 0;
+
+                        $closureTotal = 0;
+
+                        if(!empty($item['closure_name']) && $closurePrice > 0){
+
+                            $closureSubtotal =
+                                $closurePrice * $closureQty;
+
+                            $closureGST =
+                                ($closureSubtotal * $gstPercent) / 100;
+
+                            $closureTotal =
+                                $closureSubtotal + $closureGST;
+                        }
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | COMBINED LINE TOTAL
+                        |--------------------------------------------------------------------------
+                        */
+
+                        $lineSubtotal =
+                            $productSubtotal +
+                            $closureSubtotal;
+
+                        $gstAmount =
+                            $productGST +
+                            $closureGST;
+
+                        $lineTotal =
+                            $productTotal +
+                            $closureTotal;
+
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | CHECKOUT TOTALS
+                        |--------------------------------------------------------------------------
+                        */
+
                         $subtotal += $lineSubtotal;
+
                         $totalGST += $gstAmount;
                         ?>
 
@@ -401,7 +473,15 @@ $shippingMethods = $methodStmt->fetchAll();
                                         <?= htmlspecialchars($item['closure_name']) ?>
 
                                         <?php if($item['closure_price'] > 0): ?>
-                                            (+₹<?= number_format($item['closure_price'],2) ?>)
+
+                                            <br>
+
+                                            <span style="font-size:11px;color:#777;">
+                                                Qty: <?= $closureQty ?>
+                                                ×
+                                                ₹<?= number_format($closurePrice,2) ?>
+                                            </span>
+
                                         <?php endif; ?>
 
                                     </small>

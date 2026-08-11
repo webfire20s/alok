@@ -394,37 +394,34 @@ $sr = $offset + 1;
                     >
 
                         <tr>
-                            <th class="px-3 py-3" style="width: 6%; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
                                 ID
                             </th>
 
-                            <th class="px-3 py-3" style="width: 12%; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
                                 Silhouette
                             </th>
 
-                            <th class="px-3 py-3" style="width: 26%; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
                                 Product Specifications
                             </th>
 
-                            <th class="px-3 py-3" style="width: 14%; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">                            
                                 Category
                             </th>
 
-                            <th class="px-3 py-3" style="width: 10%; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
-                                Homepage
-                            </th>
-
-                            <th class="px-3 py-3" style="width: 12%; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
                                 Base Unit Price
                             </th>
 
-                            <th class="px-3 py-3" style="width: 10%; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                            <th class="py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
                                 Batch Stock
                             </th>
 
-                            <th class="text-center px-3 py-3" style="width: 10%; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
+                            <th class="text-center py-3" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600;">
                                 Control Panel
                             </th>
+
                         </tr>
 
                     </thead>
@@ -438,22 +435,23 @@ $sr = $offset + 1;
                             <tr
                                 data-id="<?= $product['id'] ?>"
                                 data-category="<?= $product['category_id'] ?>"
-                                style="border-bottom: 1px solid rgba(255,255,255,.03); cursor: move;"
+                                style="border-bottom: 1px solid rgba(255,255,255,.03);cursor:move;"
                             >
 
-                                <!-- ID -->
-                                <td class="px-3 py-3 align-middle" style="width: 6%;">
+                                <td class="px-4">
+
                                     <span style="font-size: 13px; font-family: monospace; color: #475569; font-weight: 600;">
                                         #<?= $sr++ ?>
                                     </span>
+
                                 </td>
 
-                                <!-- Silhouette -->
-                                <td class="px-3 py-3 align-middle" style="width: 12%;">
+                                <td width="110">
+
                                     <div
                                         style="
-                                            width: 56px;
-                                            height: 56px;
+                                            width: 64px;
+                                            height: 64px;
                                             overflow: hidden;
                                             border-radius: 8px;
                                             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -464,6 +462,7 @@ $sr = $offset + 1;
                                             padding: 4px;
                                         "
                                     >
+
                                         <img
                                             src="../<?= htmlspecialchars($product['image']) ?>"
                                             class="product-thumb"
@@ -475,31 +474,40 @@ $sr = $offset + 1;
                                                 filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
                                             "
                                         >
+
                                     </div>
+
                                 </td>
 
-                                <!-- Product Specifications -->
-                                <td class="px-3 py-3 align-middle" style="width: 26%;">
+                                <td>
+
                                     <div
                                         style="
                                             font-weight: 600;
-                                            font-size: 14.5px;
+                                            font-size: 15px;
                                             color: #ffffff;
                                             line-height: 1.4;
                                         "
                                     >
+
                                         <?= htmlspecialchars($product['name']) ?>
+
                                     </div>
 
                                     <?php if(!empty($product['sku'])): ?>
+
                                         <div style="font-size: 11px; color: #475569; margin-top: 2px; font-family: monospace; letter-spacing: 0.02em;">
+
                                             REF-ID: <?= htmlspecialchars($product['sku']) ?>
+
                                         </div>
+
                                     <?php endif; ?>
+
                                 </td>
 
-                                <!-- Category -->
-                                <td class="px-3 py-3 align-middle" style="width: 14%;">
+                                <td>
+
                                     <span
                                         class="badge px-3 py-2"
                                         style="
@@ -511,39 +519,33 @@ $sr = $offset + 1;
                                             border-radius: 6px;
                                         "
                                     >
+
                                         <?= htmlspecialchars($product['category_name']) ?>
+
                                     </span>
+
                                 </td>
 
-                                <!-- Homepage -->
-                                <td class="px-3 py-3 align-middle" style="width: 10%;">
-                                    <?php if($product['show_on_home']): ?>
-                                        <span class="badge px-3 py-2" style="font-size: 12px; background: rgba(16,185,129,.10); color: #10b981; border: 1px solid rgba(16,185,129,.15); font-weight: 500; border-radius: 6px;">
-                                            Selected
-                                        </span>
-                                    <?php else: ?>
-                                        <span class="badge px-3 py-2" style="font-size: 12px; background: rgba(255,255,255,.03); color: #64748b; border: 1px solid rgba(255,255,255,.05); font-weight: 500; border-radius: 6px;">
-                                            Not Selected
-                                        </span>
-                                    <?php endif; ?>
-                                </td>
+                                <td>
 
-                                <!-- Base Unit Price -->
-                                <td class="px-3 py-3 align-middle" style="width: 12%;">
                                     <strong
                                         style="
-                                            font-size: 14.5px;
+                                            font-size: 15px;
                                             color: #ffffff;
                                             font-weight: 600;
                                         "
                                     >
+
                                         ₹<?= number_format($product['price'], 2) ?>
+
                                     </strong>
+
                                 </td>
 
-                                <!-- Batch Stock -->
-                                <td class="px-3 py-3 align-middle" style="width: 10%;">
+                                <td>
+
                                     <?php if($product['stock'] > 0): ?>
+
                                         <span
                                             class="badge px-3 py-2"
                                             style="
@@ -557,7 +559,9 @@ $sr = $offset + 1;
                                         >
                                             <?= $product['stock'] ?> Units
                                         </span>
+
                                     <?php else: ?>
+
                                         <span
                                             class="badge px-3 py-2"
                                             style="
@@ -571,19 +575,21 @@ $sr = $offset + 1;
                                         >
                                             Depleted
                                         </span>
+
                                     <?php endif; ?>
+
                                 </td>
 
-                                <!-- Control Panel -->
-                                <td class="text-center px-3 py-3 align-middle" style="width: 10%;">
-                                    <div class="d-flex justify-content-center align-items-center" style="gap: 8px;">
-                                        <a href="edit_product.php?id=<?= $product['id'] ?>" class="btn btn-sm px-2.5 py-1.5"
+                                <td class="text-center">
+
+                                    <div class="d-flex justify-content-center align-items-center" style=" gap: 8px; " >
+                                        <a href="edit_product.php?id=<?= $product['id'] ?>" class="btn btn-sm px-3 py-1.5"
                                             style="
                                                 background: rgba(255,255,255,0.03);
                                                 color: #e2e8f0;
                                                 border: 1px solid rgba(255,255,255,0.08);
                                                 font-weight: 500;
-                                                font-size: 12.5px;
+                                                font-size: 13px;
                                                 border-radius: 6px;
                                                 transition: all 0.2s;
                                             "
@@ -593,23 +599,25 @@ $sr = $offset + 1;
                                             Edit
                                         </a>
 
-                                        <a href="delete_product.php?id=<?= $product['id'] ?>" class="btn btn-sm px-2.5 py-1.5"
+                                        <a href="delete_product.php?id=<?= $product['id'] ?>" class="btn btn-sm px-3 py-1.5"
                                             style="
                                                 background: rgba(239, 68, 68, 0.05);
                                                 color: #f87171;
                                                 border: 1px solid rgba(239, 68, 68, 0.1);
                                                 font-weight: 500;
-                                                font-size: 12.5px;
+                                                font-size: 13px;
                                                 border-radius: 6px;
                                                 transition: all 0.2s;
                                             "
-                                            onmouseover="this.style.background='rgba(239, 68, 68, 0.15)';"
-                                            onmouseout="this.style.background='rgba(239, 68, 68, 0.05)';"
-                                            onclick="return confirm('Delete this product?');"
+                                            onmouseover="this.style.background='rgba(239, 68, 68, 0.15)'"
+                                            onmouseout="this.style.background='rgba(239, 68, 68, 0.05)'"
+                                            onclick="return confirm('Delete this product?')"
                                         >
                                             Delete
                                         </a>
+
                                     </div>
+
                                 </td>
 
                             </tr>
@@ -750,11 +758,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     subcategory: subcategory,
 
-                    search: search,
-
-                    page: parseInt(
-                        urlParams.get("page") || "1"
-                    )
+                    search: search
 
                 })
 

@@ -36,11 +36,17 @@ if(!$order){
 $itemStmt = $pdo->prepare("
     SELECT
         order_items.*,
-        closure_options.name AS closure_option_name
+
+        closure_options.name AS closure_option_name,
+        closure_options.image AS closure_option_image
+
     FROM order_items
+
     LEFT JOIN closure_options
         ON order_items.closure_option_id = closure_options.id
+
     WHERE order_items.order_id = ?
+    ORDER BY order_items.id ASC
 ");
 
 $itemStmt->execute([$orderId]);
@@ -218,80 +224,288 @@ $pdf->Cell(42, 10, 'Total', 1, 1, 'C', true);
 |--------------------------------------------------------------------------
 */
 
+/*
+|--------------------------------------------------------------------------
+| TABLE ITEMS
+|--------------------------------------------------------------------------
+*/
+
 $pdf->SetFont('Arial', '', 10);
 
 foreach($items as $item){
 
-    $productPrice = (float)$item['price'];
+    /*
+    |--------------------------------------------------------------------------
+    | DETERMINE ITEM TYPE
+    |--------------------------------------------------------------------------
+    |
+    | Normal product:
+    | product_id exists
+    |
+    | Closure:
+    | product_id is NULL
+    | closure_option_id exists
+    |
+    */
 
-    $closurePrice = (float)($item['closure_option_price'] ?? 0);
+    $isClosure =
+        empty($item['product_id']) &&
+        !empty($item['closure_option_id']);
 
-    // Price already includes closure price
-    $effectivePrice = $productPrice;
 
-    $productOnlyPrice = $effectivePrice - $closurePrice;
+    /*
+    |--------------------------------------------------------------------------
+    | CLOSURE ITEM
+    |--------------------------------------------------------------------------
+    */
 
-    $startX = $pdf->GetX();
-    $startY = $pdf->GetY();
+    if($isClosure){
 
-    $productText = $item['product_name'];
+        $closureName =
+            !empty($item['closure_option_name'])
+                ? $item['closure_option_name']
+                : 'Closure';
 
-    if($closurePrice > 0){
 
-        $productText .= "\nClosure : " . $item['closure_option_name'];
+        $closurePrice =
+            (float)$item['closure_option_price'];
 
-        // $productText .= "\nProduct : Rs. " . number_format($productOnlyPrice,2);
 
-        $productText .= "\nClosure : Rs. " . number_format($closurePrice,2);
+        $closureQty =
+            (int)$item['quantity'];
 
-        $productText .= "\nUnit : Rs. " . number_format($effectivePrice,2);
 
+        $closureGST =
+            (float)$item['gst_percent'];
+
+
+        $closureTotal =
+            (float)$item['line_total'];
+
+
+        $productText =
+            'Closure : ' . $closureName;
+
+
+        $rowHeight = 10;
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | PRODUCT NAME
+        |--------------------------------------------------------------------------
+        */
+
+        $pdf->Cell(
+            60,
+            $rowHeight,
+            $productText,
+            1,
+            0,
+            'L'
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | QUANTITY
+        |--------------------------------------------------------------------------
+        */
+
+        $pdf->Cell(
+            18,
+            $rowHeight,
+            $closureQty,
+            1,
+            0,
+            'C'
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | TYPE
+        |--------------------------------------------------------------------------
+        */
+
+        $pdf->Cell(
+            25,
+            $rowHeight,
+            'Piece',
+            1,
+            0,
+            'C'
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | PRICE
+        |--------------------------------------------------------------------------
+        */
+
+        $pdf->Cell(
+            25,
+            $rowHeight,
+            'Rs. ' . number_format($closurePrice, 2),
+            1,
+            0,
+            'R'
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | GST
+        |--------------------------------------------------------------------------
+        */
+
+        $pdf->Cell(
+            20,
+            $rowHeight,
+            $closureGST . '%',
+            1,
+            0,
+            'C'
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | TOTAL
+        |--------------------------------------------------------------------------
+        */
+
+        $pdf->Cell(
+            42,
+            $rowHeight,
+            'Rs. ' . number_format($closureTotal, 2),
+            1,
+            1,
+            'R'
+        );
+
+
+        continue;
     }
 
-    $rowHeight = ($closurePrice > 0) ? 24 : 10;
 
-    $pdf->MultiCell(
+    /*
+    |--------------------------------------------------------------------------
+    | NORMAL PRODUCT
+    |--------------------------------------------------------------------------
+    */
+
+    $productPrice =
+        (float)$item['price'];
+
+
+    $quantity =
+        (int)$item['quantity'];
+
+
+    $gstPercent =
+        (float)$item['gst_percent'];
+
+
+    $lineTotal =
+        (float)$item['line_total'];
+
+
+    $productText =
+        $item['product_name'];
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCT ROW
+    |--------------------------------------------------------------------------
+    */
+
+    $pdf->Cell(
         60,
-        6,
+        10,
         $productText,
-        1
+        1,
+        0,
+        'L'
     );
 
-    $pdf->SetXY($startX + 60, $startY);
 
-    $pdf->Cell(18,$rowHeight,$item['quantity'],1,0,'C');
+    /*
+    |--------------------------------------------------------------------------
+    | QUANTITY
+    |--------------------------------------------------------------------------
+    */
+
+    $pdf->Cell(
+        18,
+        10,
+        $quantity,
+        1,
+        0,
+        'C'
+    );
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | ORDER UNIT
+    |--------------------------------------------------------------------------
+    */
 
     $pdf->Cell(
         25,
-        $rowHeight,
+        10,
         ucfirst($item['order_unit']),
         1,
         0,
         'C'
     );
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCT PRICE
+    |--------------------------------------------------------------------------
+    */
+
     $pdf->Cell(
         25,
-        $rowHeight,
-        'Rs. '.number_format($effectivePrice,2),
+        10,
+        'Rs. ' . number_format($productPrice, 2),
         1,
         0,
         'R'
     );
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | GST
+    |--------------------------------------------------------------------------
+    */
+
     $pdf->Cell(
         20,
-        $rowHeight,
-        $item['gst_percent'].'%',
+        10,
+        $gstPercent . '%',
         1,
         0,
         'C'
     );
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | PRODUCT TOTAL
+    |--------------------------------------------------------------------------
+    */
+
     $pdf->Cell(
         42,
-        $rowHeight,
-        'Rs. '.number_format($item['line_total'],2),
+        10,
+        'Rs. ' . number_format($lineTotal, 2),
         1,
         1,
         'R'
@@ -332,7 +546,7 @@ $pdf->Cell(
 |--------------------------------------------------------------------------
 */
 
-$pdf->Cell(148, 8, 'Product GST', 1);
+$pdf->Cell(148, 8, 'GST Total', 1);
 
 $pdf->Cell(
     42,
