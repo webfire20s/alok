@@ -443,11 +443,13 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
             display:block;
         }
 
-        .submenu-toggle::after{
-            content:"›";
-            float:right;
-            color:#999;
-            font-size:18px;
+        .submenu-toggle::after {
+            content: "›";
+            display: inline-block;
+            margin-left: 6px; /* Adjust spacing between text and arrow as needed */
+            color: #999;
+            font-size: 18px;
+            line-height: 1;
         }
 
         .dropdown-item{

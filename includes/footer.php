@@ -207,6 +207,57 @@
             transform: translateY(-2px);
         }
     }
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+        position: fixed;
+        right: 25px;
+        bottom: 25px;
+        width: 65px;
+        height: 65px;
+        color: #fff;
+        background: #25D366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 10px 30px rgba(37, 211, 102, .35);
+        z-index: 99999;
+        transition: transform .3s ease, box-shadow .3s ease;
+        animation: whatsappPulse 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+        transform: translateY(-5px) scale(1.08);
+        box-shadow: 0 15px 40px rgba(37, 211, 102, .5);
+    }
+
+    @keyframes whatsappPulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, .55);
+        }
+        70% {
+            box-shadow: 0 0 0 18px rgba(37, 211, 102, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+        }
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .whatsapp-float {
+            width: 58px;
+            height: 58px;
+            right: 15px;
+            bottom: 15px;
+        }
+
+        .whatsapp-float svg {
+            width: 28px;
+            height: 28px;
+        }
+    }
 </style>
 
 <footer class="lt-gray-bg mt-5 alok-industrial-footer">
@@ -335,7 +386,26 @@ function googleTranslateElementInit() {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/917037677289"
+   class="whatsapp-float"
+   target="_blank"
+   aria-label="Chat on WhatsApp">
 
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="32"
+         height="32"
+         viewBox="0 0 32 32"
+         fill="white">  
+
+        <!-- Centered Inner Phone Handle -->
+        <path d="M20.96 17.71c-.29-.15-1.72-.85-1.99-.95-.27-.1-.47-.15-.67.15-.2.29-.77.95-.94 1.14-.17.2-.35.22-.64.07-.29-.15-1.23-.45-2.34-1.43-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.44.13-.59.13-.13.29-.35.44-.52.15-.17.2-.29.3-.49.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.29-1.03 1.01-1.03 2.46 0 1.45 1.05 2.86 1.2 3.05.15.2 2.07 3.17 5.02 4.45.7.3 1.25.48 1.67.62.7.22 1.34.19 1.84.12.56-.08 1.72-.7 1.96-1.37.24-.67.24-1.25.17-1.37-.07-.12-.27-.2-.56-.35z"/>
+        
+        <!-- Outer Speech Bubble Chassis -->
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 3C8.82 3 3 8.82 3 16c0 2.54.75 5.01 2.16 7.12L3.5 28.5l5.52-1.62A12.92 12.92 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm0 23.6c-2.06 0-4.08-.56-5.84-1.63l-.42-.25-3.27.96.97-3.19-.28-.44A10.55 10.55 0 0 1 5.4 16C5.4 10.15 10.15 5.4 16 5.4S26.6 10.15 26.6 16 21.85 26.6 16 26.6z"/>
+    </svg>
+
+</a>
 </body> 
 </html>
 
