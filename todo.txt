@@ -1,3 +1,30 @@
+DB FILE CODE 
+<?php
+
+$host = "localhost";
+$dbname = "alokwebfiredegit_main1";
+$username = "alokwebfiredegit_alokglassweb";
+$password = "FVv_gJ-4@-X~[YHI";
+
+try {
+    $pdo = new PDO(
+        "mysql:host=$host;dbname=$dbname;charset=utf8",
+        $username,
+        $password
+    );
+
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+} catch(PDOException $e) {
+    die("Database Connection Failed: " . $e->getMessage());
+}
+
+
+
+
+
+
+
 for home page
 header drop down , double dots , stats , catalogs name changed and separate section for company profile and client protfolio , search bar me spacing theek kardi , category sidebar category space thek krdi , sku availability theek krdi ,products drag sorting fixed , navbar spacing and sequence done , weight show done , decoration-services me watch se leke sab commented out ,  resources ke changes done , email id changed , 
 slide effect on all home page categorised products , show on home or not selection done , separate page for catalogs done with admin control , CLOSURE BE TREATED AS SEPARATE AND CAN BE QUANTITY UPDATED DONE , 

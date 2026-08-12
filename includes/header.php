@@ -671,492 +671,484 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
         
 </head>
 
-    <body
-    class="page-template ltr"
-    data-theme-color="#11141a"
-    style="--color-primary: #11141a;
-            --color-primary-hover: #2c323e;
-            --color-primary-transparent: rgba(17, 20, 26, 0.8);
-            --color-primary-transparent-lite: rgba(17, 20, 26, 0.15);"
-    onload="titleMarquee()"
->
+<body class="page-template ltr" data-theme-color="#11141a" style="--color-primary: #11141a; --color-primary-hover: #2c323e; --color-primary-transparent: rgba(17, 20, 26, 0.8); --color-primary-transparent-lite: rgba(17, 20, 26, 0.15);" onload="titleMarquee()">
     <div class="wrapper" id="app">
-          
-    <!-- Header Start -->
-    <!-- Enhanced announcement layout with a sophisticated, subtle cream background and high-contrast typography -->
-    <div class="head-inform-bar" style="background: linear-gradient(90deg, #fdf8f4 0%, #f7d3b5 50%, #fdf8f4 100%); border-bottom: 1px solid rgba(200, 35, 44, 0.12); padding: 11px 0; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
-        <p class="announcement-text" style="color: #c8232c; font-weight: 700; margin: 0; font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase;">
-            The minimum order value is only Rs 15,000/- now!
-        </p>
-        <div id="google_translate_element"
-            style="margin-left:18px; min-width:160px;">
-        </div>
-    </div>
-
-    <header style="background-color: #ffffff; padding: 12px 0; border-bottom: 1px solid #f1f3f5; box-shadow: 0 4px 20px rgba(0,0,0,0.01);">
-        <div class="container">
-            <div class="row" style="align-items: center;">
-                <div class="col-md-4 txtm-center only-desktop">
-                    <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
-                        <a href="index.php" class="header-logo-link" style="display: inline-block;">
-                            <img
-                                src="assets/themes/storefront/public/images/logo.jpeg?v=2.0.3"
-                                alt="Alok Glass"
-                                style="
-                                    height: 90px;
-                                    width: auto;
-                                    object-fit: contain;
-                                    display: block;
-                                "
-                            >
-                        </a>
-
-                        <!-- Fine divider to separate the structural logos professionally with custom background flow -->
-                        <div class="header-logo-divider"></div>
-
-                        <a href="index.php" class="header-logo-link" style="display: inline-block; filter: grayscale(0) contrast(1.15); opacity: 1.0;">
-                            <img
-                                src="assets/themes/storefront/public/images/50yrstrust.png?v=2.0.3"
-                                alt="50 Years Trust"
-                                style="
-                                    height: 60px;
-                                    width: auto;
-                                    object-fit: contain;
-                                    display: block;
-                                "
-                            >
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="col-12 text-left only-mobile">
-                    
-                    <!-- Navigation Start -->
-                    <nav class="navbar navbar-expand-lg navbar-light" style="padding: 10px 0; background: #ffffff;">
-                        
-                        <!-- Flex layout container for responsive brand balancing -->
-                        <div class="d-flex align-items-center" style="gap: 12px; max-width: 70%;">
-                            <a class="navbar-brand header-logo-link" href="index.php" style="margin: 0; padding: 0;">
-                                <img src="assets/themes/storefront/public/images/logo.jpeg?v=2.0.3" alt="Alok Glass Works" style="height: 45px; width: auto; object-fit: contain;" />
-                            </a>
-                            <div style="height: 25px; width: 1px; background-color: #e2e4e8;"></div>
-                            <a href="index.php" class="header-logo-link" style="display: inline-block; filter: grayscale(1) contrast(1.1); opacity: 0.85;">
-                                <img src="assets/themes/storefront/public/images/40-years-trust2e8da.png?v=2.0.3" alt="40 Years Trust" style="height: 35px; width: auto; object-fit: contain;" />
-                            </a>
-                            <div id="google_translate_element"
-                                style="margin-left:18px; min-width:160px;">
-                            </div>
-                        </div>
-
-                        <div id="google_translate_element_mobile"
-                            style="margin-left:auto; margin-right:12px;">
-                        </div>
-                        
-                        <!-- Fixed Toggler Button: Changed data-toggle and data-target to data-bs-toggle and data-bs-target -->
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" style="border: none; background: transparent; padding: 4px 0; outline: none !important;">
-                            <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 0.05em; margin-right: 4px; color: #11141a; vertical-align: middle;">MENU</span>
-                            <span class="navbar-toggler-icon" style="width: 20px; height: 20px; vertical-align: middle;"></span>
-                        </button>
-
-                        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
-                            <ul class="navbar-nav" style="padding-top: 15px;">
-
-                                <!-- Fixed Dropdown Link: Changed data-bs-toggle to data-toggle -->
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="index.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
-                                        Home
-                                    </a>
-                                </li>
-                            
-                                <!-- Shop By Product -->
-                                <li class="nav-item">
-
-                                    <a href="#" class="nav-link mobile-main-toggle">
-                                        Shop By Product
-                                        <span class="float-right">+</span>
-                                    </a>
-
-                                    <div class="mobile-product-menu">
-
-                                        <?php foreach($navCategories as $cat): ?>
-
-                                            <?php $subs = $groupedSubcategories[$cat['id']] ?? []; ?>
-
-                                            <?php if(!empty($subs)): ?>
-
-                                                <div class="mobile-category">
-
-                                                    <div class="mobile-category-header">
-
-                                                        <a href="category/<?= urlencode($cat['slug']) ?>">
-                                                            <?= htmlspecialchars($cat['name']) ?>
-                                                        </a>
-
-                                                        <span class="mobile-sub-toggle">+</span>
-
-                                                    </div>
-
-                                                    <div class="mobile-subcategory">
-
-                                                        <a href="category/<?= urlencode($cat['slug']) ?>">
-                                                            All Products
-                                                        </a>
-
-                                                        <?php foreach($subs as $sub): ?>
-
-                                                            <a href="category/<?= urlencode($cat['slug']) ?>?sub=<?= $sub['id'] ?>">
-                                                                <?= htmlspecialchars($sub['name']) ?>
-                                                            </a>
-
-                                                        <?php endforeach; ?>
-
-                                                    </div>
-
-                                                </div>
-
-                                            <?php else: ?>
-
-                                                <a
-                                                    class="mobile-single-category"
-                                                    href="category/<?= urlencode($cat['slug']) ?>"
-                                                >
-                                                    <?= htmlspecialchars($cat['name']) ?>
-                                                </a>
-
-                                            <?php endif; ?>
-
-                                        <?php endforeach; ?>
-
-                                    </div>
-
-                                </li>
-                                
-                                <li class="nav-item">
-                                    <a class="nav-link" href="plants.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
-                                        Our Group Of Companies
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="decoration-services.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
-                                        Decoration Services
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="about.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
-                                        About Us
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="blogs.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
-                                        Blogs and Videos
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="tour.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
-                                        Factory Tour
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
-                                        Contact Us
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="track-order.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
-                                        Track Order
-                                    </a>
-                                </li>
-
-                            </ul> 
-                        </div>
-
-
-                    </nav>
-                    <!-- Navigation Ends -->
-                    
-                </div>
-                
-                <div class="col-md-4 search-wrap-update">
-
-                    <form
-                        method="GET"
-                        action="search.php"
-                        style="margin: 0;"
-                    >
-
-                        <div class="input-group" style="display: flex; align-items: center; border: 1px solid #e2e4e8; border-radius: 4px; overflow: hidden; background-color: #ffffff; transition: border-color 0.2s ease;">
-
-                            <!-- SEARCH INPUT -->
-                            <input
-                                type="text"
-                                name="q"
-                                class="form-control"
-                                placeholder="Search bottles, jars, caps..."
-                                required
-                                style="border: none; font-size: 14px; padding: 10px 14px; height: auto; box-shadow: none; background: transparent; flex-grow: 1;"
-                            >
-
-                            <!-- SLEEK FIELD DIVIDER -->
-                            <div style="width: 1px; height: 24px; background-color: #e2e4e8; flex-shrink: 0;"></div>
-
-                            <!-- CATEGORY FILTER -->
-                            <select
-                                name="category"
-                                class="form-control"
-                                style="max-width: 160px; border: none; font-size: 12px; font-weight: 370; color: #c8232c; padding: 10px 12px; height: auto; box-shadow: none; background: transparent; cursor: pointer; -webkit-appearance: none; -moz-appearance: none;"
-                            >
-                                <option value="">
-                                    All Categories
-                                </option>
-
-                                <?php foreach($navCategories as $cat): ?>
-                                    <option
-                                        value="<?= htmlspecialchars($cat['slug']) ?>"
-                                        >
-                                        <?= htmlspecialchars($cat['name']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-
-                            <!-- BUTTON -->
-                            <div class="input-group-append" style="margin: 0;">
-                                <button
-                                    class="btn btn-dark"
-                                    type="submit"
-                                    style="border: none; border-radius: 0; background-color: #c8232c; color: #ffffff; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; padding: 12px 20px; height: auto; transition: background-color 0.2s ease;"
-                                    onmouseover="this.style.backgroundColor='#2c323e'"
-                                    onmouseout="this.style.backgroundColor='#c8232c'"
-                                >
-                                    <i class="fa-solid fa-magnifying-glass d-inline d-md-none"></i>
-                                    <span class="d-none d-md-inline">Search</span>
-                                </button>
-                            </div>
-
-                        </div>
-
-                    </form>
-
-                </div>
-
-                <div class="col-md-4 text-right txtm-center menu-bar-new" style="display: flex; align-items: center; justify-content: flex-end;">
-
-                    <?php
-                    $cartCount = 0;
-                    if(!empty($_SESSION['cart'])){
-                        foreach($_SESSION['cart'] as $cartItem){
-                            $cartCount += $cartItem['quantity'];
-                        }
-                    }
-                    ?>
-
-                    <ul class="list-inline mb-0" style="padding-left: 0; margin: 0; display: flex; align-items: center; gap: 20px; list-style: none;">
-
-                        <?php if(isset($_SESSION['user_id'])): ?>
-
-                            <li class="list-inline-item" style="margin: 0;">
-                                <a href="my-account" style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #11141a; text-decoration: none; transition: color 0.2s ease;">
-                                    Hello, <?= htmlspecialchars($_SESSION['user_name']) ?>
-                                </a>
-                            </li>
-
-                            <li class="list-inline-item" style="margin: 0;">
-                                <a href="logout.php" style="font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #5a6578; text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='#11141a'" onmouseout="this.style.color='#5a6578'">
-                                    Logout
-                                </a>
-                            </li>
-
-                        <?php else: ?>
-
-                            <li class="list-inline-item" style="margin: 0;">
-                                <a href="login" style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #11141a; text-decoration: none; transition: color 0.2s ease;">
-                                    Login
-                                </a>
-                            </li>
-
-                            <li class="list-inline-item" style="margin: 0;">
-                                <a href="register" style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #11141a; text-decoration: none; transition: color 0.2s ease;">
-                                    Register
-                                </a>
-                            </li>
-
-                        <?php endif; ?>
-
-                        <!-- Premium isolated visual break line -->
-                        <div style="width: 1px; height: 16px; background-color: #e2e4e8;"></div>
-
-                        <li class="list-inline-item" style="margin: 0;">
-                            <a
-                                href="cart"
-                                class="position-relative"
-                                style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #11141a; text-decoration: none; display: flex; align-items: center; gap: 6px;"
-                            >
-                                <i class="fa-solid fa-bag-shopping" style="font-size: 14px;"></i>
-                                <span>Cart</span>
-
-                                <?php if($cartCount > 0): ?>
-                                    <span
-                                        style="
-                                            background: #11141a;
-                                            color: #ffffff;
-                                            border-radius: 50%;
-                                            width: 18px;
-                                            height: 18px;
-                                            font-size: 10px;
-                                            font-weight: 700;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            margin-left: 2px;
-                                        "
-                                    >
-                                        <?= $cartCount ?>
-                                    </span>
-                                <?php endif; ?>
-                            </a>
-                        </li>
-
-                    </ul>
-
-                </div>
-                
-            </div>
         
+        <!-- Header Start -->
+        <!-- Enhanced announcement layout with a sophisticated, subtle cream background and high-contrast typography -->
+        <div class="head-inform-bar" style="background: linear-gradient(90deg, #fdf8f4 0%, #f7d3b5 50%, #fdf8f4 100%); border-bottom: 1px solid rgba(200, 35, 44, 0.12); padding: 11px 0; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
+            <p class="announcement-text" style="color: #c8232c; font-weight: 700; margin: 0; font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase;">
+                The minimum order value is only Rs 15,000/- now!
+            </p>
+            <div id="google_translate_element"
+                style="margin-left:18px; min-width:160px;">
+            </div>
         </div>
-    </header>
 
-<!-- Header Ends -->
+        <header style="background-color: #ffffff; padding: 12px 0; border-bottom: 1px solid #f1f3f5; box-shadow: 0 4px 20px rgba(0,0,0,0.01);">
+            <div class="container">
+                <div class="row" style="align-items: center;">
+                    <div class="col-md-4 txtm-center only-desktop">
+                        <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
+                            <a href="index.php" class="header-logo-link" style="display: inline-block;">
+                                <img
+                                    src="assets/themes/storefront/public/images/logo.jpeg?v=2.0.3"
+                                    alt="Alok Glass"
+                                    style="
+                                        height: 90px;
+                                        width: auto;
+                                        object-fit: contain;
+                                        display: block;
+                                    "
+                                >
+                            </a>
 
-<!-- Desktop Navigation Bar -->
-    <!-- Desktop Navigation Bar -->
-    <nav class="navbar navbar-expand-lg only-desktop" style="background-color: var(--dark-industrial); padding: 0; border-bottom: 3.5px solid var(--primary-accent); box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 999;">
-        <div class="container-fluid px-lg-4">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" style="border: none;">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                            <!-- Fine divider to separate the structural logos professionally with custom background flow -->
+                            <div class="header-logo-divider"></div>
 
-            <div class="collapse navbar-collapse justify-content-center ss2" id="navbarsExample08">
-                <ul class="navbar-nav">
+                            <a href="index.php" class="header-logo-link" style="display: inline-block; filter: grayscale(0) contrast(1.15); opacity: 1.0;">
+                                <img
+                                    src="assets/themes/storefront/public/images/50yrstrust.png?v=2.0.3"
+                                    alt="50 Years Trust"
+                                    style="
+                                        height: 60px;
+                                        width: auto;
+                                        object-fit: contain;
+                                        display: block;
+                                    "
+                                >
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 text-left only-mobile">
+                        
+                        <!-- Navigation Start -->
+                        <nav class="navbar navbar-expand-lg navbar-light" style="padding: 10px 0; background: #ffffff;">
+                            
+                            <!-- Flex layout container for responsive brand balancing -->
+                            <div class="d-flex align-items-center" style="gap: 12px; max-width: 70%;">
+                                <a class="navbar-brand header-logo-link" href="index.php" style="margin: 0; padding: 0;">
+                                    <img src="assets/themes/storefront/public/images/logo.jpeg?v=2.0.3" alt="Alok Glass Works" style="height: 45px; width: auto; object-fit: contain;" />
+                                </a>
+                                <div style="height: 25px; width: 1px; background-color: #e2e4e8;"></div>
+                                <a href="index.php" class="header-logo-link" style="display: inline-block; filter: grayscale(1) contrast(1.1); opacity: 0.85;">
+                                    <img src="assets/themes/storefront/public/images/40-years-trust2e8da.png?v=2.0.3" alt="40 Years Trust" style="height: 35px; width: auto; object-fit: contain;" />
+                                </a>
+                                <div id="google_translate_element"
+                                    style="margin-left:18px; min-width:160px;">
+                                </div>
+                            </div>
 
-                    <!-- Home -->
-                    <li class="nav-item">
-                        <a class="nav-link custom-desktop-link" href="index.php">
-                            Home
-                        </a>
-                    </li>
+                            <div id="google_translate_element_mobile"
+                                style="margin-left:auto; margin-right:12px;">
+                            </div>
+                            
+                            <!-- Fixed Toggler Button: Changed data-toggle and data-target to data-bs-toggle and data-bs-target -->
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" style="border: none; background: transparent; padding: 4px 0; outline: none !important;">
+                                <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 0.05em; margin-right: 4px; color: #11141a; vertical-align: middle;">MENU</span>
+                                <span class="navbar-toggler-icon" style="width: 20px; height: 20px; vertical-align: middle;"></span>
+                            </button>
 
-                    <!-- Shop By Product (Dynamic Dropdown) -->
-                    <li class="nav-item dropdown">
+                            <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+                                <ul class="navbar-nav" style="padding-top: 15px;">
 
-                        <a class="nav-link dropdown-toggle custom-desktop-link" href="javascript:void(0);">
-                            Shop By Product
-                        </a>
+                                    <!-- Fixed Dropdown Link: Changed data-bs-toggle to data-toggle -->
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link" href="index.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
+                                            Home
+                                        </a>
+                                    </li>
+                                
+                                    <!-- Shop By Product -->
+                                    <li class="nav-item">
 
-                        <div class="dropdown-menu">
-
-                            <?php foreach($navCategories as $cat): ?>
-
-                                <?php $subs = $groupedSubcategories[$cat['id']] ?? []; ?>
-
-                                <?php if($subs): ?>
-
-                                    <div class="dropdown-submenu">
-
-                                        <a class="dropdown-item submenu-toggle" href="category/<?= urlencode($cat['slug']) ?>">
-                                            <?= htmlspecialchars($cat['name']) ?>
+                                        <a href="#" class="nav-link mobile-main-toggle">
+                                            Shop By Product
+                                            <span class="float-right">+</span>
                                         </a>
 
-                                        <div class="submenu">
+                                        <div class="mobile-product-menu">
 
-                                            <a class="dropdown-item" href="category/<?= urlencode($cat['slug']) ?>">
-                                                All <?= htmlspecialchars($cat['name']) ?>
-                                            </a>
+                                            <?php foreach($navCategories as $cat): ?>
 
-                                            <div class="dropdown-divider"></div>
+                                                <?php $subs = $groupedSubcategories[$cat['id']] ?? []; ?>
 
-                                            <?php foreach($subs as $sub): ?>
+                                                <?php if(!empty($subs)): ?>
 
-                                                <a class="dropdown-item" href="category/<?= urlencode($cat['slug']) ?>?sub=<?= $sub['id'] ?>">
-                                                    <?= htmlspecialchars($sub['name']) ?>
-                                                </a>
+                                                    <div class="mobile-category">
+
+                                                        <div class="mobile-category-header">
+
+                                                            <a href="category/<?= urlencode($cat['slug']) ?>">
+                                                                <?= htmlspecialchars($cat['name']) ?>
+                                                            </a>
+
+                                                            <span class="mobile-sub-toggle">+</span>
+
+                                                        </div>
+
+                                                        <div class="mobile-subcategory">
+
+                                                            <a href="category/<?= urlencode($cat['slug']) ?>">
+                                                                All Products
+                                                            </a>
+
+                                                            <?php foreach($subs as $sub): ?>
+
+                                                                <a href="category/<?= urlencode($cat['slug']) ?>?sub=<?= $sub['id'] ?>">
+                                                                    <?= htmlspecialchars($sub['name']) ?>
+                                                                </a>
+
+                                                            <?php endforeach; ?>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                <?php else: ?>
+
+                                                    <a
+                                                        class="mobile-single-category"
+                                                        href="category/<?= urlencode($cat['slug']) ?>"
+                                                    >
+                                                        <?= htmlspecialchars($cat['name']) ?>
+                                                    </a>
+
+                                                <?php endif; ?>
 
                                             <?php endforeach; ?>
 
                                         </div>
 
-                                    </div>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="plants.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
+                                            Our Group Of Companies
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="decoration-services.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
+                                            Decoration Services
+                                        </a>
+                                    </li>
 
-                                <?php else: ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="about.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
+                                            About Us
+                                        </a>
+                                    </li>
 
-                                    <a class="dropdown-item" href="category/<?= urlencode($cat['slug']) ?>">
-                                        <?= htmlspecialchars($cat['name']) ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="blogs.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
+                                            Blogs and Videos
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="tour.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
+                                            Factory Tour
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="contact.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
+                                            Contact Us
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="track-order.php" style="font-weight: 600; color: #11141a; transition: color 0.25s ease;">
+                                            Track Order
+                                        </a>
+                                    </li>
+
+                                </ul> 
+                            </div>
+
+
+                        </nav>
+                        <!-- Navigation Ends -->
+                        
+                    </div>
+                    
+                    <div class="col-md-4 search-wrap-update">
+
+                        <form
+                            method="GET"
+                            action="search.php"
+                            style="margin: 0;"
+                        >
+
+                            <div class="input-group" style="display: flex; align-items: center; border: 1px solid #e2e4e8; border-radius: 4px; overflow: hidden; background-color: #ffffff; transition: border-color 0.2s ease;">
+
+                                <!-- SEARCH INPUT -->
+                                <input
+                                    type="text"
+                                    name="q"
+                                    class="form-control"
+                                    placeholder="Search bottles, jars, caps..."
+                                    required
+                                    style="border: none; font-size: 14px; padding: 10px 14px; height: auto; box-shadow: none; background: transparent; flex-grow: 1;"
+                                >
+
+                                <!-- SLEEK FIELD DIVIDER -->
+                                <div style="width: 1px; height: 24px; background-color: #e2e4e8; flex-shrink: 0;"></div>
+
+                                <!-- CATEGORY FILTER (FIXED PADDING & WIDTH) -->
+                                <select
+                                    name="category"
+                                    class="form-control"
+                                    style="width: auto; min-width: 135px; border: none; font-size: 12px; font-weight: 370; color: #c8232c; padding: 10px 16px; height: auto; box-shadow: none; background: transparent; cursor: pointer; -webkit-appearance: none; -moz-appearance: none; text-overflow: unset; flex-shrink: 0;"
+                                >
+                                    <option value="">
+                                        All Categories
+                                    </option>
+
+                                    <?php foreach($navCategories as $cat): ?>
+                                        <option
+                                            value="<?= htmlspecialchars($cat['slug']) ?>"
+                                            >
+                                            <?= htmlspecialchars($cat['name']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+
+                                <!-- BUTTON -->
+                                <div class="input-group-append" style="margin: 0;">
+                                    <button
+                                        class="btn btn-dark"
+                                        type="submit"
+                                        style="border: none; border-radius: 0; background-color: #c8232c; color: #ffffff; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; padding: 12px 20px; height: auto; transition: background-color 0.2s ease;"
+                                        onmouseover="this.style.backgroundColor='#2c323e'"
+                                        onmouseout="this.style.backgroundColor='#c8232c'"
+                                    >
+                                        <i class="fa-solid fa-magnifying-glass d-inline d-md-none"></i>
+                                        <span class="d-none d-md-inline">Search</span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <div class="col-md-4 text-right txtm-center menu-bar-new" style="display: flex; align-items: center; justify-content: flex-end;">
+
+                        <?php
+                        $cartCount = 0;
+                        if(!empty($_SESSION['cart'])){
+                            foreach($_SESSION['cart'] as $cartItem){
+                                $cartCount += $cartItem['quantity'];
+                            }
+                        }
+                        ?>
+
+                        <ul class="list-inline mb-0" style="padding-left: 0; margin: 0; display: flex; align-items: center; gap: 20px; list-style: none;">
+
+                            <?php if(isset($_SESSION['user_id'])): ?>
+
+                                <li class="list-inline-item" style="margin: 0;">
+                                    <a href="my-account" style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #11141a; text-decoration: none; transition: color 0.2s ease;">
+                                        Hello, <?= htmlspecialchars($_SESSION['user_name']) ?>
                                     </a>
+                                </li>
 
-                                <?php endif; ?>
+                                <li class="list-inline-item" style="margin: 0;">
+                                    <a href="logout.php" style="font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #5a6578; text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='#11141a'" onmouseout="this.style.color='#5a6578'">
+                                        Logout
+                                    </a>
+                                </li>
 
-                            <?php endforeach; ?>
+                            <?php else: ?>
 
-                        </div>
+                                <li class="list-inline-item" style="margin: 0;">
+                                    <a href="login" style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #11141a; text-decoration: none; transition: color 0.2s ease;">
+                                        Login
+                                    </a>
+                                </li>
 
-                    </li>
+                                <li class="list-inline-item" style="margin: 0;">
+                                    <a href="register" style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #11141a; text-decoration: none; transition: color 0.2s ease;">
+                                        Register
+                                    </a>
+                                </li>
+
+                            <?php endif; ?>
+
+                            <!-- Premium isolated visual break line -->
+                            <div style="width: 1px; height: 16px; background-color: #e2e4e8;"></div>
+
+                            <li class="list-inline-item" style="margin: 0;">
+                                <a
+                                    href="cart"
+                                    class="position-relative"
+                                    style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #11141a; text-decoration: none; display: flex; align-items: center; gap: 6px;"
+                                >
+                                    <i class="fa-solid fa-bag-shopping" style="font-size: 14px;"></i>
+                                    <span>Cart</span>
+
+                                    <?php if($cartCount > 0): ?>
+                                        <span
+                                            style="
+                                                background: #11141a;
+                                                color: #ffffff;
+                                                border-radius: 50%;
+                                                width: 18px;
+                                                height: 18px;
+                                                font-size: 10px;
+                                                font-weight: 700;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                margin-left: 2px;
+                                            "
+                                        >
+                                            <?= $cartCount ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
                     
-                    <!-- About Us -->
-                    <li class="nav-item">
-                        <a class="nav-link custom-desktop-link" href="about.php">
-                            About Us
-                        </a>
-                    </li>
-
-                    <!-- Our Group Of Companies -->
-                    <li class="nav-item">
-                        <a class="nav-link custom-desktop-link" href="plants.php">
-                            Our Group Of Companies
-                        </a>
-                    </li>
-
-                    <!-- Decoration Services -->
-                    <li class="nav-item">
-                        <a class="nav-link custom-desktop-link" href="decoration-services.php">
-                            Decoration Services
-                        </a>
-                    </li>
-                    
-                    <!-- Factory Tour -->
-                    <li class="nav-item">
-                        <a class="nav-link custom-desktop-link" href="tour.php">
-                            Factory Tour
-                        </a>
-                    </li>
-
-                    <!-- Blogs and Videos -->
-                    <li class="nav-item">
-                        <a class="nav-link custom-desktop-link" href="resources.php">
-                            Blogs &amp; Videos
-                        </a>
-                    </li>
-
-
-                    <!-- Contact Us -->
-                    <li class="nav-item">
-                        <a class="nav-link custom-desktop-link" href="contact.php">
-                            Contact Us
-                        </a>
-                    </li>
-
-                    <!-- Track Order -->
-                    <li class="nav-item">
-                        <a class="nav-link custom-desktop-link" href="track-order.php">
-                            Track Order
-                        </a>
-                    </li>
-
-                </ul>
+                </div>
+            
             </div>
-        </div>
-    </nav>
-<!-- Desktop Navigation Bar Ends -->
+        </header>
+
+    <!-- Header Ends -->
+
+    <!-- Desktop Navigation Bar -->
+        <!-- Desktop Navigation Bar -->
+        <nav class="navbar navbar-expand-lg only-desktop" style="background-color: var(--dark-industrial); padding: 0; border-bottom: 3.5px solid var(--primary-accent); box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 999;">
+            <div class="container-fluid px-lg-4">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" style="border: none;">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-center ss2" id="navbarsExample08">
+                    <ul class="navbar-nav">
+
+                        <!-- Home -->
+                        <li class="nav-item">
+                            <a class="nav-link custom-desktop-link" href="index.php">
+                                Home
+                            </a>
+                        </li>
+
+                        <!-- Shop By Product (Dynamic Dropdown) -->
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle custom-desktop-link" href="javascript:void(0);">
+                                Shop By Product
+                            </a>
+
+                            <div class="dropdown-menu">
+
+                                <?php foreach($navCategories as $cat): ?>
+
+                                    <?php $subs = $groupedSubcategories[$cat['id']] ?? []; ?>
+
+                                    <?php if($subs): ?>
+
+                                        <div class="dropdown-submenu">
+
+                                            <a class="dropdown-item submenu-toggle" href="category/<?= urlencode($cat['slug']) ?>">
+                                                <?= htmlspecialchars($cat['name']) ?>
+                                            </a>
+
+                                            <div class="submenu">
+
+                                                <a class="dropdown-item" href="category/<?= urlencode($cat['slug']) ?>">
+                                                    All <?= htmlspecialchars($cat['name']) ?>
+                                                </a>
+
+                                                <div class="dropdown-divider"></div>
+
+                                                <?php foreach($subs as $sub): ?>
+
+                                                    <a class="dropdown-item" href="category/<?= urlencode($cat['slug']) ?>?sub=<?= $sub['id'] ?>">
+                                                        <?= htmlspecialchars($sub['name']) ?>
+                                                    </a>
+
+                                                <?php endforeach; ?>
+
+                                            </div>
+
+                                        </div>
+
+                                    <?php else: ?>
+
+                                        <a class="dropdown-item" href="category/<?= urlencode($cat['slug']) ?>">
+                                            <?= htmlspecialchars($cat['name']) ?>
+                                        </a>
+
+                                    <?php endif; ?>
+
+                                <?php endforeach; ?>
+
+                            </div>
+
+                        </li>
+                        
+                        <!-- About Us -->
+                        <li class="nav-item">
+                            <a class="nav-link custom-desktop-link" href="about.php">
+                                About Us
+                            </a>
+                        </li>
+
+                        <!-- Our Group Of Companies -->
+                        <li class="nav-item">
+                            <a class="nav-link custom-desktop-link" href="plants.php">
+                                Our Group Of Companies
+                            </a>
+                        </li>
+
+                        <!-- Decoration Services -->
+                        <li class="nav-item">
+                            <a class="nav-link custom-desktop-link" href="decoration-services.php">
+                                Decoration Services
+                            </a>
+                        </li>
+                        
+                        <!-- Factory Tour -->
+                        <li class="nav-item">
+                            <a class="nav-link custom-desktop-link" href="tour.php">
+                                Factory Tour
+                            </a>
+                        </li>
+
+                        <!-- Blogs and Videos -->
+                        <li class="nav-item">
+                            <a class="nav-link custom-desktop-link" href="resources.php">
+                                Blogs &amp; Videos
+                            </a>
+                        </li>
+
+
+                        <!-- Contact Us -->
+                        <li class="nav-item">
+                            <a class="nav-link custom-desktop-link" href="contact.php">
+                                Contact Us
+                            </a>
+                        </li>
+
+                        <!-- Track Order -->
+                        <li class="nav-item">
+                            <a class="nav-link custom-desktop-link" href="track-order.php">
+                                Track Order
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    <!-- Desktop Navigation Bar Ends -->
 
 
 
@@ -1172,17 +1164,17 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
     window.onscroll = function() {scrollFunction()};
     
     function scrollFunction() {
-      if ((document.body.scrollTop > 1070 || document.documentElement.scrollTop > 1070) && window.screen.width < 767) {
+    if ((document.body.scrollTop > 1070 || document.documentElement.scrollTop > 1070) && window.screen.width < 767) {
         // mybutton.style.display = "block";
         jQuery("#myBtn").css('display', 'block');
-      } else {
+    } else {
         jQuery("#myBtn").css('display', 'none');
-      }
+    }
     }
     // When the user clicks on the button, scroll to the top of the document
     function topFunction() {
-      document.body.scrollTop = 500;
-      document.documentElement.scrollTop = 500;
+    document.body.scrollTop = 500;
+    document.documentElement.scrollTop = 500;
     }
         // if (window.screen.width < 767) {
         //     jQuery("#myBtn").css('display', 'none');
