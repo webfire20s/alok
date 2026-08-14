@@ -193,7 +193,7 @@ $featuredCategories = $pdo->query("
         $stmt = $pdo->prepare("
             SELECT * FROM categories 
             WHERE section_title IS NOT NULL 
-            ORDER BY FIELD(id, 6, 10, 25, 9) ASC, id ASC
+            ORDER BY FIELD(id, 6, 10, 25) ASC, id ASC
         ");
         $stmt->execute();
         $homeCategories = $stmt->fetchAll();
@@ -397,9 +397,9 @@ $featuredCategories = $pdo->query("
                                 <i class="fa-solid fa-industry stat-node-icon"></i>
                             </div>
                             <h3 class="stat-node-number">
-                                <span class="live-count" data-target="400">0</span>+ Tonnes
+                                <span class="live-count" data-target="400">0</span>+ 
                             </h3>
-                            <p class="stat-node-label">Daily Production Capacity</p>
+                            <p class="stat-node-label">TonnesDaily Production Capacity</p>
                         </div>
             
                         <!-- METRIC 6: EXPERIENCE -->

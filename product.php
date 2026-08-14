@@ -134,7 +134,7 @@ if($product['has_closure_options']){
 
             <div class="d-flex mb-4 gap-4 flex-wrap">
 
-                <div>
+                <!-- <div>
                     <span style=" display:block; padding:0 15px; font-size:12px; font-weight:700; text-transform:uppercase; color:#999; margin-bottom:4px; ">
                         SKU
                     </span>
@@ -142,7 +142,7 @@ if($product['has_closure_options']){
                     <span style=" font-weight:600; color:#333; padding:0 15px; ">
                         <?= htmlspecialchars($product['sku']) ?>
                     </span>
-                </div>
+                </div> -->
 
 
                 <?php if(isset($product['weight']) && $product['weight'] !== '0.00' && $product['weight'] !== null): ?>
@@ -153,7 +153,7 @@ if($product['has_closure_options']){
                         </span>
 
                         <span style=" font-weight:600; color:#333; padding:0 15px; ">
-                            <?= htmlspecialchars($product['weight']) ?> KG
+                            <?= htmlspecialchars($product['weight']) ?> g
                         </span>
                     </div>
 

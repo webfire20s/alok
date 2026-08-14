@@ -279,7 +279,7 @@
 
                     <li class="email">
                         <i class="fa-solid fa-envelope"></i>
-                        <div style="color: #dddddd;">Email: alokglassworksfzd@gmail.com</div>
+                        <div style="color: #dddddd;">Email: alokglassworksfzd@gmail.com | sales@alokglass.com</div>
                     </li>
 
                     <li class="phone">

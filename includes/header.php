@@ -582,7 +582,7 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
             }
 
             .search-wrap-update select[name="category"] {
-                max-width: 105px !important;
+                max-width: 175px !important;
                 font-size: 11px !important;
                 padding: 8px 6px !important;
                 text-overflow: ellipsis;
@@ -688,7 +688,7 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
         <header style="background-color: #ffffff; padding: 12px 0; border-bottom: 1px solid #f1f3f5; box-shadow: 0 4px 20px rgba(0,0,0,0.01);">
             <div class="container">
                 <div class="row" style="align-items: center;">
-                    <div class="col-md-4 txtm-center only-desktop">
+                    <div class="col-md-3 txtm-center only-desktop">
                         <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
                             <a href="index.php" class="header-logo-link" style="display: inline-block;">
                                 <img
@@ -871,12 +871,12 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
                         
                     </div>
                     
-                    <div class="col-md-4 search-wrap-update">
+                    <div class="col-md-6 search-wrap-update">
 
                         <form
                             method="GET"
                             action="search.php"
-                            style="margin: 0;"
+                            style="margin: 0; width: 100%; padding: 0;"
                         >
 
                             <div class="input-group" style="display: flex; align-items: center; border: 1px solid #e2e4e8; border-radius: 4px; overflow: hidden; background-color: #ffffff; transition: border-color 0.2s ease;">
@@ -886,9 +886,9 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
                                     type="text"
                                     name="q"
                                     class="form-control"
-                                    placeholder="Search bottles, jars, caps..."
+                                    placeholder="Search"
                                     required
-                                    style="border: none; font-size: 14px; padding: 10px 14px; height: auto; box-shadow: none; background: transparent; flex-grow: 1;"
+                                    style="border: none; font-size: 12px; padding: 10px 14px; height: auto; box-shadow: none; background: transparent; flex-grow: 1;"
                                 >
 
                                 <!-- SLEEK FIELD DIVIDER -->
@@ -897,8 +897,9 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
                                 <!-- CATEGORY FILTER (FIXED PADDING & WIDTH) -->
                                 <select
                                     name="category"
+                                    id="searchCategoryFilter"
                                     class="form-control"
-                                    style="width: auto; min-width: 135px; border: none; font-size: 12px; font-weight: 370; color: #c8232c; padding: 10px 16px; height: auto; box-shadow: none; background: transparent; cursor: pointer; -webkit-appearance: none; -moz-appearance: none; text-overflow: unset; flex-shrink: 0;"
+                                    style="width: auto; min-width: 170px; border: none; font-size: 12px; font-weight: 300; color: #c8232c; padding: 5px 8px; height: auto; box-shadow: none; background: transparent; cursor: pointer; -webkit-appearance: none; -moz-appearance: none; text-overflow: unset; flex-shrink: 0;"
                                 >
                                     <option value="">
                                         All Categories
@@ -907,11 +908,12 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
                                     <?php foreach($navCategories as $cat): ?>
                                         <option
                                             value="<?= htmlspecialchars($cat['slug']) ?>"
-                                            >
+                                        >
                                             <?= htmlspecialchars($cat['name']) ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
+
 
                                 <!-- BUTTON -->
                                 <div class="input-group-append" style="margin: 0;">
@@ -930,10 +932,23 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
                             </div>
 
                         </form>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const categorySelect = document.getElementById('searchCategoryFilter');
+                                if (!categorySelect) return;
+                                categorySelect.addEventListener('change', function () {
+                                    const slug = this.value;
+                                    if (!slug) {
+                                        return;
+                                    }
+                                    window.location.href = 'category/' + encodeURIComponent(slug);
+                                });
+                            });
+                        </script>
 
                     </div>
 
-                    <div class="col-md-4 text-right txtm-center menu-bar-new" style="display: flex; align-items: center; justify-content: flex-end;">
+                    <div class="col-md-3 text-right txtm-center menu-bar-new" style="display: flex; align-items: center; justify-content: flex-end;">
 
                         <?php
                         $cartCount = 0;

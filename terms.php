@@ -407,7 +407,7 @@ include 'includes/header.php';
                             <h3>13. Contact Information</h3>
                             <div class="terms-contact-card">
                                 <strong style="font-weight: 800; color: #111111; text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em; display: block; margin-bottom: 10px;">Alok Glass Works</strong>
-                                <span style="display: block; margin-bottom: 6px; color: #555555;"><strong>Email:</strong> pranjal@alokglass.com</span>
+                                <span style="display: block; margin-bottom: 6px; color: #555555;"><strong>Email:</strong> alokglassworksfzd@gmail.com | sales@alokglass.com</span>
                                 <span style="display: block; color: #555555;"><strong>Phone:</strong> +91 999-747-7289</span>
                             </div>
                         </div>
@@ -415,7 +415,7 @@ include 'includes/header.php';
                     </div>
                 </div>
 
-                <!-- Right Sidebar Navigation Panel Index Column Block -->
+                <!-- Right Sidebar Navigation Panel Index Column Block
                 <div class="col-lg-3 d-none d-lg-block animate-fade-in" style="animation-delay: 0.3s;">
                     <div class="terms-sidebar-nav">
                         <h4 style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #111111; margin-bottom: 22px; position: relative; padding-bottom: 8px;">
@@ -438,7 +438,7 @@ include 'includes/header.php';
                             <li><a href="#sec-13">13. Contact Info</a></li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>

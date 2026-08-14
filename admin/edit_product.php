@@ -562,7 +562,7 @@ include 'includes/admin_sidebar.php';
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="form-group mb-4">
                     <label style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; font-weight: 600; margin-bottom: 8px; display: block;">
-                        Net Mass / Weight (kg)
+                        Net Mass / Weight (g)
                     </label>
                     <input 
                         type="number" 
