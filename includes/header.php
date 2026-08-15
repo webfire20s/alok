@@ -680,9 +680,9 @@ while($row = $subNavStmt->fetch(PDO::FETCH_ASSOC)){
             <p class="announcement-text" style="color: #c8232c; font-weight: 700; margin: 0; font-size: 13px; letter-spacing: 0.03em; text-transform: uppercase;">
                 The minimum order value is only Rs 15,000/- now!
             </p>
-            <div id="google_translate_element"
+            <!-- <div id="google_translate_element"
                 style="margin-left:18px; min-width:160px;">
-            </div>
+            </div> -->
         </div>
 
         <header style="background-color: #ffffff; padding: 12px 0; border-bottom: 1px solid #f1f3f5; box-shadow: 0 4px 20px rgba(0,0,0,0.01);">
