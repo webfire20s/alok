@@ -152,7 +152,7 @@ include 'includes/header.php';
                     <strong style="color: #c8232c; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.08em; display: block;">Phone</strong>
                 </div>
                 <div style="font-weight: 600; color: #333333; font-size: 15px;">
-                    +91 999-747-7289 <span style="color: #b3b3b3; margin: 0 6px; font-weight: 300;">|</span> +91 703-787-7289
+                    +91 9997477289 <span style="color: #b3b3b3; margin: 0 6px; font-weight: 300;">|</span> +91 7037877289<span style="color: #b3b3b3; margin: 0 6px; font-weight: 300;">|</span>+91 9058677289
                 </div>
             </div>
 
