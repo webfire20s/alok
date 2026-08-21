@@ -436,142 +436,52 @@ include 'includes/admin_sidebar.php';
 
 
 <div class="container-fluid py-4">
-
-
     <div class="d-flex justify-content-between align-items-center mb-4">
-
         <div>
-
-            <h2
-                class="mb-1"
-                style="
-                    font-weight:700;
-                    color:#fff;
-                "
-            >
+            <h2 class="mb-1" style=" font-weight:700; color:#fff; " >
                 Add Catalog
             </h2>
-
-            <p
-                style="
-                    color:#64748b;
-                    font-size:14px;
-                    margin:0;
-                "
-            >
+            <p style=" color:#64748b; font-size:14px; margin:0; " >
                 Upload a product catalog with its thumbnail.
             </p>
-
         </div>
 
-
-        <a
-            href="catalogs.php"
-            class="btn"
-            style="
-                background:rgba(255,255,255,.05);
-                color:#e2e8f0;
-                border:1px solid rgba(255,255,255,.08);
-                border-radius:8px;
-            "
-        >
+        <a href="catalogs.php" class="btn" style=" background:rgba(255,255,255,.05); color:#e2e8f0; border:1px solid rgba(255,255,255,.08); border-radius:8px; " >
             ← Back
         </a>
-
     </div>
 
-
-
     <?php if($error !== ''): ?>
-
-        <div
-            class="alert"
-            style="
-                background:rgba(239,68,68,.10);
-                color:#f87171;
-                border:1px solid rgba(239,68,68,.20);
-                border-radius:8px;
-            "
-        >
+        <div class="alert" style=" background:rgba(239,68,68,.10); color:#f87171; border:1px solid rgba(239,68,68,.20); border-radius:8px; " >
             <?= htmlspecialchars($error) ?>
         </div>
-
     <?php endif; ?>
 
-
-
-    <div
-        class="card border-0"
-        style="
-            max-width:850px;
-            border-radius:14px;
-            background:rgba(21,25,34,.65);
-            border:1px solid rgba(255,255,255,.05)!important;
-            box-shadow:0 20px 40px rgba(0,0,0,.25);
-        "
-    >
-
+    <div class="card border-0" style=" max-width:850px; border-radius:14px; background:rgba(21,25,34,.65); border:1px solid rgba(255,255,255,.05)!important; box-shadow:0 20px 40px rgba(0,0,0,.25); " >
         <div class="card-body p-4">
-
-
-            <form
-                method="POST"
-                enctype="multipart/form-data"
-            >
-
-
+            <form method="POST" enctype="multipart/form-data" >
                 <!-- TITLE -->
-
                 <div class="mb-4">
-
-                    <label
-                        class="form-label"
-                        style="
-                            color:#e2e8f0;
-                            font-weight:600;
-                            font-size:13px;
-                        "
-                    >
+                    <label class="form-label" style=" color:#e2e8f0; font-weight:600; font-size:13px; " >
                         Catalog Title
                     </label>
-
-                    <input
-                        type="text"
-                        name="title"
-                        class="form-control"
-                        value="<?= htmlspecialchars($_POST['title'] ?? '') ?>"
-                        placeholder="Enter catalog title"
-                        required
-                        style="
-                            background:rgba(15,17,21,.7);
-                            color:#fff;
-                            border:1px solid rgba(255,255,255,.08);
-                            border-radius:8px;
-                        "
-                    >
-
+                    <input type="text" name="title" class="form-control" value="<?= htmlspecialchars($_POST['title'] ?? '') ?>" placeholder="Enter catalog title" required style=" background:rgba(15,17,21,.7); color:#fff; border:1px solid rgba(255,255,255,.08); border-radius:8px; " >
                 </div>
 
                 <!-- DESCRIPTION -->
                 <div class="mb-4">
-
                     <label class="form-label" style=" color:#e2e8f0; font-weight:600; font-size:13px; " >
                         Description
                     </label>
-
                     <textarea name="description" rows="4" class="form-control" placeholder="Optional catalog description" style=" background:rgba(15,17,21,.7); color:#fff; border:1px solid rgba(255,255,255,.08); border-radius:8px; " ><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
-
                 </div>
 
                 <!-- PDF -->
                 <div class="mb-4">
-
                     <label class="form-label" style=" color:#e2e8f0; font-weight:600; font-size:13px; " >
                         Catalog PDF
                     </label>
-
                     <input type="file" name="catalog_file" class="form-control" accept=".pdf,application/pdf" required style=" background:rgba(15,17,21,.7); color:#94a3b8; border:1px solid rgba(255,255,255,.08); border-radius:8px; " >
-
                     <small style=" color:#64748b; font-size:12px; " >
                         Only PDF files are allowed.
                     </small>
@@ -579,13 +489,10 @@ include 'includes/admin_sidebar.php';
 
                 <!-- THUMBNAIL -->
                 <div class="mb-4">
-
                     <label class="form-label" style=" color:#e2e8f0; font-weight:600; font-size:13px; " >
                         Catalog Thumbnail
                     </label>
-
                     <input type="file" name="thumbnail" class="form-control" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required style=" background:rgba(15,17,21,.7); color:#94a3b8; border:1px solid rgba(255,255,255,.08); border-radius:8px; " >
-
                     <small style=" color:#64748b; font-size:12px; " >
                         JPG, JPEG, PNG or WEBP.
                     </small>
@@ -593,7 +500,6 @@ include 'includes/admin_sidebar.php';
 
                 <!-- STATUS -->
                 <div class="mb-4">
-
                     <label style=" color:#e2e8f0; font-weight:600; font-size:13px; " >
                         <input type="checkbox" name="status" value="1" <?= !isset($_POST['status']) || $_POST['status'] ? 'checked' : '' ?> style="margin-right:6px;" >
                         Active
@@ -602,12 +508,9 @@ include 'includes/admin_sidebar.php';
 
                 <!-- BUTTONS -->
                 <div class="d-flex gap-2">
-
                     <button type="submit" class="btn px-4" style=" background:linear-gradient( 135deg, #38bdf8, #0284c7 ); color:#fff; font-weight:600; border:none; border-radius:8px; " >
                         Upload Catalog
                     </button>
-
-
                     <a href="catalogs.php" class="btn px-4" style=" background:rgba(255,255,255,.04); color:#94a3b8; border:1px solid rgba(255,255,255,.08); border-radius:8px; " >
                         Cancel
                     </a>

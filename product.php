@@ -196,7 +196,10 @@ if($product['has_closure_options']){
 
                     <?php else: ?>
                         <input type="hidden" name="order_unit" value="piece">
-                        <div class="purchase-alert">Sold individually per piece.</div>
+                        <div class="purchase-alert">Sold individually per piece. <br>
+                            <span style="font-size: 13px; color: #666;">1 Box = <?= $product['pieces_per_box'] ?> Pieces</span>
+                        </div>
+                       
                     <?php endif; ?>
                 </div>
 
@@ -309,23 +312,46 @@ if($product['has_closure_options']){
                 </div>
 
                 <div class="d-flex align-items-center flex-wrap gap-2 mt-4">
-                    <button
-                        type="submit"
-                        class="btn btn-lg text-uppercase"
-                        style="background-color: #c8232c; color: #ffffff; font-size: 14px; font-weight: 700; letter-spacing: 0.05em; padding: 12px 30px; border: 1px solid #c8232c; border-radius: 4px; transition: all 0.2s ease-in-out;"
-                        onmouseover="this.style.backgroundColor='#b01d24'; this.style.borderColor='#b01d24';"
-                        onmouseout="this.style.backgroundColor='#c8232c'; this.style.borderColor='#c8232c';"
-                    >
-                        Add to Cart
-                    </button>
-                    
+
+                    <?php if((int)$product['stock'] > 0): ?>
+
+                        <button
+                            type="submit"
+                            class="btn btn-lg text-uppercase"
+                            style="
+                                background-color: #c8232c;
+                                color: #ffffff;
+                                font-size: 14px;
+                                font-weight: 700;
+                                letter-spacing: 0.05em;
+                                padding: 12px 30px;
+                                border: 1px solid #c8232c;
+                                border-radius: 4px;
+                                transition: all 0.2s ease-in-out;
+                            "
+                            onmouseover="this.style.backgroundColor='#b01d24'; this.style.borderColor='#b01d24';"
+                            onmouseout="this.style.backgroundColor='#c8232c'; this.style.borderColor='#c8232c';"
+                        >
+                            Add to Cart
+                        </button>
+
+                    <?php endif; ?>
+
                     <a
                         href="bulk_inquiry.php?product_id=<?= $product['id'] ?>"
                         class="btn btn-lg btn-outline-dark text-uppercase ms-md-2"
-                        style="font-size: 14px; font-weight: 600; letter-spacing: 0.05em; padding: 12px 25px; border-radius: 4px; transition: all 0.2s ease-in-out;"
+                        style="
+                            font-size: 14px;
+                            font-weight: 600;
+                            letter-spacing: 0.05em;
+                            padding: 12px 25px;
+                            border-radius: 4px;
+                            transition: all 0.2s ease-in-out;
+                        "
                     >
                         Request Bulk Quote
                     </a>
+
                 </div>
 
                 <script>

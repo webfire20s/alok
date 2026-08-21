@@ -38,28 +38,28 @@ include 'includes/header.php';
 <style>
     .catalog-page-section {
         background-color: #ffffff;
-        padding: 60px 0;
+        padding: 50px 0;
         font-family: 'Montserrat', sans-serif;
     }
 
     /* SECTION HEADER STYLE */
     .catalog-header-wrap {
         text-align: center;
-        margin-bottom: 45px;
+        margin-bottom: 35px;
     }
 
     .catalog-pretitle {
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         color: #c8232c;
         display: block;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
 
     .catalog-main-title {
-        font-size: 28px;
+        font-size: 24px;
         font-weight: 800;
         color: #111111;
         text-transform: uppercase;
@@ -68,65 +68,54 @@ include 'includes/header.php';
     }
 
     .catalog-title-underline {
-        width: 50px;
+        width: 40px;
         height: 3px;
         background-color: #c8232c;
-        margin: 10px auto 16px auto;
+        margin: 8px auto 12px auto;
         border-radius: 2px;
     }
 
     .catalog-main-desc {
-        max-width: 680px;
+        max-width: 600px;
         margin: 0 auto;
         color: #555555;
-        font-size: 14.5px;
-        line-height: 1.7;
+        font-size: 13.5px;
+        line-height: 1.6;
     }
 
-    /* CARD ARCHITECTURE */
-    .catalog-item-card {
-        background: #161616;
-        border: 1px solid #262626;
-        border-radius: 12px;
+    /* COMPACT B2B CATEGORY CARD STRUCTURE */
+    .product-category-card {
+        border: 1px solid #eef0f2;
+        border-radius: 5px;
         overflow: hidden;
+        background-color: #ffffff;
         height: 100%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
         display: flex;
         flex-direction: column;
-        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-                    border-color 0.35s ease, 
-                    box-shadow 0.35s ease;
     }
 
-    .catalog-item-card:hover {
-        transform: translateY(-5px);
-        border-color: #c8232c;
-        box-shadow: 0 12px 30px rgba(200, 35, 44, 0.15);
-    }
-
-    /* THUMBNAIL BOX */
-    .catalog-thumbnail-box {
-        position: relative;
-        height: 220px;
-        background: #222222;
+    /* TIGHTER ASPECT RATIO (16:9 for smaller vertical footprint) */
+    .product-card-media {
+        display: block;
         overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom: 1px solid #262626;
+        aspect-ratio: 16 / 9;
+        background-color: #ffffff;
+        position: relative;
+        width: 100%;
     }
 
-    .catalog-thumbnail-box img {
+    .product-card-media img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain; /* Spans full width & fills box perfectly without stretching */
+        object-position: center; /* Keeps the focus centered */
+        padding: 0; /* Removed padding to allow edge-to-edge full width */
         transition: transform 0.4s ease;
     }
 
-    .catalog-item-card:hover .catalog-thumbnail-box img {
-        transform: scale(1.05);
-    }
-
-    .catalog-no-thumb {
+    .catalog-no-thumb-placeholder {
         width: 100%;
         height: 100%;
         display: flex;
@@ -134,51 +123,52 @@ include 'includes/header.php';
         justify-content: center;
         flex-direction: column;
         color: #888888;
-        background: linear-gradient(135deg, #1c1c1c 0%, #111111 100%);
+        background: #f9f9f9;
     }
 
-    .catalog-no-thumb i {
-        font-size: 42px;
-        margin-bottom: 8px;
+    .catalog-no-thumb-placeholder i {
+        font-size: 32px;
+        margin-bottom: 4px;
         color: #c8232c;
     }
 
-    .catalog-no-thumb span {
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #aaaaaa;
-    }
-
-    /* CONTENT PANEL */
-    .catalog-card-body {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-    }
-
-    .catalog-card-title {
-        font-size: 17px;
+    .catalog-no-thumb-placeholder span {
+        font-size: 10px;
         font-weight: 700;
-        color: #ffffff !important;
-        margin-bottom: 8px;
-        line-height: 1.35;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #888888;
     }
 
-    .catalog-card-desc {
-        font-size: 13px;
-        line-height: 1.6;
-        color: #aaaaaa;
-        margin-bottom: 20px;
-        flex-grow: 1;
+    /* SLIM BANNER BAND */
+    .product-card-banner {
+        padding: 10px 8px;
+        text-align: center;
+        text-transform: uppercase;
     }
 
-    /* ACTIONS BUTTONS */
+    .product-card-link {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: #ffffff;
+        text-decoration: none;
+        display: block;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .product-card-link:hover {
+        text-decoration: none;
+        color: #ffffff;
+    }
+
+    /* COMPACT ACTION BUTTONS */
     .catalog-action-row {
         display: flex;
-        gap: 10px;
+        border-top: 1px solid #eef0f2;
+        background: #ffffff;
         margin-top: auto;
     }
 
@@ -187,88 +177,91 @@ include 'includes/header.php';
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
-        padding: 10px 14px;
-        border-radius: 4px;
-        font-size: 12px;
-        font-weight: 600;
+        gap: 5px;
+        padding: 8px 6px;
+        font-size: 11px;
+        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.04em;
         text-decoration: none !important;
-        transition: all 0.25s ease;
+        transition: all 0.2s ease;
     }
 
     .btn-preview-dark {
-        background: transparent;
-        color: #ffffff;
-        border: 1px solid #333333;
+        background: #ffffff;
+        color: #111111;
+        border-right: 1px solid #eef0f2;
     }
 
     .btn-preview-dark:hover {
-        background: #ffffff;
-        color: #111111;
-        border-color: #ffffff;
+        background: #111111;
+        color: #ffffff;
     }
 
     .btn-download-red {
-        background: #c8232c;
-        color: #ffffff;
-        border: 1px solid #c8232c;
+        background: #ffffff;
+        color: #c8232c;
     }
 
     .btn-download-red:hover {
-        background: #a91d25;
-        border-color: #a91d25;
+        background: #c8232c;
         color: #ffffff;
+    }
+
+    /* HOVER EFFECT */
+    .product-category-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .product-category-card:hover .product-card-media img {
+        transform: scale(1.05);
+    }
+
+    /* PALETTE VARIANT ENGINE */
+    .bg-palette-accent {
+        background-color: #c8232c;
+    }
+
+    .bg-palette-charcoal {
+        background-color: #111111;
     }
 
     /* EMPTY STATE */
     .catalog-empty-wrapper {
         text-align: center;
-        padding: 60px 20px;
+        padding: 50px 20px;
         background: #fcfbfa;
         border: 1px solid #eef0f2;
-        border-radius: 12px;
+        border-radius: 5px;
     }
 
     .catalog-empty-wrapper i {
-        font-size: 48px;
+        font-size: 40px;
         color: #c8232c;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
 
     .catalog-empty-wrapper h4 {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 700;
         color: #111111;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
 
     .catalog-empty-wrapper p {
-        font-size: 14px;
+        font-size: 13px;
         color: #666666;
         margin-bottom: 0;
     }
 
     @media(max-width: 767.98px) {
         .catalog-page-section {
-            padding: 40px 0;
+            padding: 35px 0;
         }
 
         .catalog-main-title {
-            font-size: 22px;
-        }
-
-        .catalog-thumbnail-box {
-            height: 180px;
-        }
-
-        .catalog-action-row {
-            flex-direction: column;
-        }
-
-        .catalog-btn-action {
-            width: 100%;
+            font-size: 20px;
         }
     }
 </style>
@@ -297,67 +290,61 @@ include 'includes/header.php';
 
         <?php else: ?>
 
-            <!-- CATALOGS MATRIX GRID -->
-            <div class="row g-4">
+            <!-- COMPACT GRID (4 COLUMNS ON DESKTOP) -->
+            <div class="row g-3">
 
-                <?php foreach($catalogs as $catalog): ?>
+                <?php foreach($catalogs as $index => $catalog): ?>
 
                     <?php
+                    $variantClass = ($index % 2 == 0) ? 'bg-palette-accent' : 'bg-palette-charcoal';
                     $fileUrl = htmlspecialchars($catalog['file_path']);
                     $thumbnailUrl = !empty($catalog['thumbnail']) ? htmlspecialchars($catalog['thumbnail']) : '';
                     ?>
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                        <div class="catalog-item-card w-100">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
 
-                            <!-- THUMBNAIL -->
-                            <div class="catalog-thumbnail-box">
+                        <!-- Compact Product Card Frame -->
+                        <div class="product-category-card">
+
+                            <!-- Image Wrapper -->
+                            <a href="<?= $fileUrl ?>" target="_blank" rel="noopener noreferrer" class="product-card-media">
                                 <?php if($thumbnailUrl): ?>
                                     <img src="<?= $thumbnailUrl ?>" 
                                          alt="<?= htmlspecialchars($catalog['title']) ?>" 
                                          loading="lazy">
                                 <?php else: ?>
-                                    <div class="catalog-no-thumb">
+                                    <div class="catalog-no-thumb-placeholder">
                                         <i class="fa-regular fa-file-pdf"></i>
                                         <span>PDF Document</span>
                                     </div>
                                 <?php endif; ?>
+                            </a>
+
+                            <!-- Slim Banner Band -->
+                            <div class="product-card-banner <?= $variantClass ?>">
+                                <a href="<?= $fileUrl ?>" target="_blank" rel="noopener noreferrer" class="product-card-link" title="<?= htmlspecialchars($catalog['title']) ?>">
+                                    <?= htmlspecialchars($catalog['title']) ?>
+                                </a>
                             </div>
 
-                            <!-- CONTENT -->
-                            <div class="catalog-card-body">
-                                <h3 class="catalog-card-title">
-                                    <?= htmlspecialchars($catalog['title']) ?>
-                                </h3>
+                            <!-- Integrated Actions Bar -->
+                            <div class="catalog-action-row">
+                                <a href="<?= $fileUrl ?>" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer" 
+                                   class="catalog-btn-action btn-preview-dark">
+                                    <i class="fa-regular fa-eye me-1"></i> Preview
+                                </a>
 
-                                <?php if(!empty($catalog['description'])): ?>
-                                    <p class="catalog-card-desc">
-                                        <?= nl2br(htmlspecialchars($catalog['description'])) ?>
-                                    </p>
-                                <?php else: ?>
-                                    <!-- <p class="catalog-card-desc">
-                                        View and download our technical catalog for complete specifications.
-                                    </p> -->
-                                <?php endif; ?>
-
-                                <!-- ACTIONS -->
-                                <div class="catalog-action-row">
-                                    <a href="<?= $fileUrl ?>" 
-                                       target="_blank" 
-                                       rel="noopener noreferrer" 
-                                       class="catalog-btn-action btn-preview-dark">
-                                        <i class="fa-regular fa-eye me-1"></i> Preview
-                                    </a>
-
-                                    <a href="<?= $fileUrl ?>" 
-                                       download="<?= htmlspecialchars($catalog['file_name']) ?>" 
-                                       class="catalog-btn-action btn-download-red">
-                                        <i class="fa-solid fa-download me-1"></i> Download
-                                    </a>
-                                </div>
+                                <a href="<?= $fileUrl ?>" 
+                                   download="<?= htmlspecialchars($catalog['file_name']) ?>" 
+                                   class="catalog-btn-action btn-download-red">
+                                    <i class="fa-solid fa-download me-1"></i> Download
+                                </a>
                             </div>
 
                         </div>
+
                     </div>
 
                 <?php endforeach; ?>

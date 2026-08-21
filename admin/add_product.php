@@ -664,7 +664,7 @@ function togglePiecesField(){
 
     }else{
 
-        piecesWrap.style.display = "none";
+        piecesWrap.style.display = "block";
 
     }
 }
