@@ -546,18 +546,55 @@ include 'includes/admin_sidebar.php';
 
                                 </label>
 
+
+                                <!-- ==========================================================
+                                    CLOSURE SEARCH
+                                =========================================================== -->
+
+                                <div style="position:relative; margin-top:10px; margin-bottom:10px;">
+
+                                    <input
+                                        type="text"
+                                        id="closureSearch"
+                                        class="form-control"
+                                        placeholder="Search closures..."
+                                        autocomplete="off"
+                                        style="
+                                            background:rgba(15,17,21,.7);
+                                            border:1px solid rgba(255,255,255,.08);
+                                            color:#ffffff;
+                                            font-size:13px;
+                                            padding:10px 12px;
+                                            border-radius:7px;
+                                        "
+                                    >
+
+                                </div>
+
+
+                                <!-- ==========================================================
+                                    CLOSURE LIST
+                                =========================================================== -->
+
                                 <div
+                                    id="closureList"
                                     style="
-                                    max-height:220px;
-                                    overflow:auto;
-                                    padding:12px;
-                                    background:rgba(15,17,21,.5);
-                                    border:1px solid rgba(255,255,255,.08);
-                                    border-radius:8px;">
+                                        max-height:220px;
+                                        overflow:auto;
+                                        padding:12px;
+                                        background:rgba(15,17,21,.5);
+                                        border:1px solid rgba(255,255,255,.08);
+                                        border-radius:8px;">
 
                                     <?php foreach($closureOptions as $closure): ?>
 
-                                        <div class="form-check mb-2">
+                                        <div
+                                            class="form-check mb-2 closure-item"
+                                            data-closure-name="<?= htmlspecialchars(
+                                                strtolower($closure['name']),
+                                                ENT_QUOTES,
+                                                'UTF-8'
+                                            ) ?>">
 
                                             <input
                                                 class="form-check-input"
@@ -572,9 +609,12 @@ include 'includes/admin_sidebar.php';
 
                                                 <?= htmlspecialchars($closure['name']) ?>
 
-                                                <?php if($closure['price']>0): ?>
+                                                <?php if($closure['price'] > 0): ?>
 
-                                                    (+₹<?= number_format($closure['price'],2) ?>)
+                                                    (+₹<?= number_format(
+                                                        $closure['price'],
+                                                        2
+                                                    ) ?>)
 
                                                 <?php endif; ?>
 
@@ -583,6 +623,24 @@ include 'includes/admin_sidebar.php';
                                         </div>
 
                                     <?php endforeach; ?>
+
+
+                                    <!-- ======================================================
+                                        NO SEARCH RESULTS
+                                    ======================================================= -->
+
+                                    <div
+                                        id="noClosureResults"
+                                        style="
+                                            display:none;
+                                            padding:10px 4px;
+                                            color:#64748b;
+                                            font-size:12px;
+                                            text-align:center;">
+
+                                        No closures found.
+
+                                    </div>
 
                                 </div>
 
@@ -739,6 +797,77 @@ loadSubCategories();
 
 </script>
 </div>
+<script>
 
+document.addEventListener('DOMContentLoaded', function(){
+
+    const closureSearch =
+        document.getElementById('closureSearch');
+
+    const closureItems =
+        document.querySelectorAll('.closure-item');
+
+    const noClosureResults =
+        document.getElementById('noClosureResults');
+
+
+    if(!closureSearch){
+        return;
+    }
+
+
+    closureSearch.addEventListener('input', function(){
+
+        const searchTerm =
+            this.value.trim().toLowerCase();
+
+        let visibleCount = 0;
+
+
+        closureItems.forEach(function(item){
+
+            const closureName =
+                item.dataset.closureName || '';
+
+
+            if(
+                searchTerm === '' ||
+                closureName.includes(searchTerm)
+            ){
+
+                item.style.display = '';
+
+                visibleCount++;
+
+            }else{
+
+                item.style.display = 'none';
+
+            }
+
+        });
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | NO RESULTS MESSAGE
+        |--------------------------------------------------------------------------
+        */
+
+        if(visibleCount === 0){
+
+            noClosureResults.style.display = 'block';
+
+        }else{
+
+            noClosureResults.style.display = 'none';
+
+        }
+
+    });
+
+});
+
+</script>
 </body>
 </html>

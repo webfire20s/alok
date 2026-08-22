@@ -419,54 +419,110 @@ include 'includes/admin_sidebar.php';
 
         </div>
 
+
         <div
             id="closureOptionsWrap"
             style="<?= $product['has_closure_options'] ? '' : 'display:none;' ?>"
         >
 
-            <label class="mb-3">
+            <label class="mb-2">
                 Available Closure Options
             </label>
 
-            <?php foreach($closureOptions as $closure): ?>
 
-                <div class="form-check mb-2">
+            <!-- Closure Search -->
+            <div class="mb-3">
 
-                    <input
-                        type="checkbox"
-                        class="form-check-input"
-                        name="closure_options[]"
-                        value="<?= $closure['id'] ?>"
-                        id="closure<?= $closure['id'] ?>"
+                <input
+                    type="text"
+                    id="editClosureSearch"
+                    class="form-control"
+                    placeholder="Search closures..."
+                    autocomplete="off"
+                    style="
+                        background:rgba(15,17,21,.7);
+                        border:1px solid rgba(255,255,255,.08);
+                        color:#fff;
+                        font-size:13px;
+                        border-radius:7px;
+                        padding:9px 12px;
+                    "
+                >
 
-                        <?= in_array(
-                                $closure['id'],
-                                $selectedClosures
-                            )
-                            ? 'checked'
-                            : ''
-                        ?>
+            </div>
 
+
+            <div
+                id="editClosureList"
+                style="
+                    max-height:220px;
+                    overflow:auto;
+                    padding:12px;
+                    background:rgba(15,17,21,.5);
+                    border:1px solid rgba(255,255,255,.08);
+                    border-radius:8px;
+                "
+            >
+
+                <?php foreach($closureOptions as $closure): ?>
+
+                    <div
+                        class="form-check mb-2 edit-closure-item"
+                        data-closure-name="<?= htmlspecialchars(strtolower($closure['name'])) ?>"
                     >
 
-                    <label
-                        class="form-check-label"
-                        for="closure<?= $closure['id'] ?>"
-                    >
+                        <input
+                            type="checkbox"
+                            class="form-check-input"
+                            name="closure_options[]"
+                            value="<?= $closure['id'] ?>"
+                            id="editClosure<?= $closure['id'] ?>"
 
-                        <?= htmlspecialchars($closure['name']) ?>
+                            <?= in_array(
+                                    $closure['id'],
+                                    $selectedClosures
+                                )
+                                ? 'checked'
+                                : ''
+                            ?>
+                        >
 
-                        <?php if($closure['price']>0): ?>
+                        <label
+                            class="form-check-label"
+                            for="editClosure<?= $closure['id'] ?>"
+                        >
 
-                            (+₹<?= number_format($closure['price'],2) ?>)
+                            <?= htmlspecialchars($closure['name']) ?>
 
-                        <?php endif; ?>
+                            <?php if($closure['price'] > 0): ?>
 
-                    </label>
+                                (+₹<?= number_format($closure['price'],2) ?>)
 
+                            <?php endif; ?>
+
+                        </label>
+
+                    </div>
+
+                <?php endforeach; ?>
+
+
+                <!-- No Results -->
+
+                <div
+                    id="editClosureNoResults"
+                    style="
+                        display:none;
+                        color:#94a3b8;
+                        font-size:12px;
+                        text-align:center;
+                        padding:10px;
+                    "
+                >
+                    No closures found.
                 </div>
 
-            <?php endforeach; ?>
+            </div>
 
         </div>
 
@@ -808,4 +864,48 @@ categorySelect.addEventListener("change",function(){
 
 loadSubCategories();
 
+</script>
+<script>
+
+document.addEventListener('DOMContentLoaded', function(){
+
+    const search =
+        document.getElementById('editClosureSearch');
+
+    const items =
+        document.querySelectorAll('.edit-closure-item');
+
+    const noResults =
+        document.getElementById('editClosureNoResults');
+
+    if(!search) return;
+
+    search.addEventListener('input', function(){
+
+        const value =
+            this.value.trim().toLowerCase();
+
+        let visibleCount = 0;
+
+        items.forEach(function(item){
+
+            const name =
+                item.dataset.closureName || '';
+
+            if(name.includes(value)){
+                item.style.display = '';
+                visibleCount++;
+            }else{
+                item.style.display = 'none';
+            }
+        });
+
+        if(noResults){
+            noResults.style.display =
+                visibleCount === 0
+                ? 'block'
+                : 'none';
+        }
+    });
+});
 </script>

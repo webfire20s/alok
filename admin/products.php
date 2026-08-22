@@ -43,7 +43,7 @@ $search = trim($_GET['search'] ?? '');
 
 $page = max(1, (int)($_GET['page'] ?? 1));
 
-$perPage = 25;
+$perPage = 50;
 
 $where = [];
 
@@ -376,6 +376,37 @@ $sr = $offset + 1;
             overflow: hidden;
         "
     >
+        <?php if($categoryFilter <= 0): ?>
+
+            <div
+                class="mb-3 px-3 py-2"
+                style="
+                    background: rgba(56, 189, 248, 0.08);
+                    border: 1px solid rgba(56, 189, 248, 0.15);
+                    color: #7dd3fc;
+                    border-radius: 8px;
+                    font-size: 13px;
+                "
+            >
+                Select a category to enable drag sorting.
+            </div>
+
+        <?php elseif($search !== ''): ?>
+
+            <div
+                class="mb-3 px-3 py-2"
+                style="
+                    background: rgba(245, 158, 11, 0.08);
+                    border: 1px solid rgba(245, 158, 11, 0.15);
+                    color: #fbbf24;
+                    border-radius: 8px;
+                    font-size: 13px;
+                "
+            >
+                Clear the search field to enable drag sorting.
+            </div>
+
+        <?php endif; ?>
 
         <div class="card-body p-0">
 
@@ -673,6 +704,7 @@ $sr = $offset + 1;
 
 </div> </div> 
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+
 <script>
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -683,106 +715,230 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    new Sortable(tbody, {
+
+    /*
+    |--------------------------------------------------------------------------
+    | CURRENT FILTERS
+    |--------------------------------------------------------------------------
+    */
+
+    const urlParams = new URLSearchParams(
+        window.location.search
+    );
+
+    const category = parseInt(
+        urlParams.get("category") || "0",
+        10
+    );
+
+    const subcategory = parseInt(
+        urlParams.get("subcategory") || "0",
+        10
+    );
+
+    const search = urlParams.get("search") || "";
+
+    const page = parseInt(
+        urlParams.get("page") || "1",
+        10
+    );
+    const sortingAllowed = category > 0 && search === "";
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | SORTABLE
+    |--------------------------------------------------------------------------
+    */
+
+    const sortable = new Sortable(tbody, {
 
         animation: 200,
 
         ghostClass: "table-warning",
 
+        draggable: "tr",
+
+        /*
+        |----------------------------------------------------------------------
+        | Do not allow sorting across different categories.
+        |----------------------------------------------------------------------
+        */
+
+        onMove: function (event) {
+
+            const draggedRow = event.dragged;
+
+            const relatedRow = event.related;
+
+            if (!draggedRow || !relatedRow) {
+                return true;
+            }
+
+            const draggedCategory =
+                parseInt(
+                    draggedRow.dataset.category || "0",
+                    10
+                );
+
+            const relatedCategory =
+                parseInt(
+                    relatedRow.dataset.category || "0",
+                    10
+                );
+
+            return draggedCategory === relatedCategory;
+        },
+
+
+        /*
+        |----------------------------------------------------------------------
+        | SAVE AFTER DRAG
+        |----------------------------------------------------------------------
+        */
+
         onEnd: function () {
+
+            /*
+            |------------------------------------------------------------------
+            | Category is required for safe sorting.
+            |------------------------------------------------------------------
+            */
+
+            if (category <= 0) {
+
+                console.warn(
+                    "Product sorting requires a category filter."
+                );
+
+                return;
+            }
+
+
+            /*
+            |------------------------------------------------------------------
+            | BUILD ORDER
+            |------------------------------------------------------------------
+            */
 
             const order = [];
 
             tbody.querySelectorAll("tr").forEach(function (row) {
 
-                if (!row.dataset.id) {
-                    return;
+                const id = parseInt(
+                    row.dataset.id || "0",
+                    10
+                );
+
+                if (id > 0) {
+
+                    order.push({
+                        id: id
+                    });
                 }
-
-                order.push({
-                    id: parseInt(row.dataset.id)
-                });
-
             });
+
 
             if (order.length === 0) {
                 return;
             }
 
+
             /*
-            |--------------------------------------------------------------------------
-            | CURRENT FILTERS
-            |--------------------------------------------------------------------------
+            |------------------------------------------------------------------
+            | DISABLE SORT WHILE SAVING
+            |------------------------------------------------------------------
             */
 
-            const urlParams = new URLSearchParams(window.location.search);
-
-            const category = parseInt(
-                urlParams.get("category") || "0"
+            sortable.option(
+                "disabled",
+                true
             );
-
-            const subcategory = parseInt(
-                urlParams.get("subcategory") || "0"
-            );
-
-            const search = urlParams.get("search") || "";
 
 
             /*
-            |--------------------------------------------------------------------------
+            |------------------------------------------------------------------
             | SAVE ORDER
-            |--------------------------------------------------------------------------
+            |------------------------------------------------------------------
             */
 
-            fetch("update_product_order.php", {
+            fetch(
+                "update_product_order.php",
+                {
+                    method: "POST",
 
-                method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    body: JSON.stringify({
 
-                body: JSON.stringify({
+                        products: order,
 
-                    products: order,
+                        category: category,
 
-                    category: category,
+                        subcategory: subcategory,
 
-                    subcategory: subcategory,
+                        search: search,
 
-                    search: search,
+                        page: page
 
-                    page: parseInt(
-                        urlParams.get("page") || "1"
-                    )
+                    })
+                }
+            )
+            .then(function (response) {
 
-                })
+                if (!response.ok) {
 
-            })
-            .then(response => response.json())
-
-            .then(data => {
-
-                if (data.success) {
-
-                    console.log("Product order saved successfully.");
-
-                } else {
-
-                    console.error(
-                        "Failed to save product order:",
-                        data.message || "Unknown error"
+                    throw new Error(
+                        "Server returned HTTP " +
+                        response.status
                     );
-
                 }
 
+                return response.json();
             })
+            .then(function (data) {
 
-            .catch(error => {
+                if (!data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to save product order."
+                    );
+                }
+
+                console.log(
+                    "Product order saved successfully."
+                );
+
+            })
+            .catch(function (error) {
 
                 console.error(
-                    "Error saving product order:",
+                    "Product order save failed:",
                     error
+                );
+
+                alert(
+                    "Unable to save the product order. " +
+                    "Please refresh the page and try again."
+                );
+
+                /*
+                |--------------------------------------------------------------
+                | Reload so the UI returns to the actual database order.
+                |--------------------------------------------------------------
+                */
+
+                window.location.reload();
+
+            })
+            .finally(function () {
+
+                sortable.option(
+                    "disabled",
+                    false
                 );
 
             });
@@ -790,6 +946,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | DISABLE SORTING WHEN NO CATEGORY IS SELECTED
+    |--------------------------------------------------------------------------
+    */
+
+    if (!sortingAllowed) {
+
+        sortable.option(
+            "disabled",
+            true
+        );
+    }
 
 });
 
