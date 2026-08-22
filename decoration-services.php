@@ -177,7 +177,7 @@ include 'includes/header.php';
                     Pioneers in Premium Glass Decoration
                 </h1>
                 <p class="mb-0" style="color: #cccccc; font-size: 16px; line-height: 1.8; max-width: 620px;">
-                    At Alok Glass, we combine state-of-the-art automation printing with master craftsmanship to transform standard glass bottles and jars into iconic, shelf-ready brand experiences.
+                    At Alok Glass, we combine state-of-the-art automated facilities with master craftsmanship to transform standard glass bottles and jars into iconic, shelf-ready brand experiences.
                 </p>
             </div>
         </div>
@@ -683,7 +683,7 @@ include 'includes/header.php';
             Need Custom Decorated Packaging?
         </h2>
 
-        <p class="mb-4 mx-auto" style="font-size: 15px; font-weight: 400; max-width: 620px; color: #cccccc; line-height: 1.7;">
+        <p class="mb-4 mx-auto" style="font-size: 15px; font-weight: 400; max-width: 620px; color: #c8232c; line-height: 1.7;">
             Get in touch with our team for customized glass bottle and jar decoration solutions.
         </p>
 

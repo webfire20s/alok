@@ -284,7 +284,7 @@
 
                     <li class="phone">
                         <i class="fa-solid fa-phone"></i>
-                        <div style="color: #dddddd;">Phone/Whatsapp: +91 999-747-7289 | +91 703-787-7289 (9:30-6:00 pm)</div>
+                        <div style="color: #dddddd;">Phone/Whatsapp: +91 999-747-7289 | +91 703-787-7289 (9:30 am - 6:00 pm)</div>
                     </li>
                 </ul>
             </div>
