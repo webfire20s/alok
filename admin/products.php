@@ -718,7 +718,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /*
     |--------------------------------------------------------------------------
-    | CURRENT URL FILTERS
+    | CURRENT FILTERS
     |--------------------------------------------------------------------------
     */
 
@@ -742,206 +742,215 @@ document.addEventListener("DOMContentLoaded", function () {
         urlParams.get("page") || "1",
         10
     );
+    const sortingAllowed = category > 0 && search === "";
 
 
     /*
     |--------------------------------------------------------------------------
-    | SORTING RULE
-    |--------------------------------------------------------------------------
-    |
-    | Sorting is allowed only when:
-    |
-    | 1. A category is selected.
-    | 2. No search is active.
-    |
-    */
-
-    const sortingAllowed =
-        category > 0 &&
-        search === "";
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | INITIALIZE SORTABLE
+    | SORTABLE
     |--------------------------------------------------------------------------
     */
 
-    const sortable = new Sortable(
-        tbody,
-        {
+    const sortable = new Sortable(tbody, {
 
-            animation: 200,
+        animation: 200,
 
-            ghostClass: "table-warning",
+        ghostClass: "table-warning",
 
-            draggable: "tr",
+        draggable: "tr",
+
+        /*
+        |----------------------------------------------------------------------
+        | Do not allow sorting across different categories.
+        |----------------------------------------------------------------------
+        */
+
+        onMove: function (event) {
+
+            const draggedRow = event.dragged;
+
+            const relatedRow = event.related;
+
+            if (!draggedRow || !relatedRow) {
+                return true;
+            }
+
+            const draggedCategory =
+                parseInt(
+                    draggedRow.dataset.category || "0",
+                    10
+                );
+
+            const relatedCategory =
+                parseInt(
+                    relatedRow.dataset.category || "0",
+                    10
+                );
+
+            return draggedCategory === relatedCategory;
+        },
+
+
+        /*
+        |----------------------------------------------------------------------
+        | SAVE AFTER DRAG
+        |----------------------------------------------------------------------
+        */
+
+        onEnd: function () {
+
+            /*
+            |------------------------------------------------------------------
+            | Category is required for safe sorting.
+            |------------------------------------------------------------------
+            */
+
+            if (category <= 0) {
+
+                console.warn(
+                    "Product sorting requires a category filter."
+                );
+
+                return;
+            }
 
 
             /*
-            |--------------------------------------------------------------------------
-            | DRAG END
-            |--------------------------------------------------------------------------
+            |------------------------------------------------------------------
+            | BUILD ORDER
+            |------------------------------------------------------------------
             */
 
-            onEnd: function () {
+            const order = [];
 
-                if (!sortingAllowed) {
+            tbody.querySelectorAll("tr").forEach(function (row) {
 
-                    return;
-                }
-
-
-                /*
-                |------------------------------------------------------------------
-                | BUILD NEW ORDER
-                |------------------------------------------------------------------
-                */
-
-                const order = [];
-
-
-                tbody.querySelectorAll("tr").forEach(
-                    function (row) {
-
-                        const id = parseInt(
-                            row.dataset.id || "0",
-                            10
-                        );
-
-
-                        if (id > 0) {
-
-                            order.push({
-                                id: id
-                            });
-
-                        }
-
-                    }
+                const id = parseInt(
+                    row.dataset.id || "0",
+                    10
                 );
 
+                if (id > 0) {
 
-                if (order.length === 0) {
+                    order.push({
+                        id: id
+                    });
+                }
+            });
 
-                    return;
+
+            if (order.length === 0) {
+                return;
+            }
+
+
+            /*
+            |------------------------------------------------------------------
+            | DISABLE SORT WHILE SAVING
+            |------------------------------------------------------------------
+            */
+
+            sortable.option(
+                "disabled",
+                true
+            );
+
+
+            /*
+            |------------------------------------------------------------------
+            | SAVE ORDER
+            |------------------------------------------------------------------
+            */
+
+            fetch(
+                "update_product_order.php",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        products: order,
+
+                        category: category,
+
+                        subcategory: subcategory,
+
+                        search: search,
+
+                        page: page
+
+                    })
+                }
+            )
+            .then(function (response) {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Server returned HTTP " +
+                        response.status
+                    );
                 }
 
+                return response.json();
+            })
+            .then(function (data) {
+
+                if (!data.success) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to save product order."
+                    );
+                }
+
+                console.log(
+                    "Product order saved successfully."
+                );
+
+            })
+            .catch(function (error) {
+
+                console.error(
+                    "Product order save failed:",
+                    error
+                );
+
+                alert(
+                    "Unable to save the product order. " +
+                    "Please refresh the page and try again."
+                );
 
                 /*
-                |------------------------------------------------------------------
-                | DISABLE SORT DURING SAVE
-                |------------------------------------------------------------------
+                |--------------------------------------------------------------
+                | Reload so the UI returns to the actual database order.
+                |--------------------------------------------------------------
                 */
+
+                window.location.reload();
+
+            })
+            .finally(function () {
 
                 sortable.option(
                     "disabled",
-                    true
+                    false
                 );
 
-
-                /*
-                |------------------------------------------------------------------
-                | SAVE
-                |------------------------------------------------------------------
-                */
-
-                fetch(
-                    "update_product_order.php",
-                    {
-
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body: JSON.stringify({
-
-                            products: order,
-
-                            category: category,
-
-                            subcategory: subcategory,
-
-                            search: search,
-
-                            page: page
-
-                        })
-
-                    }
-                )
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "HTTP " +
-                            response.status
-                        );
-                    }
-
-                    return response.json();
-
-                })
-                .then(function (data) {
-
-                    if (!data.success) {
-
-                        throw new Error(
-                            data.message ||
-                            "Unable to save product order."
-                        );
-                    }
-
-                    console.log(
-                        "Product order saved successfully."
-                    );
-
-                })
-                .catch(function (error) {
-
-                    console.error(
-                        "Product order save failed:",
-                        error
-                    );
-
-
-                    alert(
-                        "Unable to save the product order. " +
-                        "Please refresh the page and try again."
-                    );
-
-
-                    /*
-                    |--------------------------------------------------------------
-                    | RESTORE DATABASE ORDER
-                    |--------------------------------------------------------------
-                    */
-
-                    window.location.reload();
-
-                })
-                .finally(function () {
-
-                    sortable.option(
-                        "disabled",
-                        false
-                    );
-
-                });
-
-            }
+            });
 
         }
-    );
+
+    });
 
 
     /*
     |--------------------------------------------------------------------------
-    | DISABLE SORTING WHEN NOT ALLOWED
+    | DISABLE SORTING WHEN NO CATEGORY IS SELECTED
     |--------------------------------------------------------------------------
     */
 
@@ -951,7 +960,6 @@ document.addEventListener("DOMContentLoaded", function () {
             "disabled",
             true
         );
-
     }
 
 });

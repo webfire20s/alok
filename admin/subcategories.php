@@ -5,12 +5,35 @@ require '../includes/db.php';
 
 $search = trim($_GET['search'] ?? '');
 
+$categoryFilter = (int)($_GET['category'] ?? 0);
+
 $page = max(1, (int)($_GET['page'] ?? 1));
 
 $perPage = 25;
 
 $where = [];
 $params = [];
+
+
+/*
+|--------------------------------------------------------------------------
+| CATEGORY FILTER
+|--------------------------------------------------------------------------
+*/
+
+if($categoryFilter > 0){
+
+    $where[] = "sc.category_id = ?";
+    $params[] = $categoryFilter;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SEARCH FILTER
+|--------------------------------------------------------------------------
+*/
 
 if($search != ''){
 
@@ -51,6 +74,23 @@ if($where){
     $whereSql = ' WHERE '.implode(' AND ',$where);
 
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| GET CATEGORIES
+|--------------------------------------------------------------------------
+*/
+
+$categoryStmt = $pdo->query("
+    SELECT id, name
+    FROM categories
+    ORDER BY name ASC
+");
+
+$categories = $categoryStmt->fetchAll();
+
+
 
 /* TOTAL */
 
@@ -143,15 +183,101 @@ include 'includes/admin_sidebar.php';
             <p style="color:#64748b;margin:0;"> Manage product subcategories. </p>
         </div>
 
-        <div class="d-flex gap-2">
-            <form method="GET">
-                <input type="text" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search..." class="form-control" style=" width:250px; background:#111827; color:#fff; border:1px solid #374151;">
+        <div class="d-flex gap-2 flex-wrap">
+
+            <!-- SEARCH -->
+            <form method="GET" class="d-flex gap-2">
+
+                <?php if($categoryFilter > 0): ?>
+
+                    <input type="hidden" name="category" value="<?= $categoryFilter ?>" >
+
+                <?php endif; ?>
+
+                <input type="text" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search..." class="form-control" style=" width:250px; background:#111827; color:#fff; border:1px solid #374151; " >
+
+                <button type="submit" class="btn btn-info" >
+                    Search
+                </button>
+
             </form>
-            <a href="add_subcategory.php" class="btn btn-info" > Add Subcategory </a>
+
+
+            <!-- CATEGORY FILTER -->
+
+            <form method="GET">
+
+                <?php if($search != ''): ?>
+
+                    <input
+                        type="hidden"
+                        name="search"
+                        value="<?= htmlspecialchars($search) ?>"
+                    >
+
+                <?php endif; ?>
+
+                <select
+                    name="category"
+                    onchange="this.form.submit()"
+                    class="form-control"
+                    style="
+                        width:220px;
+                        background:#111827;
+                        color:#fff;
+                        border:1px solid #374151;
+                        cursor:pointer;
+                    "
+                >
+
+                    <option value="0">
+                        All Categories
+                    </option>
+
+                    <?php foreach($categories as $category): ?>
+
+                        <option
+                            value="<?= $category['id'] ?>"
+                            <?= $categoryFilter == $category['id'] ? 'selected' : '' ?>
+                        >
+                            <?= htmlspecialchars($category['name']) ?>
+                        </option>
+
+                    <?php endforeach; ?>
+
+                </select>
+
+            </form>
+
+
+            <!-- ADD SUBCATEGORY -->
+
+            <a
+                href="add_subcategory.php"
+                class="btn btn-info"
+            >
+                Add Subcategory
+            </a>
+
         </div>
     </div>
 
     <div class="card border-0" style=" border-radius:14px; background:rgba(21,25,34,.60); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.05); box-shadow:0 20px 40px rgba(0,0,0,.25); overflow:hidden; ">
+         <?php if($categoryFilter <= 0): ?>
+
+        <div
+            class="mb-1  px-3 py-2"
+            style="
+                background: rgba(56, 189, 248, 0.08);
+                border: 1px solid rgba(56, 189, 248, 0.15);
+                color: #7dd3fc;
+                border-radius: 8px;
+                font-size: 13px;
+            "
+        >
+            Select a category to enable drag sorting.
+        </div>
+        <?php endif;?>
         <div class="card-body p-0">
             <div class="table-responsive custom-table-scroll">
 
@@ -250,7 +376,7 @@ include 'includes/admin_sidebar.php';
                 <ul class="pagination justify-content-center">
                     <?php for($i=1;$i<=$totalPages;$i++): ?>
                     <li class="page-item <?= $page==$i?'active':'' ?>">
-                        <a class="page-link" href="?page=<?= $i ?>&search=<?= urlencode($search) ?>" >
+                        <a class="page-link" href="?page=<?= $i ?>&search=<?= urlencode($search) ?>&category=<?= $categoryFilter ?>" >
                             <?= $i ?>
                         </a>
                     </li>

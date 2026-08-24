@@ -13,9 +13,10 @@ try {
     |--------------------------------------------------------------------------
     */
 
-    $rawData = file_get_contents("php://input");
-
-    $data = json_decode($rawData, true);
+    $data = json_decode(
+        file_get_contents("php://input"),
+        true
+    );
 
     if (!is_array($data)) {
 
@@ -42,16 +43,6 @@ try {
 
     $search = trim($data['search'] ?? '');
 
-    if ($search !== '') {
-
-        echo json_encode([
-            'success' => false,
-            'message' => 'Please clear the search before sorting products.'
-        ]);
-
-        exit;
-    }
-
     $page = max(
         1,
         (int)($data['page'] ?? 1)
@@ -60,9 +51,11 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | IMPORTANT
+    | PRODUCTS PER PAGE
     |--------------------------------------------------------------------------
+    |
     | Must match products.php
+    |
     */
 
     $perPage = 50;
@@ -70,7 +63,7 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | VALIDATE PRODUCT LIST
+    | VALIDATION
     |--------------------------------------------------------------------------
     */
 
@@ -87,14 +80,10 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | CATEGORY IS REQUIRED FOR SAFE SORTING
+    | CATEGORY REQUIRED
     |--------------------------------------------------------------------------
     |
-    | display_order belongs to the category ordering.
-    |
-    | If "All Categories" is selected, products from different categories
-    | are mixed in the same draggable list and their display_order values
-    | cannot safely be exchanged.
+    | Products are sorted within their category.
     |
     */
 
@@ -111,26 +100,45 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | BUILD FILTERS
+    | SEARCH SORTING NOT ALLOWED
+    |--------------------------------------------------------------------------
+    |
+    | A search result is only a subset of the category.
+    | Reordering it would not provide enough information to safely
+    | determine the complete category order.
+    |
+    */
+
+    if ($search !== '') {
+
+        echo json_encode([
+            'success' => false,
+            'message' => 'Please clear the search before sorting products.'
+        ]);
+
+        exit;
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | BUILD FILTER
     |--------------------------------------------------------------------------
     */
 
-    $where = [];
+    $where = [
+        "products.category_id = ?"
+    ];
 
-    $params = [];
-
-
-    /*
-    | CATEGORY
-    */
-
-    $where[] = "products.category_id = ?";
-
-    $params[] = $category;
+    $params = [
+        $category
+    ];
 
 
     /*
+    |--------------------------------------------------------------------------
     | SUBCATEGORY
+    |--------------------------------------------------------------------------
     */
 
     if ($subcategory > 0) {
@@ -141,61 +149,16 @@ try {
     }
 
 
-    /*
-    | SEARCH
-    |
-    | Search is intentionally included here so the visible page is
-    | calculated exactly from the same filtering rules as products.php.
-    */
-
-    if ($search !== '') {
-
-        if (is_numeric($search)) {
-
-            $where[] = "
-                (
-                    products.id = ?
-                    OR products.name LIKE ?
-                    OR products.sku LIKE ?
-                    OR products.slug LIKE ?
-                )
-            ";
-
-            $params[] = (int)$search;
-            $params[] = "%{$search}%";
-            $params[] = "%{$search}%";
-            $params[] = "%{$search}%";
-
-        } else {
-
-            $where[] = "
-                (
-                    products.name LIKE ?
-                    OR products.sku LIKE ?
-                    OR products.slug LIKE ?
-                )
-            ";
-
-            $params[] = "%{$search}%";
-            $params[] = "%{$search}%";
-            $params[] = "%{$search}%";
-        }
-    }
-
-
-    $whereSql = 'WHERE ' . implode(' AND ', $where);
+    $whereSql = 'WHERE ' . implode(
+        ' AND ',
+        $where
+    );
 
 
     /*
     |--------------------------------------------------------------------------
-    | GET COMPLETE SORTING SCOPE
+    | GET COMPLETE SORTING LIST
     |--------------------------------------------------------------------------
-    |
-    | No LIMIT here.
-    |
-    | We need the complete filtered list to determine the exact
-    | display_order positions occupied by the current page.
-    |
     */
 
     $stmt = $pdo->prepare("
@@ -213,12 +176,14 @@ try {
 
     $stmt->execute($params);
 
-    $allProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $allProducts = $stmt->fetchAll(
+        PDO::FETCH_ASSOC
+    );
 
 
     /*
     |--------------------------------------------------------------------------
-    | CHECK WHETHER PRODUCTS EXIST
+    | CHECK PRODUCTS
     |--------------------------------------------------------------------------
     */
 
@@ -226,7 +191,7 @@ try {
 
         echo json_encode([
             'success' => false,
-            'message' => 'No products found for the selected filters.'
+            'message' => 'No products found.'
         ]);
 
         exit;
@@ -235,7 +200,7 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | TOTAL PAGES
+    | TOTAL PRODUCTS / PAGES
     |--------------------------------------------------------------------------
     */
 
@@ -243,21 +208,17 @@ try {
 
     $totalPages = max(
         1,
-        (int)ceil($totalProducts / $perPage)
+        (int)ceil(
+            $totalProducts / $perPage
+        )
     );
 
-
-    /*
-    |--------------------------------------------------------------------------
-    | VALIDATE PAGE
-    |--------------------------------------------------------------------------
-    */
 
     if ($page > $totalPages) {
 
         echo json_encode([
             'success' => false,
-            'message' => 'The page has changed. Please refresh the page and try again.'
+            'message' => 'Invalid page. Please refresh the page.'
         ]);
 
         exit;
@@ -266,15 +227,15 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | GET CURRENT PAGE
+    | CURRENT PAGE
     |--------------------------------------------------------------------------
     */
 
-    $pageOffset = ($page - 1) * $perPage;
+    $offset = ($page - 1) * $perPage;
 
     $currentPageProducts = array_slice(
         $allProducts,
-        $pageOffset,
+        $offset,
         $perPage
     );
 
@@ -295,7 +256,7 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | READ DRAGGED IDS
+    | DRAGGED IDS
     |--------------------------------------------------------------------------
     */
 
@@ -314,7 +275,7 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | REMOVE DUPLICATE IDS
+    | REMOVE DUPLICATES
     |--------------------------------------------------------------------------
     */
 
@@ -325,8 +286,11 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | VALIDATE EXACT PAGE CONTENT
+    | VALIDATE EXACT PAGE
     |--------------------------------------------------------------------------
+    |
+    | The browser must send exactly the products currently displayed.
+    |
     */
 
     $expectedIds = $currentPageIds;
@@ -334,63 +298,19 @@ try {
     $receivedIds = $draggedIds;
 
     sort($expectedIds);
+
     sort($receivedIds);
+
 
     if ($expectedIds !== $receivedIds) {
 
         echo json_encode([
             'success' => false,
-            'message' => 'The displayed product list has changed. Please refresh the page and try again.'
+            'message' => 'The product list has changed. Please refresh the page and try again.'
         ]);
 
         exit;
     }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | BUILD CURRENT PAGE ORDER VALUES
-    |--------------------------------------------------------------------------
-    */
-
-    $pageOrders = [];
-
-    foreach ($currentPageProducts as $product) {
-
-        $pageOrders[] = (int)$product['display_order'];
-    }
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | PRESERVE ORDER POSITIONS
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-     * The browser gives us the desired product sequence.
-     *
-     * We assign the existing display_order values in that sequence.
-     *
-     * Example:
-     *
-     * Existing:
-     * Product A -> 10
-     * Product B -> 20
-     * Product C -> 30
-     *
-     * Dragged:
-     * Product C
-     * Product A
-     * Product B
-     *
-     * Result:
-     * Product C -> 10
-     * Product A -> 20
-     * Product B -> 30
-     *
-     * No arbitrary values are generated.
-     */
 
 
     /*
@@ -404,9 +324,51 @@ try {
 
     /*
     |--------------------------------------------------------------------------
-    | UPDATE ORDER
+    | TEMPORARY VALUES
+    |--------------------------------------------------------------------------
+    |
+    | We first move the current page products to temporary negative
+    | values. This prevents any accidental conflicts while assigning
+    | the final positions.
+    |
+    */
+
+    $tempStmt = $pdo->prepare("
+        UPDATE products
+        SET display_order = ?
+        WHERE id = ?
+          AND category_id = ?
+    ");
+
+
+    foreach ($draggedIds as $index => $productId) {
+
+        $temporaryOrder = -($index + 1);
+
+        $tempStmt->execute([
+            $temporaryOrder,
+            $productId,
+            $category
+        ]);
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | FINAL ORDER
     |--------------------------------------------------------------------------
     */
+
+    /*
+     * IMPORTANT:
+     *
+     * The page starts at $offset.
+     *
+     * Therefore the first product on page 1 gets order 1.
+     * The first product on page 2 gets order 51.
+     * The first product on page 3 gets order 101.
+     *
+     */
 
     $updateStmt = $pdo->prepare("
         UPDATE products
@@ -418,15 +380,10 @@ try {
 
     foreach ($draggedIds as $index => $productId) {
 
-        if (!isset($pageOrders[$index])) {
-
-            throw new RuntimeException(
-                'Invalid product order received.'
-            );
-        }
+        $newOrder = $offset + $index + 1;
 
         $updateStmt->execute([
-            $pageOrders[$index],
+            $newOrder,
             $productId,
             $category
         ]);

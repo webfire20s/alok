@@ -215,11 +215,11 @@ $products = $productStmt->fetchAll();
             width: 100%;
         }
 
-        /* EXACT 6-COLUMN GRID MATRIX PER ROW */
+        /* EXACT 4-COLUMN GRID MATRIX PER ROW */
         .category-nav ul li {
             position: relative;
-            flex: 0 0 calc(100% / 6); /* Forces exactly 6 columns per row */
-            max-width: calc(100% / 6);
+            flex: 0 0 25%;
+            max-width: 25%;
             box-sizing: border-box;
         }
 
@@ -246,7 +246,7 @@ $products = $productStmt->fetchAll();
             border-bottom-left-radius: 10px;
         }
 
-        .category-nav ul li:nth-child(6) > a {
+        .category-nav ul li:nth-child(4) > a {
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
         }

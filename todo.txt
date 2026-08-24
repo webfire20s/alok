@@ -1,25 +1,282 @@
 DB FILE CODE 
-<?php
+    <?php
 
-$host = "localhost";
-$dbname = "alokwebfiredegit_main1";
-$username = "alokwebfiredegit_alokglassweb";
-$password = "FVv_gJ-4@-X~[YHI";
+    $host = "localhost";
+    $dbname = "alokwebfiredegit_main1";
+    $username = "alokwebfiredegit_alokglassweb";
+    $password = "FVv_gJ-4@-X~[YHI";
 
-try {
-    $pdo = new PDO(
-        "mysql:host=$host;dbname=$dbname;charset=utf8",
-        $username,
-        $password
-    );
+    try {
+        $pdo = new PDO(
+            "mysql:host=$host;dbname=$dbname;charset=utf8",
+            $username,
+            $password
+        );
 
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-} catch(PDOException $e) {
-    die("Database Connection Failed: " . $e->getMessage());
-}
+    } catch(PDOException $e) {
+        die("Database Connection Failed: " . $e->getMessage());
+    }
+
+add to cart will only be shown on instock products 
+pcs per box is shown on both public/product.php , and admin/add_product.php
 
 
+products ke niche ki js , 
+
+    <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const tbody = document.getElementById("sortableProducts");
+
+        if (!tbody) {
+            return;
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CURRENT URL FILTERS
+        |--------------------------------------------------------------------------
+        */
+
+        const urlParams = new URLSearchParams(
+            window.location.search
+        );
+
+        const category = parseInt(
+            urlParams.get("category") || "0",
+            10
+        );
+
+        const subcategory = parseInt(
+            urlParams.get("subcategory") || "0",
+            10
+        );
+
+        const search = urlParams.get("search") || "";
+
+        const page = parseInt(
+            urlParams.get("page") || "1",
+            10
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | SORTING RULE
+        |--------------------------------------------------------------------------
+        |
+        | Sorting is allowed only when:
+        |
+        | 1. A category is selected.
+        | 2. No search is active.
+        |
+        */
+
+        const sortingAllowed =
+            category > 0 &&
+            search === "";
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | INITIALIZE SORTABLE
+        |--------------------------------------------------------------------------
+        */
+
+        const sortable = new Sortable(
+            tbody,
+            {
+
+                animation: 200,
+
+                ghostClass: "table-warning",
+
+                draggable: "tr",
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | DRAG END
+                |--------------------------------------------------------------------------
+                */
+
+                onEnd: function () {
+
+                    if (!sortingAllowed) {
+
+                        return;
+                    }
+
+
+                    /*
+                    |------------------------------------------------------------------
+                    | BUILD NEW ORDER
+                    |------------------------------------------------------------------
+                    */
+
+                    const order = [];
+
+
+                    tbody.querySelectorAll("tr").forEach(
+                        function (row) {
+
+                            const id = parseInt(
+                                row.dataset.id || "0",
+                                10
+                            );
+
+
+                            if (id > 0) {
+
+                                order.push({
+                                    id: id
+                                });
+
+                            }
+
+                        }
+                    );
+
+
+                    if (order.length === 0) {
+
+                        return;
+                    }
+
+
+                    /*
+                    |------------------------------------------------------------------
+                    | DISABLE SORT DURING SAVE
+                    |------------------------------------------------------------------
+                    */
+
+                    sortable.option(
+                        "disabled",
+                        true
+                    );
+
+
+                    /*
+                    |------------------------------------------------------------------
+                    | SAVE
+                    |------------------------------------------------------------------
+                    */
+
+                    fetch(
+                        "update_product_order.php",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                products: order,
+
+                                category: category,
+
+                                subcategory: subcategory,
+
+                                search: search,
+
+                                page: page
+
+                            })
+
+                        }
+                    )
+                    .then(function (response) {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "HTTP " +
+                                response.status
+                            );
+                        }
+
+                        return response.json();
+
+                    })
+                    .then(function (data) {
+
+                        if (!data.success) {
+
+                            throw new Error(
+                                data.message ||
+                                "Unable to save product order."
+                            );
+                        }
+
+                        console.log(
+                            "Product order saved successfully."
+                        );
+
+                    })
+                    .catch(function (error) {
+
+                        console.error(
+                            "Product order save failed:",
+                            error
+                        );
+
+
+                        alert(
+                            "Unable to save the product order. " +
+                            "Please refresh the page and try again."
+                        );
+
+
+                        /*
+                        |--------------------------------------------------------------
+                        | RESTORE DATABASE ORDER
+                        |--------------------------------------------------------------
+                        */
+
+                        window.location.reload();
+
+                    })
+                    .finally(function () {
+
+                        sortable.option(
+                            "disabled",
+                            false
+                        );
+
+                    });
+
+                }
+
+            }
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | DISABLE SORTING WHEN NOT ALLOWED
+        |--------------------------------------------------------------------------
+        */
+
+        if (!sortingAllowed) {
+
+            sortable.option(
+                "disabled",
+                true
+            );
+
+        }
+
+    });
+
+    </script>
 
 
 
