@@ -24,7 +24,7 @@ $blogs = $stmt->fetchAll();
     }
     .blog-section-wrapper {
         font-family: 'Montserrat', sans-serif;
-        background-color: #fafafa;
+        background-color: #ffffff;
     }
     .blog-animate-fade {
         animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;

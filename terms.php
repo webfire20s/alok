@@ -148,7 +148,7 @@ include 'includes/header.php';
         }
     </style> -->
 
-<div class="alok-terms-wrapper" style="font-family: 'Montserrat', sans-serif; background: #fafafa; color: #444444;">
+<div class="alok-terms-wrapper" style="font-family: 'Montserrat', sans-serif; background: #ffffff; color: #444444;">
 
     <!-- Integrated Corporate Theme Styles & Keyframes -->
     <style>
@@ -176,7 +176,7 @@ include 'includes/header.php';
             letter-spacing: 0.1em;
         }
         .terms-section-node {
-            background: #ffffff;
+            background: #fff9f9;
             padding: 35px;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.02);

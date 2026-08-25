@@ -332,9 +332,41 @@ include 'includes/header.php';
     </div>
 </section>
 
+
+<!-- HERO INTRODUCTORY SEGMENT -->
+    <!-- <section class="py-5" style="background-color: #fafafa;">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mb-5 mb-lg-0 pe-lg-5 srv-animate-fade" style="animation-delay: 0.05s;">
+                    <h1 class="text-uppercase mb-4" style="font-size: 36px; font-weight: 800; color: #111111; letter-spacing: -0.01em; line-height: 1.25; position: relative; padding-bottom: 18px;">
+                        Decoration & Branding Services
+                        <span style="position: absolute; bottom: 0; left: 0; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px; animation: srvLineExpand 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;"></span>
+                    </h1>
+
+                    <p class="mb-4" style="font-size: 15px; line-height: 1.8; color: #555555; font-weight: 500; margin-top: 24px;">
+                        Elevate your packaging with premium decoration solutions including screen printing, UV printing, frosting, coating, labeling, and custom branding for glass bottles and jars.
+                    </p>
+
+                    <div class="mt-4 pt-2">
+                        <a href="bulk_inquiry.php" class="btn srv-btn-quote text-uppercase">
+                            Request Bulk Quote
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-10 srv-animate-fade" style="animation-delay: 0.15s;">
+                    <div style="background: #ffffff; border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
+                        <img src="storage/media/decoration-banner.jpg" class="img-fluid" style="border-radius: 8px; width: 100%; height: 350px; object-fit: cover;" alt="Glass Decoration Infrastructure">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+
 <!-- VIDEO -->
 <!-- INTEGRATED DECORATION PROCESS & INDUSTRIES SYSTEM STYLES -->
-<style>
+<!-- <style>
     /* Responsive Premium Video Frame Container */
     .proc-video-container {
         position: relative;
@@ -403,7 +435,7 @@ include 'includes/header.php';
     .ind-card:hover .ind-card-text {
         color: #c8232c;
     }
-</style>
+</style> -->
 
 <!-- WATCH OUR DECORATION PROCESS VIDEO SEGMENT --
 <section class="py-5" style="background-color: #fafafa; font-family: 'Montserrat', sans-serif;">

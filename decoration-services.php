@@ -3,6 +3,7 @@ include 'includes/header.php';
 ?>
 
 <!-- ADVANCED MANUFACTURING & DECORATION SYSTEM STYLES -->
+<!-- ADVANCED MANUFACTURING & DECORATION SYSTEM STYLES -->
 <style>
     /* Global Page Scoping & Typography */
     .alok-page-container {
@@ -26,7 +27,7 @@ include 'includes/header.php';
 
     /* Hero Banner Architecture */
     .about-hero {
-        background-image: linear-gradient(to right, rgba(17, 17, 17, 0.92) 30%, rgba(0, 0, 0, 0.75) 70%), 
+        background-image: linear-gradient(to right, rgba(17, 17, 17, 0.92) 10%, rgba(0, 0, 0, 0.75) 50%), 
                           url('assets/themes/storefront/public/images/aboutherobanner.jpg');
         background-size: cover;
         background-position: center;
@@ -94,7 +95,7 @@ include 'includes/header.php';
             grid-template-columns: repeat(2, 1fr);
         }
         .span-full-row {
-            grid-column: span 2;
+            grid-column: span 3;
         }
     }
     @media (min-width: 992px) {
@@ -106,7 +107,7 @@ include 'includes/header.php';
         }
     }
 
-    /* Media-Rich Feature Card Component */
+    /* Media-Rich Feature Card Component (Redesigned for Full-Bleed Images) */
     .media-card {
         background: #ffffff;
         border: 1px solid #e9ecef;
@@ -125,27 +126,39 @@ include 'includes/header.php';
         border-color: rgba(200, 35, 44, 0.3);
         box-shadow: 0 14px 30px rgba(0,0,0,0.08);
     }
+
+    /* FIXED IMAGE CONTAINER: Soft framed presentation with smart aspect ratio */
+    /* INCREASED IMAGE CONTAINER: Gives full headroom for cover alignment */
     .media-card-img-wrap {
-        height: 200px;
+        height: 350px !important;  /* Increased from 220px to prevent cropping */
         width: 100%;
         overflow: hidden;
         position: relative;
-        background-color: #f1f3f5;
+        background-color: #f4f5f7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
     }
+
+    /* FULL COVER IMAGE: Fills container completely without breaking aspect ratio */
     .media-card-img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        object-fit: fill;
+        object-position: center;
+        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .media-card:hover .media-card-img {
-        transform: scale(1.06);
+        transform: scale(1.05);
     }
+
     .media-card-body {
         padding: 24px;
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+        background: #ffffff;
     }
     .media-card-title {
         font-size: 17px;
@@ -255,7 +268,7 @@ include 'includes/header.php';
 
     /* CTA Premium Styling */
     .cta-premium-bg {
-        background: linear-gradient(135deg, #221e1e 40%, #494949 100%);
+        background: linear-gradient(135deg, #ffffff 40%, #ffffff 100%);
         color: #ffffff !important;
         position: relative;
     }
@@ -271,42 +284,12 @@ include 'includes/header.php';
                     <span class="text-uppercase d-block mb-2" style="color: #c8232c; font-size: 13px; font-weight: 700; letter-spacing: 0.1em;">
                         Crafting Visual Identities Since 1998
                     </span>
-                    <h1 class="text-uppercase mb-4" style="color: #070606 !important; font-size: 42px; font-weight: 900; letter-spacing: 0.02em; line-height: 1.2;">
+                    <h1 class="text-uppercase mb-4" style="color: #c9a8a8 !important; font-size: 42px; font-weight: 900; letter-spacing: 0.02em; line-height: 1.2;">
                         Pioneers in Premium Glass Decoration
                     </h1>
                     <p class="mb-0" style="color: #ffff; font-size: 16px; line-height: 1.8; max-width: 620px;">
                         At Alok Glass, we combine state-of-the-art automated facilities with master craftsmanship to transform standard glass bottles and jars into iconic, shelf-ready brand experiences.
                     </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- HERO INTRODUCTORY SEGMENT -->
-    <section class="py-5" style="background-color: #fafafa;">
-        <div class="container py-4">
-            <div class="row align-items-center">
-                <div class="col-lg-8 mb-5 mb-lg-0 pe-lg-5 srv-animate-fade" style="animation-delay: 0.05s;">
-                    <h1 class="text-uppercase mb-4" style="font-size: 36px; font-weight: 800; color: #111111; letter-spacing: -0.01em; line-height: 1.25; position: relative; padding-bottom: 18px;">
-                        Decoration & Branding Services
-                        <span style="position: absolute; bottom: 0; left: 0; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px; animation: srvLineExpand 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;"></span>
-                    </h1>
-
-                    <p class="mb-4" style="font-size: 15px; line-height: 1.8; color: #555555; font-weight: 500; margin-top: 24px;">
-                        Elevate your packaging with premium decoration solutions including screen printing, UV printing, frosting, coating, labeling, and custom branding for glass bottles and jars.
-                    </p>
-
-                    <div class="mt-4 pt-2">
-                        <a href="bulk_inquiry.php" class="btn srv-btn-quote text-uppercase">
-                            Request Bulk Quote
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-10 srv-animate-fade" style="animation-delay: 0.15s;">
-                    <div style="background: #ffffff; border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
-                        <img src="storage/media/decoration-banner.jpg" class="img-fluid" style="border-radius: 8px; width: 100%; height: 350px; object-fit: cover;" alt="Glass Decoration Infrastructure">
-                    </div>
                 </div>
             </div>
         </div>
@@ -329,7 +312,7 @@ include 'includes/header.php';
                 <article class="media-card span-full-row srv-animate-fade">
                     <span class="feature-tag-badge">9,000 Pcs / Hour</span>
                     <div class="media-card-img-wrap" style="height: 240px;">
-                        <img src="https://rtpackaging.in/wp-content/uploads/2022/06/glass_roll_on_bottle-removebg-preview.png" class="media-card-img" alt="Colour Coating on Glass">
+                        <img src="assets/images/colour coating.png" class="media-card-img" alt="Colour Coating on Glass">
                     </div>
                     <div class="media-card-body">
                         <h3 class="media-card-title">Colour Coating on Glass</h3>
@@ -357,7 +340,7 @@ include 'includes/header.php';
                 <!-- Card 2: Colour Printing -->
                 <article class="media-card srv-animate-fade">
                     <div class="media-card-img-wrap">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2N-sMmEhFrcS4grM9kY9q8aNtuKA8cyW9iUBuZTXacR6D9A4Slv9a04c&s=10" class="media-card-img" alt="Colour Printing on Glass">
+                        <img src="assets/images/colour printing.png" class="media-card-img" alt="Colour Printing on Glass">
                     </div>
                     <div class="media-card-body">
                         <h3 class="media-card-title">Colour Printing on Glass</h3>
@@ -380,7 +363,7 @@ include 'includes/header.php';
                 <!-- Card 3: Foiling -->
                 <article class="media-card srv-animate-fade">
                     <div class="media-card-img-wrap">
-                        <img src="https://i.etsystatic.com/11653899/r/il/428ac5/8413159963/il_300x300.8413159963_mw4a.jpg" class="media-card-img" alt="Foiling on Glass">
+                        <img src="assets/images/foiling.png" class="media-card-img" alt="Foiling on Glass">
                     </div>
                     <div class="media-card-body">
                         <h3 class="media-card-title">Foiling on Glass</h3>
@@ -401,7 +384,7 @@ include 'includes/header.php';
                 <!-- Card 4: Acid-Dipped Frosting -->
                 <article class="media-card span-full-row srv-animate-fade">
                     <div class="media-card-img-wrap">
-                        <img src="https://media.licdn.com/dms/image/v2/D5612AQFTV5eZf0Mzxg/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1695823582841?e=2147483647&v=beta&t=JnTI5f8nxHFR_Y5DMC5Tj5zLQMi_lYsigLm0FkFDgoc" class="media-card-img" alt="Acid-Dipped Frosting">
+                        <img src="assets/images/frosting.png" class="media-card-img" alt="Acid-Dipped Frosting">
                     </div>
                     <div class="media-card-body">
                         <h3 class="media-card-title">Acid-Dipped Frosting</h3>
@@ -422,7 +405,7 @@ include 'includes/header.php';
                 <!-- Card 5: Metallization -->
                 <article class="media-card span-full-row srv-animate-fade">
                     <div class="media-card-img-wrap">
-                        <img src="https://www.lianxinbottle.com/wp-content/uploads/2025/06/electroplated-dropper-bottles.jpg.webp" class="media-card-img" alt="Glass Metallization">
+                        <img src="assets/images/Mettalization.png" class="media-card-img" alt="Glass Metallization">
                     </div>
                     <div class="media-card-body">
                         <h3 class="media-card-title">Metallization</h3>
@@ -463,7 +446,7 @@ include 'includes/header.php';
                 <article class="media-card span-full-row srv-animate-fade">
                     <span class="feature-tag-badge">GM Glass Partner</span>
                     <div class="media-card-img-wrap" style="height: 240px;">
-                        <img src="https://cdn.globalso.com/yrglassbottle/%E4%B8%BB%E5%9B%BE0613.jpg" class="media-card-img" alt="Flint Glass Manufacturing">
+                        <img src="assets/images/Flint Glass.png" class="media-card-img" alt="Flint Glass Manufacturing">
                     </div>
                     <div class="media-card-body">
                         <h3 class="media-card-title">Flint Glass (Green Tint)</h3>
@@ -499,7 +482,7 @@ include 'includes/header.php';
                 <!-- Facility 3: Mould Workshop -->
                 <article class="media-card srv-animate-fade">
                     <div class="media-card-img-wrap">
-                        <img src="https://www.newraybottles.com/wp-content/uploads/2024/04/glass-bottle-mold-repair-workshop-1.jpg" class="media-card-img" alt="Mould Workshop">
+                        <img src="assets/images/Mould Workshop.png" class="media-card-img" alt="Mould Workshop">
                     </div>
                     <div class="media-card-body">
                         <h3 class="media-card-title">In-House Mould Workshop</h3>
@@ -512,7 +495,7 @@ include 'includes/header.php';
                 <!-- Facility 4: Corrugated Carton Manufacturing -->
                 <article class="media-card span-full-row srv-animate-fade">
                     <div class="media-card-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" class="media-card-img" alt="Corrugated Packaging">
+                        <img src="assets/images/Corrugated Carton Manufacturing.png" class="media-card-img" alt="Corrugated Packaging">
                     </div>
                     <div class="media-card-body">
                         <h3 class="media-card-title">Corrugated Carton Manufacturing</h3>
@@ -533,7 +516,7 @@ include 'includes/header.php';
                 <!-- Facility 6: Injection Moulding -->
                 <article class="media-card span-full-row srv-animate-fade">
                     <div class="media-card-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" class="media-card-img" alt="Injection Moulding">
+                        <img src="assets/images/injection moulding.png" class="media-card-img" alt="Injection Moulding">
                     </div>
                     <div class="media-card-body">
                         <h3 class="media-card-title">In-House Injection Moulding</h3>
@@ -544,9 +527,9 @@ include 'includes/header.php';
                 </article>
 
                 <!-- Facility 5: Lug Cap Manufacturing -->
-                <article class="media-card  srv-animate-fade">
+                <article class="media-card srv-animate-fade">
                     <div class="media-card-img-wrap">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCFbevdU_kcVSZgYVKOLPxjHHcnatPr3glwE-7DLHNJG-ceFLhcXcMT6VW&s=10" class="media-card-img" alt="Metal Lug Caps" style="object-fit: contain;">
+                        <img src="assets/images/Lug Cap Manufacturing.png" class="media-card-img" alt="Metal Lug Caps">
                     </div>
                     <div class="media-card-body">
                         <h3 class="media-card-title">In-House Lug Cap Manufacturing</h3>
@@ -559,7 +542,7 @@ include 'includes/header.php';
                 <!-- Facility 7: Shrink-Wrap & Tray Packing -->
                 <article class="media-card srv-animate-fade">
                     <div class="media-card-img-wrap">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfj5pSVSFYD3EtAM4p42MBbxaNmXd5cPjpb4KM2W6CX_Efk1QtYTJrV2U&s=10" class="media-card-img" alt="Tray Packaging">
+                        <img src="assets/images/Shrink-Wrap & Tray Packing.png" class="media-card-img" alt="Tray Packaging">
                     </div>
                     <div class="media-card-body">
                         <h3 class="media-card-title">Shrink-Wrap & Tray Packing</h3>
@@ -589,12 +572,12 @@ include 'includes/header.php';
 
     <!-- CONVERSION-FOCUSED CLOSING CTA SEGMENT -->
     <section class="py-5 text-center cta-premium-bg">
-        <div class="container py-4" style="position: relative; z-index: ;">
+        <div class="container py-4">
             <h2 class="mb-3 text-uppercase" style="font-size: 28px; font-weight: 800; letter-spacing: 0.04em;">
                 Need Custom Decorated Packaging?
             </h2>
 
-            <p class="mb-4 mx-auto" style="font-size: 15px; font-weight: 400; max-width: 620px; color: #ffff; line-height: 1.7;">
+            <p class="mb-4 mx-auto" style="font-size: 15px; font-weight: 400; max-width: 620px; color: #c8232c; line-height: 1.7;">
                 Get in touch with our team for customized glass bottle and jar decoration solutions.
             </p>
 
