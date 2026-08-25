@@ -2,53 +2,16 @@
 include 'includes/header.php';
 ?>
 
-<!-- HERO -->
-
-<!-- INTEGRATED DECORATION & BRANDING SYSTEM STYLES -->
+<!-- ADVANCED MANUFACTURING & DECORATION SYSTEM STYLES -->
 <style>
-    /* Hero Banner Architecture */
-    .about-hero {
-        background: linear-gradient(135deg, #8d8c8c 0%, #5a5a5a 100%);
-        color: #ffffff;
-        position: relative;
-        overflow: hidden;
-    }
-    .about-hero::before {
-        content: '';
-        position: absolute;
-        top: 0; right: 0; width: 50%; height: 100%;
-        background: radial-gradient(circle, rgba(252, 252, 252, 0.12) 0%, rgba(236, 225, 225, 0) 80%);
-        pointer-events: none;
-    }
-    /* Scoping and Base Typography Configuration */
-    .about-hero, .certificates-section {
+    /* Global Page Scoping & Typography */
+    .alok-page-container {
         font-family: 'Montserrat', sans-serif;
+        color: #333333;
+        background-color: #ffffff;
     }
 
-    /* Modern Hero Image Engine with Deep Readable Vignette Overlay */
-    .about-hero {
-        /* Replace 'path/to/your-hero-image.jpg' with your active image asset file path */
-        background-image: linear-gradient(to right, rgba(49, 48, 48, 0.95) 30%, rgba(0, 0, 0, 0.6) 100%), 
-                          url('assets/themes/storefront/public/images/aboutherobanner.jpg');
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        color: #ffffff;
-        position: relative;
-        overflow: hidden;
-    }
-
-    /* Ambient Subtle Identity Glow Grid Overlay */
-    .about-hero::before {
-        content: '';
-        position: absolute;
-        top: 0; 
-        right: 0; 
-        width: 50%; 
-        height: 100%;
-        background: radial-gradient(circle, rgba(200, 35, 44, 0.2) 0%, rgba(0, 0, 0, 0) 80%);
-        pointer-events: none;
-    }
+    /* Animations */
     @keyframes srvFadeInUp {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
@@ -60,45 +23,46 @@ include 'includes/header.php';
     .srv-animate-fade {
         animation: srvFadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
-    
-    /* Hero Banner Modern Elements */
-    .srv-hero-banner-frame {
-        background: #ffffff; 
-        border: 1px solid #eeeeee; 
-        padding: 12px; 
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-        width:50vw;
+
+    /* Hero Banner Architecture */
+    .about-hero {
+        background-image: linear-gradient(to right, rgba(17, 17, 17, 0.92) 30%, rgba(0, 0, 0, 0.75) 70%), 
+                          url('assets/themes/storefront/public/images/aboutherobanner.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
     }
-    .srv-hero-img {
-        width: 100%; 
-        height: 100%; 
-        object-fit: cover; 
-        vertical-align: right; 
-        border-radius: 8px;
+    .about-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; 
+        right: 0; 
+        width: 50%; 
+        height: 100%;
+        background: radial-gradient(circle, rgba(200, 35, 44, 0.25) 0%, rgba(0, 0, 0, 0) 80%);
+        pointer-events: none;
     }
-    @media (max-width: 992px) {
-        .srv-hero-banner-frame {
-            width: 100vw;
-        }
-    }
-    
-    /* Premium Slide-Fill Action Button */
+
+    /* Reusable Interactive Buttons */
     .srv-btn-quote {
         background: linear-gradient(135deg, #c8232c 0%, #a81a21 100%);
-        color: #ffffff; 
+        color: #ffffff !important; 
         font-size: 13px; 
         font-weight: 700; 
-        letter-spacing: 0.06em; 
+        letter-spacing: 0.08em; 
         padding: 15px 34px; 
         border: none; 
         border-radius: 6px; 
         position: relative;
         overflow: hidden;
         z-index: 1;
-        transition: color 0.4s ease, box-shadow 0.4s ease;
+        transition: color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
         display: inline-block;
         text-decoration: none;
+        box-shadow: 0 4px 15px rgba(200, 35, 44, 0.25);
     }
     .srv-btn-quote::before {
         content: '';
@@ -115,585 +79,533 @@ include 'includes/header.php';
         transform-origin: left;
     }
     .srv-btn-quote:hover {
-        color: #ffffff;
-        text-decoration: none;
-        box-shadow: 0 6px 20px rgba(200, 35, 44, 0.25);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(200, 35, 44, 0.4);
     }
 
-    /* Grid Functional Card Modular Matrix */
-    .srv-card {
-        border: 1px solid #eeeeee; 
-        border-radius: 12px; 
-        overflow: hidden; 
-        background: #ffffff; 
-        display: flex; 
-        flex-direction: column; 
-        box-shadow: 0 4px 15px rgba(0,0,0,0.01); 
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    /* Modern Responsive Layout Grid Systems */
+    .custom-section-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
     }
-    .srv-card:hover {
-        border-color: #e0e0e0;
-        transform: translateY(-6px);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+    @media (min-width: 768px) {
+        .custom-section-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .span-full-row {
+            grid-column: span 2;
+        }
     }
-    .srv-card-img-wrap {
-        height: 240px; 
-        background: #fafafa;
-        overflow: hidden;
-        position: relative;
+    @media (min-width: 992px) {
+        .custom-section-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .span-full-row {
+            grid-column: span 2;
+        }
     }
-    .srv-card-img {
-        width: 100%; 
-        height: 100%; 
-        object-fit: cover; 
-        transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .srv-card:hover .srv-card-img {
-        transform: scale(1.05);
-    }
-    .srv-card:hover .srv-card-title {
-        color: #c8232c;
-    }
-    .srv-card-title {
-        font-size: 16px; 
-        font-weight: 800; 
-        color: #111111; 
-        margin-bottom: 12px; 
-        text-transform: uppercase; 
-        letter-spacing: 0.03em;
-        transition: color 0.3s ease;
-    }
-</style>
 
-<!-- HEADER HERO BANNER SEGMENT -->
-<section class="py-5 about-hero">
-    <div class="container py-5">
-        <div class="row align-items-center">
-            <div class="col-lg-7">
-                <span class="text-uppercase d-block mb-2" style="color: #c8232c; font-size: 13px; font-weight: 700; letter-spacing: 0.1em;">
-                    Crafting Visual Identities Since 1998
-                </span>
-                <h1 class="text-uppercase mb-4" style=" color: #cccccc; font-size: 42px; font-weight: 800; letter-spacing: 0.02em; line-height: 1.2;">
-                    Pioneers in Premium Glass Decoration
-                </h1>
-                <p class="mb-0" style="color: #cccccc; font-size: 16px; line-height: 1.8; max-width: 620px;">
-                    At Alok Glass, we combine state-of-the-art automated facilities with master craftsmanship to transform standard glass bottles and jars into iconic, shelf-ready brand experiences.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- HERO INTRODUCTORY SEGMENT -->
-<section class="py-5" style="background-color: #fafafa; font-family: 'Montserrat', sans-serif;">
-    <div class="container py-4">
-        <div class="row align-items-center">
-
-            
-            <div class="col-lg-6 mb-5 mb-lg-0 pe-lg-5 srv-animate-fade" style="animation-delay: 0.05s;">
-                <h1 class="text-uppercase mb-4" style="font-size: 38px; font-weight: 800; color: #111111; letter-spacing: -0.01em; line-height: 1.25; position: relative; padding-bottom: 18px;">
-                    Decoration & Branding Services
-                    <span style="position: absolute; bottom: 0; left: 0; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px; animation: srvLineExpand 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;"></span>
-                </h1>
-
-                <p class="mb-4" style="font-size: 15px; line-height: 1.8; color: #555555; font-weight: 500; margin-top: 24px;">
-                    Elevate your packaging with premium decoration solutions including screen printing, 
-                    UV printing, frosting, coating, labeling, and custom branding for glass bottles and jars.
-                </p>
-
-                <div class="mt-4 pt-2">
-                    <a href="bulk_inquiry.php" class="btn srv-btn-quote text-uppercase">
-                        Request Bulk Quote
-                    </a>
-                </div>
-            </div>
-
-            
-            <div class="col-lg-6 srv-animate-fade" style="animation-delay: 0.15s;">
-                <div class="srv-hero-banner-frame">
-                    <img src="storage/media/decoration-banner.jpg" class="img-fluid srv-hero-img" alt="Decoration Services">
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- COMPREHENSIVE SERVICES GRID DETAILED MATRIX -->
-<section class="py-5" style="background-color: #ffffff; font-family: 'Montserrat', sans-serif;">
-    <div class="container py-3">
-
-        <!-- Grid Subsection Structural Header -->
-        <div class="text-center mb-5 srv-animate-fade" style="animation-delay: 0.2s;">
-            <h2 class="text-uppercase mb-3" style="font-size: 28px; font-weight: 800; color: #111111; letter-spacing: 0.02em; position: relative; display: inline-block; padding-bottom: 14px;">
-                Our Decoration Services
-                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px;"></span>
-            </h2>
-            <p class="text-muted" style="font-size: 14px; font-weight: 500; color: #777777 !important; margin-top: 6px;">
-                Complete packaging customization solutions.
-            </p>
-        </div>
-
-        <!-- Dynamic Modular Row Matrix -->
-        <div class="row">
-            
-            <!-- Service Block 1 -->
-            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch srv-animate-fade" style="animation-delay: 0.25s;">
-                <div class="card srv-card w-100">
-                    <div class="srv-card-img-wrap">
-                        <img src="storage/media/screen-printing.jpg" class="srv-card-img" alt="Screen Printing" loading="lazy">
-                    </div>
-                    <div class="card-body" style="padding: 28px; display: flex; flex-direction: column;">
-                        <h4 class="srv-card-title">Screen Printing</h4>
-                        <p style="font-size: 13.5px; line-height: 1.65; color: #666666; font-weight: 400; margin-bottom: 0;">
-                            Permanent direct printing on glass bottles and jars with excellent durability.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service Block 2 -->
-            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch srv-animate-fade" style="animation-delay: 0.3s;">
-                <div class="card srv-card w-100">
-                    <div class="srv-card-img-wrap">
-                        <img src="storage/media/uv-printing.jpg" class="srv-card-img" alt="UV Printing" loading="lazy">
-                    </div>
-                    <div class="card-body" style="padding: 28px; display: flex; flex-direction: column;">
-                        <h4 class="srv-card-title">UV Printing</h4>
-                        <p style="font-size: 13.5px; line-height: 1.65; color: #666666; font-weight: 400; margin-bottom: 0;">
-                            Vibrant multi-color branding with premium finish and excellent clarity.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service Block 3 -->
-            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch srv-animate-fade" style="animation-delay: 0.35s;">
-                <div class="card srv-card w-100">
-                    <div class="srv-card-img-wrap">
-                        <img src="storage/media/frosted-bottle.jpg" class="srv-card-img" alt="Frosting & Coating" loading="lazy">
-                    </div>
-                    <div class="card-body" style="padding: 28px; display: flex; flex-direction: column;">
-                        <h4 class="srv-card-title">Frosting & Coating</h4>
-                        <p style="font-size: 13.5px; line-height: 1.65; color: #666666; font-weight: 400; margin-bottom: 0;">
-                            Elegant matte and luxury finishes for premium packaging products.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service Block 4 -->
-            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch srv-animate-fade" style="animation-delay: 0.4s;">
-                <div class="card srv-card w-100">
-                    <div class="srv-card-img-wrap">
-                        <img src="storage/media/metallic-coating.jpg" class="srv-card-img" alt="Metallic Coating" loading="lazy">
-                    </div>
-                    <div class="card-body" style="padding: 28px; display: flex; flex-direction: column;">
-                        <h4 class="srv-card-title">Metallic Coating</h4>
-                        <p style="font-size: 13.5px; line-height: 1.65; color: #666666; font-weight: 400; margin-bottom: 0;">
-                            Gold, silver and premium metallic decorative effects.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service Block 5 -->
-            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch srv-animate-fade" style="animation-delay: 0.45s;">
-                <div class="card srv-card w-100">
-                    <div class="srv-card-img-wrap">
-                        <img src="storage/media/label-application.jpg" class="srv-card-img" alt="Label Application" loading="lazy">
-                    </div>
-                    <div class="card-body" style="padding: 28px; display: flex; flex-direction: column;">
-                        <h4 class="srv-card-title">Label Application</h4>
-                        <p style="font-size: 13.5px; line-height: 1.65; color: #666666; font-weight: 400; margin-bottom: 0;">
-                            Accurate and professional labeling solutions for every industry.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service Block 6 -->
-            <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch srv-animate-fade" style="animation-delay: 0.5s;">
-                <div class="card srv-card w-100">
-                    <div class="srv-card-img-wrap">
-                        <img src="storage/media/perfume-decoration.jpg" class="srv-card-img" alt="Custom Branding" loading="lazy">
-                    </div>
-                    <div class="card-body" style="padding: 28px; display: flex; flex-direction: column;">
-                        <h4 class="srv-card-title">Custom Branding</h4>
-                        <p style="font-size: 13.5px; line-height: 1.65; color: #666666; font-weight: 400; margin-bottom: 0;">
-                            End-to-end packaging customization for your brand identity.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- VIDEO -->
-<!-- INTEGRATED DECORATION PROCESS & INDUSTRIES SYSTEM STYLES -->
-<style>
-    /* Responsive Premium Video Frame Container */
-    .proc-video-container {
-        position: relative;
-        padding-bottom: 56.25%; /* Perfect 16:9 Aspect Ratio */
-        height: 0;
-        overflow: hidden;
-        border: 1px solid #eeeeee;
+    /* Media-Rich Feature Card Component */
+    .media-card {
+        background: #ffffff;
+        border: 1px solid #e9ecef;
         border-radius: 12px;
-        background: #111111;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.04);
-        padding: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+        position: relative;
+        height: 100%;
     }
-    .proc-video-iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
+    .media-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(200, 35, 44, 0.3);
+        box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+    }
+    .media-card-img-wrap {
+        height: 200px;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        background-color: #f1f3f5;
+    }
+    .media-card-img {
         width: 100%;
         height: 100%;
-        border: 0;
-        border-radius: 8px;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .media-card:hover .media-card-img {
+        transform: scale(1.06);
+    }
+    .media-card-body {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    .media-card-title {
+        font-size: 17px;
+        font-weight: 800;
+        color: #111111;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        transition: color 0.3s ease;
+    }
+    .media-card:hover .media-card-title {
+        color: #c8232c;
+    }
+    .media-card-text {
+        font-size: 13.5px;
+        line-height: 1.7;
+        color: #555555;
+        margin-bottom: 16px;
     }
 
-    /* Industry Matrix Card Blocks */
-    .ind-card {
-        border: 1px solid #eeeeee; 
-        border-radius: 10px; 
-        padding: 28px 14px; 
-        background-color: #ffffff; 
-        height: 100%; 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
-        position: relative; 
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+    /* Tag Pills & Features Styling */
+    .feature-tag-badge {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: 10.5px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        background: #c8232c;
+        color: #ffffff;
+        padding: 5px 12px;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(200, 35, 44, 0.3);
+        z-index: 2;
     }
-    .ind-card:hover {
-        border-color: #c8232c; 
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(200, 35, 44, 0.08);
+    .highlight-box {
+        background: #fdf2f2;
+        border-left: 3px solid #c8232c;
+        padding: 10px 14px;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #c8232c;
+        border-radius: 0 6px 6px 0;
+        margin-bottom: 16px;
     }
-    .ind-card::after {
+    .card-footer-pills {
+        border-top: 1px solid #f1f3f5;
+        padding-top: 14px;
+        margin-top: auto;
+    }
+    .pills-heading {
+        font-size: 10.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #888888;
+        display: block;
+        margin-bottom: 8px;
+    }
+    .pill-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .pill-chip {
+        font-size: 11.5px;
+        font-weight: 600;
+        color: #444444;
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 4px 10px;
+        border-radius: 16px;
+        transition: all 0.2s ease;
+    }
+    .media-card:hover .pill-chip {
+        background: #ffffff;
+        border-color: #dce1e6;
+    }
+
+    /* Section Divider Visual */
+    .section-title-wrapper {
+        text-align: center;
+        margin-bottom: 48px;
+    }
+    .section-title-main {
+        font-size: 28px;
+        font-weight: 800;
+        color: #111111;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        padding-bottom: 14px;
+    }
+    .section-title-main::after {
         content: '';
         position: absolute;
         bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 44px;
+        height: 4px;
         background: linear-gradient(90deg, #c8232c, #e0535a);
-        transform: scaleX(0);
-        transition: transform 0.4s ease;
-    }
-    .ind-card:hover::after {
-        transform: scaleX(1);
-    }
-    .ind-card-text {
-        font-size: 13px; 
-        font-weight: 700; 
-        color: #111111; 
-        text-transform: uppercase; 
-        letter-spacing: 0.06em; 
-        line-height: 1.5;
-        transition: color 0.3s ease;
-    }
-    .ind-card:hover .ind-card-text {
-        color: #c8232c;
-    }
-</style>
-
-<!-- WATCH OUR DECORATION PROCESS VIDEO SEGMENT --
-<section class="py-5" style="background-color: #fafafa; font-family: 'Montserrat', sans-serif;">
-    <div class="container py-3">
-
-        <div class="text-center mb-5">
-            <h2 class="text-uppercase mb-3" style="font-size: 28px; font-weight: 800; color: #111111; letter-spacing: 0.02em; position: relative; display: inline-block; padding-bottom: 14px;">
-                Watch Our Decoration Process
-                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px;"></span>
-            </h2>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-lg-9 col-xl-8">
-                <div class="proc-video-container">
-                    <iframe
-                        class="proc-video-iframe"
-                        src="https://www.youtube.com/embed/ScMzIvxBSi4"
-                        allowfullscreen
-                    ></iframe>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- INDUSTRIES WE SERVE MATRIX SEGMENT --
-<section class="py-5" style="background-color: #ffffff; font-family: 'Montserrat', sans-serif;">
-    <div class="container py-3">
-
-        <div class="text-center mb-5">
-            <h2 class="text-uppercase mb-3" style="font-size: 28px; font-weight: 800; color: #111111; letter-spacing: 0.02em; position: relative; display: inline-block; padding-bottom: 14px;">
-                Industries We Serve
-                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px;"></span>
-            </h2>
-        </div>
-
-        <div class="row text-center justify-content-center g-4">
-
-            <!-- Food & Beverage --
-            <div class="col-6 col-lg-2 col-md-4">
-                <div class="ind-card">
-                    <span class="ind-card-text">
-                        Food &<br>Beverage
-                    </span>
-                </div>
-            </div>
-
-            <!-- Cosmetics --
-            <div class="col-6 col-lg-2 col-md-4">
-                <div class="ind-card">
-                    <span class="ind-card-text">
-                        Cosmetics
-                    </span>
-                </div>
-            </div>
-
-            <!-- Perfumes --
-            <div class="col-6 col-lg-2 col-md-4">
-                <div class="ind-card">
-                    <span class="ind-card-text">
-                        Perfumes
-                    </span>
-                </div>
-            </div>
-
-            <!-- Pharmaceuticals --
-            <div class="col-6 col-lg-2 col-md-4">
-                <div class="ind-card">
-                    <span class="ind-card-text">
-                        Pharmaceu&shy;ticals
-                    </span>
-                </div>
-            </div>
-
-            <!-- Chemicals --
-            <div class="col-6 col-lg-2 col-md-4">
-                <div class="ind-card">
-                    <span class="ind-card-text">
-                        Chemicals
-                    </span>
-                </div>
-            </div>
-
-            <!-- Hospitality --
-            <div class="col-6 col-lg-2 col-md-4">
-                <div class="ind-card">
-                    <span class="ind-card-text">
-                        Hospitality
-                    </span>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- WHY CHOOSE -->
-
-<!-- INTEGRATED VALUE PROPOSITION & CTA SYSTEM STYLES --
-<style>
-    /* Value Badge Feature Block Matrix */
-    .val-badge {
-        background-color: #ffffff; 
-        border: 1px solid #eeeeee; 
-        border-radius: 8px; 
-        padding: 20px 22px; 
-        display: flex; 
-        align-items: center; 
-        height: 100%;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.01);
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-    .val-badge:hover {
-        border-color: #c8232c;
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(200, 35, 44, 0.06);
-    }
-    .val-badge-icon {
-        margin-right: 14px; 
-        flex-shrink: 0;
-        transition: transform 0.3s ease;
-    }
-    .val-badge:hover .val-badge-icon {
-        transform: scale(1.15);
-    }
-    .val-badge-text {
-        font-size: 14px; 
-        font-weight: 700; 
-        color: #111111; 
-        letter-spacing: 0.01em;
+        border-radius: 2px;
     }
 
-    /* Premium Dynamic CTA Section Variables */
+    /* CTA Premium Styling */
     .cta-premium-bg {
-        background: linear-gradient(135deg, #272727 0%, #252525 100%); 
-        color: #ffffff; 
+        background: linear-gradient(135deg, #221e1e 40%, #494949 100%);
+        color: #ffffff !important;
         position: relative;
-        overflow: hidden;
-    }
-    .cta-premium-bg::before {
-        content: '';
-        position: absolute;
-        top: -50%; left: -30%; width: 60%; height: 200%;
-        background: radial-gradient(circle, rgba(200,35,44,0.15) 0%, rgba(0,0,0,0) 70%);
-        transform: rotate(-15deg);
-        pointer-events: none;
-    }
-    
-    /* Sliding Interaction Button Link Layout */
-    .cta-btn-action {
-        background: #c8232c;
-        color: #ffffff; 
-        font-size: 13px; 
-        font-weight: 700; 
-        letter-spacing: 0.06em; 
-        padding: 15px 36px; 
-        border: 1px solid #c8232c; 
-        border-radius: 6px; 
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-        transition: color 0.4s ease, border-color 0.4s ease;
-        display: inline-block;
-        text-decoration: none;
-    }
-    .cta-btn-action::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: #ffffff;
-        z-index: -1;
-        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        transform: scaleY(0);
-        transform-origin: bottom;
-    }
-    .cta-btn-action:hover::before {
-        transform: scaleY(1);
-    }
-    .cta-btn-action:hover {
-        color: #111111;
-        border-color: #ffffff;
-        text-decoration: none;
-        box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
     }
 </style>
 
-<!-- VALUE PROPOSITION GRID BLOCK --
-<section class="py-5" style="background-color: #fafafa; font-family: 'Montserrat', sans-serif;">
-    <div class="container py-3">
+<div class="alok-page-container">
 
-        <div class="text-center mb-5">
-            <h2 class="text-uppercase mb-3" style="font-size: 28px; font-weight: 800; color: #111111; letter-spacing: 0.02em; position: relative; display: inline-block; padding-bottom: 14px;">
-                Why Choose Alok Glass
-                <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px;"></span>
+    <!-- HEADER HERO BANNER SEGMENT -->
+    <section class="py-5 about-hero">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <span class="text-uppercase d-block mb-2" style="color: #c8232c; font-size: 13px; font-weight: 700; letter-spacing: 0.1em;">
+                        Crafting Visual Identities Since 1998
+                    </span>
+                    <h1 class="text-uppercase mb-4" style="color: #070606 !important; font-size: 42px; font-weight: 900; letter-spacing: 0.02em; line-height: 1.2;">
+                        Pioneers in Premium Glass Decoration
+                    </h1>
+                    <p class="mb-0" style="color: #ffff; font-size: 16px; line-height: 1.8; max-width: 620px;">
+                        At Alok Glass, we combine state-of-the-art automated facilities with master craftsmanship to transform standard glass bottles and jars into iconic, shelf-ready brand experiences.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HERO INTRODUCTORY SEGMENT -->
+    <section class="py-5" style="background-color: #fafafa;">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mb-5 mb-lg-0 pe-lg-5 srv-animate-fade" style="animation-delay: 0.05s;">
+                    <h1 class="text-uppercase mb-4" style="font-size: 36px; font-weight: 800; color: #111111; letter-spacing: -0.01em; line-height: 1.25; position: relative; padding-bottom: 18px;">
+                        Decoration & Branding Services
+                        <span style="position: absolute; bottom: 0; left: 0; height: 4px; background: linear-gradient(90deg, #c8232c, #e0535a); border-radius: 2px; animation: srvLineExpand 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;"></span>
+                    </h1>
+
+                    <p class="mb-4" style="font-size: 15px; line-height: 1.8; color: #555555; font-weight: 500; margin-top: 24px;">
+                        Elevate your packaging with premium decoration solutions including screen printing, UV printing, frosting, coating, labeling, and custom branding for glass bottles and jars.
+                    </p>
+
+                    <div class="mt-4 pt-2">
+                        <a href="bulk_inquiry.php" class="btn srv-btn-quote text-uppercase">
+                            Request Bulk Quote
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-10 srv-animate-fade" style="animation-delay: 0.15s;">
+                    <div style="background: #ffffff; border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
+                        <img src="storage/media/decoration-banner.jpg" class="img-fluid" style="border-radius: 8px; width: 100%; height: 350px; object-fit: cover;" alt="Glass Decoration Infrastructure">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 1: IN-HOUSE DECORATION CAPABILITIES -->
+    <section class="py-5" style="background-color: #ffffff;">
+        <div class="container py-3">
+
+            <div class="section-title-wrapper srv-animate-fade">
+                <h2 class="section-title-main">In-House Decoration Capabilities</h2>
+                <p class="text-muted" style="font-size: 14px; font-weight: 500; color: #777777 !important; margin-top: 6px;">
+                    Precision surface styling, customized coating, and metallic finishes executed at scale.
+                </p>
+            </div>
+
+            <div class="custom-section-grid">
+                
+                <!-- Card 1: Colour Coating (Featured Double Span) -->
+                <article class="media-card span-full-row srv-animate-fade">
+                    <span class="feature-tag-badge">9,000 Pcs / Hour</span>
+                    <div class="media-card-img-wrap" style="height: 240px;">
+                        <img src="https://rtpackaging.in/wp-content/uploads/2022/06/glass_roll_on_bottle-removebg-preview.png" class="media-card-img" alt="Colour Coating on Glass">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">Colour Coating on Glass</h3>
+                        <p class="media-card-text">
+                            Alok Glass Works operates two coating machines with a combined production capacity of approximately <strong>9,000 pieces per hour</strong>, depending on product design and coating specifications. We offer customised colour coatings matched to your brand identity, applied as a full-body finish or to selected areas.
+                        </p>
+                        <div class="highlight-box">
+                            ✔ Dishwasher-Safe: Withstands 100–250 washing cycles based on finish parameters.
+                        </div>
+                        <div class="card-footer-pills">
+                            <span class="pills-heading">Available Finishes</span>
+                            <div class="pill-wrapper">
+                                <span class="pill-chip">Matte</span>
+                                <span class="pill-chip">Glossy</span>
+                                <span class="pill-chip">Translucent</span>
+                                <span class="pill-chip">Opaque</span>
+                                <span class="pill-chip">Two-Tone</span>
+                                <span class="pill-chip">Fade</span>
+                                <span class="pill-chip">Bottom-Only Spray</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2: Colour Printing -->
+                <article class="media-card srv-animate-fade">
+                    <div class="media-card-img-wrap">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2N-sMmEhFrcS4grM9kY9q8aNtuKA8cyW9iUBuZTXacR6D9A4Slv9a04c&s=10" class="media-card-img" alt="Colour Printing on Glass">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">Colour Printing on Glass</h3>
+                        <p class="media-card-text">
+                            Alok Glass Works operates two six colour printing machines for applying colours, patterns, text and detailed artwork directly onto glass bottles and jars. Printing creates a durable, high-quality finish suitable for customised packaging across different product categories.
+                        </p>
+                        <div class="card-footer-pills">
+                            <span class="pills-heading">Available Options</span>
+                            <div class="pill-wrapper">
+                                <span class="pill-chip">Single-Colour</span>
+                                <span class="pill-chip">Multi-Colour</span>
+                                <span class="pill-chip">Patterns</span>
+                                <span class="pill-chip">Text</span>
+                                <span class="pill-chip">Custom Artwork</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3: Foiling -->
+                <article class="media-card srv-animate-fade">
+                    <div class="media-card-img-wrap">
+                        <img src="https://i.etsystatic.com/11653899/r/il/428ac5/8413159963/il_300x300.8413159963_mw4a.jpg" class="media-card-img" alt="Foiling on Glass">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">Foiling on Glass</h3>
+                        <p class="media-card-text">
+                            Foiling applies reflective metallic details directly onto glass bottles and jars, creating a premium finish for logos, text, patterns and decorative artwork. Designs can be customised to complement the product’s shape and branding requirements.
+                        </p>
+                        <div class="card-footer-pills">
+                            <span class="pills-heading">Available Finishes</span>
+                            <div class="pill-wrapper">
+                                <span class="pill-chip">Gold</span>
+                                <span class="pill-chip">Copper</span>
+                                <span class="pill-chip">Silver</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 4: Acid-Dipped Frosting -->
+                <article class="media-card span-full-row srv-animate-fade">
+                    <div class="media-card-img-wrap">
+                        <img src="https://media.licdn.com/dms/image/v2/D5612AQFTV5eZf0Mzxg/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1695823582841?e=2147483647&v=beta&t=JnTI5f8nxHFR_Y5DMC5Tj5zLQMi_lYsigLm0FkFDgoc" class="media-card-img" alt="Acid-Dipped Frosting">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">Acid-Dipped Frosting</h3>
+                        <p class="media-card-text">
+                            Our acid-dipped frosting process chemically etches the glass surface to create a smooth, uniform and permanent frosted finish. The treatment softly diffuses light and gives bottles and jars an elegant, translucent appearance suitable for premium packaging.
+                        </p>
+                        <div class="card-footer-pills">
+                            <span class="pills-heading">Available Finishes</span>
+                            <div class="pill-wrapper">
+                                <span class="pill-chip">Light Frost</span>
+                                <span class="pill-chip">Deep Frost</span>
+                                <span class="pill-chip">Full-Body Frosting</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 5: Metallization -->
+                <article class="media-card span-full-row srv-animate-fade">
+                    <div class="media-card-img-wrap">
+                        <img src="https://www.lianxinbottle.com/wp-content/uploads/2025/06/electroplated-dropper-bottles.jpg.webp" class="media-card-img" alt="Glass Metallization">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">Metallization</h3>
+                        <p class="media-card-text">
+                            Metallization gives glass bottles and jars a smooth, reflective metal-like appearance. It can be applied as a complete surface finish or to selected areas, creating distinctive packaging for premium and luxury products.
+                        </p>
+                        <div class="card-footer-pills">
+                            <span class="pills-heading">Available Finishes</span>
+                            <div class="pill-wrapper">
+                                <span class="pill-chip">Gold</span>
+                                <span class="pill-chip">Silver</span>
+                                <span class="pill-chip">Bronze</span>
+                                <span class="pill-chip">Full-Body</span>
+                                <span class="pill-chip">Selected-Area</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: IN-HOUSE MANUFACTURING FACILITIES -->
+    <section class="py-5" style="background-color: #fafafa;">
+        <div class="container py-4">
+
+            <div class="section-title-wrapper srv-animate-fade">
+                <h2 class="section-title-main">In-House Manufacturing Facilities</h2>
+                <p class="text-muted" style="font-size: 14px; font-weight: 500; color: #777777 !important; margin-top: 6px;">
+                    End-to-end production ecosystem from raw glass container design to logistics export packing.
+                </p>
+            </div>
+
+            <div class="custom-section-grid">
+
+                <!-- Facility 1: Flint Glass (Green Tint) - Featured Double Span -->
+                <article class="media-card span-full-row srv-animate-fade">
+                    <span class="feature-tag-badge">GM Glass Partner</span>
+                    <div class="media-card-img-wrap" style="height: 240px;">
+                        <img src="https://cdn.globalso.com/yrglassbottle/%E4%B8%BB%E5%9B%BE0613.jpg" class="media-card-img" alt="Flint Glass Manufacturing">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">Flint Glass (Green Tint)</h3>
+                        <p class="media-card-text">
+                            Through our associated company, <strong>GM Glass</strong>, we also manufacture and supply flint glass with a characteristic light green tint. It is suitable for reliable and cost-effective packaging across food, beverage, and other product categories.
+                        </p>
+                        <div class="card-footer-pills">
+                            <span class="pills-heading">Available Products</span>
+                            <div class="pill-wrapper">
+                                <span class="pill-chip">Bottles</span>
+                                <span class="pill-chip">Jars</span>
+                                <span class="pill-chip">Liquor Bottles</span>
+                                <span class="pill-chip">Milk Bottles</span>
+                                <span class="pill-chip">Custom Glass Solutions</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Facility 2: In-House Design & Development -->
+                <article class="media-card srv-animate-fade">
+                    <div class="media-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" class="media-card-img" alt="Product Development">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">Design & Product Development</h3>
+                        <p class="media-card-text">
+                            Our experienced designers transform your container idea into a production-ready glass package that reflects your brand identity. We recommend ideal weight, MOQs, closure, and configuration balancing aesthetics with manufacturing feasibility.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Facility 3: Mould Workshop -->
+                <article class="media-card srv-animate-fade">
+                    <div class="media-card-img-wrap">
+                        <img src="https://www.newraybottles.com/wp-content/uploads/2024/04/glass-bottle-mold-repair-workshop-1.jpg" class="media-card-img" alt="Mould Workshop">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">In-House Mould Workshop</h3>
+                        <p class="media-card-text">
+                            Our workshop manufactures, modifies, and maintains moulds for custom glass bottles and jars. This ensures dimensional accuracy, faster sampling turnaround, and a smooth transition to full-scale commercial manufacturing.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Facility 4: Corrugated Carton Manufacturing -->
+                <article class="media-card span-full-row srv-animate-fade">
+                    <div class="media-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" class="media-card-img" alt="Corrugated Packaging">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">Corrugated Carton Manufacturing</h3>
+                        <p class="media-card-text">
+                            We manufacture corrugated cartons in-house for safe storage and transit. Depending on the product dimensions and transport requirements, we produce customized heavy-duty corrugated box configurations.
+                        </p>
+                        <div class="card-footer-pills">
+                            <span class="pills-heading">Ply Specs Offered</span>
+                            <div class="pill-wrapper">
+                                <span class="pill-chip">3-Ply Cartons</span>
+                                <span class="pill-chip">5-Ply Cartons</span>
+                                <span class="pill-chip">7-Ply Cartons</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Facility 6: Injection Moulding -->
+                <article class="media-card span-full-row srv-animate-fade">
+                    <div class="media-card-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" class="media-card-img" alt="Injection Moulding">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">In-House Injection Moulding</h3>
+                        <p class="media-card-text">
+                            Our plastic injection unit produces custom plastic caps, airtight sealing rings for glass lids, and ancillary packaging components. This guarantees total closure compatibility and seal integrity.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Facility 5: Lug Cap Manufacturing -->
+                <article class="media-card  srv-animate-fade">
+                    <div class="media-card-img-wrap">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCFbevdU_kcVSZgYVKOLPxjHHcnatPr3glwE-7DLHNJG-ceFLhcXcMT6VW&s=10" class="media-card-img" alt="Metal Lug Caps" style="object-fit: contain;">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">In-House Lug Cap Manufacturing</h3>
+                        <p class="media-card-text">
+                            Our lug cap unit enables us to offer precision metal closures for food jars and glass containers. Metal caps are engineered in multiple sizes, custom colors, and protective liner finishes based on product requirements.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Facility 7: Shrink-Wrap & Tray Packing -->
+                <article class="media-card srv-animate-fade">
+                    <div class="media-card-img-wrap">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfj5pSVSFYD3EtAM4p42MBbxaNmXd5cPjpb4KM2W6CX_Efk1QtYTJrV2U&s=10" class="media-card-img" alt="Tray Packaging">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">Shrink-Wrap & Tray Packing</h3>
+                        <p class="media-card-text">
+                            We offer shrink-wrapping and robust tray-packing setups tailored to order sizes and transit requirements. These options provide secure, practical, and economical packaging for bottles, jars, and tumblers.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Facility 8: Export Palletization -->
+                <article class="media-card span-full-row srv-animate-fade">
+                    <div class="media-card-img-wrap">
+                        <img src="https://media.licdn.com/dms/image/v2/C4E12AQFs2DqAi7yneQ/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1520114423555?e=2147483647&v=beta&t=FzGNAvmLmzuCXMAvz9mI08PtKZWgdMcqjT3uW_3slu8" class="media-card-img" alt="Export Palletization">
+                    </div>
+                    <div class="media-card-body">
+                        <h3 class="media-card-title">Export Palletization</h3>
+                        <p class="media-card-text">
+                            We provide heavy-duty wooden and plastic palletization for export orders to safeguard shipments during ocean or land transit. Configurations are engineered based on box dimensions and container loading parameters.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONVERSION-FOCUSED CLOSING CTA SEGMENT -->
+    <section class="py-5 text-center cta-premium-bg">
+        <div class="container py-4" style="position: relative; z-index: ;">
+            <h2 class="mb-3 text-uppercase" style="font-size: 28px; font-weight: 800; letter-spacing: 0.04em;">
+                Need Custom Decorated Packaging?
             </h2>
+
+            <p class="mb-4 mx-auto" style="font-size: 15px; font-weight: 400; max-width: 620px; color: #ffff; line-height: 1.7;">
+                Get in touch with our team for customized glass bottle and jar decoration solutions.
+            </p>
+
+            <div class="mt-4 pt-2">
+                <a href="bulk_inquiry.php" class="btn srv-btn-quote text-uppercase">
+                    Request Bulk Quote
+                </a>
+            </div>
         </div>
+    </section>
 
-        <div class="row g-4">
-
-            <!-- Core Value 1 --
-            <div class="col-xl-3 col-md-4 col-sm-6">
-                <div class="val-badge">
-                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span class="val-badge-text">Low MOQ</span>
-                </div>
-            </div>
-
-            <!-- Core Value 2 --
-            <div class="col-xl-3 col-md-4 col-sm-6">
-                <div class="val-badge">
-                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span class="val-badge-text">Fast Turnaround</span>
-                </div>
-            </div>
-
-            <!-- Core Value 3 --
-            <div class="col-xl-3 col-md-4 col-sm-6">
-                <div class="val-badge">
-                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span class="val-badge-text">Premium Quality</span>
-                </div>
-            </div>
-
-            <!-- Core Value 4 --
-            <div class="col-xl-3 col-md-4 col-sm-6">
-                <div class="val-badge">
-                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span class="val-badge-text">Custom Branding</span>
-                </div>
-            </div>
-
-            <!-- Core Value 5 --
-            <div class="col-xl-3 col-md-4 col-sm-6">
-                <div class="val-badge">
-                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span class="val-badge-text">Food Grade Solutions</span>
-                </div>
-            </div>
-
-            <!-- Core Value 6 --
-            <div class="col-xl-3 col-md-4 col-sm-6">
-                <div class="val-badge">
-                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span class="val-badge-text">Export Packaging</span>
-                </div>
-            </div>
-
-            <!-- Core Value 7 --
-            <div class="col-xl-3 col-md-4 col-sm-6">
-                <div class="val-badge">
-                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span class="val-badge-text">Experienced Team</span>
-                </div>
-            </div>
-
-            <!-- Core Value 8 --
-            <div class="col-xl-3 col-md-4 col-sm-6">
-                <div class="val-badge">
-                    <svg class="val-badge-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8232c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span class="val-badge-text">End-to-End Support</span>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- CONVERSION-FOCUSED CLOSING CTA SEGMENT -->
-<section class="py-5 text-center cta-premium-bg" style="font-family: 'Montserrat', sans-serif;">
-    <div class="container py-4" style="position: relative; z-index: 2;">
-
-        <h2 class="mb-3 text-uppercase" style="font-size: 28px; font-weight: 800; letter-spacing: 0.04em;">
-            Need Custom Decorated Packaging?
-        </h2>
-
-        <p class="mb-4 mx-auto" style="font-size: 15px; font-weight: 400; max-width: 620px; color: #c8232c; line-height: 1.7;">
-            Get in touch with our team for customized glass bottle and jar decoration solutions.
-        </p>
-
-        <div class="mt-4 pt-2">
-            <a href="bulk_inquiry.php" class="btn cta-btn-action text-uppercase">
-                Request Bulk Quote
-            </a>
-        </div>
-
-    </div>
-</section>
+</div>
 
 <?php include 'includes/footer.php'; ?>
