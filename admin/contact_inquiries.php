@@ -13,7 +13,7 @@ $stmt = $pdo->query("
 ");
 
 $inquiries = $stmt->fetchAll();
-
+ $sr = 1;
 ?>
 
 <!-- Custom Premium UI Scrollbar Styles -->
@@ -88,7 +88,7 @@ $inquiries = $stmt->fetchAll();
                                 <!-- INQUIRY ID -->
                                 <td class="px-4">
                                     <span style="font-size: 13px; font-family: monospace; color: #38bdf8; font-weight: 600;">
-                                        #<?= $row['id'] ?>
+                                        #<?= $sr++?>
                                     </span>
                                 </td>
 

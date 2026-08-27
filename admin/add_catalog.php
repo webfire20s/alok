@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $title = trim($_POST['title'] ?? '');
     $description = trim($_POST['description'] ?? '');
     $status = isset($_POST['status']) ? 1 : 0;
-
+    $showOnHome = isset($_POST['show_on_home']) ? 1 : 0;
 
     /*
     |--------------------------------------------------------------------------
@@ -19,25 +19,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     */
 
     if($title === ''){
-
         $error = 'Catalog title is required.';
-
     }elseif(
         empty($_FILES['catalog_file']['name']) ||
         $_FILES['catalog_file']['error'] !== UPLOAD_ERR_OK
     ){
-
         $error = 'Please select a catalog PDF file.';
-
     }elseif(
         empty($_FILES['thumbnail']['name']) ||
         $_FILES['thumbnail']['error'] !== UPLOAD_ERR_OK
     ){
-
         $error = 'Please select a thumbnail image.';
-
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -46,18 +39,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     */
 
     if($error === ''){
-
         $file = $_FILES['catalog_file'];
-
         $extension = strtolower(
             pathinfo($file['name'], PATHINFO_EXTENSION)
         );
 
-
         if($extension !== 'pdf'){
-
             $error = 'Only PDF catalog files are allowed.';
-
         }
 
         /*
@@ -67,9 +55,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         */
 
         elseif($file['size'] <= 0){
-
             $error = 'The selected PDF file is empty.';
-
         }
 
         /*
@@ -79,27 +65,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         */
 
         else{
-
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
-
             $mime = finfo_file(
                 $finfo,
                 $file['tmp_name']
             );
-
             finfo_close($finfo);
 
-
             if($mime !== 'application/pdf'){
-
                 $error = 'Invalid PDF file.';
-
             }
-
         }
-
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -108,16 +85,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     */
 
     if($error === ''){
-
         $thumbnail = $_FILES['thumbnail'];
-
         $thumbnailExtension = strtolower(
             pathinfo(
                 $thumbnail['name'],
                 PATHINFO_EXTENSION
             )
         );
-
 
         $allowedThumbnailExtensions = [
             'jpg',
@@ -137,9 +111,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             $error =
                 'Thumbnail must be JPG, JPEG, PNG or WEBP.';
-
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -148,21 +120,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         */
 
         if($error === ''){
-
             $imageInfo = @getimagesize(
                 $thumbnail['tmp_name']
             );
 
             if($imageInfo === false){
-
                 $error = 'Invalid thumbnail image.';
-
             }
-
         }
-
     }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -171,13 +137,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     */
 
     if($error === ''){
-
         $catalogDirectory =
             '../storage/catalogs/files/';
 
         $thumbnailDirectory =
             '../storage/catalogs/thumbnails/';
-
 
         /*
         |--------------------------------------------------------------------------
@@ -186,25 +150,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         */
 
         if(!is_dir($catalogDirectory)){
-
             mkdir(
                 $catalogDirectory,
                 0755,
                 true
             );
-
         }
 
         if(!is_dir($thumbnailDirectory)){
-
             mkdir(
                 $thumbnailDirectory,
                 0755,
                 true
             );
-
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -216,25 +175,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             time() . '_' .
             bin2hex(random_bytes(5));
 
-
         $catalogFileName =
             $uniqueName . '.pdf';
-
 
         $thumbnailFileName =
             $uniqueName . '.' .
             $thumbnailExtension;
 
-
         $catalogPath =
             $catalogDirectory .
             $catalogFileName;
 
-
         $thumbnailPath =
             $thumbnailDirectory .
             $thumbnailFileName;
-
 
         /*
         |--------------------------------------------------------------------------
@@ -249,9 +203,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             $error =
                 'Unable to upload the catalog PDF.';
-
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -274,16 +226,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             */
 
             if(file_exists($catalogPath)){
-
                 unlink($catalogPath);
-
             }
 
             $error =
                 'Unable to upload the thumbnail.';
-
         }
-
 
         /*
         |--------------------------------------------------------------------------
@@ -294,7 +242,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         if($error === ''){
 
             try{
-
                 /*
                 |--------------------------------------------------------------------------
                 | GET NEXT DISPLAY ORDER
@@ -312,7 +259,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $displayOrder =
                     (int)$orderStmt->fetchColumn();
 
-
                 /*
                 |--------------------------------------------------------------------------
                 | DATABASE PATHS
@@ -323,11 +269,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     'storage/catalogs/files/' .
                     $catalogFileName;
 
-
                 $dbThumbnailPath =
                     'storage/catalogs/thumbnails/' .
                     $thumbnailFileName;
-
 
                 /*
                 |--------------------------------------------------------------------------
@@ -345,57 +289,36 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                         file_size,
                         thumbnail,
                         display_order,
-                        status
+                        status,
+                        show_on_home
                     )
                     VALUES
                     (
-                        ?,
-                        ?,
-                        ?,
-                        ?,
-                        ?,
-                        ?,
-                        ?,
-                        ?
+                        ?, ?, ?, ?, ?, ?, ?, ?, ?
                     )
                 ");
 
 
                 $stmt->execute([
-
                     $title,
-
-                    $description !== ''
-                        ? $description
-                        : null,
-
+                    $description !== '' ? $description : null,
                     $file['name'],
-
                     $dbFilePath,
-
                     (int)$file['size'],
-
                     $dbThumbnailPath,
-
                     $displayOrder,
-
-                    $status
-
+                    $status,
+                    $showOnHome
                 ]);
-
-
+                
                 /*
                 |--------------------------------------------------------------------------
                 | SUCCESS
                 |--------------------------------------------------------------------------
                 */
 
-                header(
-                    'Location: catalogs.php'
-                );
-
+                header( 'Location: catalogs.php' );
                 exit;
-
 
             }catch(Exception $e){
 
@@ -406,28 +329,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 */
 
                 if(file_exists($catalogPath)){
-
                     unlink($catalogPath);
-
                 }
 
                 if(file_exists($thumbnailPath)){
-
                     unlink($thumbnailPath);
-
                 }
 
                 $error =
                     'Unable to save catalog. Please try again.';
-
             }
-
         }
-
     }
-
 }
-
 
 include 'includes/admin_header.php';
 include 'includes/admin_sidebar.php';
@@ -504,6 +418,24 @@ include 'includes/admin_sidebar.php';
                         <input type="checkbox" name="status" value="1" <?= !isset($_POST['status']) || $_POST['status'] ? 'checked' : '' ?> style="margin-right:6px;" >
                         Active
                     </label>
+                </div>
+
+                <!-- SHOW ON HOME -->
+                <div class="mb-4">
+                    <label style="color:#e2e8f0; font-weight:600; font-size:13px;">
+                        <input
+                            type="checkbox"
+                            name="show_on_home"
+                            value="1"
+                            <?= isset($_POST['show_on_home']) ? 'checked' : '' ?>
+                            style="margin-right:6px;"
+                        >
+                        Show on Home
+                    </label>
+
+                    <div style="color:#64748b; font-size:12px; margin-top:6px;">
+                        Enable this to display this catalog on the homepage.
+                    </div>
                 </div>
 
                 <!-- BUTTONS -->

@@ -3,7 +3,6 @@ include 'includes/header.php';
 ?>
 
 <!-- ADVANCED MANUFACTURING & DECORATION SYSTEM STYLES -->
-<!-- ADVANCED MANUFACTURING & DECORATION SYSTEM STYLES -->
 <style>
     /* Global Page Scoping & Typography */
     .alok-page-container {
@@ -95,7 +94,7 @@ include 'includes/header.php';
             grid-template-columns: repeat(2, 1fr);
         }
         .span-full-row {
-            grid-column: span 3;
+            grid-column: span 2;
         }
     }
     @media (min-width: 992px) {
@@ -127,21 +126,23 @@ include 'includes/header.php';
         box-shadow: 0 14px 30px rgba(0,0,0,0.08);
     }
 
-    /* FIXED IMAGE CONTAINER: Soft framed presentation with smart aspect ratio */
-    /* INCREASED IMAGE CONTAINER: Gives full headroom for cover alignment */
+    /* FLUID ASPECT RATIO CONTAINER: Prevents cropping and side spacing */
     .media-card-img-wrap {
-        height: 350px !important;  /* Increased from 220px to prevent cropping */
         width: 100%;
+        aspect-ratio: 4 / 3;
         overflow: hidden;
         position: relative;
         background-color: #f4f5f7;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0;
     }
 
-    /* FULL COVER IMAGE: Fills container completely without breaking aspect ratio */
+    .span-full-row .media-card-img-wrap {
+        aspect-ratio: 16= / 9;
+    }
+
+    /* SMART COVER IMAGE: Preserves natural proportion without stretching */
     .media-card-img {
         width: 100%;
         height: 100%;
@@ -150,7 +151,7 @@ include 'includes/header.php';
         transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .media-card:hover .media-card-img {
-        transform: scale(1.05);
+        transform: scale(1.04);
     }
 
     .media-card-body {
@@ -222,17 +223,61 @@ include 'includes/header.php';
     .pill-wrapper {
         display: flex;
         flex-wrap: wrap;
-        gap: 6px;
+        gap: 8px; /* Slightly increased gap to prevent floating pills from touching */
+        padding: 4px 0;
     }
+
     .pill-chip {
         font-size: 11.5px;
         font-weight: 600;
-        color: #444444;
-        background: #f8f9fa;
-        border: 1px solid #e9ecef;
+        color: #c8232c;
+        background: #ffffff;
+        border: 1px solid rgba(200, 35, 44, 0.4);
         padding: 4px 10px;
         border-radius: 16px;
-        transition: all 0.2s ease;
+        display: inline-block;
+        
+        /* Continuous Red Glow Effect */
+        box-shadow: 0 0 8px rgba(200, 35, 44, 0.25);
+        
+        /* Permanent Automatic Floating Animation */
+        animation: floatGlowPill 3s ease-in-out infinite;
+        will-change: transform, box-shadow;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    /* Stagger floating timing and phase so adjacent pills float independently */
+    .pill-chip:nth-child(even) {
+        animation-duration: 3.4s;
+        animation-delay: -0.8s;
+    }
+
+    .pill-chip:nth-child(3n) {
+        animation-duration: 2.7s;
+        animation-delay: -1.5s;
+    }
+
+    .pill-chip:nth-child(4n) {
+        animation-duration: 4.1s;
+        animation-delay: -2.2s;
+    }
+
+    /* Hover Enhancements (optional slight scaling on mouse-over) */
+    .pill-chip:hover {
+        background: #fdf2f2;
+        border-color: #c8232c;
+    }
+
+    /* Automatic Floating & Pulsing Glow Keyframes */
+    @keyframes floatGlowPill {
+        0%, 100% {
+            transform: translateY(0px);
+            box-shadow: 0 0 6px rgba(200, 35, 44, 0.2);
+        }
+        50% {
+            transform: translateY(-9px);
+            box-shadow: 0 6px 14px rgba(200, 35, 44, 0.45);
+        }
     }
     .media-card:hover .pill-chip {
         background: #ffffff;
@@ -272,6 +317,10 @@ include 'includes/header.php';
         color: #ffffff !important;
         position: relative;
     }
+    .card-full-width {
+        grid-column: 1 / -1 !important;
+        height: 100%;
+    }
 </style>
 
 <div class="alok-page-container">
@@ -310,8 +359,8 @@ include 'includes/header.php';
                 
                 <!-- Card 1: Colour Coating (Featured Double Span) -->
                 <article class="media-card span-full-row srv-animate-fade">
-                    <span class="feature-tag-badge">9,000 Pcs / Hour</span>
-                    <div class="media-card-img-wrap" style="height: 240px;">
+                    <!-- <span class="feature-tag-badge">9,000 Pcs / Hour</span> -->
+                    <div class="media-card-img-wrap">
                         <img src="assets/images/colour coating.png" class="media-card-img" alt="Colour Coating on Glass">
                     </div>
                     <div class="media-card-body">
@@ -319,9 +368,9 @@ include 'includes/header.php';
                         <p class="media-card-text">
                             Alok Glass Works operates two coating machines with a combined production capacity of approximately <strong>9,000 pieces per hour</strong>, depending on product design and coating specifications. We offer customised colour coatings matched to your brand identity, applied as a full-body finish or to selected areas.
                         </p>
-                        <div class="highlight-box">
+                        <!-- <div class="highlight-box">
                             ✔ Dishwasher-Safe: Withstands 100–250 washing cycles based on finish parameters.
-                        </div>
+                        </div> -->
                         <div class="card-footer-pills">
                             <span class="pills-heading">Available Finishes</span>
                             <div class="pill-wrapper">
@@ -403,7 +452,7 @@ include 'includes/header.php';
                 </article>
 
                 <!-- Card 5: Metallization -->
-                <article class="media-card span-full-row srv-animate-fade">
+                <article class="media-card card-full-width srv-animate-fade">
                     <div class="media-card-img-wrap">
                         <img src="assets/images/Mettalization.png" class="media-card-img" alt="Glass Metallization">
                     </div>
@@ -444,8 +493,8 @@ include 'includes/header.php';
 
                 <!-- Facility 1: Flint Glass (Green Tint) - Featured Double Span -->
                 <article class="media-card span-full-row srv-animate-fade">
-                    <span class="feature-tag-badge">GM Glass Partner</span>
-                    <div class="media-card-img-wrap" style="height: 240px;">
+                    <!-- <span class="feature-tag-badge">GM Glass Partner</span> -->
+                    <div class="media-card-img-wrap">
                         <img src="assets/images/Flint Glass.png" class="media-card-img" alt="Flint Glass Manufacturing">
                     </div>
                     <div class="media-card-body">
@@ -469,7 +518,7 @@ include 'includes/header.php';
                 <!-- Facility 2: In-House Design & Development -->
                 <article class="media-card srv-animate-fade">
                     <div class="media-card-img-wrap">
-                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" class="media-card-img" alt="Product Development">
+                        <img src="assets/images/Mould Manufacturing and designing.png" class="media-card-img" alt="Product Development">
                     </div>
                     <div class="media-card-body">
                         <h3 class="media-card-title">Design & Product Development</h3>

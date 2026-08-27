@@ -1,5 +1,6 @@
 <?php
 require 'includes/db.php';
+require 'includes/mailer.php';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
@@ -38,6 +39,24 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $message
 
     ]);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | SEND EMAIL
+    |--------------------------------------------------------------------------
+    |
+    | The database insertion has already succeeded.
+    | Email failure will NOT break the contact form.
+    |
+    */
+
+    sendContactInquiryEmail(
+        $name,
+        $email,
+        $phone,
+        $message
+    );
 
     $success = true;
 }

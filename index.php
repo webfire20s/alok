@@ -1219,117 +1219,135 @@ $featuredCategories = $pdo->query("
         <!-- Google Review Ends -->
 
         <!-- CATALOG DOWNLOAD SECTION -->
+                <?php
+
+                $homeCatalogStmt = $pdo->prepare("
+                    SELECT
+                        id,
+                        title,
+                        description,
+                        file_path,
+                        thumbnail
+                    FROM catalogs
+                    WHERE status = 1
+                    AND show_on_home = 1
+                    ORDER BY display_order ASC, id ASC
+                ");
+
+                $homeCatalogStmt->execute();
+
+                $homeCatalogs = $homeCatalogStmt->fetchAll();
+
+                ?>
         <!-- MAIN PRODUCT CATALOGS SECTION -->
-            <div class="catalog-section py-5">
+            <?php if(!empty($homeCatalogs)): ?>
+
+            <div class="catalog-page-section">
                 <div class="container">
-                    
-                    <!-- Premium Section Header Box -->
-                    <div class="catalog-header mb-4">
-                        <span class="catalog-pretitle">Resources</span>
-                        <h2 class="catalog-title">Product Catalogs & Technical Media</h2>
+
+                    <!-- SECTION HEADER -->
+                    <div class="catalog-header-wrap">
+
+                        <span class="catalog-pretitle"> Resources </span>
+                        <h2 class="catalog-main-title"> Product Catalogs & Technical Media </h2>
+                        <div class="catalog-title-underline"></div>
+
+                        <p class="catalog-main-desc"> Explore our latest product catalogs, collections and technical resources. </p>
                     </div>
 
-                    <!-- Uniform Grid Layout (Product Range) -->
-                    <div class="catalog-matrix-pillar">
-                        
-                        <!-- Item Card 1 -->
-                        <div class="catalog-item-card">
-                            <div>
-                                <h4 class="catalog-name standard-name">Gift Pack Collection</h4>
-                            </div>
-                            <a href="assets/catalogs/gift_pack.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                                <i class="fa-solid fa-download"></i> Download PDF
-                            </a>
-                        </div>
 
-                        <!-- Item Card 2 -->
-                        <div class="catalog-item-card">
-                            <div>
-                                <h4 class="catalog-name standard-name">Bowl Set Collection</h4>
-                            </div>
-                            <a href="assets/catalogs/bowl_set.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                                <i class="fa-solid fa-download"></i> Download PDF
-                            </a>
-                        </div>
+                    <!-- CATALOG GRID -->
+                    <div class="row g-3">
+                        <?php foreach($homeCatalogs as $index => $catalog): ?>
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <div class="product-category-card">
 
-                        <!-- Item Card 3 -->
-                        <div class="catalog-item-card">
-                            <div>
-                                <h4 class="catalog-name standard-name">Food Jar Collection</h4>
-                            </div>
-                            <a href="assets/catalogs/food_jar.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                                <i class="fa-solid fa-download"></i> Download PDF
-                            </a>
-                        </div>
+                                    <!-- CATALOG TITLE -->
+                                    <div class=" product-card-banner <?= ($index % 2 === 0) ? 'bg-palette-accent' : 'bg-palette-charcoal' ?> ">
+                                        <span class="product-card-link"> <?= htmlspecialchars($catalog['title']) ?> </span>
+                                    </div>
 
-                        <!-- Item Card 4 -->
-                        <div class="catalog-item-card">
-                            <div>
-                                <h4 class="catalog-name standard-name">Home Decor Collection</h4>
-                            </div>
-                            <a href="assets/catalogs/home_decor.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                                <i class="fa-solid fa-download"></i> Download PDF
-                            </a>
-                        </div>
+                                    <!-- OPTIONAL DESCRIPTION -->
 
-                        <!-- Item Card 5 -->
-                        <div class="catalog-item-card">
-                            <div>
-                                <h4 class="catalog-name standard-name">Decoration & Printing Guide</h4>
-                            </div>
-                            <a href="assets/catalogs/neon_printing.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                                <i class="fa-solid fa-download"></i> Download PDF
-                            </a>
-                        </div>
+                                    <?php if(!empty($catalog['description'])): ?>
+                                        <!-- <div style=" padding:12px 14px; text-align:center; min-height:55px; display:flex; align-items:center; justify-content:center; ">
+                                            <p style=" margin:0; font-size:12px; line-height:1.5; color:#666666; "> <?= htmlspecialchars($catalog['description']) ?> </p>
+                                        </div> -->
+                                    <?php endif; ?>
 
-                        <!-- Item Card 6 -->
-                        <div class="catalog-item-card">
-                            <div>
-                                <h4 class="catalog-name standard-name">Bottles Range</h4>
-                            </div>
-                            <a href="assets/catalogs/bottles.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                                <i class="fa-solid fa-download"></i> Download PDF
-                            </a>
-                        </div>
+                                    <!-- ACTION BUTTONS -->
+                                    <div class="catalog-action-row">
 
+                                        <!-- PREVIEW -->
+                                        <a href="<?= htmlspecialchars($catalog['file_path']) ?>" target="_blank" rel="noopener noreferrer" class="catalog-btn-action btn-preview-dark" > <i class="fa-solid fa-eye"></i> Preview </a>
+                                        <!-- DOWNLOAD -->
+                                        <a href="<?= htmlspecialchars($catalog['file_path']) ?>" download class="catalog-btn-action btn-download-red" > <i class="fa-solid fa-download"></i> Download </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
 
             <!-- DEDICATED COMPANY PROFILE & CREDENTIALS SECTION -->
             <!-- COMPANY PROFILE & CLIENT PORTFOLIO SECTION -->
-            <div class="catalog-section">
+
+            <div class="catalog-page-section">
                 <div class="container">
-                    
-                    <!-- Section Header -->
-                    <div class="catalog-header">
-                        <span class="catalog-pretitle">Corporate Dossier</span>
-                        <h2 class="catalog-title">Company Profile & Client Credentials</h2>
+
+                    <!-- SECTION HEADER -->
+                    <div class="catalog-header-wrap">
+
+                        <span class="catalog-pretitle"> Corporate Dossier </span>
+                        <h2 class="catalog-main-title"> Company Profile & Client Credentials </h2>
+                        <div class="catalog-title-underline"></div>
+
+                        <p class="catalog-main-desc"> Explore our company profile and client portfolio. </p>
                     </div>
 
-                    <!-- Matching Matrix Grid -->
-                    <div class="catalog-matrix-pillar company-credentials-grid">
-                        
-                        <!-- Item Card 1: Company Profile -->
-                        <div class="catalog-item-card">
-                            <div>
-                                <h4 class="catalog-name standard-name">Company Profile</h4>
+
+                    <!-- CORPORATE DOCUMENT GRID -->
+                    <div class="row g-3">
+
+                        <!-- COMPANY PROFILE -->
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="product-category-card">
+                                <div class="product-card-banner bg-palette-accent">
+
+                                    <span class="product-card-link"> Company Profile </span>
+
+                                </div>
+
+                                <div class="catalog-action-row">
+
+                                    <a href="assets/catalogs/company_profile.pdf" target="_blank" rel="noopener noreferrer" class="catalog-btn-action btn-preview-dark" > <i class="fa-solid fa-eye"></i> Preview </a>
+
+                                    <a href="assets/catalogs/company_profile.pdf" download class="catalog-btn-action btn-download-red" > <i class="fa-solid fa-download"></i> Download </a>
+
+                                </div>
                             </div>
-                            <a href="assets/catalogs/company_profile.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                                <i class="fa-solid fa-download"></i> Download PDF
-                            </a>
                         </div>
 
-                        <!-- Item Card 2: Client Portfolio -->
-                        <div class="catalog-item-card">
-                            <div>
-                                <h4 class="catalog-name standard-name">Client Portfolio</h4>
-                            </div>
-                            <a href="assets/catalogs/client_portfolio.pdf" download class="catalog-download-btn btn-outline-charcoal">
-                                <i class="fa-solid fa-download"></i> Download PDF
-                            </a>
-                        </div>
+                        <!-- CLIENT PORTFOLIO -->
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="product-category-card">
+                                <div class="product-card-banner bg-palette-charcoal">
+                                    <span class="product-card-link"> Client Portfolio </span>
+                                </div>
 
+
+                                <div class="catalog-action-row">
+
+                                    <a href="assets/catalogs/client_portfolio.pdf" target="_blank" rel="noopener noreferrer" class="catalog-btn-action btn-preview-dark" > <i class="fa-solid fa-eye"></i> Preview </a>
+
+                                    <a href="assets/catalogs/client_portfolio.pdf" download class="catalog-btn-action btn-download-red" > <i class="fa-solid fa-download"></i> Download </a>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
